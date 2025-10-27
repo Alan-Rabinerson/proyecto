@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Jungle - Urban Streetwear</title>
+    <meta name="description" content="Tienda online de ropa streetwear urbana">
+    <link rel="stylesheet" href="./estilos/homepage.css">
+    <link rel="stylesheet" href="./estilos/header_footer.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
+            </div>
+        </nav>
+        
+        <!-- Menú hamburguesa -->
+        <div id="mobile-menu" class="mobile-menu">
+            
+            <button class="menu-toggle" ><img src="./assets/logos/icon-menu.png" alt=""></button>
+            <ul class="menu-links">
+                <button id="close-menu"><img src="./assets/logos/cerrar-menu.png" alt=""></button>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#novedades">Novedades</a></li>
+                <li><a href="#hombre">Hombre</a></li>
+                <li><a href="#mujer">Mujer</a></li>
+                <li><a href="#accesorios">Accesorios</a></li>
+                <li><a href="#ofertas">Ofertas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <button id="cart-icon" class="carrito" ><img src="./assets/logos/16744398191571183082-128.png" alt=""></button>
+        <!-- Buscador -->
+        <div class="search-bar">
+            <input type="search" placeholder="Buscar productos o categorías..." aria-label="Buscar productos">
+            <button type="button" aria-label="Buscar">
+                <span></span>
+            </button>
+            <select aria-label="Filtrar por categoría">
+                <option value="">Todas las categorías</option>
+                <option value="camisetas">Camisetas</option>
+                <option value="sudaderas">Sudaderas</option>
+                <option value="pantalones">Pantalones</option>
+                <option value="zapatillas">Zapatillas</option>
+                <option value="accesorios">Accesorios</option>
+            </select>
+        </div>
+        <!-- Hero Banner -->
+        <section class="hero">
+            <img src="./assets/imagenes/hero_image.jpg" alt="Colección urbana streetwear">
+            <div class="hero-content">
+                <h2>Nueva Colección Urbana</h2>
+                <p>Descubre el estilo de la calle</p>
+                <a href="#productos" class="btn-primary">Ver ahora</a>
+            </div>
+        </section>
+
+        <!-- Productos Destacados -->
+        <section class="featured-products">
+            <h2>Productos Destacados</h2>
+            
+            <div class="slider-container">
+                <button class="slider-arrow slider-prev" aria-label="Anterior">‹</button>
+                
+                <div class="products-slider">
+                    <div class="product-card">
+                        <img src="placeholder-product1.jpg" alt="Sudadera Urban Style">
+                        <h3>Sudadera Urban Style</h3>
+                        <p class="price">49,99 €</p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="placeholder-product2.jpg" alt="Camiseta Concrete">
+                        <h3>Camiseta Concrete</h3>
+                        <p class="price">24,99 €</p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="placeholder-product3.jpg" alt="Pantalón Cargo Street">
+                        <h3>Pantalón Cargo Street</h3>
+                        <p class="price">59,99 €</p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                    
+                    <div class="product-card">
+                        <img src="placeholder-product4.jpg" alt="Zapatillas Urban">
+                        <h3>Zapatillas Urban</h3>
+                        <p class="price">89,99 €</p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                </div>
+                
+                <button class="slider-arrow slider-next" aria-label="Siguiente">›</button>
+            </div>
+        </section>
+
+        <!-- Ofertas Semanales -->
+        <section class="weekly-offers">
+            <h2>Ofertas Semanales</h2>
+            
+            <div class="slider-container">
+                <button class="slider-arrow slider-prev" aria-label="Anterior">‹</button>
+                
+                <div class="offers-slider">
+                    <div class="product-card offer">
+                        <span class="discount-badge">-30%</span>
+                        <img src="placeholder-offer1.jpg" alt="Chaqueta Bomber">
+                        <h3>Chaqueta Bomber</h3>
+                        <p class="price">
+                            <span class="old-price">99,99 €</span>
+                            <span class="new-price">69,99 €</span>
+                        </p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                    
+                    <div class="product-card offer">
+                        <span class="discount-badge">-25%</span>
+                        <img src="placeholder-offer2.jpg" alt="Hoodie Oversized">
+                        <h3>Hoodie Oversized</h3>
+                        <p class="price">
+                            <span class="old-price">54,99 €</span>
+                            <span class="new-price">41,24 €</span>
+                        </p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                    
+                    <div class="product-card offer">
+                        <span class="discount-badge">-20%</span>
+                        <img src="placeholder-offer3.jpg" alt="Gorra Snapback">
+                        <h3>Gorra Snapback</h3>
+                        <p class="price">
+                            <span class="old-price">29,99 €</span>
+                            <span class="new-price">23,99 €</span>
+                        </p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                    
+                    <div class="product-card offer">
+                        <span class="discount-badge">-35%</span>
+                        <img src="placeholder-offer4.jpg" alt="Jeans Destroyed">
+                        <h3>Jeans Destroyed</h3>
+                        <p class="price">
+                            <span class="old-price">79,99 €</span>
+                            <span class="new-price">51,99 €</span>
+                        </p>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    </div>
+                </div>
+                
+                <button class="slider-arrow slider-next" aria-label="Siguiente">›</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre Nosotros</h3>
+                <p>Concrete Jungle es tu destino para el mejor streetwear urbano.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Email: info@concretejungle.com</li>
+                    <li>Teléfono: +34 900 123 456</li>
+                    <li>Horario: L-V 9:00-18:00</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="#instagram" aria-label="Instagram">IG</a>
+                    <a href="#facebook" aria-label="Facebook">FB</a>
+                    <a href="#twitter" aria-label="Twitter">TW</a>
+                    <a href="#tiktok" aria-label="TikTok">TT</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Concrete Jungle. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Carrito Sticky (Móvil/Tablet) -->
+    <button id="sticky-cart" class="sticky-cart" aria-label="Abrir carrito">
+        🛒
+        <span class="cart-count">0</span>
+    </button>
+
+</body>
+</html>
