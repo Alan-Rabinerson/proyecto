@@ -1,0 +1,5 @@
+# excluir node_modules
+node_modules/
+# excluir los otros archivos del paquete
+package.json
+package-lock.json
