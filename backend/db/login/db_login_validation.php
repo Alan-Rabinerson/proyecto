@@ -1,7 +1,6 @@
 <?php
-// Fix: include the correct DB connect file and use prepared statements.
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
 session_start();
+include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
 
 
 $username = $_POST['username'];
@@ -15,8 +14,8 @@ if (count($user) > 0 && count($user) === 1) {
     // Credenciales válidas, redirigir al backend
     $_SESSION['loggedin'] = true;
     $_SESSION['customer_id'] = $user[0]['customer_id'];
-    $_SESSION['username'] = $username;
-    if (isset($user[0]['role']) && $user[0]['role'] == 'admin') {
+    $_SESSION['username'] = $user[0]['username'];
+    if ($user[0]['type'] == 'admin') {
         $_SESSION['role'] = 'admin';
         header("Location: /student024/shop/backend/index.php");
         exit;

@@ -1,11 +1,11 @@
 <?php 
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
 session_start();
+include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
 $customer_id = $_SESSION['customer_id'];
 
 
 ?>
-<form action="/student024/shop/backend/db/shopping_cart/db_shopping_cart_insert.php" method="POST">
+<form  method="POST">
     <input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
     <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
     <div class="mb-3">
