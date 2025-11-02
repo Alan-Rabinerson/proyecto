@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Concrete Jungle - Urban Streetwear</title>
     <meta name="description" content="Tienda online de ropa streetwear urbana">
-    <link rel="stylesheet" href="./estilos/homepage.css">
-    <link rel="stylesheet" href="./estilos/header_footer.css">
+    <link rel="stylesheet" href="./styles/homepage.css">
+    <link rel="stylesheet" href="./styles/header_footer.css">
 </head>
 <body>
     <!-- Header -->
@@ -23,35 +23,36 @@
             <button class="menu-toggle" ><img src="./assets/logos/icon-menu.png" alt=""></button>
             <ul class="menu-links">
                 <button id="close-menu"><img src="./assets/logos/cerrar-menu.png" alt=""></button>
+                <div class="search-bar">
+                    <input type="search" placeholder="Buscar productos o categorías..." aria-label="Buscar productos">
+                    <button type="button" aria-label="Buscar">
+                        <span></span>
+                    </button>
+                    <select aria-label="Filtrar por categoría">
+                        <option value="">Todas las categorías</option>
+                        <option value="camisetas">Camisetas</option>
+                        <option value="sudaderas">Sudaderas</option>
+                        <option value="pantalones">Pantalones</option>
+                        <option value="zapatillas">Zapatillas</option>
+                        <option value="accesorios">Accesorios</option>
+                    </select>
+                </div>
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#novedades">Novedades</a></li>
                 <li><a href="#hombre">Hombre</a></li>
                 <li><a href="#mujer">Mujer</a></li>
                 <li><a href="#accesorios">Accesorios</a></li>
                 <li><a href="#ofertas">Ofertas</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#carrito"><img src="./assets/logos/carrito_blanco.png" alt="Carrito"></a></li>
             </ul>
         </div>
     </header>
 
     <!-- Main Content -->
     <main>
-        <button id="cart-icon" class="carrito" ><img src="./assets/logos/16744398191571183082-128.png" alt=""></button>
         <!-- Buscador -->
-        <div class="search-bar">
-            <input type="search" placeholder="Buscar productos o categorías..." aria-label="Buscar productos">
-            <button type="button" aria-label="Buscar">
-                <span></span>
-            </button>
-            <select aria-label="Filtrar por categoría">
-                <option value="">Todas las categorías</option>
-                <option value="camisetas">Camisetas</option>
-                <option value="sudaderas">Sudaderas</option>
-                <option value="pantalones">Pantalones</option>
-                <option value="zapatillas">Zapatillas</option>
-                <option value="accesorios">Accesorios</option>
-            </select>
-        </div>
+        
+       
         <!-- Hero Banner -->
         <section class="hero">
             <img src="./assets/imagenes/hero_image.jpg" alt="Colección urbana streetwear">
@@ -71,21 +72,21 @@
                 
                 <div class="products-slider">
                     <div class="product-card">
-                        <img src="placeholder-product1.jpg" alt="Sudadera Urban Style">
+                        <img src="./assets/imagenes/stretwear_hoodie.png" alt="Sudadera Urban Style">
                         <h3>Sudadera Urban Style</h3>
                         <p class="price">49,99 €</p>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
                     <div class="product-card">
-                        <img src="placeholder-product2.jpg" alt="Camiseta Concrete">
+                        <img src="./assets/imagenes/streetwear_shirt.jpg" alt="Camiseta Concrete">
                         <h3>Camiseta Concrete</h3>
                         <p class="price">24,99 €</p>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
                     <div class="product-card">
-                        <img src="placeholder-product3.jpg" alt="Pantalón Cargo Street">
+                        <img src="./assets/imagenes/" alt="Pantalón Cargo Street">
                         <h3>Pantalón Cargo Street</h3>
                         <p class="price">59,99 €</p>
                         <button class="btn-add-cart">Añadir al carrito</button>
@@ -196,9 +197,27 @@
 
     <!-- Carrito Sticky (Móvil/Tablet) -->
     <button id="sticky-cart" class="sticky-cart" aria-label="Abrir carrito">
-        🛒
+        <img src="./assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
         <span class="cart-count">0</span>
     </button>
-
+    <div class="carrito">
+        <div class="carrito-header">
+            <h2>Tu Carrito</h2>
+            <button id="close-cart" aria-label="Cerrar carrito">×</button>
+        </div>
+        <div class="carrito-body">
+            <ul class="carrito-items">
+                <li class="carrito-item"><span>   </span><span class="nombre-producto">Nombre </span> <span class="cantidad-producto">Cantidad</span> <span class="precio-producto">Precio</span></li>
+                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 1</span> <span class="cantidad-producto">1</span> <span class="precio-producto">29,99 €</span></li>
+                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 1</span> <span class="cantidad-producto">1</span> <span class="precio-producto">29,99 €</span></li>
+            </ul>
+        </div>
+        <div class="carrito-footer">
+            <p class="total-amount">Total: 0,00 €</p>
+            <button class="btn-checkout">Proceder al pago</button>
+        </div>
+    </div>
+    <script src="./JavaScript/homepage.js"></script>
+    <script src="./JavaScript/menu.js"></script>
 </body>
 </html>

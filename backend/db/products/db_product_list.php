@@ -8,7 +8,7 @@
     foreach($products as $product){
         $product_id = $product['product_id'];
         // Display product details
-        echo "<div>";
+        echo "<div class='product mt-2'>";
         echo "<h3>" . $product['name']  ."</h3>";
         echo "<p>Price: $" . $product['price'] . "</p>";
         echo "<p>Description: " . $product['description'] . "</p>";
