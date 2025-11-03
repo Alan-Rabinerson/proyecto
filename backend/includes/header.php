@@ -8,10 +8,10 @@
         <link rel="stylesheet" href="/student024/Shop/backend/styles/output.css">
     </head>
     <body>
-        <header class="w-full bg-indigo-950 p-3 mb-4">
+        <header class="w-full bg-background p-3 mb-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <img src="/student024/Shop/frontend/assets/logos/logo_sin_slogan_rectangular.png" alt="Logo" class="h-auto max-h-24 object-contain"/>
+                    <img src="/student024/Shop/frontend/assets/logos/logo_sin_fondo._rectangular.png" alt="Logo" class="h-auto max-h-24 object-contain"/>
                 </div>
                 <nav class="flex items-center justify center">
                     <ul class="flex space-x-2 list-none p-0 m-0">

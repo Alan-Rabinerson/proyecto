@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "build:css": "tailwindcss -i ./backend/styles/styles.css -o ./backend/styles/output.css --minify",
+    "watch:css": "tailwindcss -i ./backend/styles/styles.css -o ./backend/styles/output.css --watch"
+  },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.16",
     "tailwindcss": "^4.1.16"

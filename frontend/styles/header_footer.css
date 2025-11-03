@@ -164,8 +164,10 @@ footer {
 }
 
 .footer-content {
-    display: grid;
+    display: flex;
     gap: var(--spacing-lg);
+    align-items: center;
+    justify-content: space-between;
 }
 
 .footer-section h3 {
@@ -293,7 +295,8 @@ footer {
         display: none;
     }
     
-    .mobile-menu ul {
+    .menu-links {
+        display: flex;
         flex-direction: row;
         gap: var(--spacing-lg);
         margin: 0;
