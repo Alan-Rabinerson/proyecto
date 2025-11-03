@@ -324,6 +324,18 @@ footer {
         display: block;
     }
 
+    .sticky-cart.carrito {
+        display: block;
+        position: static;
+        width: auto;
+    }
+
+    .cart-count {
+        transform: none;
+        margin-left: 0.25rem;
+        top: 2px;
+    }
+
     /* Footer */
     .footer-content {
         grid-template-columns: repeat(4, 1fr);

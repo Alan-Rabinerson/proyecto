@@ -43,7 +43,13 @@
                 <li><a href="#mujer">Mujer</a></li>
                 <li><a href="#accesorios">Accesorios</a></li>
                 <li><a href="#ofertas">Ofertas</a></li>
-                <li><a href="#carrito"><img src="./assets/logos/carrito_blanco.png" alt="Carrito"></a></li>
+                <li><a href="#carrito">
+                    <button id="sticky-cart" class="sticky-cart carrito" aria-label="Abrir carrito">
+                        <img src="./assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
+                        <span class="cart-count">0</span>
+                    </button>
+
+                </a></li>
             </ul>
         </div>
     </header>
@@ -85,14 +91,14 @@
                     </div>
                     
                     <div class="product-card">
-                        <img src="./assets/imagenes/" alt="Pantalón Cargo Street">
+                        <img src="./assets/imagenes/streetwear_cargo.jpg" alt="Pantalón Cargo Street">
                         <h3>Pantalón Cargo Street</h3>
                         <p class="price">59,99 €</p>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
                     <div class="product-card">
-                        <img src="placeholder-product4.jpg" alt="Zapatillas Urban">
+                        <img src="./assets/imagenes/streetwear_zapatos.jpg" alt="Zapatillas Urban">
                         <h3>Zapatillas Urban</h3>
                         <p class="price">89,99 €</p>
                         <button class="btn-add-cart">Añadir al carrito</button>
@@ -113,7 +119,7 @@
                 <div class="offers-slider">
                     <div class="product-card offer">
                         <span class="discount-badge">-30%</span>
-                        <img src="placeholder-offer1.jpg" alt="Chaqueta Bomber">
+                        <img src="./assets/imagenes/streetwear_bomber.jpg" alt="Chaqueta Bomber">
                         <h3>Chaqueta Bomber</h3>
                         <p class="price">
                             <span class="old-price">99,99 €</span>
@@ -124,7 +130,7 @@
                     
                     <div class="product-card offer">
                         <span class="discount-badge">-25%</span>
-                        <img src="placeholder-offer2.jpg" alt="Hoodie Oversized">
+                        <img src="./assets/imagenes/sudadera_oversize.jpg" alt="Hoodie Oversized">
                         <h3>Hoodie Oversized</h3>
                         <p class="price">
                             <span class="old-price">54,99 €</span>
@@ -135,7 +141,7 @@
                     
                     <div class="product-card offer">
                         <span class="discount-badge">-20%</span>
-                        <img src="placeholder-offer3.jpg" alt="Gorra Snapback">
+                        <img src="./assets/imagenes/gorra_snapback.jpg" alt="Gorra Snapback">
                         <h3>Gorra Snapback</h3>
                         <p class="price">
                             <span class="old-price">29,99 €</span>
@@ -146,8 +152,8 @@
                     
                     <div class="product-card offer">
                         <span class="discount-badge">-35%</span>
-                        <img src="placeholder-offer4.jpg" alt="Jeans Destroyed">
-                        <h3>Jeans Destroyed</h3>
+                        <img src="./assets/imagenes/ripped_jeans.jpg" alt="Jeans Destroyed">
+                        <h3>Ripped Jeans</h3>
                         <p class="price">
                             <span class="old-price">79,99 €</span>
                             <span class="new-price">51,99 €</span>
