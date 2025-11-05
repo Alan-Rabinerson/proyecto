@@ -11,11 +11,10 @@
 <body>
     <!-- Header -->
     <header>
-        <nav>
-            <div class="logo">
-                <img src="./assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
-            </div>
-        </nav>
+        <div class="logo">
+            <img src="./assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
+        </div>
+  
         
         <!-- Menú hamburguesa -->
         <div id="mobile-menu" class="mobile-menu">
@@ -23,7 +22,8 @@
             <button class="menu-toggle" ><img src="./assets/logos/icon-menu.png" alt=""></button>
             <ul class="menu-links">
                 <button id="close-menu"><img src="./assets/logos/cerrar-menu.png" alt=""></button>
-                <div class="search-bar">
+                 <!-- Buscador -->
+                  <div class="search-bar">
                     <input type="search" placeholder="Buscar productos o categorías..." >
                     <button type="button" >
                         <span></span>
@@ -44,11 +44,10 @@
                 <li><a href="#accesorios">Accesorios</a></li>
                 <li><a href="#ofertas">Ofertas</a></li>
                 <li><a href="#carrito">
-                    <button id="sticky-cart" class="sticky-cart carrito" aria-label="Abrir carrito">
+                    <button id="sticky-cart" class="sticky-cart carrito-desktop" >
                         <img src="./assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
-                        <span class="cart-count">0</span>
+                        <span class="cart-count">2</span>
                     </button>
-
                 </a></li>
             </ul>
         </div>
@@ -56,7 +55,7 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Buscador -->
+       
         
        
         <!-- Hero Banner -->
@@ -80,6 +79,7 @@
                         <img src="./assets/imagenes/stretwear_hoodie.png" alt="Sudadera Urban Style">
                         <h3>Sudadera Urban Style</h3>
                         <p class="price">49,99 €</p>
+                        <button class="btn-comprar-ahora">Comprar ahora</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
@@ -87,6 +87,7 @@
                         <img src="./assets/imagenes/streetwear_shirt.jpg" alt="Camiseta Concrete">
                         <h3>Camiseta Concrete</h3>
                         <p class="price">24,99 €</p>
+                        <button class="btn-comprar-ahora">Comprar ahora</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
@@ -94,6 +95,7 @@
                         <img src="./assets/imagenes/streetwear_cargo.jpg" alt="Pantalón Cargo Street">
                         <h3>Pantalón Cargo Street</h3>
                         <p class="price">59,99 €</p>
+                        <button class="btn-comprar-ahora">Comprar ahora</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
@@ -101,6 +103,7 @@
                         <img src="./assets/imagenes/streetwear_zapatos.jpg" alt="Zapatillas Urban">
                         <h3>Zapatillas Urban</h3>
                         <p class="price">89,99 €</p>
+                        <button class="btn-comprar-ahora">Comprar ahora</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                 </div>
@@ -125,6 +128,7 @@
                             <span class="old-price">99,99 €</span>
                             <span class="new-price">69,99 €</span>
                         </p>
+                        <button class="btn-comprar-ahora">Comprar ahora</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
@@ -136,6 +140,7 @@
                             <span class="old-price">54,99 €</span>
                             <span class="new-price">41,24 €</span>
                         </p>
+                        <button class="btn-comprar-ahora">Comprar ahora</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
@@ -147,6 +152,7 @@
                             <span class="old-price">29,99 €</span>
                             <span class="new-price">23,99 €</span>
                         </p>
+                        <button class="btn-comprar-ahora">Comprar ahora</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     </div>
                     
@@ -202,7 +208,7 @@
     <!-- Carrito Sticky (Móvil/Tablet) -->
     <button id="sticky-cart" class="sticky-cart" aria-label="Abrir carrito">
         <img src="./assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
-        <span class="cart-count">0</span>
+        <span class="cart-count">2</span>
     </button>
     <div class="carrito">
         <div class="carrito-header">
@@ -212,8 +218,8 @@
         <div class="carrito-body">
             <ul class="carrito-items">
                 <li class="carrito-item"><span>   </span><span class="nombre-producto">Nombre </span> <span class="cantidad-producto">Cantidad</span> <span class="precio-producto">Precio</span></li>
-                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 1</span> <span class="cantidad-producto">1</span> <span class="precio-producto">29,99 €</span></li>
-                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 1</span> <span class="cantidad-producto">1</span> <span class="precio-producto">29,99 €</span></li>
+                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 1</span> <span class="restar-cantidad">-</span> <span class="cantidad-producto">1</span><span class="añadir-cantidad">+</span> <span class="precio-producto">29,99 €</span></li>
+                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 2</span> <span class="restar-cantidad">-</span> <span class="cantidad-producto">1</span> <span class="añadir-cantidad">+</span> <span class="precio-producto">29,99 €</span></li>
             </ul>
         </div>
         <div class="carrito-footer">

@@ -4,7 +4,7 @@
 }
 @font-face {
     font-family: Montserrat;
-    src: url(../assets/fonts/Montserrat/Montserrat-Bold.ttf);
+    src: url(../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 :root {
     /* Tipografía */
@@ -44,16 +44,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: var(--spacing-sm);
 }
 
-header nav {
+.logo {
     padding: 1rem;
 }
 
 /* Logo */
 .logo img {
-    width: 150px;
-    
+    width: 250px;
 }
 
 /* Botón menú hamburguesa */
@@ -66,6 +66,7 @@ header nav {
     position: fixed;
     top: 12px;
     right: 12px;
+    margin-top: var(--spacing-lg);
 }
 
 .menu-toggle img {
@@ -161,6 +162,8 @@ footer {
     background-color: rgba(0, 0, 0, 0.3);
     padding: var(--spacing-lg) var(--spacing-sm);
     margin-top: var(--spacing-xl);
+    max-width: max-content;
+    overflow-x: hidden;
 }
 
 .footer-content {
@@ -168,6 +171,8 @@ footer {
     gap: var(--spacing-lg);
     align-items: center;
     justify-content: space-between;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 
 .footer-section h3 {
@@ -324,7 +329,7 @@ footer {
         display: block;
     }
 
-    .sticky-cart.carrito {
+    .sticky-cart.carrito-desktop {
         display: block;
         position: static;
         width: auto;
@@ -337,9 +342,10 @@ footer {
     }
 
     /* Footer */
+    footer{
+        max-width: 100%;
+    }
     .footer-content {
-        grid-template-columns: repeat(4, 1fr);
-        max-width: 1400px;
         margin: 0 auto;
     }
 }
