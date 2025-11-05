@@ -183,6 +183,9 @@ main {
     margin-top: var(--spacing-sm);
 }
 
+.btn-comprar-ahora:hover {
+    background-color: var(--secondary-color);
+}
 /* Secciones de productos */
 .featured-products,
 .weekly-offers {
@@ -541,7 +544,7 @@ main {
     }
     /* Productos */
     .product-card {
-        min-width: 280px;
+        min-width: 300px;
     }
     
 }
