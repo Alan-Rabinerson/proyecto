@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     const carrito = document.querySelector('.carrito');
-    const stickyCart = document.querySelector('.sticky-cart');
+    const stickyCart = document.querySelectorAll('.sticky-cart')[1];
     const cerrarCarrito = document.getElementById('close-cart');
-    const carritoDesktop = document.querySelector('.menu-links li img[src="./assets/logos/carrito_blanco.png"]');
+    const carritoDesktop = document.querySelector('.menu-links .carrito-desktop');
 
-    // Seguridad: comprobar que los elementos existen antes de añadir handlers
+    // Agregar funcionalidad al botón "Comprar ahora"
+    // Comprobar que los elementos existen antes de añadir eventos
     if (carrito) {
         if (stickyCart) {
             stickyCart.addEventListener('click', () => {
-                carrito.classList.toggle('active');
+                carrito.classList.add('active');
             });
         }
 
@@ -20,11 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (carritoDesktop) {
             carritoDesktop.addEventListener('click', () => {
-                carrito.classList.toggle('active');
+                carrito.classList.add('active');
             });
         }
     }
-
+    // Slider de productos y ofertas
     const sliderContainers = document.querySelectorAll('.slider-container');
     sliderContainers.forEach(container => {
         const slider = container.querySelector('.products-slider, .offers-slider');
@@ -33,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
 
-        // Calcular cuánto desplazar por clic: preferir ancho de tarjeta si existe
+        // Función para calcular la cantidad de desplazamiento
+        // esta parte esta sacada de stackoverflow y modificada segun lo que necesito
         const computeScroll = () => {
             const card = slider.querySelector('.product-card');
             if (card) {

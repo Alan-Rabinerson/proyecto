@@ -1,10 +1,10 @@
 @font-face {
     font-family: Roboto;
-    src: url(./fonts/Roboto-Regular.ttf);
+    src: url(../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
 }
 @font-face {
     font-family: Montserrat;
-    src: url(./fonts/Montserrat-Bold.ttf);
+    src: url(../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 :root {
     /* Tipografía */
@@ -28,9 +28,12 @@
     --secondary-color: #669BBC;
     --accent-color: #780000;
 }
-body{
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+body{
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: 'Roboto', sans-serif;
@@ -170,6 +173,16 @@ main {
     background-color: var(--primary-color);
 }
 
+.btn-comprar-ahora {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: var(--spacing-sm);
+    border-radius: 5px;
+    font-weight: 500;
+    margin-top: var(--spacing-sm);
+}
+
 /* Secciones de productos */
 .featured-products,
 .weekly-offers {
@@ -238,7 +251,7 @@ main {
 
 /* Tarjetas de producto */
 .product-card {
-    min-width: 250px;
+    min-width: 320px;
     background-color: rgba(102, 155, 188, 0.1);
     border: 2px solid var(--secondary-color);
     border-radius: 10px;
@@ -373,11 +386,17 @@ main {
     justify-content: space-between;
     align-items: center;
     margin-bottom: var(--spacing-md);
+    flex-direction: column;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.carrito-item:nth-child(1) {
+    display: none;
 }
 
 .carrito-items .carrito-item img {
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
     border-radius: 5px;
     margin-right: var(--spacing-sm);
@@ -400,6 +419,12 @@ main {
     letter-spacing: 1px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
+
+.añadir-cantidad,
+.restar-cantidad {
+    display: none;
+}
+
 /* ===== TABLET (768px+) ===== */
 @media screen and (min-width: 768px) {
     /* Hero */
@@ -417,7 +442,7 @@ main {
     
     /* Productos */
     .product-card {
-        min-width: 220px;
+        min-width: 400px;
     }
 
     /* Carrito */
@@ -427,7 +452,30 @@ main {
         width: auto;
         max-width: calc(100vw - 5vw);
     }
-       
+    .carrito-item:first-child {
+        display: flex;
+        font-weight: bold;
+        border-bottom: 2px solid var(--secondary-color);
+        padding-bottom: var(--spacing-sm);
+        margin-bottom: var(--spacing-md);
+    }
+    .carrito-items .carrito-item {
+        flex-direction: row;
+        border: none;
+    }  
+
+
+    .añadir-cantidad,
+    .restar-cantidad {
+        display: block;
+        cursor: pointer;
+        background-color: var(--primary-color);
+        color: var(--text-color);
+        padding: 2px 6px;
+        margin: 0 var(--spacing-xs);
+        border-radius: 50%;
+        font-weight: bold;
+    }   
     /* Sticky cart sigue visible en tablet */
 }
 
@@ -445,7 +493,36 @@ main {
     .hero-content p {
         font-size: 1.4rem;
     }
-    
+
+    /* carrito */
+    .carrito.active {
+        display: grid;
+        grid-template-columns: 2.5fr 1fr; 
+        grid-template-rows: auto 1fr; 
+        grid-template-areas:
+            "carrito-header carrito-header"
+            "carrito-items carrito-footer";
+        align-items: start;
+    }
+
+    .carrito-header {
+        grid-area: carrito-header;
+    }
+
+    .carrito-items {
+        grid-area: carrito-items;
+        overflow-y: auto;
+        padding: var(--spacing-md);
+    }
+
+    .carrito-footer {
+        grid-area: carrito-footer;
+        padding: var(--spacing-md);
+        border-top: none;
+        border-left: 2px solid var(--secondary-color);
+        height: calc(100% - 2rem);
+    }
+
     /* Secciones */
     .featured-products,
     .weekly-offers {
@@ -459,6 +536,9 @@ main {
         font-size: 2.2rem;
     }
     
+    .slider-arrow{
+        display: none;
+    }
     /* Productos */
     .product-card {
         min-width: 280px;
@@ -466,7 +546,7 @@ main {
     
 }
 
-/* ===== ANIMACIONES ===== */
+/* ===== ANIMACIONES =====  esto lo he sacado de internet y de chatgpt*/
 @keyframes fadeIn {
     from {
         opacity: 0;
