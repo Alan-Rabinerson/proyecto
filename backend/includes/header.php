@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/student024/Shop/styles/output.css">
     </head>
     <body>
-        <header class="w-full bg-background p-3 mb-4">
+        <header class="header">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <img src="/student024/Shop/assets/logos/logo_sin_fondo._rectangular.png" alt="Logo" class="h-auto max-h-24 object-contain"/>

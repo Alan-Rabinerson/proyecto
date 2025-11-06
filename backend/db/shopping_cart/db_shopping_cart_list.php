@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/db/db_connection.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/db/db_connect.php';
 $customer_id = $_SESSION['customer_id'];
 $sql = "SELECT * FROM 024_shopping_cart WHERE customer_id = $customer_id";
 $result = mysqli_query($conn, $sql);
@@ -18,7 +18,7 @@ foreach ($cart_items as $item) {
     $item['price'] = $product['price'];
     $cart_details[] = $item;
 
-    echo "<div>";
+    echo "<div class='product-card'>";
     echo "<h3>" . $item['product_name']  ."</h3>";
     echo "<p>Price: $" . $item['price'] . "</p>";
     echo "<p>Quantity: " . $item['quantity'] . "</p>";
