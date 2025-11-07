@@ -1,29 +1,27 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?> 
-        <main>
+        <main class="bg-azul-oscuro h-100vh  text-white p-6 flex flex-col items-center">
             <h2 class="mt-4">Página Principal</h2>
             <p class="mt-2">Este es el contenido principal de la página.</p>
 
             <nav class="mt-4">
                 <h3>Products</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/products/form_product_insert.php">Insert Product</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/products/form_product_select_by_id.php">Update Product</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/products/form_product_select.php">Select Product</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/products/form_product_delete.php">Delete Product</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/products.php"> View Product</a></li>
+                    
                 </ul>
                 <h3 class="mt-4">Customers</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/customers/form_customer_insert.php">Insert Customer</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/customers/form_customer_select_by_id.php">Update Customer</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/customers/form_customer_select.php">Select Customer</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/customers/form_customer_delete.php">Delete Customer</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/customers.php"> View Customer</a></li>
+
                 </ul>
                 <h3 class="mt-4">Orders</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/orders/form_order_insert.php">Insert Order</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/orders/form_order_select_by_id.php">Update Order</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/orders/form_order_select.php">Select Order</a></li>
-                    <li class="px-3 py-1 bg-white border border-gray-200 rounded"><a class="text-blue-600 hover:underline" href="/student024/shop/backend/forms/orders/form_order_delete.php">Delete Order</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/orders.php">View Orders</a></li>
+
+                </ul>
+                <h3 class="mt-4">Shopping Cart</h3>
+                <ul class="flex space-x-2 list-none p-0 m-0">
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/shopping_cart.php">View Shopping Cart</a></li>
                 </ul>
             </nav>
         </main>

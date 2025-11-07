@@ -30,13 +30,16 @@
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --radius-lg: 0.5rem;
+    --radius-4xl: 2rem;
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --color-azul-oscuro: #003049;
     --color-beige: #FDF0D5;
+    --color-rojo: #C1121F;
     --color-azul-claro: #669BBC;
+    --color-granate: #780000;
   }
 }
 @layer base {
@@ -191,6 +194,9 @@
   .invisible {
     visibility: hidden;
   }
+  .relative {
+    position: relative;
+  }
   .static {
     position: static;
   }
@@ -260,6 +266,9 @@
   .min-h-screen {
     min-height: 100vh;
   }
+  .w-fit {
+    width: fit-content;
+  }
   .w-full {
     width: 100%;
   }
@@ -312,6 +321,9 @@
   .rounded {
     border-radius: 0.25rem;
   }
+  .rounded-4xl {
+    border-radius: var(--radius-4xl);
+  }
   .rounded-lg {
     border-radius: var(--radius-lg);
   }
@@ -325,11 +337,17 @@
   .border-gray-300 {
     border-color: var(--color-gray-300);
   }
+  .bg-azul-claro {
+    background-color: var(--color-azul-claro);
+  }
   .bg-azul-oscuro {
     background-color: var(--color-azul-oscuro);
   }
   .bg-blue-600 {
     background-color: var(--color-blue-600);
+  }
+  .bg-granate {
+    background-color: var(--color-granate);
   }
   .bg-green-600 {
     background-color: var(--color-green-600);
@@ -337,8 +355,8 @@
   .bg-red-600 {
     background-color: var(--color-red-600);
   }
-  .bg-white {
-    background-color: var(--color-white);
+  .bg-rojo {
+    background-color: var(--color-rojo);
   }
   .object-contain {
     object-fit: contain;
@@ -405,9 +423,6 @@
   }
   .text-beige {
     color: var(--color-beige);
-  }
-  .text-blue-600 {
-    color: var(--color-blue-600);
   }
   .text-gray-700 {
     color: var(--color-gray-700);
@@ -495,6 +510,42 @@
     color: var(--color-beige);
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .boton-rojo {
+    border-radius: 0.25rem;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-beige);
+    background-color: var(--color-rojo);
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 2);
+    color: var(--color-beige);
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-granate);
+      }
+    }
+  }
+  .boton-azul {
+    border-radius: 0.25rem;
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+    border-color: var(--color-beige);
+    background-color: var(--color-azul-claro);
+    padding-inline: calc(var(--spacing) * 4);
+    padding-block: calc(var(--spacing) * 2);
+    color: var(--color-beige);
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-granate);
+      }
+    }
   }
 }
 @property --tw-space-x-reverse {

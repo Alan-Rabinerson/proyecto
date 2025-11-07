@@ -113,6 +113,14 @@ header {
     filter: brightness(1.2);
 }
 
+.login {
+    background-color: var(--primary-color);
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
 /* Buscador */
 .search-bar {
     padding: 1rem;
@@ -147,7 +155,7 @@ header {
 }
 
 .search-bar select {
-    width: 100%;
+    width: auto;
     padding: 1rem;
     border: 2px solid var(--secondary-color);
     background-color: var(--bg-color);

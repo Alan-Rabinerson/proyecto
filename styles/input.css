@@ -18,4 +18,14 @@
     .header{
         @apply bg-azul-oscuro text-beige w-full p-4 flex items-center justify-between sticky top-0 z-50 shadow-md;
     }
+
+    .boton-rojo{
+        @apply bg-rojo text-beige px-4 py-2 rounded hover:bg-granate transition border border-beige;
+    }
+
+    .boton-azul{
+        @apply bg-azul-claro text-beige px-4 py-2 rounded hover:bg-granate transition border border-beige;
+    }
+
+
 }
