@@ -24,9 +24,11 @@ if ($total_items > 0) {
         echo "<div class='product-card w-fit'>";
         echo "<h3>" . $item['name']  ."</h3>";
         echo "<p>Price: $" . $item['price'] . "</p>";
-        include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/shopping_cart/form_shopping_cart_update_add_qty.php';
-        echo "<p>Quantity: " . $item['quantity'] . "</p>";
+        echo "<span class='flex items-center gap-2'>";
         include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/shopping_cart/form_shopping_cart_update_remove_qty.php';
+        echo "<p>Quantity: " . $item['quantity'] . "</p>";
+        include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/shopping_cart/form_shopping_cart_update_add_qty.php';
+        echo "</span>";
         echo "</div><hr>";
     }
 }else {
