@@ -23,6 +23,10 @@
                 <ul class="flex space-x-2 list-none p-0 m-0">
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/shopping_cart.php">View Shopping Cart</a></li>
                 </ul>
+                <h3 class="mt-4">sandbox</h3>
+                <ul class="flex space-x-2 list-none p-0 m-0">
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/sandbox/shopping_cart.php">View Sandbox</a></li>
+                </ul>
             </nav>
         </main>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?> 
