@@ -14,11 +14,11 @@
   
         
         <!-- Menú hamburguesa -->
-        <div id="mobile-menu" class="hidden">
-            
+        <div id="mobile-menu" class="menu-container">
+
             <button class="menu-toggle" ><img src="../assets/logos/icon-menu.png" alt=""></button>
-            <ul class="menu-links">
-                <button id="close-menu"><img src="../assets/logos/cerrar-menu.png" alt=""></button>
+            <ul class="menu-links" >
+                <button id="close-menu" class="lg:hidden"><img src="../assets/logos/cerrar-menu.png" alt=""></button>
                  <!-- Buscador -->
                   <div class="search-bar">
                     <input type="search" placeholder="Buscar productos o categorías..." >
@@ -34,30 +34,87 @@
                         <option value="accesorios">Accesorios</option>
                     </select>
                 </div>
-                <li><a href="#home">Inicio</a></li>
+                <li><a href="../index.html">Inicio</a></li>
                 <li><a href="#novedades">Novedades</a></li>
                 <li><a href="#hombre">Hombre</a></li>
                 <li><a href="#mujer">Mujer</a></li>
-                <li><a href="./backend/index.php">Administración</a></li>
+                <li><a href="../backend/index.php">Administración</a></li>
                 <li><a href="#ofertas">Ofertas</a></li>
+                <li><button class="login boton-rojo" onclick="location.href='../backend/forms/login/form_login.php'">Login</button></li>
             </ul>
         </div>
     </header>
-    <main class="p-8 bg-azul-oscuro min-h-screen text-white">
+    <main class="p-8 bg-azul-oscuro min-h-screen text-beige">
         <h1 class="text-3xl font-bold mb-6">Detalle del Producto</h1>
         <div class="product-detail flex flex-col md:flex-row gap-8">
-            <div class="product-image flex-1">
-                <img src="../assets/productos/producto_ejemplo.jpg" alt="Nombre del Producto" class="w-full h-auto rounded-lg shadow-md">
+            <div class="product-image">
+                <img src="../assets/imagenes/stretwear_hoodie.png" alt="Nombre del Producto" class="w-100 h-auto rounded-lg shadow-md">
             </div>
             <div class="product-info flex-1">
                 <h2 class="text-2xl font-semibold mb-4">Nombre del Producto</h2>
-                <p class="text-gray-700 mb-4">Descripción detallada del producto. Aquí puedes incluir información sobre materiales, características, y cualquier otro detalle relevante que ayude al cliente a tomar una decisión de compra.</p>
+                <p class="text-azul-claro mb-4">Descripción detallada del producto. Aquí puedes incluir información sobre materiales, características, y cualquier otro detalle relevante que ayude al cliente a tomar una decisión de compra.</p>
+                <div class="tallas">
+                    <form action=""> 
+                        <span class="font-bold">Tallas:</span>
+                        <label class="mr-4">
+                            <input type="radio" name="talla" value="S" class="mr-1"> S
+                        </label>
+                        <label class="mr-4">
+                            <input type="radio" name="talla" value="M" class="mr-1"> M
+                        </label>
+                        <label class="mr-4">
+                            <input type="radio" name="talla" value="L" class="mr-1"> L
+                        </label>
+                        <label class="mr-4">
+                            <input type="radio" name="talla" value="XL" class="mr-1"> XL
+                        </label>
+                    </form>
+                </div>
                 <p class="text-xl font-bold mb-4">$49.99</p>
-                <button class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-dark transition">Agregar al Carrito</button>
-   
+                <button class="boton-rojo">Agregar al Carrito</button>
+                <button class="boton-rojo ml-4">Comprar Ahora</button>
+
             </div>
         </div>
+        <section class="reviews">
+            <h2 class="text-2xl font-semibold mt-12 mb-6">Reseñas de Clientes</h2>
+            <div class="review-item mb-4">
+                <p class="font-bold">Usuario123</p>
+                <p>¡Me encanta este producto! La calidad es excelente y el diseño es muy moderno.</p>
+            </div>
+        </section>
     </main>  
-        <script src="../JavaScript/menu.js"></script>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Sobre Nosotros</h3>
+                <p>Concrete Jungle es tu destino para el mejor streetwear urbano.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Email: info@concretejungle.com</li>
+                    <li>Teléfono: +34 900 123 456</li>
+                    <li>Horario: L-V 9:00-18:00</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a href="#instagram" >IG</a>
+                    <a href="#facebook">FB</a>
+                    <a href="#twitter">TW</a>
+                    <a href="#tiktok">TT</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Concrete Jungle. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="../JavaScript/menu.js"></script>
 </body>
 </html> 

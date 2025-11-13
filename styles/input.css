@@ -1,4 +1,12 @@
 @import "tailwindcss";
+@font-face {
+    font-family: Roboto;
+    src: url(../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
+}
+@font-face {
+    font-family: Montserrat;
+    src: url(../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
 
 @theme {
    
@@ -7,25 +15,113 @@
     --color-rojo: #C1121F;
     --color-azul-claro: #669BBC;
     --color-granate: #780000;
+    --color-buscador-fondo: rgba(102,155,188, 0.1);
+    --color-fondo-footer: #0000004d;
+    --color-texto-footer: #fdf0d599;
+
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
     
 }
 
 @layer components{
+    body{
+        @apply font-secondary bg-azul-oscuro text-beige;
+    }
+
     .product-card{
-        @apply bg-azul-claro text-beige p-4 rounded-lg shadow-md flex flex-col items-center justify-center w-min ;
+        @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-center justify-center w-min ;
     }
 
     .header{
-        @apply bg-azul-oscuro text-beige w-full p-4 flex items-center justify-between sticky top-0 z-50 shadow-md;
+        @apply bg-azul-oscuro w-full p-4 flex items-center justify-between sticky top-0 z-50 shadow-md;
     }
 
     .boton-rojo{
-        @apply bg-rojo text-beige px-4 py-2 rounded hover:bg-granate transition border border-beige;
+        @apply bg-rojo text-beige px-4 py-2 rounded hover:bg-granate transition hover:transform-[scale(1.8)];
     }
 
     .boton-azul{
-        @apply bg-azul-claro text-beige px-4 py-2 rounded hover:bg-granate transition border border-beige;
+        @apply bg-azul-claro text-beige px-4 py-2 rounded hover:bg-granate transition hover:transform-[scale(1.2)];
     }
+
+    .menu-links{
+        /* Por defecto en móvil el menú está oculto; se muestra al añadir la clase .active desde JS */
+        @apply hidden bg-azul-oscuro w-full p-4;
+    }
+
+    .menu-container{
+        @apply  w-full h-full bg-azul-oscuro z-40;
+    }
+
+    .logo img{
+        @apply w-63;
+    }
+
+    .search-bar{
+        @apply flex items-center rounded px-2 py-1 gap-2 w-full lg:w-auto lg:max-w-lg;
+    }
+
+    .search-bar input[type="search"]{
+        /* Permitir que el input se encoja dentro del contenedor flex y no provoque overflow */
+        @apply flex-1 min-w-0 bg-buscador-fondo text-beige rounded border border-azul-claro focus:outline-none p-2;
+        width: 100%;
+    }
+
+    .search-bar input[type="search"]::placeholder{
+        @apply text-xs;
+    }
+
+
+    .search-bar select{
+        @apply bg-azul-oscuro px-2 py-2 rounded-sm transition border border-azul-claro flex-shrink-0;
+    }
+
+    .search-bar button{
+        /* Evitar que el botón crezca y provoque overflow */
+        @apply flex-shrink-0 p-2;
+    }
+
+    .menu-links{
+        /* Escritorio: menú horizontal. Móvil: oculto hasta que se añada .active */
+        @apply hidden lg:flex lg:flex-row lg:gap-4 lg:justify-center lg:items-center;
+    }
+
+    .menu-toggle{
+        /* Mostrar botón en móvil (por defecto) y ocultar en pantallas grandes */
+        @apply lg:hidden block absolute top-6 right-4;
+    }
+
+    .menu-links.active{
+        /* Mostrar en columna, ocupar ancho completo y quedar por encima del contenido */
+        @apply flex flex-col gap-4 justify-start items-start absolute top-16 left-0 right-0 z-50 p-4;
+        background-color: var(--color-azul-oscuro);
+    }
+
+    .tallas{
+        @apply flex gap-2 mt-4;
+    }
+
+    .footer-content{
+        @apply flex justify-between flex-wrap gap-4 p-8 bg-fondo-footer text-beige text-sm;
+    }
+
+    .footer-section h3{
+        @apply text-xl mb-4 text-azul-claro font-bold ;
+    }
+
+    .footer-section p, li{
+        @apply mb-2;
+    }
+
+    .footer-bottom{
+        @apply text-center p-4 bg-fondo-footer text-texto-footer border-t border-beige;
+    }
+
+    .social-links a{
+        @apply text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 ;
+    }
+
 
 
 }

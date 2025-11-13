@@ -3,8 +3,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const stickyCart = document.querySelectorAll('.sticky-cart')[1];
     const cerrarCarrito = document.getElementById('close-cart');
     const carritoDesktop = document.querySelector('.menu-links .carrito-desktop');
+    const productCards = document.querySelectorAll('.product-card');
 
-    // Agregar funcionalidad al botón "Comprar ahora"
+    // Agregar ruta de producto a cada tarjeta de producto
+    productCards.forEach(card => {
+        card.addEventListener('click', () => {
+            window.location.href = './views/producto.html';
+        });
+    });
+
     // Comprobar que los elementos existen antes de añadir eventos
     if (carrito) {
         if (stickyCart) {
