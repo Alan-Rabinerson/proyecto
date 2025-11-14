@@ -1,13 +1,14 @@
 <?php 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/sandbox/db_shopping_cart.php';
+    $cart_total = 0.0;
+    $total_items = 0;
 ?>
 <h2 class="text-2xl font-bold mb-4 text-center">Shopping Cart</h2>
 <div class="text-center">
    
-    <div class="flex flex-wrap items-center justify-center gap-4">
-        <?php
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/db/shopping_cart/db_shopping_cart_list.php';
-        ?>
+    <div class="flex flex-wrap items-center justify-center gap-4" id="cart-items">
+        
     </div>
         
     <h3>Total Items:

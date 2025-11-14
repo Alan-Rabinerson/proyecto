@@ -34,12 +34,12 @@
                         <option value="accesorios">Accesorios</option>
                     </select>
                 </div>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="#novedades">Novedades</a></li>
-                <li><a href="#hombre">Hombre</a></li>
-                <li><a href="#mujer">Mujer</a></li>
-                <li><a href="../backend/index.php">Administración</a></li>
-                <li><a href="#ofertas">Ofertas</a></li>
+                <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="../index.html">Inicio</a></li>
+                <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="#novedades">Novedades</a></li>
+                <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="#hombre">Hombre</a></li>
+                <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="#mujer">Mujer</a></li>
+                <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="../backend/index.php">Administración</a></li>
+                <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="#ofertas">Ofertas</a></li>
                 <li><button class="login boton-rojo" onclick="location.href='../backend/forms/login/form_login.php'">Login</button></li>
             </ul>
         </div>
@@ -51,8 +51,16 @@
                 <img src="../assets/imagenes/stretwear_hoodie.png" alt="Nombre del Producto" class="w-100 h-auto rounded-lg shadow-md">
             </div>
             <div class="product-info flex-1">
-                <h2 class="text-2xl font-semibold mb-4">Nombre del Producto</h2>
-                <p class="text-azul-claro mb-4">Descripción detallada del producto. Aquí puedes incluir información sobre materiales, características, y cualquier otro detalle relevante que ayude al cliente a tomar una decisión de compra.</p>
+                <h2 class="text-2xl font-semibold mb-4 text-azul-claro">Sudadera Streetwear</h2>
+                <div class="product-description mb-6">
+                    <p class=" mb-4">La sudadera "Concrete Wave" está confeccionada pensando en la calle. Su interior cepillado aporta una suavidad térmica ideal para temporadas medias y frías. Presenta un corte ligeramente oversize que favorece la libertad de movimiento y permite llevarla sola o sobre capas. Detalles cuidados como costuras reforzadas, puños acanalados y capucha con cordón regulable elevan la durabilidad y el confort. El logo bordado en el pecho añade un toque sobrio y premium sin perder la identidad streetwear.</p>
+                    <ul class="list-disc list-inside">
+                        <h3>Materiales:</h3>
+                        <li class="mb-2">80% algodón orgánico.</li>
+                        <li class="mb-2">20% poliéster reciclado.</li>
+                    </ul>
+                </div>
+
                 <div class="tallas">
                     <form action=""> 
                         <span class="font-bold">Tallas:</span>
@@ -79,8 +87,18 @@
         <section class="reviews">
             <h2 class="text-2xl font-semibold mt-12 mb-6">Reseñas de Clientes</h2>
             <div class="review-item mb-4">
-                <p class="font-bold">Usuario123</p>
+                <p class="font-bold text-azul-claro">Usuario123</p>
                 <p>¡Me encanta este producto! La calidad es excelente y el diseño es muy moderno.</p>
+                <span class="flex">
+                    <img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_sin_relleno.png" alt="">
+                </span>
+            </div>
+            <div class="review-item mb-4">
+                <p class="font-bold text-azul-claro">Usuario234</p>
+                <p>¡Me encanta este producto! La calidad es excelente y el diseño es muy moderno.</p>
+                <span class="flex">
+                    <img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_sin_relleno.png" alt="">
+                </span>
             </div>
         </section>
     </main>  
