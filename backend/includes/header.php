@@ -18,11 +18,11 @@
                         <?php if (isset($_SESSION['username'])) { ?>
                             <li class="px-3 py-1 rounded"><a href="/student024/Shop/backend/"><img class="max-w-8" src="/student024/Shop/frontend/assets/logos/carrito_blanco.png" alt=""></a></li>
                         <?php } ?>
-                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/index.php">Home</a></li>
-                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/products.php">Products</a></li>
-                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/customers.php">Customers</a></li>
-                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/orders.php">Orders</a></li>
-                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/shopping_cart.php">Shopping Cart</a></li>
+                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/index.php">Home</a></li>
+                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/products.php">Products</a></li>
+                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/customers.php">Customers</a></li>
+                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/orders.php">Orders</a></li>
+                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/shopping_cart.php">Shopping Cart</a></li>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/index.html">Homepage</a></li>
                     </ul>
                     <div class="ml-4">
