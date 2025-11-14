@@ -6,26 +6,26 @@
             <nav class="mt-4">
                 <h3>Products</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/products.php"> View Product</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/products.php"> View Product</a></li>
                     
                 </ul>
                 <h3 class="mt-4">Customers</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/customers.php"> View Customer</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/customers.php"> View Customer</a></li>
 
                 </ul>
                 <h3 class="mt-4">Orders</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/orders.php">View Orders</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/orders.php">View Orders</a></li>
 
                 </ul>
                 <h3 class="mt-4">Shopping Cart</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/shopping_cart.php">View Shopping Cart</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/shopping_cart.php">View Shopping Cart</a></li>
                 </ul>
                 <h3 class="mt-4">sandbox</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/sandbox/shopping_cart.php">View Sandbox</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/sandbox/views/shopping_cart.php">View Sandbox</a></li>
                 </ul>
             </nav>
         </main>
