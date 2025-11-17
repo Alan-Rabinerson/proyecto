@@ -54,10 +54,6 @@
         @apply  w-full h-full bg-azul-oscuro z-40;
     }
 
-    .logo img{
-        @apply w-63;
-    }
-
     .search-bar{
         @apply flex items-center rounded px-2 py-1 gap-2 w-full lg:w-auto lg:max-w-lg;
     }
@@ -114,22 +110,6 @@
         @apply text-xl mb-4 text-azul-claro font-bold ;
     }
 
-    .footer-section p, li{
-        @apply mb-2;
-    }
 
-    .footer-bottom{
-        @apply text-center p-4 bg-fondo-footer text-texto-footer border-t border-beige;
-    }
-
-    .social-links a{
-        @apply text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)];
-    }
-
-    .review-item img{
-        @apply w-5 h-5;
-    }
-
-
-
+   
 }

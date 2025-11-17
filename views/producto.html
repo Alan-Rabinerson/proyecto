@@ -9,7 +9,7 @@
 <body>
     <header class="header">
         <div class="logo">
-            <img src="../assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
+            <img class="w-63" src="../assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
         </div>
   
         
@@ -44,11 +44,16 @@
             </ul>
         </div>
     </header>
-    <main class="p-8 bg-azul-oscuro min-h-screen text-beige">
+    <main class="p-8 bg-azul-oscuro text-beige">
         <h1 class="text-3xl font-bold mb-6">Detalle del Producto</h1>
         <div class="product-detail flex flex-col md:flex-row gap-8">
-            <div class="product-image">
-                <img src="../assets/imagenes/foto1.png" alt="Nombre del Producto" class="w-100 h-auto rounded-lg shadow-md">
+            <div class="product-images">
+                <img src="../assets/imagenes/foto1.jpg" alt="Nombre del Producto" class="w-100 h-auto rounded-lg shadow-md">
+                <div class="additional-images flex gap-4 mt-2">
+                    <img src="../assets/imagenes/foto-detalle-1-1.png" alt="Imagen adicional 1" class="w-24 h-24 object-cover rounded-lg shadow-md cursor-pointer">
+                    <img src="../assets/imagenes/foto-detalle-1-2.png" alt="Imagen adicional 2" class="w-24 h-24 object-cover rounded-lg shadow-md cursor-pointer">
+                    <img src="../assets/imagenes/foto-detalle-1-3.png" alt="Imagen adicional 3" class="w-24 h-24 object-cover rounded-lg shadow-md cursor-pointer">
+                </div>           
             </div>
             <div class="product-info flex-1">
                 <h2 class="text-2xl font-semibold mb-4 text-azul-claro">Sudadera Streetwear</h2>
@@ -79,25 +84,45 @@
                     </form>
                 </div>
                 <p class="text-xl font-bold mb-4">$49.99</p>
-                <button class="boton-rojo">Agregar al Carrito</button>
-                <button class="boton-rojo ml-4">Comprar Ahora</button>
-
+                <nav class="botones flex items-center justify-center flex-wrap gap-4 md:justify-start">
+                    <form action="">
+                        <label for="cantidad" class="font-bold mr-2">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad" value="1" min="1" class="w-16 rounded-md p-1 border border-beige">
+                        <button class="boton-rojo">Agregar al Carrito</button>
+                    </form>
+                    <button class="boton-rojo ml-4">Comprar Ahora</button>
+                </nav>
             </div>
         </div>
-        <section class="reviews">
-            <h2 class="text-2xl font-semibold mt-12 mb-6">Reseñas de Clientes</h2>
+        <h2 class="text-2xl font-semibold mt-12 mb-6">Reseñas de Clientes</h2>
+        <section class="reviews flex flex-wrap mt-12 gap-5">
+            
             <div class="review-item mb-4">
                 <p class="font-bold text-azul-claro">Usuario123</p>
                 <p>¡Me encanta este producto! La calidad es excelente y el diseño es muy moderno.</p>
                 <span class="flex">
-                    <img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_sin_relleno.png" alt="">
+                    <img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_sin_relleno.png" alt="">
                 </span>
             </div>
             <div class="review-item mb-4">
                 <p class="font-bold text-azul-claro">Usuario234</p>
                 <p>¡Me encanta este producto! La calidad es excelente y el diseño es muy moderno.</p>
                 <span class="flex">
-                    <img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_con_relleno.png" alt=""><img src="../assets/logos/estrella_sin_relleno.png" alt="">
+                    <img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_sin_relleno.png" alt="">
+                </span>
+            </div>
+             <div class="review-item mb-4">
+                <p class="font-bold text-azul-claro">Usuario234</p>
+                <p>¡Me encanta este producto! La calidad es excelente y el diseño es muy moderno.</p>
+                <span class="flex">
+                    <img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_sin_relleno.png" alt="">
+                </span>
+            </div>
+             <div class="review-item mb-4">
+                <p class="font-bold text-azul-claro">Usuario234</p>
+                <p>¡Me encanta este producto! La calidad es excelente y el diseño es muy moderno.</p>
+                <span class="flex">
+                    <img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_con_relleno.png" alt=""><img class="w-5 h-5" src="../assets/logos/estrella_sin_relleno.png" alt="">
                 </span>
             </div>
         </section>
@@ -106,33 +131,34 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Sobre Nosotros</h3>
-                <p>Concrete Jungle es tu destino para el mejor streetwear urbano.</p>
+                <p class="mb-2">Concrete Jungle es tu destino para el mejor streetwear urbano.</p>
             </div>
             
             <div class="footer-section">
                 <h3>Contacto</h3>
                 <ul>
-                    <li>Email: info@concretejungle.com</li>
-                    <li>Teléfono: +34 900 123 456</li>
-                    <li>Horario: L-V 9:00-18:00</li>
+                    <li class="mb-2">Email: info@concretejungle.com</li>
+                    <li class="mb-2">Teléfono: +34 900 123 456</li>
+                    <li class="mb-2">Horario: L-V 9:00-18:00</li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h3>Síguenos</h3>
                 <div class="social-links">
-                    <a href="#instagram" >IG</a>
-                    <a href="#facebook">FB</a>
-                    <a href="#twitter">TW</a>
-                    <a href="#tiktok">TT</a>
+                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#instagram" >IG</a>
+                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#facebook">FB</a>
+                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#twitter">TW</a>
+                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#tiktok">TT</a>
                 </div>
             </div>
         </div>
         
-        <div class="footer-bottom">
+        <div class="footer-bottom text-center p-4 bg-fondo-footer text-texto-footer border-t border-beige">
             <p>&copy; 2025 Concrete Jungle. Todos los derechos reservados.</p>
         </div>
     </footer>
     <script src="../JavaScript/menu.js"></script>
+    <script src="../JavaScript/producto.js"></script>
 </body>
 </html> 
