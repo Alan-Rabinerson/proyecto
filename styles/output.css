@@ -275,6 +275,9 @@
   .table {
     display: table;
   }
+  .h-48 {
+    height: calc(var(--spacing) * 48);
+  }
   .h-auto {
     height: auto;
   }
@@ -283,6 +286,9 @@
   }
   .min-h-screen {
     min-height: 100vh;
+  }
+  .w-48 {
+    width: calc(var(--spacing) * 48);
   }
   .w-100 {
     width: calc(var(--spacing) * 100);
@@ -375,6 +381,9 @@
   }
   .object-contain {
     object-fit: contain;
+  }
+  .object-cover {
+    object-fit: cover;
   }
   .p-0 {
     padding: calc(var(--spacing) * 0);
@@ -519,6 +528,7 @@
   }
   .product-card {
     display: flex;
+    height: calc(var(--spacing) * 150);
     width: calc(1/4 * 100%);
     flex-direction: column;
     align-items: center;

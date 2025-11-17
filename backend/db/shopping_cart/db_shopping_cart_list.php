@@ -25,6 +25,7 @@ if ($total_items > 0) {
         $cart_total += $item_total;
 
         echo "<div class='product-card w-fit'>";
+        echo "<img src='/student024/shop/assets/imagenes/foto" . $product_id . ".jpg' alt='" . $item['name'] . "' class='w-48 h-48 object-cover mb-2 rounded-lg shadow-md'>";
         echo "<h3 id='product-name-" . $product_id . "'>" . $item['name']  ."</h3>";
         echo "<p id='product-price-" . $product_id . "'>Price: " . $item['price'] . "€ </p>";
         echo "<p>Subtotal: " . ($item['price'] * $item['quantity']) . "€ </p>";
@@ -35,7 +36,7 @@ if ($total_items > 0) {
             <input type="number" name="quantity" value="<?php echo $quantity-- ; ?>" min="1" hidden>
             <button class="boton-rojo rounded-4xl" type="submit">-</button>
         </form>        
-        <?php echo "<p>Quantity: " . $item['quantity'] . "</p>";?>
+        <?php echo "<p id='product-quantity'>Quantity: " . $item['quantity'] . "</p>";?>
         <form action="" class="add-qty" onsubmit="addQuantity(event)">
             <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" hidden>
             <input type="number" name="quantity" value="<?php echo $quantity++ ; ?>" min="1" hidden>

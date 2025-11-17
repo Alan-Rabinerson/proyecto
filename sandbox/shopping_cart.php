@@ -17,6 +17,7 @@
         <?php echo number_format($cart_total, 2). "€"; ?>
     </h3>
 </div>
+<script src="/student024/shop/sandbox/shopping_cart.js"></script>
 <?php
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';
 ?>

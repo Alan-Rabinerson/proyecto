@@ -1,4 +1,4 @@
-let cartItemsDiv = document.getElementById("cart-items");
+let productQty = document.getElementById("product-quantity");
 let addQty = document.querySelector(".add-qty");
 let removeQty = document.querySelector(".remove-qty");
 let totalItemsSpan = document.getElementById("total-items");
@@ -9,9 +9,8 @@ function addQuantity(event) {
     xmlhttp.onreadystatechange = () => {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             let products = JSON.parse(xmlhttp.responseText);
-            cartItemsDiv.innerHTML = products.map(product => `<div>${product.name}</div>`).join('');
-            totalItemsSpan.textContent = products.length;
-            cartTotalSpan.textContent = products.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2) + "€";
+            parseInt(totalItemsSpan.textContent) ++;
+            cartTotalSpan.textContent = (parseFloat(cartTotalSpan.textContent) + parseFloat(products.price)).toFixed(2) + "€";
         }
     }
     xmlhttp.open("GET", "/student024/shop/backend/sandbox/db_shopping_cart.php?", true);

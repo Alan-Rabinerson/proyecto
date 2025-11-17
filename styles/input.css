@@ -30,7 +30,7 @@
     }
 
     .product-card{
-        @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-center justify-center w-1/4 wrap-normal ;
+        @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-center justify-center w-1/4 wrap-normal h-150 ;
     }
 
     .header{
