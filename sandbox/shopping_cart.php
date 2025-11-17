@@ -1,6 +1,5 @@
 <?php 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/sandbox/db_shopping_cart.php';
     $cart_total = 0.0;
     $total_items = 0;
 ?>
@@ -8,7 +7,7 @@
 <div class="text-center">
    
     <div class="flex flex-wrap items-center justify-center gap-4" id="cart-items">
-        
+        <?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/db/shopping_cart/db_shopping_cart_list.php'; ?>
     </div>
         
     <h3>Total Items:
