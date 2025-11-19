@@ -13,10 +13,12 @@
     <h3>Total Items:
         <?php echo $total_items; ?>
     </h3>
-    <h3>Cart Total:
+    <h3 id="cart-total">Cart Total:
         <?php echo number_format($cart_total, 2). "€"; ?>
     </h3>
+    <input type="submit" class="boton-rojo rounded-4xl mb-4" value="Proceed to Checkout">
 </div>
+<script src="/student024/shop/JavaScript/shopping_cart.js"></script>
 <?php
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';
 ?>

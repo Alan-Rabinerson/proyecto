@@ -24,7 +24,7 @@
    
 
     if($query){
-        header("Location: /student024/Shop/backend/products.php");
+        header("Location: /student024/Shop/backend/views/products.php");
         exit();
     } else {
         echo "Error al agregar al carrito: " . mysqli_error($conn);

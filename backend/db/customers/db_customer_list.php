@@ -7,7 +7,8 @@
 
     foreach($customers as $customer){
         $customer_id = $customer['customer_id'];
-        echo "<div>";
+        echo "<div class='customer-card w-fit h-fit border p-4 rounded-lg shadow-md flex flex-col items-center' id='customer-" . $customer_id . "'>";
+        echo "<img src='/student024/shop/assets/imagenes/user.png' class='w-24 h-24 object-cover mb-2 rounded-lg shadow-md'>";
         echo "<h3>" . $customer['first_name'] . " " . $customer['last_name'] . "</h3>";
         echo "<p>Email: " . $customer['email'] . "</p>";
         echo "<p>Phone: " . $customer['phone'] . "</p>";

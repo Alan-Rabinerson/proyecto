@@ -24,24 +24,16 @@ if ($total_items > 0) {
         $item_total = $item['price'] * $item['quantity'];
         $cart_total += $item_total;
 
-        echo "<div class='product-card w-fit'>";
+        echo "<div class='product-card w-fit h-fit' id='product-" . $product_id . "'>";
         echo "<img src='/student024/shop/assets/imagenes/foto" . $product_id . ".jpg' alt='" . $item['name'] . "' class='w-48 h-48 object-cover mb-2 rounded-lg shadow-md'>";
         echo "<h3 id='product-name-" . $product_id . "'>" . $item['name']  ."</h3>";
         echo "<p id='product-price-" . $product_id . "'>Price: " . $item['price'] . "€ </p>";
         echo "<p>Subtotal: " . ($item['price'] * $item['quantity']) . "€ </p>";
         echo "<span class='flex items-center gap-2'>";
         ?>
-        <form class="remove-qty" action="" onsubmit="removeQuantity(event)">
-            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" hidden>
-            <input type="number" name="quantity" value="<?php echo $quantity-- ; ?>" min="1" hidden>
-            <button class="boton-rojo rounded-4xl" type="submit">-</button>
-        </form>        
+        <button onclick="removeQuantity(<?php echo $product_id; ?>, <?php echo $quantity; ?>, <?php echo $item['price']; ?>)"  class="boton-rojo rounded-4xl">-</button>           
         <?php echo "<p id='product-quantity'>Quantity: " . $item['quantity'] . "</p>";?>
-        <form action="" class="add-qty" onsubmit="addQuantity(event)">
-            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" hidden>
-            <input type="number" name="quantity" value="<?php echo $quantity++ ; ?>" min="1" hidden>
-            <button class="boton-rojo rounded-4xl" type="submit">+</button>
-        </form>
+        <button onclick="addQuantity(<?php echo $product_id; ?>, <?php echo $quantity; ?>, <?php echo $item['price']; ?>)" class="boton-rojo rounded-4xl">+</button>
         <?php
         echo "</span>";
         echo "</div><hr>";
