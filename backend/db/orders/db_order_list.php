@@ -5,7 +5,7 @@
 
     foreach($orders as $order){
         $order_number = $order['order_number'];
-        echo "<div>";
+        echo "<div class='order-box flex flex-col items-center border rounded-md p-3 mb-3 h-fit w-fit'>";
         echo "<h3>Order Number: " . $order['order_number'] . "</h3>";
         echo "<p>Customer Name: " . $order['first_name'] . " " . $order['last_name'] . "</p>";
         echo "<p>Order Date: " . $order['order_date'] . "</p>";
@@ -15,5 +15,5 @@
         echo "<p>Method: " . $order['method_name'] . "</p>";
         include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';
         include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_delete.php';
-        echo "</div><hr>";
+        echo "</div>";
     }

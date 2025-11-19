@@ -29,6 +29,14 @@
         @apply font-secondary bg-azul-oscuro text-beige;
     }
 
+    h1, h2, h3, h4, h5, h6{
+        @apply font-primary;
+    }
+
+    .form-control{
+        @apply w-full p-2 rounded border border-azul-claro bg-azul-oscuro text-beige focus:outline-none;
+    }
+
     .product-card{
         @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-center justify-center w-1/4 wrap-normal h-150 ;
     }
