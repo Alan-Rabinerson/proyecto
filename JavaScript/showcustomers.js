@@ -15,7 +15,7 @@ function showCustomers(str) {
       divProducts.innerHTML = this.responseText;
     }
   };
-  xmlhttp.open("GET", "/student024/Shop/sandbox/db_customer_search.php?searchTerm=" + str, true);
+  xmlhttp.open("GET", "/student024/Shop/backend/db/customers/db_customer_search.php?searchTerm=" + str, true);
   xmlhttp.send();
   
 }
