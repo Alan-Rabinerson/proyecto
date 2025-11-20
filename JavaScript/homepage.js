@@ -1,8 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const carrito = document.querySelector('.carrito');
-    const stickyCart = document.querySelectorAll('.sticky-cart')[1];
-    const cerrarCarrito = document.getElementById('close-cart');
-    const carritoDesktop = document.querySelector('.menu-links .carrito-desktop');
     const productCards = document.querySelectorAll('.product-card');
 
     // Agregar ruta de producto a cada tarjeta de producto
@@ -12,26 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Comprobar que los elementos existen antes de añadir eventos
-    if (carrito) {
-        if (stickyCart) {
-            stickyCart.addEventListener('click', () => {
-                carrito.classList.add('active');
-            });
-        }
 
-        if (cerrarCarrito) {
-            cerrarCarrito.addEventListener('click', () => {
-                carrito.classList.remove('active');
-            });
-        }
-
-        if (carritoDesktop) {
-            carritoDesktop.addEventListener('click', () => {
-                carrito.classList.add('active');
-            });
-        }
-    }
     // Slider de productos y ofertas
     const sliderContainers = document.querySelectorAll('.slider-container');
     sliderContainers.forEach(container => {

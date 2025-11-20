@@ -11,18 +11,17 @@
         <div class="logo">
             <img class="w-63" src="../assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
         </div>
-  
         
         <!-- Menú hamburguesa -->
         <div id="mobile-menu" class="menu-container">
 
-            <button class="menu-toggle" ><img src="../assets/logos/icon-menu.png" alt=""></button>
-            <ul class="menu-links" >
+            <button class="menu-toggle lg:hidden block absolute top-6 right-4 hover:transform-[scale(1.2)]" ><img src="../assets/logos/icon-menu.png" alt=""></button>
+            <ul class="menu-links " >
                 <button id="close-menu" class="lg:hidden"><img src="../assets/logos/cerrar-menu.png" alt=""></button>
                  <!-- Buscador -->
                   <div class="search-bar">
-                    <input type="search" placeholder="Buscar productos o categorías..." >
-                    <button type="button" >
+                    <input type="search" class="flex-1 min-w-0 bg-buscador-fondo text-beige rounded border border-azul-claro focus:outline-none p-2 width: 100%" placeholder="Buscar productos o categorías..." >
+                    <button type="button" class="shrink-0 p-2" >
                         <span></span>
                     </button>
                     <select aria-label="Filtrar por categoría">
@@ -34,6 +33,10 @@
                         <option value="accesorios">Accesorios</option>
                     </select>
                 </div>
+                <button id="sticky-cart-desktop" class="sticky-cart carrito-desktop">
+                    <img src="../assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
+                    <span class="cart-count">2</span>
+                </button>
                 <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="../index.html">Inicio</a></li>
                 <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="#novedades">Novedades</a></li>
                 <li><a class=" hover:text-azul-claro hover:underline hover:text-xl" href="#hombre">Hombre</a></li>
@@ -48,11 +51,11 @@
         <h1 class="text-3xl font-bold mb-6">Sudadera Streetwear</h1>
         <div class="product-detail flex flex-col lg:flex-row gap-8">
             <div class="product-images flex flex-col items-center lg:items-start">
-                <img src="../assets/imagenes/foto1.jpg" alt="Nombre del Producto" class="w-30 md:w-55 lg:w-55 h-auto rounded-lg shadow-md">
+                <img src="../assets/imagenes/foto1.jpg" alt="Nombre del Producto" class="hover:border-azul-claro w-30 md:w-55 lg:w-60 h-auto rounded-lg shadow-md">
                 <div class="additional-images flex gap-4 mt-2">
-                    <img src="../assets/imagenes/foto-detalle-1-1.png" alt="Imagen adicional 1" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shadow-md cursor-pointer">
-                    <img src="../assets/imagenes/foto-detalle-1-2.png" alt="Imagen adicional 2" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shadow-md cursor-pointer">
-                    <img src="../assets/imagenes/foto-detalle-1-3.png" alt="Imagen adicional 3" class="w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shadow-md cursor-pointer">
+                    <img src="../assets/imagenes/foto-detalle-1-1.png" alt="Imagen adicional 1" class="hover:border-azul-claro w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shadow-md cursor-pointer">
+                    <img src="../assets/imagenes/foto-detalle-1-2.png" alt="Imagen adicional 2" class="hover:border-azul-claro w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shadow-md cursor-pointer">
+                    <img src="../assets/imagenes/foto-detalle-1-3.png" alt="Imagen adicional 3" class="hover:border-azul-claro w-16 h-16 md:w-20 md:h-20 object-cover rounded-lg shadow-md cursor-pointer">
                 </div>           
                
                 <span id="precio">
@@ -63,7 +66,7 @@
                     <form action="" class="flex justify-center">
                         <label for="cantidad" class="font-bold mr-2">Cantidad:</label>
                         <input type="number" id="cantidad" name="cantidad" value="1" min="1" class="w-16 rounded-md p-1 border border-beige">
-                        <button class="boton-rojo">Agregar al Carrito</button>
+                        <button id="añadir-carrito-btn" class="boton-rojo agregar-carrito">Agregar al Carrito</button>
                     </form>
                     <button class="boton-rojo ml-4">Comprar Ahora</button>
                 </nav>
@@ -71,7 +74,7 @@
 
             
             <div class="product-info flex-1 flex-col lg:flex-col-reverse"> 
-                <div class="tallas mb-2">
+                <div class="tallas mb-2 flex gap-2 mt-4">
                     <form action=""> 
                         <span class="font-bold">Tallas:</span>
                         <label class="mr-4">
@@ -89,7 +92,7 @@
                     </form>
                 </div>
                 <div class="product-description mb-6">
-                    <p class=" mb-4">La sudadera "Concrete Wave" está confeccionada pensando en la calle. Su interior cepillado aporta una suavidad térmica ideal para temporadas medias y frías. Presenta un corte ligeramente oversize que favorece la libertad de movimiento y permite llevarla sola o sobre capas. Detalles cuidados como costuras reforzadas, puños acanalados y capucha con cordón regulable elevan la durabilidad y el confort. El logo bordado en el pecho añade un toque sobrio y premium sin perder la identidad streetwear.</p>
+                    <p class=" mb-4 lg:text-xl">La sudadera "Concrete Wave" está confeccionada pensando en la calle. Su interior cepillado aporta una suavidad térmica ideal para temporadas medias y frías. Presenta un corte ligeramente oversize que favorece la libertad de movimiento y permite llevarla sola o sobre capas. Detalles cuidados como costuras reforzadas, puños acanalados y capucha con cordón regulable elevan la durabilidad y el confort. El logo bordado en el pecho añade un toque sobrio y premium sin perder la identidad streetwear.</p>
                     <ul class="list-disc list-inside">
                         <h3>Materiales:</h3>
                         <li class="mb-2">80% algodón orgánico.</li>
@@ -135,7 +138,7 @@
         </section>
     </main>  
     <footer>
-        <div class="footer-content">
+        <div class="footer-content flex justify-between flex-wrap gap-4 p-8 bg-fondo-footer text-beige text-sm">
             <div class="footer-section">
                 <h3>Sobre Nosotros</h3>
                 <p class="mb-2">Concrete Jungle es tu destino para el mejor streetwear urbano.</p>
@@ -165,6 +168,86 @@
             <p>&copy; 2025 Concrete Jungle. Todos los derechos reservados.</p>
         </div>
     </footer>
+<!-- Botón Sticky Cart (Móvil) -->
+<button id="sticky-cart-mobile" class="sticky-cart">
+    <img src="../assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
+    <span class="cart-count">2</span>
+</button>
+
+
+
+<!-- Modal del Carrito -->
+<div class="carrito" id="carrito">
+    <!-- Header del Carrito -->
+    <div class="carrito-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart">×</button>
+    </div>
+
+    <!-- Lista de Items -->
+    <ul class="carrito-items">
+        <!-- Fila de Encabezados (solo visible en tablet+) -->
+        <li class="carrito-item">
+            <span class="w-[90px]"></span>
+            <span class="nombre-producto">Nombre</span>
+            <span class="cantidad-container">Cantidad</span>
+            <span class="precio-producto">Precio</span>
+        </li>
+
+        <!-- Item 1 -->
+        <li class="carrito-item">
+            <img src="../assets/imagenes/foto1.jpg" alt="Producto 1">
+            <span class="nombre-producto">Sudadera Urban Style</span>
+            <div class="cantidad-container">
+                <button class="restar-cantidad" data-producto="1">-</button>
+                <span class="cantidad-producto">1</span>
+                <button class="añadir-cantidad" data-producto="1">+</button>
+            </div>
+            <span class="precio-producto">49,99 €</span>
+        </li>
+
+        <!-- Item 2 -->
+        <li class="carrito-item">
+            <img src="../assets/imagenes/foto2.jpg" alt="Producto 2">
+            <span class="nombre-producto">Camiseta Concrete</span>
+            <div class="cantidad-container">
+                <button class="restar-cantidad" data-producto="2">-</button>
+                <span class="cantidad-producto">2</span>
+                <button class="añadir-cantidad" data-producto="2">+</button>
+            </div>
+            <span class="precio-producto">24,99 €</span>
+        </li>
+    </ul>
+
+    <!-- Footer del Carrito -->
+    <div class="carrito-footer">
+        <p class="total-amount">Total: 99,97 €</p>
+        <button class="btn-checkout">Proceder al pago</button>
+    </div>
+</div>
+
+<!-- Ejemplo: Carrito Vacío -->
+
+<!-- <div class="carrito active" id="carrito">
+    <div class="carrito-header">
+        <h2>Tu Carrito</h2>
+        <button id="close-cart">×</button>
+    </div>
+
+    <div class="carrito-empty">
+        <svg class="w-24 h-24 text-azul-claro" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+        </svg>
+        <p>Tu carrito está vacío</p>
+        <button class="boton-rojo">Ir a comprar</button>
+    </div>
+
+    <div class="carrito-footer">
+        <p class="total-amount">Total: 0,00 €</p>
+        <button class="btn-checkout" disabled>Proceder al pago</button>
+    </div>
+</div> -->
+
     <script src="../JavaScript/menu.js"></script>
     <script src="../JavaScript/producto.js"></script>
 </body>

@@ -15,7 +15,7 @@
     --color-rojo: #C1121F;
     --color-azul-claro: #669BBC;
     --color-granate: #780000;
-    --color-buscador-fondo: rgba(102,155,188, 0.1);
+    --color-buscador-fondo: #669bbc1a;
     --color-fondo-footer: #0000004d;
     --color-texto-footer: #fdf0d599;
 
@@ -53,71 +53,164 @@
         @apply bg-azul-claro text-beige px-4 py-2 rounded hover:bg-granate transition hover:transform-[scale(1.2)];
     }
 
-    .menu-links{
-        /* Por defecto en móvil el menú está oculto; se muestra al añadir la clase .active desde JS */
-        @apply hidden bg-azul-oscuro w-full p-4;
-    }
-
-    .menu-container{
-        @apply  w-full h-full bg-azul-oscuro z-40;
-    }
-
     .search-bar{
         @apply flex items-center rounded px-2 py-1 gap-2 w-full lg:w-auto lg:max-w-lg;
-    }
-
-    .search-bar input[type="search"]{
-        /* Permitir que el input se encoja dentro del contenedor flex y no provoque overflow */
-        @apply flex-1 min-w-0 bg-buscador-fondo text-beige rounded border border-azul-claro focus:outline-none p-2;
-        width: 100%;
     }
 
     .search-bar input[type="search"]::placeholder{
         @apply text-xs;
     }
 
-
     .search-bar select{
         @apply bg-azul-oscuro px-2 py-2 rounded-sm transition border border-azul-claro flex-shrink-0;
-    }
-
-    .search-bar button{
-        /* Evitar que el botón crezca y provoque overflow */
-        @apply flex-shrink-0 p-2;
-    }
-
-    .menu-links{
-        /* Escritorio: menú horizontal. Móvil: oculto hasta que se añada .active */
-        @apply hidden lg:flex lg:flex-row lg:gap-4 lg:justify-center lg:items-center;
     }
 
     .menu-links ul li{  
         @apply hover:transform-[scale(1.3)];
     }
 
-    .menu-toggle{
-        /* Mostrar botón en móvil (por defecto) y ocultar en pantallas grandes */
-        @apply lg:hidden block absolute top-6 right-4 hover:transform-[scale(1.2)];
+    /* Menú de navegación: oculto en móvil por defecto, visible en desktop como fila */
+    .menu-links{
+        @apply  list-none hidden gap-4 lg:flex lg:items-center lg:justify-center;
     }
 
+    /* Estado activo (usado para togglear menú en tablet/móvil). En mobile/tablet muestra columna absoluta; en lg muestra fila estática */
     .menu-links.active{
-        /* Mostrar en columna, ocupar ancho completo y quedar por encima del contenido */
-        @apply flex flex-col gap-4 justify-start items-start absolute top-16 left-0 right-0 z-50 p-4;
-        background-color: var(--color-azul-oscuro);
+        @apply flex bg-azul-oscuro flex-col gap-4 justify-start items-start absolute top-16 left-0 right-0 z-50 p-4 lg:flex-row lg:p-0 lg:bg-transparent lg:static lg:top-auto lg:left-auto lg:right-auto lg:z-auto;
     }
-
-    .tallas{
-        @apply flex gap-2 mt-4;
-    }
-
-    .footer-content{
-        @apply flex justify-between flex-wrap gap-4 p-8 bg-fondo-footer text-beige text-sm;
-    }
+ 
 
     .footer-section h3{
         @apply text-xl mb-4 text-azul-claro font-bold ;
     }
 
+    /* ========== CLASES REUTILIZABLES DEL CARRITO ========== */
+    
+    /* Botón flotante del carrito (móvil/tablet) */
+    .sticky-cart{
+        @apply fixed bottom-6 right-4 w-15 h-15 bg-rojo text-beige rounded-full text-2xl shadow-lg flex items-center justify-center hover:bg-granate hover:scale-110 transition lg:hidden;
+    }
 
-   
+    /* Versión del carrito para desktop (en header) */
+    .sticky-cart.carrito-desktop{
+        @apply hidden lg:flex relative w-auto bg-transparent hover:scale-110 top-0.5 ml-5; ;
+    }
+
+    /* Icono dentro del sticky cart */
+    .sticky-cart img{
+        @apply w-7 h-7 object-contain;
+    }
+
+    /* Contador de items en el carrito */
+    .cart-count{
+        @apply absolute -top-[1px] -right-[5px] bg-rojo text-beige rounded-full w-5 h-5 
+               flex items-center justify-center text-xs font-bold z-50 pointer-events-none;
+    }
+
+    /* Contador para versión desktop */
+    .carrito-desktop .cart-count{
+        @apply bg-beige text-azul-oscuro top-0 right-0;
+    }
+
+    /* Contenedor principal del carrito (modal) */
+    .carrito{
+        @apply hidden;
+    }
+
+    .carrito.active{
+        @apply fixed top-[10vh] right-15 w-80 h-[88vh] bg-azul-oscuro text-beige 
+               border-2 border-azul-claro rounded-lg shadow-lg z-[1001] flex flex-col
+               md:left-[2.5vw] md:right-[2.5vw] md:w-auto md:max-w-[95vw]
+               lg:grid lg:grid-cols-[2.5fr_1fr] lg:grid-rows-[auto_1fr] lg:items-start;
+    }
+
+    /* Header del carrito */
+    .carrito-header{
+        @apply p-4 border-b-2 border-azul-claro flex items-center justify-between
+               lg:col-span-2;
+    }
+
+    .carrito-header h2{
+        @apply text-xl font-bold;
+    }
+
+    .carrito-header button{
+        @apply bg-transparent text-beige text-2xl p-0 hover:text-azul-claro transition cursor-pointer;
+    }
+
+    /* Lista de items del carrito */
+    .carrito-items{
+        @apply flex-1 overflow-y-auto p-4 lg:row-start-2;
+    }
+
+    /* Item individual del carrito */
+    .carrito-item{
+        @apply flex flex-col items-center justify-between mb-4 pb-4 border-b border-azul-claro
+               md:flex-row md:border-none;
+    }
+
+    /* Primera fila (encabezados) - solo visible en tablet+ */
+    .carrito-item:first-child{
+        @apply hidden md:flex md:flex-row font-bold border-b-2 border-azul-claro pb-2 mb-4;
+    }
+
+    /* Imagen del producto en el carrito */
+    .carrito-item img{
+        @apply w-[90px] h-[90px] object-cover rounded-md mr-0 mb-2
+               md:mr-4 md:mb-0;
+    }
+
+    /* Nombre del producto */
+    .carrito-item .nombre-producto{
+        @apply flex-1 text-center md:text-left mb-2 md:mb-0;
+    }
+
+    /* Contenedor de cantidad */
+    .cantidad-container{
+        @apply flex items-center gap-2 w-24 justify-center mb-2 md:mb-0;
+    }
+
+    /* Botones de incrementar/decrementar cantidad */
+    .añadir-cantidad,
+    .restar-cantidad{
+        @apply hidden md:inline-block cursor-pointer bg-rojo text-beige px-2 py-[2px] 
+               rounded-full font-bold hover:bg-granate transition select-none;
+    }
+
+    /* Cantidad actual */
+    .carrito-item .cantidad-producto{
+        @apply w-8 text-center font-semibold;
+    }
+
+    /* Precio del producto */
+    .carrito-item .precio-producto{
+        @apply w-20 text-right font-semibold;
+    }
+
+    /* Footer del carrito (total y checkout) */
+    .carrito-footer{
+        @apply p-4 border-t-2 border-azul-claro text-center flex flex-col gap-4
+               lg:border-t-0 lg:border-l-2 lg:row-start-2 lg:h-[calc(100%-2rem)] lg:justify-start;
+    }
+
+    /* Total del carrito */
+    .carrito-footer .total-amount{
+        @apply text-lg font-bold mb-2;
+    }
+
+    /* Botón de checkout */
+    .btn-checkout{
+        @apply bg-rojo text-beige px-6 py-2 rounded font-semibold uppercase tracking-wider 
+               shadow-md hover:bg-granate transition w-full;
+    }
+
+    /* Estado vacío del carrito */
+    .carrito-empty{
+        @apply flex flex-col items-center justify-center p-8 text-center gap-4;
+    }
+
+    .carrito-empty p{
+        @apply text-lg text-azul-claro;
+    }
+
 }
