@@ -10,30 +10,27 @@ document.addEventListener("DOMContentLoaded", function () {
   const añadirCantidadBtn = document.querySelectorAll('.añadir-cantidad');
   const restarCantidadBtn = document.querySelectorAll('.restar-cantidad');
 
-
-  // Seguridad: si no existe el elemento, evitar errores
-
-    menuButton.addEventListener('click', function () {
-      mobileMenu.classList.add('active');
-      menuLinks.classList.add('active');
-      console.log("menu")
-      menuButton.setAttribute('aria-expanded', 'true');
-    });
+  // Evento para abrir el menú móvil
+  menuButton.addEventListener('click', function () {
+    mobileMenu.classList.add('active');
+    menuLinks.classList.add('active');
+    // console.log("menu") DEBUGGING
+    menuButton.setAttribute('aria-expanded', 'true');
+  });
+  
+  // Evento para cerrar el menú móvil
+  closeButton.addEventListener('click', function () {
+    mobileMenu.classList.remove('active');
+    menuLinks.classList.remove('active');
+  });
   
 
-  if (closeButton && mobileMenu) {
-    closeButton.addEventListener('click', function () {
-      mobileMenu.classList.remove('active');
-      menuLinks.classList.remove('active');
-    });
-  }
-
-    // Comprobar que los elementos existen antes de añadir eventos
+  // Eeventos para abrir y cerrar el carrito
     
   if (stickyCart) {
     stickyCart.addEventListener('click', () => {
       carrito.classList.add('active');
-      console.log("carrito")
+      // console.log("carrito") DEBUGGING
     });
   }
 
@@ -48,25 +45,25 @@ document.addEventListener("DOMContentLoaded", function () {
       carrito.classList.add('active');
     });
   }
+   //Funcionalidad no implementada para que al hacer click en los botones de añadir o restar cantidad en el carrito, se modifique el valor del input de cantidad y el total del producto
+  // añadirCantidadBtn.forEach(button => {
+  //   button.addEventListener('click', () => {
+  //     const cantidadInput = document.getElementById('cantidad');
+  //     let currentValue = parseInt(cantidadInput.value);
+  //     cantidadInput.value = currentValue + 1;
+  //     const precioProducto = document.querySelector('.precio-producto').textContent.split(' ')[0];
+  //   });
 
-  añadirCantidadBtn.forEach(button => {
-    button.addEventListener('click', () => {
-      const cantidadInput = document.getElementById('cantidad');
-      let currentValue = parseInt(cantidadInput.value);
-      cantidadInput.value = currentValue + 1;
-      const precioProducto = document.querySelector('.precio-producto').textContent;
-    });
-
-  }); 
-  restarCantidadBtn.forEach(button => {
-    button.addEventListener('click', () => {
-      const cantidadInput = document.getElementById('cantidad');
-      let currentValue = parseInt(cantidadInput.value);
-      if (currentValue > 1) {
-        cantidadInput.value = currentValue - 1;
-      } else {
+  // }); 
+  // restarCantidadBtn.forEach(button => {
+  //   button.addEventListener('click', () => {
+  //     const cantidadInput = document.getElementById('cantidad');
+  //     let currentValue = parseInt(cantidadInput.value);
+  //     if (currentValue > 1) {
+  //       cantidadInput.value = currentValue - 1;
+  //     } else {
         
-      }
-    }); 
-  });
+  //     }
+  //   }); 
+  // });
 });
