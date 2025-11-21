@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../styles/output.css">
 </head>
 <body>
-    <header class="header">
+    <header>
         <div class="logo">
             <img class="w-63" src="../assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
         </div>
@@ -20,12 +20,12 @@
                 <button id="close-menu" class="lg:hidden"><img src="../assets/logos/cerrar-menu.png" alt=""></button>
                  <!-- Buscador -->
                   <div class="search-bar">
-                    <input type="search" class="flex-1 min-w-0 bg-buscador-fondo text-beige rounded border border-azul-claro focus:outline-none p-2 width: 100%" placeholder="Buscar productos o categorías..." >
+                    <input type="search" class="form-control bg-buscador-fondo" placeholder="Buscar productos o categorías..." >
                     <button type="button" class="shrink-0 p-2" >
                         <span></span>
                     </button>
                     <select aria-label="Filtrar por categoría">
-                        <option value="">Todas las categorías</option>
+                        <option value="">Todas las categorías</option> 
                         <option value="camisetas">Camisetas</option>
                         <option value="sudaderas">Sudaderas</option>
                         <option value="pantalones">Pantalones</option>
@@ -156,10 +156,10 @@
             <div class="footer-section">
                 <h3>Síguenos</h3>
                 <div class="social-links">
-                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#instagram" >IG</a>
-                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#facebook">FB</a>
-                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#twitter">TW</a>
-                    <a class="text-base text-beige hover:bg-granate bg-azul-claro transition rounded-4xl p-2 gap-1 hover:transform-[scale(1.4)]" href="#tiktok">TT</a>
+                    <a class="boton-azul rounded-4xl" href="#instagram" >IG</a>
+                    <a class="boton-azul rounded-4xl" href="#facebook">FB</a>
+                    <a class="boton-azul rounded-4xl" href="#twitter">TW</a>
+                    <a class="boton-azul rounded-4xl" href="#tiktok">TT</a>
                 </div>
             </div>
         </div>
@@ -168,86 +168,63 @@
             <p>&copy; 2025 Concrete Jungle. Todos los derechos reservados.</p>
         </div>
     </footer>
-<!-- Botón Sticky Cart (Móvil) -->
-<button id="sticky-cart-mobile" class="sticky-cart">
-    <img src="../assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
-    <span class="cart-count">2</span>
-</button>
+    <!-- Botón Sticky Cart (Móvil) -->
+    <button id="sticky-cart-mobile" class="sticky-cart">
+        <img src="../assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
+        <span class="cart-count">2</span>
+    </button>
 
 
 
-<!-- Modal del Carrito -->
-<div class="carrito" id="carrito">
-    <!-- Header del Carrito -->
-    <div class="carrito-header">
-        <h2>Tu Carrito</h2>
-        <button id="close-cart">×</button>
+    <!-- Modal del Carrito -->
+    <div class="carrito" id="carrito">
+        <!-- Header del Carrito -->
+        <div class="carrito-header">
+            <h2>Tu Carrito</h2>
+            <button id="close-cart">×</button>
+        </div>
+
+        <!-- Lista de Items -->
+        <ul class="carrito-items">
+            <!-- Fila de Encabezados (solo visible en tablet+) -->
+            <li class="carrito-item">
+                <span class="w-[90px]"></span>
+                <span class="nombre-producto">Nombre</span>
+                <span class="cantidad-container">Cantidad</span>
+                <span class="precio-producto">Precio</span>
+            </li>
+
+            <!-- Item 1 -->
+            <li class="carrito-item" id="carrito-item-1">
+                <img src="../assets/imagenes/foto1.jpg" alt="Producto 1">
+                <span class="nombre-producto">Sudadera Urban Style</span>
+                <div class="cantidad-container">
+                    <button class="restar-cantidad" data-producto="1">-</button>
+                    <span class="cantidad-producto">1</span>
+                    <button class="añadir-cantidad" data-producto="1">+</button>
+                </div>
+                <span class="precio-producto">49,99 €</span>
+            </li>
+
+            <!-- Item 2 -->
+            <li class="carrito-item" id="carrito-item-2">
+                <img src="../assets/imagenes/foto2.jpg" alt="Producto 2">
+                <span class="nombre-producto">Camiseta Concrete</span>
+                <div class="cantidad-container">
+                    <button class="restar-cantidad" data-producto="2">-</button>
+                    <span class="cantidad-producto">2</span>
+                    <button class="añadir-cantidad" data-producto="2">+</button>
+                </div>
+                <span class="precio-producto">24,99 €</span>
+            </li>
+        </ul>
+
+        <!-- Footer del Carrito -->
+        <div class="carrito-footer">
+            <p class="total-amount">Total: 99,97 €</p>
+            <button class="btn-checkout">Proceder al pago</button>
+        </div>
     </div>
-
-    <!-- Lista de Items -->
-    <ul class="carrito-items">
-        <!-- Fila de Encabezados (solo visible en tablet+) -->
-        <li class="carrito-item">
-            <span class="w-[90px]"></span>
-            <span class="nombre-producto">Nombre</span>
-            <span class="cantidad-container">Cantidad</span>
-            <span class="precio-producto">Precio</span>
-        </li>
-
-        <!-- Item 1 -->
-        <li class="carrito-item">
-            <img src="../assets/imagenes/foto1.jpg" alt="Producto 1">
-            <span class="nombre-producto">Sudadera Urban Style</span>
-            <div class="cantidad-container">
-                <button class="restar-cantidad" data-producto="1">-</button>
-                <span class="cantidad-producto">1</span>
-                <button class="añadir-cantidad" data-producto="1">+</button>
-            </div>
-            <span class="precio-producto">49,99 €</span>
-        </li>
-
-        <!-- Item 2 -->
-        <li class="carrito-item">
-            <img src="../assets/imagenes/foto2.jpg" alt="Producto 2">
-            <span class="nombre-producto">Camiseta Concrete</span>
-            <div class="cantidad-container">
-                <button class="restar-cantidad" data-producto="2">-</button>
-                <span class="cantidad-producto">2</span>
-                <button class="añadir-cantidad" data-producto="2">+</button>
-            </div>
-            <span class="precio-producto">24,99 €</span>
-        </li>
-    </ul>
-
-    <!-- Footer del Carrito -->
-    <div class="carrito-footer">
-        <p class="total-amount">Total: 99,97 €</p>
-        <button class="btn-checkout">Proceder al pago</button>
-    </div>
-</div>
-
-<!-- Ejemplo: Carrito Vacío -->
-
-<!-- <div class="carrito active" id="carrito">
-    <div class="carrito-header">
-        <h2>Tu Carrito</h2>
-        <button id="close-cart">×</button>
-    </div>
-
-    <div class="carrito-empty">
-        <svg class="w-24 h-24 text-azul-claro" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-        </svg>
-        <p>Tu carrito está vacío</p>
-        <button class="boton-rojo">Ir a comprar</button>
-    </div>
-
-    <div class="carrito-footer">
-        <p class="total-amount">Total: 0,00 €</p>
-        <button class="btn-checkout" disabled>Proceder al pago</button>
-    </div>
-</div> -->
-
     <script src="../JavaScript/menu.js"></script>
     <script src="../JavaScript/producto.js"></script>
 </body>

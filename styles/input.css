@@ -25,86 +25,97 @@
 }
 
 @layer components{
+    /* body: fuente base, fondo y color de texto por defecto para todo el sitio */
     body{
         @apply font-secondary bg-azul-oscuro text-beige;
     }
 
+    /* Encabezados: usar la fuente principal para todos los títulos */
     h1, h2, h3, h4, h5, h6{
         @apply font-primary;
     }
 
+    /* Controles de formulario: estilos comunes para inputs, selects y textareas */
     .form-control{
         @apply w-full p-2 rounded border border-azul-claro bg-azul-oscuro text-beige focus:outline-none;
     }
 
+    /* Tarjeta de producto: diseño de tarjeta para mostrar resúmenes de productos */
     .product-card{
         @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-center justify-center w-1/4 wrap-normal h-150 ;
     }
 
-    .header{
+    /* header: barra superior del sitio con espaciado y comportamiento sticky */
+    header{
         @apply bg-azul-oscuro w-full p-4 flex items-center justify-between sticky top-0 z-50 shadow-md;
     }
 
+    /* Botón principal (rojo): usado para llamadas a la acción */
     .boton-rojo{
         @apply bg-rojo text-beige px-4 py-2 rounded hover:bg-granate transition hover:transform-[scale(1.2)];
     }
 
+    /* Botón secundario (azul): estilo alternativo para CTAs */
     .boton-azul{
         @apply bg-azul-claro text-beige px-4 py-2 rounded hover:bg-granate transition hover:transform-[scale(1.2)];
     }
 
+    /* Barra de búsqueda: contenedor para el input y controles de búsqueda */
     .search-bar{
         @apply flex items-center rounded px-2 py-1 gap-2 w-full lg:w-auto lg:max-w-lg;
     }
 
+    /* Placeholder de búsqueda: texto de marcador más pequeño para inputs de búsqueda */
     .search-bar input[type="search"]::placeholder{
         @apply text-xs;
     }
 
+    /* Select en búsqueda: estilos para cualquier select dentro de la barra de búsqueda */
     .search-bar select{
         @apply bg-azul-oscuro px-2 py-2 rounded-sm transition border border-azul-claro flex-shrink-0;
     }
 
+    /* Hover en elementos del menú: ligera escala al pasar el ratón */
     .menu-links ul li{  
         @apply hover:transform-[scale(1.3)];
     }
 
-    /* Menú de navegación: oculto en móvil por defecto, visible en desktop como fila */
+    
+    /* Enlaces del menú: contenedor de los enlaces de navegación; oculto en pantallas pequeñas */
     .menu-links{
         @apply  list-none hidden gap-4 lg:flex lg:items-center lg:justify-center;
     }
 
-    /* Estado activo (usado para togglear menú en tablet/móvil). En mobile/tablet muestra columna absoluta; en lg muestra fila estática */
+    /* Menú activo: al togglear (móvil/tablet) muestra una columna a pantalla completa; en pantallas grandes es una fila normal */
     .menu-links.active{
         @apply flex bg-azul-oscuro flex-col gap-4 justify-start items-start absolute top-16 left-0 right-0 z-50 p-4 lg:flex-row lg:p-0 lg:bg-transparent lg:static lg:top-auto lg:left-auto lg:right-auto lg:z-auto;
     }
  
 
+    /* Encabezados del footer: estilo para los títulos de las secciones del pie de página */
     .footer-section h3{
         @apply text-xl mb-4 text-azul-claro font-bold ;
     }
 
-    /* ========== CLASES REUTILIZABLES DEL CARRITO ========== */
-    
-    /* Botón flotante del carrito (móvil/tablet) */
+
+    /* Carrito fijo (móvil/tablet): botón redondo flotante fijo en la esquina inferior derecha */
     .sticky-cart{
         @apply fixed bottom-6 right-4 w-15 h-15 bg-rojo text-beige rounded-full text-2xl shadow-lg flex items-center justify-center hover:bg-granate hover:scale-110 transition lg:hidden;
     }
 
-    /* Versión del carrito para desktop (en header) */
+    /* Carrito escritorio: icono de carrito no fijo colocado en el header para pantallas grandes */
     .sticky-cart.carrito-desktop{
         @apply hidden lg:flex relative w-auto bg-transparent hover:scale-110 top-0.5 ml-5; ;
     }
 
-    /* Icono dentro del sticky cart */
+    /* Imagen del icono del carrito: tamaño y ajuste */
     .sticky-cart img{
         @apply w-7 h-7 object-contain;
     }
 
-    /* Contador de items en el carrito */
+    /* Contador del carrito: pequeño contador circular posicionado sobre el icono */
     .cart-count{
-        @apply absolute -top-[1px] -right-[5px] bg-rojo text-beige rounded-full w-5 h-5 
-               flex items-center justify-center text-xs font-bold z-50 pointer-events-none;
+        @apply absolute -top-[1px] -right-[5px] bg-rojo text-beige rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold z-50 pointer-events-none;
     }
 
     /* Contador para versión desktop */
@@ -112,41 +123,38 @@
         @apply bg-beige text-azul-oscuro top-0 right-0;
     }
 
-    /* Contenedor principal del carrito (modal) */
+    /* Contenedor del carrito: oculto por defecto; al activarse muestra un modal/panel con los items */
     .carrito{
         @apply hidden;
     }
-
+    /* Carrito activo: panel/modal posicionado que muestra el contenido del carrito con layout responsive */
     .carrito.active{
-        @apply fixed top-[10vh] right-15 w-80 h-[88vh] bg-azul-oscuro text-beige 
-               border-2 border-azul-claro rounded-lg shadow-lg z-[1001] flex flex-col
-               md:left-[2.5vw] md:right-[2.5vw] md:w-auto md:max-w-[95vw]
-               lg:grid lg:grid-cols-[2.5fr_1fr] lg:grid-rows-[auto_1fr] lg:items-start;
+        @apply fixed top-[10vh] right-15 w-80 h-[88vh] bg-azul-oscuro text-beige   border-2 border-azul-claro rounded-lg shadow-lg z-1001 flex flex-col md:left-[2.5vw] md:right-[2.5vw] md:w-auto md:max-w-[95vw] lg:grid lg:grid-cols-[2.5fr_1fr] lg:grid-rows-[auto_1fr] lg:items-start;
     }
 
-    /* Header del carrito */
+    /* Header del carrito: título y zona del botón de cerrar dentro del panel */
     .carrito-header{
-        @apply p-4 border-b-2 border-azul-claro flex items-center justify-between
-               lg:col-span-2;
+        @apply p-4 border-b-2 border-azul-claro flex items-center justify-between lg:col-span-2;
     }
 
+    /* Título del carrito: texto más grande y en negrita */
     .carrito-header h2{
         @apply text-xl font-bold;
     }
 
+    /* Botón de la cabecera del carrito: estilo del botón de cerrar */
     .carrito-header button{
         @apply bg-transparent text-beige text-2xl p-0 hover:text-azul-claro transition cursor-pointer;
     }
 
-    /* Lista de items del carrito */
+    /* Lista de items del carrito: área con scroll que contiene los items individuales */
     .carrito-items{
         @apply flex-1 overflow-y-auto p-4 lg:row-start-2;
     }
 
     /* Item individual del carrito */
     .carrito-item{
-        @apply flex flex-col items-center justify-between mb-4 pb-4 border-b border-azul-claro
-               md:flex-row md:border-none;
+        @apply flex flex-col items-center justify-between mb-4 pb-4 border-b border-azul-claro  md:flex-row md:border-none;
     }
 
     /* Primera fila (encabezados) - solo visible en tablet+ */
@@ -156,8 +164,7 @@
 
     /* Imagen del producto en el carrito */
     .carrito-item img{
-        @apply w-[90px] h-[90px] object-cover rounded-md mr-0 mb-2
-               md:mr-4 md:mb-0;
+        @apply w-[90px] h-[90px] object-cover rounded-md mr-0 mb-2 md:mr-4 md:mb-0;
     }
 
     /* Nombre del producto */
@@ -170,27 +177,25 @@
         @apply flex items-center gap-2 w-24 justify-center mb-2 md:mb-0;
     }
 
-    /* Botones de incrementar/decrementar cantidad */
+    /* Botones de incrementar/decrementar cantidad del carrito */
     .añadir-cantidad,
     .restar-cantidad{
-        @apply hidden md:inline-block cursor-pointer bg-rojo text-beige px-2 py-[2px] 
-               rounded-full font-bold hover:bg-granate transition select-none;
+        @apply hidden md:inline-block cursor-pointer bg-rojo text-beige px-2 py-.5  rounded-full font-bold hover:bg-granate transition select-none;
     }
 
-    /* Cantidad actual */
+
     .carrito-item .cantidad-producto{
         @apply w-8 text-center font-semibold;
     }
 
-    /* Precio del producto */
+
     .carrito-item .precio-producto{
         @apply w-20 text-right font-semibold;
     }
 
     /* Footer del carrito (total y checkout) */
     .carrito-footer{
-        @apply p-4 border-t-2 border-azul-claro text-center flex flex-col gap-4
-               lg:border-t-0 lg:border-l-2 lg:row-start-2 lg:h-[calc(100%-2rem)] lg:justify-start;
+        @apply p-4 border-t-2 border-azul-claro text-center flex flex-col gap-4 lg:border-t-0 lg:border-l-2 lg:row-start-2 lg:h-[calc(100%-2rem)] lg:justify-start;
     }
 
     /* Total del carrito */
@@ -200,8 +205,7 @@
 
     /* Botón de checkout */
     .btn-checkout{
-        @apply bg-rojo text-beige px-6 py-2 rounded font-semibold uppercase tracking-wider 
-               shadow-md hover:bg-granate transition w-full;
+        @apply bg-rojo text-beige px-6 py-2 rounded font-semibold uppercase tracking-wider shadow-md hover:bg-granate transition w-full;
     }
 
     /* Estado vacío del carrito */
