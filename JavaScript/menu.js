@@ -19,11 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   
   // Evento para cerrar el menú móvil
-
   closeButton.addEventListener('click', function () {
     mobileMenu.classList.remove('active');
     menuLinks.classList.remove('active');
-    });
+  });
   
 
   // Eeventos para abrir y cerrar el carrito
