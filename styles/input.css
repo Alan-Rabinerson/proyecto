@@ -180,7 +180,7 @@
     /* Botones de incrementar/decrementar cantidad del carrito */
     .añadir-cantidad,
     .restar-cantidad{
-        @apply hidden md:inline-block cursor-pointer bg-rojo text-beige px-2 py-.5  rounded-full font-bold hover:bg-granate transition select-none;
+        @apply hidden md:inline-block cursor-pointer bg-rojo text-beige px-2 py-0.5  rounded-full font-bold hover:bg-granate transition select-none;
     }
 
 

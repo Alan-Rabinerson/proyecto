@@ -25,7 +25,7 @@
                 </ul>
                 <h3 class="mt-4">sandbox</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/sandbox/customers.php">View Sandbox</a></li>
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/sandbox/products.php">View Sandbox</a></li>
                 </ul>
             </nav>
         </main>

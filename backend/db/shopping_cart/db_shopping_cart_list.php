@@ -7,7 +7,7 @@ $cart_items = mysqli_fetch_all($result, MYSQLI_ASSOC);
 $total_items = count($cart_items);
 $cart_details = [];
 $cart_total = 0;
-
+$products = [];
 if ($total_items > 0) {
     foreach ($cart_items as $item) {
         $product_id = $item['product_id'];
@@ -19,7 +19,7 @@ if ($total_items > 0) {
         $cart_details[] = $item;
         $product_id= $item['product_id'];
         $quantity = $item['quantity'];
-        
+        $products[] = ['product_id' => $product_id, 'quantity' => $quantity, 'price' => $item['price']];
 
         $item_total = $item['price'] * $item['quantity'];
         $cart_total += $item_total;

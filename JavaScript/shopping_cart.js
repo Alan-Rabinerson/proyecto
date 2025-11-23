@@ -12,6 +12,7 @@ function addQuantity(productId, quantity, price) {
             productQty.textContent = "Quantity: " + products.quantity;
             cartTotalValue = (parseFloat(cartTotalValue) + parseFloat(price)).toFixed(2) + "€";
             cartTotal.textContent = "Cart Total: " + cartTotalValue;
+            
         }
     }
     xmlhttp.open("GET", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart.php?product_id=" + productId + "&action=add&quantity="+ quantity, true);
@@ -29,6 +30,9 @@ function removeQuantity(productId, quantity, price) {
             console.log(products)
             cartTotalValue = (parseFloat(cartTotalValue) - parseFloat(price)).toFixed(2) + "€";
             cartTotal.textContent = "Cart Total: " + cartTotalValue;
+            if (products.quantity <= 0) {
+                document.querySelector("#product-" + productId).remove();
+            }
         }
     }
     xmlhttp.open("GET", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart.php?product_id=" + productId + "&action=remove&quantity="+ quantity, true);
