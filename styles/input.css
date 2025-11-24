@@ -217,4 +217,8 @@
         @apply text-lg text-azul-claro;
     }
 
+    .add-to-cart-form{
+        @apply flex flex-col gap-4 items-center justify-center mt-4;
+    }
+
 }

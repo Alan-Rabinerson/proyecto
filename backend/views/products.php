@@ -10,6 +10,7 @@
         <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/db/products/db_product_list.php'; ?>
     </div>
 </main>
-<script>showProducts('');</script>
 <script src="/student024/shop/JavaScript/showproducts.js"></script>
+<script src="/student024/shop/JavaScript/insert_shopping_cart.js"></script>
+
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?>

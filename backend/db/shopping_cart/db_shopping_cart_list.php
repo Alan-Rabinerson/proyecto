@@ -11,7 +11,7 @@ $products = [];
 if ($total_items > 0) {
     foreach ($cart_items as $item) {
         $product_id = $item['product_id'];
-        $sql = "SELECT * FROM 024_products WHERE product_id = $product_id";
+        $sql = "SELECT * FROM `024_products` WHERE product_id = $product_id";
         $product_result = mysqli_query($conn, $sql);
         $product = mysqli_fetch_assoc($product_result);
         $item['name'] = $product['name'];
