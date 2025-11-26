@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/shopping-cart.css">
+    <title>Shopping Cart</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img class="w-63" src="../assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
+        </div>
+        
+        <!-- Menú hamburguesa -->
+        <div id="mobile-menu" class="menu-container">
+
+            <button class="menu-toggle" ><img src="../assets/logos/icon-menu.png" alt=""></button>
+            <ul class="menu-links " >
+                <button id="close-menu" class="lg:hidden"><img src="../assets/logos/cerrar-menu.png" alt=""></button>
+                 <!-- Buscador -->
+                  <div class="search-bar">
+                    <input type="search" class="form-control bg-buscador-fondo" placeholder="Buscar productos o categorías..." >
+                    <select aria-label="Filtrar por categoría">
+                        <option value="">Todas las categorías</option> 
+                        <option value="camisetas">Camisetas</option>
+                        <option value="sudaderas">Sudaderas</option>
+                        <option value="pantalones">Pantalones</option>
+                        <option value="zapatillas">Zapatillas</option>
+                        <option value="accesorios">Accesorios</option>
+                    </select>
+                </div>
+                <li><a class="" href="../index.html">Inicio</a></li>
+                <li><a class="" href="#novedades">Novedades</a></li>
+                <li><a class="" href="#hombre">Hombre</a></li>
+                <li><a class="" href="#mujer">Mujer</a></li>
+                <li><a class="" href="../backend/index.php">Administración</a></li>
+                <li><a class="" href="#ofertas">Ofertas</a></li>
+                <li><button class="login" onclick="location.href='../backend/forms/login/form_login.php'">Login</button></li>
+            </ul>
+        </div>
+    </header>
+    <main>
+        <!-- Modal del Carrito -->
+        <div class="carrito" id="carrito">
+            <!-- Header del Carrito -->
+            <div class="carrito-header">
+                <h2>Tu Carrito</h2>
+                <button id="close-cart">×</button>
+            </div>
+    
+            <!-- Lista de Items -->
+            <ul class="carrito-items">
+                <!-- Fila de Encabezados (solo visible en tablet+) -->
+                <li class="carrito-item">
+                    <span class="w-[90px]"></span>
+                    <span class="nombre-producto">Nombre</span>
+                    <span class="cantidad-container">Cantidad</span>
+                    <span class="precio-producto">Precio</span>
+                </li>
+    
+                <!-- Item 1 -->
+                <li class="carrito-item" id="carrito-item-1">
+                    <img src="../assets/imagenes/foto1.jpg" alt="Producto 1">
+                    <span class="nombre-producto">Sudadera Urban Style</span>
+                    <div class="cantidad-container">
+                        <button class="restar-cantidad" data-producto="1">-</button>
+                        <span class="cantidad-producto">1</span>
+                        <button class="añadir-cantidad" data-producto="1">+</button>
+                    </div>
+                    <span class="precio-producto">49,99 €</span>
+                </li>
+    
+                <!-- Item 2 -->
+                <li class="carrito-item" id="carrito-item-2">
+                    <img src="../assets/imagenes/foto2.jpg" alt="Producto 2">
+                    <span class="nombre-producto">Camiseta Concrete</span>
+                    <div class="cantidad-container">
+                        <button class="restar-cantidad" data-producto="2">-</button>
+                        <span class="cantidad-producto">2</span>
+                        <button class="añadir-cantidad" data-producto="2">+</button>
+                    </div>
+                    <span class="precio-producto">24,99 €</span>
+                </li>
+            </ul>
+    
+            <!-- Footer del Carrito -->
+            <div class="carrito-footer">
+                <p class="total-amount">Total: 99,97 €</p>
+                <button class="btn-checkout">Proceder al pago</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content ">
+            <div class="footer-section">
+                <h3>Sobre Nosotros</h3>
+                <p class="mb-2">Concrete Jungle es tu destino para el mejor streetwear urbano.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li class="mb-2">Email: info@concretejungle.com</li>
+                    <li class="mb-2">Teléfono: +34 900 123 456</li>
+                    <li class="mb-2">Horario: L-V 9:00-18:00</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Síguenos</h3>
+                <div class="social-links">
+                    <a class="social-link" href="#instagram" >IG</a>
+                    <a class="social-link" href="#facebook">FB</a>
+                    <a class="social-link" href="#twitter">TW</a>
+                    <a class="social-link" href="#tiktok">TT</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom ">
+            <p>&copy; 2025 Concrete Jungle. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+</body>
+<script src="../JavaScript/menu.js"></script>
+<script src="../JavaScript/shopping-cart.js"></script>
+</html>

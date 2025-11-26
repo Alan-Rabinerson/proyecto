@@ -72,7 +72,7 @@
 
     /* Select en búsqueda: estilos para cualquier select dentro de la barra de búsqueda */
     .search-bar select{
-        @apply bg-azul-oscuro px-2 py-2 rounded-sm transition border border-azul-claro flex-shrink-0;
+        @apply bg-azul-oscuro p-2 rounded-sm transition border border-azul-claro flex-shrink-0;
     }
 
     /* Hover en elementos del menú: ligera escala al pasar el ratón */

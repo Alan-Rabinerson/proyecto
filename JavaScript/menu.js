@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const carritoDesktop = document.querySelector('.menu-links .carrito-desktop');
   const añadirCantidadBtn = document.querySelectorAll('.añadir-cantidad');
   const restarCantidadBtn = document.querySelectorAll('.restar-cantidad');
+  const checkoutBtn = document.getElementsByClassName('btn-checkout');
 
   // Evento para abrir el menú móvil
   menuButton.addEventListener('click', function () {
@@ -45,7 +46,13 @@ document.addEventListener("DOMContentLoaded", function () {
       carrito.classList.add('active');
     });
   }
-   //Funcionalidad no implementada para que al hacer click en los botones de añadir o restar cantidad en el carrito, se modifique el valor del input de cantidad y el total del producto
+
+  if (checkoutBtn.length > 0) {
+    checkoutBtn[0].addEventListener('click', () => {
+      window.location.href = './views/shopping-cart.html';
+    });
+  }
+  //Funcionalidad no implementada para que al hacer click en los botones de añadir o restar cantidad en el carrito, se modifique el valor del input de cantidad y el total del producto
   // añadirCantidadBtn.forEach(button => {
   //   button.addEventListener('click', () => {
   //     const cantidadInput = document.getElementById('cantidad');
