@@ -5,7 +5,7 @@
 
     foreach($orders as $order){
         $order_number = $order['order_number'];
-        echo "<div class='order-box flex flex-col items-center border rounded-md p-3 mb-3 h-fit w-fit'>";
+        echo "<div class='order-card'>";
         echo "<h3>Order Number: " . $order['order_number'] . "</h3>";
         echo "<p>Customer Name: " . $order['first_name'] . " " . $order['last_name'] . "</p>";
         echo "<p>Order Date: " . $order['order_date'] . "</p>";

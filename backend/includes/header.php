@@ -1,4 +1,20 @@
-<?php session_start(); ?>
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Determine requested path
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $path = strtolower(parse_url($request_uri, PHP_URL_PATH) ?? '');
+
+    // Whitelist of public paths (no login required)
+
+    if (!isset($_SESSION['username']) && $path !== '/student024/shop/backend/views/login.php' && $path !== '/student024/shop/backend/login/logout.php') {
+        header('Location: /student024/Shop/backend/views/login.php');
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,7 +43,7 @@
                             <span class="mr-2 text-white">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
                             <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/login/logout.php';">Logout</button>
                         <?php } else { ?>
-                            <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/forms/login/form_login.php'">Login</button>
+                            <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/views/login.php'">Login</button>
                         <?php } ?>
                     </div>
                 </nav>

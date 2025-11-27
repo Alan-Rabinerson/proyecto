@@ -5,17 +5,17 @@ addtoCartForms.forEach(form => {
         event.preventDefault(); // prevent form submission
         let productId = form.querySelector("input[name='product_id']").value;
         var params = "product_id=" + encodeURIComponent(productId)+ "&quantity=" + encodeURIComponent(1);
-        console.log("añadir al carrito")
         //crear objeto xhttprequest
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart_insert.php", true);
-
+        var size = form.querySelector("select[name='size']");
+        params += "&size=" + encodeURIComponent(size.value);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         
         xhttp.onreadystatechange = function() {
-            console.log(xhttp);
+            
             if (this.readyState == 4 && this.status == 200) { 
-               
+                
                 elementoMensaje.innerText = JSON.parse(this.responseText).message;   
                 elementoMensaje.style.position = "fixed";
                 elementoMensaje.style.bottom = "20px";

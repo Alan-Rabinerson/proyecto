@@ -24,16 +24,20 @@ if ($total_items > 0) {
         $item_total = $item['price'] * $item['quantity'];
         $cart_total += $item_total;
 
-        echo "<div class='product-card w-fit h-fit' id='product-" . $product_id . "'>";
+        // use size in container id to support multiple sizes for same product
+        $size_safe = htmlspecialchars($item['size']);
+        $container_id = 'product-' . $product_id . '-' . $size_safe;
+        echo "<div class='product-card w-fit h-fit' id='" . $container_id . "'>";
         echo "<img src='/student024/shop/assets/imagenes/foto" . $product_id . ".jpg' alt='" . $item['name'] . "' class='w-48 h-48 object-cover mb-2 rounded-lg shadow-md'>";
         echo "<h3 id='product-name-" . $product_id . "'>" . $item['name']  ."</h3>";
         echo "<p id='product-price-" . $product_id . "'>Price: " . $item['price'] . "€ </p>";
+        echo "<p>Size: " . htmlspecialchars($item['size']) . "</p>";
         echo "<p>Subtotal: " . ($item['price'] * $item['quantity']) . "€ </p>";
         echo "<span class='flex items-center gap-2'>";
         ?>
-        <button onclick="removeQuantity(<?php echo $product_id; ?>, <?php echo $quantity; ?>, <?php echo $item['price']; ?>)"  class="boton-rojo rounded-4xl">-</button>           
-        <?php echo "<p id='product-quantity'>Quantity: " . $item['quantity'] . "</p>";?>
-        <button onclick="addQuantity(<?php echo $product_id; ?>, <?php echo $quantity; ?>, <?php echo $item['price']; ?>)" class="boton-rojo rounded-4xl">+</button>
+        <button onclick="removeQuantity(<?php echo $product_id; ?>, '<?php echo $item['size']; ?>', <?php echo $quantity; ?>, <?php echo $item['price']; ?>)"  class="boton-rojo rounded-4xl">-</button>           
+        <?php echo "<p id='product-quantity-" . $product_id . "-" . htmlspecialchars($item['size']) . "'>Quantity: " . $item['quantity'] . "</p>";?>
+        <button onclick="addQuantity(<?php echo $product_id; ?>, '<?php echo $item['size']; ?>', <?php echo $quantity; ?>, <?php echo $item['price']; ?>)" class="boton-rojo rounded-4xl">+</button>
         <?php
         echo "</span>";
         echo "</div><hr>";

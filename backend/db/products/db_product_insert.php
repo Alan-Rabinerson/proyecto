@@ -5,14 +5,22 @@
     $product_name = $_GET['product_name'];
     $product_price = $_GET['price'];
     $product_description = $_GET['description'];
-    $product_stock = $_GET['stock'];
+    $product_stock = isset($_GET['stock']) ? (int) $_GET['stock'] : 0;
     $product_supplier = $_GET['supplier'];
     $product_category = $_GET['category'];
+    $tallas = isset($_GET['tallas']) ? $_GET['tallas'] : []; // array of sizes
+    $tallas_stock = isset($_GET['tallas_stock']) ? $_GET['tallas_stock'] : []; // associative array size=>stock
 
     print_r($_GET); // debug
     // put data into database
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
-    $sql = "INSERT INTO 024_products (name, description, price, stock, supplier) VALUES ('$product_name', '$product_description', $product_price, $product_stock, '$product_supplier')";
+    // prepare available_sizes as CSV for the SET column
+    $available_sizes = '';
+    if (!empty($tallas) && is_array($tallas)) {
+        $available_sizes = implode(',', array_map(function($s){ return $s; }, $tallas));
+    }
+
+    $sql = "INSERT INTO 024_products (name, description, price, supplier, available_sizes) VALUES ('$product_name', '$product_description', $product_price, '$product_supplier', '$available_sizes')";
 
 
 
@@ -20,6 +28,18 @@
 
     // send confirmation or error message
     if ($conn->query($sql) === TRUE) {
+        // get new product id
+        $new_product_id = $conn->insert_id;
+        // insert sizes into 024_product_sizes with given stock per size
+        if (!empty($tallas) && is_array($tallas)) {
+            foreach ($tallas as $size) {
+                $size_clean = $conn->real_escape_string($size);
+                $stock_val = isset($tallas_stock[$size]) ? (int)$tallas_stock[$size] : $product_stock;
+                $insert_size_sql = "INSERT INTO 024_product_sizes (product_id, size, stock) VALUES ($new_product_id, '$size_clean', $stock_val)";
+                $conn->query($insert_size_sql);
+            }
+        }
+
         echo "<main><h2 class='mt-4'>New product created successfully</h2>";
         echo "<p>Product Name: $product_name</p>";
         echo "<p>Description: $product_description</p>";

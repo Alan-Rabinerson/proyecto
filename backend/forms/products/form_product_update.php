@@ -4,7 +4,7 @@
     // capturar datos del producto a actualizar
     $product_id = $_POST['product_id'];
     // fetch product data from database based on product_id
-    $sql = "SELECT * FROM 024_products WHERE product_id = $product_id";
+    $sql = "SELECT * FROM 024_products_view WHERE product_id = $product_id";
     $result = mysqli_query($conn, $sql);
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $product_id = $products[0]['product_id'];
@@ -12,6 +12,16 @@
     $description = $products[0]['description'];
     $price = $products[0]['price'];
     $stock = $products[0]['stock'];
+    $tallas = $products[0]['tallas'];
+    // fetch existing size stocks for this product
+    $sizeStocks = [];
+    $sql = "SELECT size, stock FROM 024_product_sizes WHERE product_id = $product_id";
+    $query = mysqli_query($conn, $sql);
+    if ($query) {
+        while ($result = mysqli_fetch_assoc($query)) {
+            $sizeStocks[$result['size']] = (int)$result['stock'];
+        }
+    }
     $supplier = $products[0]['supplier'];
    
 
@@ -42,6 +52,23 @@
                 <div class="mb-3">
                     <label for="supplier" class="form-label">Supplier:</label>
                     <input type="text" class="form-control" id="supplier" name="supplier" required value="<?php echo $supplier; ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="tallas" class="form-label">Sizes (Tallas):</label>
+                    <?php
+                        $sizes = explode(",", $tallas);
+                        $all_sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+                        foreach ($all_sizes as $size) {
+                            $checked = in_array($size, $sizes) ? 'checked' : '';
+                            $stock_val = isset($sizeStocks[$size]) ? $sizeStocks[$size] : '';
+                            echo "<div class='inline-flex items-center mr-3 mb-2'>";
+                            echo "<input class='form-check-input mr-2' type='checkbox' id='size_$size' name='tallas[]' value='$size' $checked>";
+                            echo "<label class='form-check-label mr-2' for='size_$size'>$size</label>";
+                            echo "<input type='number' min='0' name='tallas_stock[$size]' value='$stock_val' placeholder='stock' class='w-20 border rounded px-2 py-1'/>";
+                            echo "</div>";
+                        }
+                    ?>
+                    
                 </div>
                 <div class="mb-3">
                     <label for="category" class="form-label">Category:</label>

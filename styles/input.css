@@ -90,6 +90,10 @@
     .menu-links.active{
         @apply flex bg-azul-oscuro flex-col gap-4 justify-start items-start absolute top-16 left-0 right-0 z-50 p-4 lg:flex-row lg:p-0 lg:bg-transparent lg:static lg:top-auto lg:left-auto lg:right-auto lg:z-auto;
     }
+
+    .order-card{
+        @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-start justify-start w-fit mb-4 border border-beige;
+    }
  
 
     /* Encabezados del footer: estilo para los títulos de las secciones del pie de página */
