@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileMenu.classList.add('active');
     menuLinks.classList.add('active');
     // console.log("menu") DEBUGGING
-    menuButton.setAttribute('aria-expanded', 'true');
   });
   
   // Evento para cerrar el menú móvil

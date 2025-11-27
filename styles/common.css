@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: Roboto;
   src: url(../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
@@ -34,9 +35,13 @@ header {
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem;
+  /* Logo */
+  /* Botón menú hamburguesa */
+  /* Menú móvil */
+  /* Buscador */
 }
 
 header .logo {
@@ -54,126 +59,111 @@ header .menu-toggle {
   padding: 0;
   z-index: 1500;
   position: fixed;
-  top: 24px;
-  right: 16px;
+  top: 12px;
+  right: 12px;
+  margin-top: 0.5rem;
 }
 
-header .menu-toggle :hover {
-  cursor: pointer;
-  transform: scale(1.2);
-}
-
-@media (min-width: 1024px) {
-  header .menu-toggle {
-    display: none;
-  }
+header .menu-toggle img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 header .mobile-menu.active {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: flex-start;
-  align-items: flex-start;
-  top: 64px;
-  left: 0;
-  right: 0;
-  z-index: 50;
-}
-
-@media (min-width: 1024px) {
-  header .mobile-menu.active {
-    display: none;
-  }
+  position: fixed;
+  top: 0;
+  width: 75%;
+  height: 100%;
+  background-color: #003049;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  padding: 0.5rem;
+  transition: left 0.3s ease;
+  z-index: 1200;
 }
 
 header .menu-links {
+  display: none;
   list-style: none;
-  display: flex;
-  gap: 1.5rem;
-  margin-right: 1rem;
-  align-items: center;
 }
 
-header .menu-links li a {
-  text-decoration: none;
+header .menu-links.active {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 1.5em;
+}
+
+header .menu-links li img {
+  display: none;
+}
+
+header #close-menu {
+  background: none;
+}
+
+header #close-menu img {
+  width: 40px;
+  height: auto;
+}
+
+header .menu-toggle:hover img {
+  filter: brightness(1.2);
+}
+
+header .login {
+  background-color: #C1121F;
+  padding: .5rem 1rem;
+  border-radius: 5px;
   color: #fdf0d5;
   font-weight: bold;
 }
 
-header .menu-links li a:hover {
-  color: #780000;
-}
-
-header .menu-links #close-menu {
-  align-self: flex-end;
-  margin: 1rem;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: #fdf0d5;
-}
-
-header .menu-links #close-menu:hover {
-  cursor: pointer;
-  color: #780000;
-}
-
-@media (min-width: 1024px) {
-  header .menu-links #close-menu {
-    display: none;
-  }
-}
-
-header .menu-links .login {
-  background: #C1121F;
-  padding: 8px 16px;
-  border-radius: 8px;
-  color: #fdf0d5;
-  border: none;
-}
-
-header .menu-links .login:hover {
-  background: #780000;
-  transform: scale(1.2);
-}
-
-header .menu-links .search-bar {
+header .search-bar {
+  padding: 1rem;
   display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  border: none;
-  gap: 4px;
+  flex-direction: column;
+  gap: .5rem;
 }
 
-header .menu-links .search-bar input {
-  border: #669BBC 1px solid;
-  background: rgba(102, 155, 188, 0.1);
-  color: #fdf0d5;
+header .search-bar input[type="search"] {
   width: 100%;
-  border-radius: 4px;
-  padding: 8px;
-}
-
-header .menu-links .search-bar input:focus {
-  outline: none;
-}
-
-header .menu-links .search-bar select {
-  border: #669BBC 1px solid;
-  background: rgba(102, 155, 188, 0.1);
+  padding: 1rem;
+  border: 2px solid #669BBC;
+  background-color: rgba(102, 155, 188, 0.1);
   color: #fdf0d5;
-  padding: 8px;
-  border-radius: 4px;
-  padding: 8px;
+  border-radius: 5px;
+  font-size: 0.9rem;
 }
 
-header .menu-links .search-bar select:focus {
-  outline: none;
+header .search-bar input[type="search"]::placeholder {
+  color: rgba(253, 239, 211, 0.6);
+}
+
+header .search-bar button {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  color: #fdf0d5;
+  padding: .5rem;
+  display: none;
+}
+
+header .search-bar select {
+  width: auto;
+  padding: 1rem;
+  border: 2px solid #669BBC;
+  background-color: #003049;
+  color: #fdf0d5;
+  border-radius: 5px;
+  font-size: 0.9rem;
 }
 
 footer {
-  background-color: rgba0(#003049, 0.6);
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;

@@ -1,6 +1,6 @@
 @import "common";
 @import "_cart-detail";
-
+ 
 // Vista detallada del carrito - Full page layout
 .carrito {
   width: 100%;
@@ -43,7 +43,7 @@
     margin: 0;
     color: $color-texto;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 1.5px; 
 
     @media (max-width: 768px) {
       font-size: 1.5rem;
