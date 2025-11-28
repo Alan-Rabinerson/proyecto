@@ -16,7 +16,10 @@
     <h3 id="cart-total">Cart Total:
         <?php echo number_format($cart_total, 2). "€"; ?>
     </h3>
-    <form action="" method="post">
+    <form action="/student024/shop/backend/views/checkout.php" method="post">
+        <input type="hidden" name="total_items" value="<?php echo $total_items; ?>">
+        <input type="hidden" name="cart_total" value="<?php echo $cart_total; ?>">
+        <input type="hidden" id="hidden-cart-data" name="cart_data" value='<?php echo json_encode($cart_items); ?>'>
         <input type="submit" class="boton-rojo rounded-4xl mb-4" value="Proceed to Checkout">
     </form>
 </div>
