@@ -9,8 +9,8 @@
 
     // Whitelist of public paths (no login required)
 
-    if (!isset($_SESSION['username']) && $path !== '/student024/shop/backend/views/login.php' && $path !== '/student024/shop/backend/login/logout.php') {
-        header('Location: /student024/Shop/backend/views/login.php');
+    if (!isset($_SESSION['username']) && $path !== '/student024/shop/backend/login/login.php' && $path !== '/student024/shop/backend/login/logout.php') {
+        header('Location: /student024/Shop/backend/login/login.php');
         exit;
     }
 ?>
@@ -33,7 +33,13 @@
                     <ul class="flex space-x-2 list-none p-0 m-0">
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/index.php">Home</a></li>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/products.php">Products</a></li>
-                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/customers.php">Customers</a></li>
+                        
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
+                            <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/customers.php">Customers</a></li>
+                        <?php } else { ?>
+                            <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/my_account.php">My Account</a></li>
+
+                        <?php } ?>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/orders.php">Orders</a></li>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/shopping_cart.php">Shopping Cart</a></li>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/index.html">Homepage</a></li>

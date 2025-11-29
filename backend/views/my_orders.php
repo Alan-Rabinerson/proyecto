@@ -22,8 +22,10 @@
                 echo "<p>Quantity: " . $order['quantity'] . "</p>";
                 echo "<p>Address: " . $order['delivery_address'] . "</p>";
                 echo "<p>Method: " . $order['method_name'] . "</p>";
-                include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';
-                include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_delete.php';
+                if ($_SESSION['role'] === 'admin') {
+                    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';
+                    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_delete.php';
+                }
                 echo "</div>";
             }
         ?>

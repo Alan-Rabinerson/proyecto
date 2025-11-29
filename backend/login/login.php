@@ -47,7 +47,7 @@
 ?>
 <main>
     <h1>Login</h1>
-    <form  action="/student024/shop/backend/views/login.php" method="POST">
+    <form  action="/student024/shop/backend/login/login.php" method="POST">
         <div>
             <label for="username">Username:</label>
             <input class="border border-gray-300 p-2 rounded" type="text" id="username" name="username" required>

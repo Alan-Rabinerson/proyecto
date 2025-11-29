@@ -14,6 +14,7 @@
     $zip_code = '';
     $province = '';
     $payment_methods = [];
+    $password_hash = '';
 
     if ($customer_id) {
         // recoger todos los registros relacionados (direcciones / métodos de pago)
@@ -35,6 +36,9 @@
                 }
                 if (empty($phone)) {
                     $phone = $row['phone'] ?? '';
+                }
+                if (empty($password_hash)) {
+                    $password_hash = hash('sha256', $row['password']);
                 }
 
                 // Normalizar/extraer dirección

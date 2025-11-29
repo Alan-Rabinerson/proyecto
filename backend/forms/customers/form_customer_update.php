@@ -34,10 +34,12 @@
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" required value="<?php echo $email; ?>">
             </div>
+            <?php if ($_SESSION['role'] == 'admin') { ?>
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input type="text" name="username" class="form-control" id="username" required value="<?php echo $username;?>">
             </div>
+            <?php } ?>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
                 <input type="password" class="form-control" id="password" name="password" required value="<?php echo $password; ?>">

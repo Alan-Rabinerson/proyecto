@@ -9,11 +9,21 @@
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/products.php"> View Product</a></li>
                     
                 </ul>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'){ ?>
                 <h3 class="mt-4">Customers</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/customers.php"> View Customer</a></li>
-
                 </ul>
+                <h3 class="mt-4">My Account</h3>
+                <ul class="flex space-x-2 list-none p-0 m-0">
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/my_account.php"> View My Account</a></li>
+                </ul>
+                <?php } else { ?>
+                <h3 class="mt-4">My Account</h3>
+                <ul class="flex space-x-2 list-none p-0 m-0">
+                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/my_account.php"> View My Account</a></li>
+                </ul>
+                <?php } ?>
                 <h3 class="mt-4">Orders</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/orders.php">View Orders</a></li>
@@ -23,10 +33,10 @@
                 <ul class="flex space-x-2 list-none p-0 m-0">
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/backend/views/shopping_cart.php">View Shopping Cart</a></li>
                 </ul>
-                <h3 class="mt-4">sandbox</h3>
+                <!-- <h3 class="mt-4">sandbox</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/shop/sandbox/products.php">View Sandbox</a></li>
-                </ul>
+                </ul> -->
             </nav>
         </main>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?> 

@@ -31,6 +31,6 @@
     // Redirect back to customers page after 3 seconds
     setTimeout(
         () => {
-        window.location.href = '/student024/shop/sandbox/customers.php';
+        window.location.href = '/student024/shop/backend/customers.php';
     }, 3000);
 </script>

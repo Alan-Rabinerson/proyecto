@@ -1,4 +1,9 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado 
+    if ($_SESSION['role'] != 'admin') {
+        header("Location: /student024/shop/backend/index.php");
+        exit();
+    }
+?>
 <main class="flex items-center flex-col">
     <h1 class="underline text-4xl">Gestión de Clientes</h1>
     <input class="form-control"  type="text" id="searchInput" placeholder="Buscar clientes por nombre" onkeyup="showCustomers(this.value)">
