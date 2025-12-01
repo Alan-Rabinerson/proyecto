@@ -52,12 +52,19 @@
                             <?php if (!empty($addresses)): ?>
                                 <ul class="space-y-2">
                                     <?php foreach ($addresses as $addr): ?>
-                                        <li class="p-3 bg-azul-claro rounded">
+                                        <li class="p-3 bg-azul-claro rounded flex flex-col md:flex-row md:justify-between">
+                                             Address:
                                             <?php echo htmlspecialchars(($addr['street'] ?? '') . ', ' . ($addr['city'] ?? '') . ' ' . ($addr['zip_code'] ?? ''), ENT_QUOTES); ?>
-                                            <form action="db_address_delete.php" method="POST" class="inline">
-                                                <button type="submit" class="mt-2 px-4 py-2 bg-rojo rounded text-white hover:bg-granate" value="<?php echo $addr['address_id']; ?>">Eliminar dirección</button>
-                                            </form>
-                                            <button onClick="window.location.href='/student024/shop/backend/forms/addresses/form_address_update.php" id="manage-addresses-btn" class="mt-4 ml-2 px-4 py-2 bg-azul-oscuro rounded text-white hover:bg-granate">Actualizar direccion</button>
+                                            <div class="mt-2 md:mt-0 flex gap-2 items-center">                                               
+                                                <form action="/student024/shop/backend/db/addresses/db_address_delete.php" method="POST" class="inline">
+                                                    <input type="hidden" name="address_id" value="<?php echo $addr['address_id']; ?>">
+                                                    <button type="submit" class="boton-rojo">Eliminar dirección</button>
+                                                </form>
+                                                <form action="/student024/shop/backend/forms/addresses/form_address_update.php" method="POST" class="flex items-center inline">
+                                                    <input type="hidden" name="address_id" value="<?php echo $addr['address_id']; ?>">
+                                                    <button id="manage-addresses-btn" class="boton-rojo bg-azul-oscuro" type="submit">Actualizar direccion</button>
+                                                </form>
+                                            </div>
                                         </li>
                                     <?php endforeach; ?>
                                 </ul>

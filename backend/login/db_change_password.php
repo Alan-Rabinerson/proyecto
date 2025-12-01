@@ -14,7 +14,13 @@
             // Check if new password and confirm password match
             if (($_POST['new_password'] ?? '') !== ($_POST['confirm_password'] ?? '')) {
                 echo "<p class='text-red-500'>La nueva contraseña y la confirmación no coinciden.</p>";
-                
+                ?>
+                <script>
+                    setTimeout(() => {
+                        window.location.href = '/student024/shop/backend/login/change_password.php';
+                    }, 5000);
+                </script>
+                <?php
                 exit;
             } else {
                 // Update password in the database
@@ -35,7 +41,7 @@
                 ?>
                     <script>
                         setTimeout(() => {
-                            window.location.href = '/student024/shop/backend/login/my_account.php';
+                            window.location.href = '/student024/shop/backend/views/my_account.php';
                         }, 5000);
                     </script>
                 <?php
