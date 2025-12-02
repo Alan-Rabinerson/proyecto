@@ -67,6 +67,8 @@ header {
     top: 12px;
     right: 12px;
     margin-top: var(--spacing-lg);
+    border: none;
+    box-shadow: none;
 }
 
 .menu-toggle img {
@@ -140,7 +142,7 @@ header {
 }
 
 .search-bar input[type="search"]::placeholder {
-    color: hsla(40, 91%, 91%, 0.6);
+    color: hsla(40, 91%, 91%, 0.6) ;
 }
 
 .search-bar button {
@@ -275,7 +277,7 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 
-}
+} 
 
 @media screen and (min-width: 1024px) {
     /* Header */

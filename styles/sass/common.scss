@@ -1,11 +1,11 @@
 @font-face {
     font-family: Roboto;
-    src: url(../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
+    src: url(student024/shop/assets/fonts/Roboto/Roboto-VariableFont_wght.ttf);
 }
 
 @font-face {
     font-family: Montserrat;
-    src: url(../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+    src: url(student024/shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 $color-fondo: #003049;
 $color-fondo-footer: rgba(0,0,0,0.3);
@@ -29,12 +29,23 @@ body {
     color: $color-texto;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
+    width: 100vw;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: $fuente-secundaria;
     color: $color-texto;
 } 
+
+a {
+    color: $color-texto;
+    text-decoration: none;
+
+    &:hover {
+        color: $color-secundario;
+    }
+}
 
 
 
@@ -48,6 +59,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem;
+    width:99vw;
 
 
     .logo {
@@ -69,7 +81,12 @@ header {
         position: fixed;
         top: 12px;
         right: 12px;
-        margin-top: 0.5rem;
+        margin-top: 1.5rem;
+        box-shadow: none;
+        border: none;
+        @media screen and (min-width: 1024px) {
+            display: none;
+        }
     }
 
     .menu-toggle img {
@@ -93,11 +110,19 @@ header {
     .menu-links {
         display: none;
         list-style: none;
+        @media screen and (min-width: 1024px) {
+            display: flex;
+            gap: 1rem;
+            font-size: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
     }
     .menu-links.active {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        align-items: stretch;
+        gap: 1.5rem;
         margin-top: 0.5rem;
         font-size: 1.5em;
     }
@@ -107,10 +132,17 @@ header {
 
     #close-menu {
         background: none;
+        border: none;
+        display: flex;
+        align-items: flex-start;
+        @media screen and (min-width: 1024px) {
+            display: none;
+        }
     }
     #close-menu img {
         width: 40px;
         height: auto;
+
     }
 
     .menu-toggle:hover img {
@@ -131,6 +163,11 @@ header {
         display: flex;
         flex-direction: column;
         gap: .5rem;
+        @media screen and (min-width: 768px) {
+            flex-direction: row;
+            align-items: center;
+            position: relative;
+        }
     }
 
     .search-bar input[type="search"] {
@@ -177,25 +214,57 @@ footer{
     gap: 16px;
     padding: 32px;
     color: $color-texto;
+    padding:0.5rem;
+    margin-top: 2rem;
+    
+    .footer-content{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        width: 100%;    
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        
 
-    .footer-section{
+
+        .footer-section{
         flex: 1 1 200px;
         margin-bottom: 16px;
 
-        h3{
-            margin-bottom: 8px;
-        }
+            h3{
+                margin-bottom: 8px;
+                font-size: 20px;
+                color: $color-secundario;
+            }
 
-        p, a{
-            font-size: 14px;
-            color: $color-texto;
-            text-decoration: none;
+            p, a{
+                font-size: 14px;
+                color: $color-texto;
+                text-decoration: none;
+            }
 
-            &:hover{
-                color: $color-accent;
+            a{
+                border-radius: 100%;
+                background-color: $color-secundario;
+                padding: 0.5rem;
+                
+                &:hover{
+                    background-color: $color-accent;
+                    transform: scale(1.2);
+                }
             }
         }
     }
+
+    .footer-bottom{
+        text-align: center;
+        width: 100%;
+        margin-top: 16px;
+        font-size: 14px;
+    }
+
+    
 }
 
 
