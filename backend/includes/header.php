@@ -21,7 +21,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mi Proyecto</title>
-        <link rel="stylesheet" href="/student024/Shop/styles/output.css">
+        <link rel="stylesheet" href="/student024/Shop/styles/css/output.css">
     </head>
     <body class="bg-azul-oscuro text-beige">
         <header class="header">
@@ -34,7 +34,7 @@
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/index.php">Home</a></li>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/products.php">Products</a></li>
                         
-                        <?php if ( $_SESSION['role'] == 'admin') { ?>
+                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { ?>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/customers.php">Customers</a></li>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/my_account.php">My Account</a></li>
                         <?php } else { ?>

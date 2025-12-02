@@ -29,6 +29,7 @@
             $_SESSION['loggedin'] = true;
             $_SESSION['customer_id'] = $user[0]['customer_id'];
             $_SESSION['username'] = $user[0]['username'];
+            setcookie('username', $user[0]['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
             if ($user[0]['type'] == 'admin') {
                 $_SESSION['role'] = 'admin';
                 header("Location: /student024/shop/backend/index.php");

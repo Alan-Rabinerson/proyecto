@@ -21,6 +21,14 @@
         <input type="number" id="address_id" name="address_id" value="<?php echo $orders[0]['address_id']; ?>" required><br><br>
         <label for="method_id">ID del Método de Pago:</label>
         <input type="number" id="method_id" name="method_id" value="<?php echo $orders[0]['method_id']; ?>" required><br><br>
+        <label for="status">Estado del Pedido:</label>
+        <select id="status" name="status">
+            <option value="" <?php echo ($orders[0]['status'] === '') ? 'selected' : ''; ?>>(vacío)</option>
+            <option value="PROCESSING" <?php echo ($orders[0]['status'] === 'PROCESSING') ? 'selected' : ''; ?>>PROCESSING</option>
+            <option value="EN-ROUTE" <?php echo ($orders[0]['status'] === 'EN-ROUTE') ? 'selected' : ''; ?>>EN-ROUTE</option>
+            <option value="DELIVERED" <?php echo ($orders[0]['status'] === 'DELIVERED') ? 'selected' : ''; ?>>DELIVERED</option>
+        </select>
+        <br><br>
         <br><br>
         <button type="submit">Actualizar Pedido</button>
     </form>

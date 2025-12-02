@@ -17,7 +17,7 @@
             $price_row = $price_res ? mysqli_fetch_assoc($price_res) : null;
             $price = $price_row ? (float)$price_row['price'] : 0.0;
             $total_price = $price * $quantity;
-            $sql = "INSERT INTO `024_orders_table` (`customer_id`, `product_id`, `size`, `quantity`, `price`, `address_id`, `method_id`, `order_date`) VALUES ($customer_id, $product_id, '$size', $quantity, $total_price, $selected_address_id, $payment_method, NOW())";
+            $sql = "INSERT INTO `024_orders_table` (`customer_id`, `product_id`, `size`, `quantity`, `price`, `address_id`, `method_id`, `status`, `order_date`) VALUES ($customer_id, $product_id, '$size', $quantity, $total_price, $selected_address_id, $payment_method, 'PROCESSING', NOW())";
 
             $query = mysqli_query($conn, $sql);
             // if (!$query) { DEBUGGING 
