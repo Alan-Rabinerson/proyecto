@@ -9,6 +9,10 @@
   src: url(student024/shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +26,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  width: 100vw;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -49,7 +53,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
-  width: 99vw;
+  /* avoid using 100vw here; it can cause overflow when scrollbar is present */
   /* Logo */
   /* Botón menú hamburguesa */
   /* Menú móvil */
@@ -69,10 +73,10 @@ header .menu-toggle {
   width: 36px;
   height: 36px;
   padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   z-index: 1500;
-  position: fixed;
-  top: 12px;
-  right: 12px;
   margin-top: 1.5rem;
   box-shadow: none;
   border: none;
@@ -93,6 +97,7 @@ header .menu-toggle img {
 header .mobile-menu.active {
   position: fixed;
   top: 0;
+  left: 0;
   width: 75%;
   height: 100%;
   background-color: #003049;
@@ -153,11 +158,26 @@ header .menu-toggle:hover img {
 }
 
 header .login {
-  background-color: #C1121F;
   padding: .5rem 1rem;
-  border-radius: 5px;
-  color: #fdf0d5;
   font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 80px;
+  height: auto;
+  background-color: #C1121F;
+  color: #fdf0d5;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+header .login:hover {
+  background-color: #ea1c2b;
+  transform: scale(1.2);
 }
 
 header .search-bar {
@@ -249,13 +269,29 @@ footer .footer-content .footer-section p, footer .footer-content .footer-section
   text-decoration: none;
 }
 
-footer .footer-content .footer-section a {
-  border-radius: 100%;
-  background-color: #669BBC;
-  padding: 0.5rem;
+footer .footer-content .footer-section .social-links {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
 }
 
-footer .footer-content .footer-section a:hover {
+footer .footer-content .footer-section .social-links a {
+  padding: 4px;
+  width: 40px;
+  height: auto;
+  background-color: #669BBC;
+  color: #fdf0d5;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+footer .footer-content .footer-section .social-links a:hover {
   background-color: #780000;
   transform: scale(1.2);
 }

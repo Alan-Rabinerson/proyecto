@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
   menuButton.addEventListener('click', function () {
     mobileMenu.classList.add('active');
     menuLinks.classList.add('active');
+    menuButton.style.display = 'none';
     // console.log("menu") DEBUGGING
   });
   
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   closeButton.addEventListener('click', function () {
     mobileMenu.classList.remove('active');
     menuLinks.classList.remove('active');
+    menuButton.style.display = 'block';
   });
   
 
