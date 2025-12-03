@@ -32,16 +32,24 @@
         echo "<p>Address: " . $address . "</p>";
         foreach($items as $product){
             $order_number = $product['order_number'];
+            $product_id = $product['product_id'];
             echo "<div class='order-product'>";
+            echo "<div id='nombre-producto'>";
             echo "<h3> " . $product['product_name']  . "</h3>";
+            echo "</div>";
+            echo "<div id='detalles-producto' class='flex items-center justify-center gap-4'>";
             echo "<img src='/student024/shop/assets/imagenes/foto" . htmlspecialchars($product['product_id'], ENT_QUOTES, 'UTF-8') . ".jpg' alt='" . htmlspecialchars($product['product_name'], ENT_QUOTES, 'UTF-8') . "' class='w-32 h-32 object-cover mb-2'></img>";
             echo "<p>Quantity: " . $product['quantity'] . "</p>";
             echo "<p>Price: " . $product['price'] . "€</p>";
             
+            echo "<span class='flex items-center justify-center gap-2'>";
             if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin') {
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_delete.php';
             }
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/product_review_call.php';
+            echo "</span>";
+            echo "</div>";
             echo "</div>";
         }
         echo "</div>";

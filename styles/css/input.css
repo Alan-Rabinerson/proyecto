@@ -99,8 +99,16 @@
         @apply text-lg font-bold mb-2;
     }
 
+    .order-card::-webkit-scrollbar{
+        @apply bg-azul-claro rounded-lg shadow-md;
+    }
+
+    .order-card::-webkit-scrollbar-thumb{
+        @apply bg-azul-oscuro rounded-lg;
+    }
+
     .order-product{
-        @apply flex items-center justify-center flex-col gap-4 mb-2 border border-beige p-2 rounded;
+        @apply flex flex-col items-center justify-center gap-4 mb-2 border border-beige p-2 rounded;
     }
  
 
