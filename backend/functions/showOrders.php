@@ -22,18 +22,21 @@
         $order_date = $first['order_date'] ;
         $status = $first['status'] ;
         $method_name = $first['payment_method'];
+        $address = $first['delivery_address'];
         echo "<div class='order-card'>";
         echo "<h3>Order ID: " . $order_id . "</h3>";
         echo "<p>Customer Name: " . $first_name . " " . $last_name . "</p>";
         echo "<p>Order Date: " . $order_date . "</p>";
         echo "<p>Status: " . $status . "</p>";
         echo "<p>Method: " . $method_name . "</p>";
+        echo "<p>Address: " . $address . "</p>";
         foreach($items as $product){
             $order_number = $product['order_number'];
             echo "<div class='order-product'>";
-            echo "<h4>Product Name: " . $product['product_name']  . "</h4>";
+            echo "<h3> " . $product['product_name']  . "</h3>";
+            echo "<img src='/student024/shop/assets/imagenes/foto" . htmlspecialchars($product['product_id'], ENT_QUOTES, 'UTF-8') . ".jpg' alt='" . htmlspecialchars($product['product_name'], ENT_QUOTES, 'UTF-8') . "' class='w-32 h-32 object-cover mb-2'></img>";
             echo "<p>Quantity: " . $product['quantity'] . "</p>";
-            echo "<p>Address: " . $product['delivery_address'] . "</p>";
+            echo "<p>Price: " . $product['price'] . "€</p>";
             
             if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin') {
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';

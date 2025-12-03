@@ -1,28 +1,28 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';// header no terminado ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
 
-    $order_number = $_GET['order_number'];
+    $order_number = $_POST['order_number'];
     $sql = "SELECT * FROM 024_orders_table WHERE order_number = $order_number";
     $result = mysqli_query($conn, $sql);
     $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <main> 
-    <form action="/student024/shop/backend/db/db_order_update.php" method="get">
+    <form action="/student024/shop/backend/db/orders/db_order_update.php" method="get">
         <h2>Actualizar Pedido</h2>
         <label for="order_number">Número de Pedido (no editable):</label>
-        <input type="number" name="order_number" id="order_number" value="<?php echo $orders[0]['order_number']; ?>" readonly><br><br>
+        <input type="number" name="order_number" id="order_number" class="form-control" value="<?php echo $orders[0]['order_number']; ?>" readonly><br><br>
         <label for="customer_id">ID del Cliente:</label>
-        <input type="number" id="customer_id" name="customer_id" value="<?php echo $orders[0]['customer_id']; ?>" required><br><br>
+        <input type="number" id="customer_id" name="customer_id" class="form-control" value="<?php echo $orders[0]['customer_id']; ?>" required><br><br>
         <label for="product_id">ID del Producto:</label>
-        <input type="number" id="product_id" name="product_id" value="<?php echo $orders[0]['product_id']; ?>" required><br><br>
+        <input type="number" id="product_id" name="product_id" class="form-control" value="<?php echo $orders[0]['product_id']; ?>" required><br><br>
         <label for="quantity">Cantidad:</label>
-        <input type="number" id="quantity" name="quantity" value="<?php echo $orders[0]['quantity']; ?>" required><br><br>
+        <input type="number" id="quantity" name="quantity" class="form-control" value="<?php echo $orders[0]['quantity']; ?>" required><br><br>
         <label for="address_id">ID de la Dirección:</label>
-        <input type="number" id="address_id" name="address_id" value="<?php echo $orders[0]['address_id']; ?>" required><br><br>
+        <input type="number" id="address_id" name="address_id" class="form-control" value="<?php echo $orders[0]['address_id']; ?>" required><br><br>
         <label for="method_id">ID del Método de Pago:</label>
-        <input type="number" id="method_id" name="method_id" value="<?php echo $orders[0]['method_id']; ?>" required><br><br>
+        <input type="number" id="method_id" name="method_id" class="form-control" value="<?php echo $orders[0]['method_id']; ?>" required><br><br>
         <label for="status">Estado del Pedido:</label>
-        <select id="status" name="status">
+        <select id="status" name="status" class="form-control" required>
             <option value="" <?php echo ($orders[0]['status'] === '') ? 'selected' : ''; ?>>(vacío)</option>
             <option value="PROCESSING" <?php echo ($orders[0]['status'] === 'PROCESSING') ? 'selected' : ''; ?>>PROCESSING</option>
             <option value="EN-ROUTE" <?php echo ($orders[0]['status'] === 'EN-ROUTE') ? 'selected' : ''; ?>>EN-ROUTE</option>
@@ -30,8 +30,8 @@
         </select>
         <br><br>
         <br><br>
-        <button type="submit">Actualizar Pedido</button>
+        <button type="submit" class="boton-rojo">Actualizar Pedido</button>
     </form>
 </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';// footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?>

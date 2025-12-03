@@ -92,7 +92,15 @@
     }
 
     .order-card{
-        @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-start justify-start w-fit mb-4 border border-beige;
+        @apply bg-azul-claro p-4 rounded-lg shadow-md flex flex-col items-start justify-start w-fit mb-4 border border-beige overflow-y-scroll h-140;
+    }
+
+    .order-card h3{
+        @apply text-lg font-bold mb-2;
+    }
+
+    .order-product{
+        @apply flex items-center justify-center flex-col gap-4 mb-2 border border-beige p-2 rounded;
     }
  
 
@@ -224,5 +232,7 @@
     .add-to-cart-form{
         @apply flex flex-col gap-4 items-center justify-center mt-4;
     }
+
+    
 
 }
