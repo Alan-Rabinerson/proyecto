@@ -6,9 +6,11 @@
     $sql = "DELETE FROM 024_orders_table WHERE order_number = $order_number";
     $result = mysqli_query($conn, $sql);
     if($result){
-        echo "Pedido eliminado correctamente.";
+        header("Location: /student024/shop/backend/views/my_orders.php?message=Order+deleted+successfully");
+        exit();
     } else {
-        echo "Error al eliminar el pedido: " . mysqli_error($conn);
+        header("Location: /student024/shop/backend/views/my_orders.php?error=Failed+to+delete+order");
+        exit();
     }
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado
 ?>

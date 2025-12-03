@@ -8,6 +8,7 @@
     </form>
     <div class="orders-container mt-4 h-fit w-fit flex flex-wrap items-center justify-center gap-4" id="orders-container">
         <?php 
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
             $orders_id_list = [];
             $customer_id = $_SESSION['customer_id'];
             require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
