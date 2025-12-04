@@ -9,7 +9,7 @@ if (isset($_POST['status']) && isset($_POST['product_id']) && isset($_POST['cust
     $sql = "UPDATE 024_reviews SET status = '$status' WHERE product_id = $product_id AND customer_id = $customer_id AND order_number = '$order_number'";
     $query = mysqli_query($conn, $sql);
     if ($query) {
-        header("Location: /student024/shop/backend/views/reviews.php");
+        header("Location: /student024/shop/backend/views/reviews.php?message=Review+status+updated+successfully");
         exit();
     } else {
         header("Location: /student024/shop/backend/views/reviews.php?error=Failed+to+update+review+status");
