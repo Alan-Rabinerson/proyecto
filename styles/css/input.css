@@ -1,11 +1,11 @@
 @import "tailwindcss";
 @font-face {
     font-family: Roboto;
-    src: url(../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
+    src: url("/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf");
 }
 @font-face {
     font-family: Montserrat;
-    src: url(../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+    src: url("/student024/Shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
 }
 
 @theme {
@@ -240,6 +240,12 @@
     .add-to-cart-form{
         @apply flex flex-col gap-4 items-center justify-center mt-4;
     }
+
+    .review-item{
+        @apply border border-azul-claro p-4 mb-4 rounded-lg;
+    }
+
+    
 
     
 

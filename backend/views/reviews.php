@@ -1,6 +1,6 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php'; 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
-    $sql = "SELECT * FROM 024_reviews";
+    $sql = "SELECT * FROM 024_reviews WHERE status != 'APPROVED' ORDER BY created_at DESC";
     $result = mysqli_query($conn, $sql);
     $reviews = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -36,14 +36,14 @@
                         <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($review['review_rating'], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($review['status'], ENT_QUOTES, 'UTF-8'); ?>
                             <form action="/student024/shop/backend/db/reviews/update_review_status.php" method="POST">
-                                <input type="hidden" name="status" value="approved">
+                                <input type="hidden" name="status" value="APPROVED">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($review['product_id'], ENT_QUOTES, 'UTF-8'); ?>">
                                 <input type="hidden" name="customer_id" value="<?php echo htmlspecialchars($review['customer_id'], ENT_QUOTES, 'UTF-8'); ?>">
                                 <input type="hidden" name="order_number" value="<?php echo htmlspecialchars($review['order_number'], ENT_QUOTES, 'UTF-8'); ?>">
                                 <button class="boton-rojo bg-green-500" type="submit">Approve</button>
                             </form>
                             <form action="/student024/shop/backend/db/reviews/update_review_status.php" method="POST">
-                                <input type="hidden" name="status" value="rejected">
+                                <input type="hidden" name="status" value="REJECTED">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($review['product_id'], ENT_QUOTES, 'UTF-8'); ?>">
                                 <input type="hidden" name="customer_id" value="<?php echo htmlspecialchars($review['customer_id'], ENT_QUOTES, 'UTF-8'); ?>">
                                 <input type="hidden" name="order_number" value="<?php echo htmlspecialchars($review['order_number'], ENT_QUOTES, 'UTF-8'); ?>">

@@ -61,7 +61,7 @@
                                                     <input type="hidden" name="address_id" value="<?php echo $addr['address_id']; ?>">
                                                     <button type="submit" class="boton-rojo">Eliminar dirección</button>
                                                 </form>
-                                                <form action="/student024/shop/backend/forms/addresses/form_address_update.php" method="POST" class="flex items-center inline">
+                                                <form action="/student024/shop/backend/forms/addresses/form_address_update.php" method="POST" class="flex items-center ">
                                                     <input type="hidden" name="address_id" value="<?php echo $addr['address_id']; ?>">
                                                     <button id="manage-addresses-btn" class="boton-rojo bg-azul-oscuro" type="submit">Actualizar direccion</button>
                                                 </form>

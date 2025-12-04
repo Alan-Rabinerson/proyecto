@@ -47,7 +47,8 @@
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_delete.php';
             }
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/product_review_call.php';
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/reviews/form_product_review_call.php';
+            
             echo "</span>";
             echo "</div>";
             echo "</div>";
