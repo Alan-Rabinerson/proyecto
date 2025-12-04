@@ -7,23 +7,20 @@ $city = isset($_POST['city']) ? mysqli_real_escape_string($conn, trim($_POST['ci
 $zip_code = isset($_POST['zip_code']) ? mysqli_real_escape_string($conn, trim($_POST['zip_code'])) : '';
 $province = isset($_POST['province']) ? mysqli_real_escape_string($conn, trim($_POST['province'])) : '';
 
-$customer_id = $_SESSION['customer_id'] ?? null;
-if (empty($customer_id)) {
-    echo "No customer session found.";
-    exit();
-}
+$customer_id = $_SESSION['customer_id'] ;
+
 
 // Insert address first
 $insert_address_sql = "INSERT INTO `024_address` (`street`, `city`, `zip_code`, `province`) VALUES ('$street', '$city', '$zip_code', '$province')";
 if (!mysqli_query($conn, $insert_address_sql)) {
-    echo "Error inserting address: " . mysqli_error($conn);
+    header("Location: /student024/shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
     exit();
 }
 
 // Get the newly created address id
 $address_id = mysqli_insert_id($conn);
 if (empty($address_id)) {
-    echo "Could not get new address id.";
+    header("Location: /student024/shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode("Failed to retrieve new address ID"));
     exit();
 }
 
@@ -33,11 +30,11 @@ if (!mysqli_query($conn, $customer_address_sql)) {
     // If this fails, remove the previously inserted address to avoid orphan rows
     $del_sql = "DELETE FROM `024_address` WHERE `address_id` = $address_id";
     mysqli_query($conn, $del_sql);
-    echo "Error linking address to customer: " . mysqli_error($conn);
+    header("Location: /student024/shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
     exit();
 }
 
 // Success: redirect back to account page
-header("Location: /student024/shop/backend/views/my_account.php");
+header("Location: /student024/shop/backend/views/my_account.php?message=" . urlencode("Address added successfully"));
 exit();
 ?>

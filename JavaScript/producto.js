@@ -22,3 +22,23 @@ anadirCarritoBtn.addEventListener('click', (e) => {
 });
 
 
+let reviews = document.querySelector('.reviews');
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+if (this.readyState == 4 && this.status == 200) {
+
+    try {
+        var response = JSON.parse(this.responseText);
+        if (response && response.success) {
+            
+        } else {
+            renderCart([], 0);
+        }
+        } catch (e) {
+            console.error('Error parsing JSON response:', e);
+            renderCart([], 0);
+        }
+    }
+};
+xmlhttp.open("GET", "/student024/Shop/backend/endpoints/producto/reviews.php", true);
+xmlhttp.send();    

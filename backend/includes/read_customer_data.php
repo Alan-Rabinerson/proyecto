@@ -61,8 +61,7 @@
                     $method = [
                         'method_id'       => $row['method_id'] ?? null,
                         'method_name'     => $row['method_name'] ?? '',
-                        'account_number'  => $row['account_number'] ?? '',
-                        'card_number'     => $row['card_number'] ?? '',
+                        'number'          => $row['number'] ?? '',
                         'expiration_date' => $row['expiration_date'] ?? '',
                         'security_code'   => $row['security_code'] ?? ''
                     ];

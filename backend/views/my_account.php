@@ -1,6 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?> 
 <?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php'; ?>
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/read_customer_data.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php'; ?>
 
         <main class="bg-azul-oscuro min-h-screen text-beige p-6">
             <div class="max-w-6xl mx-auto">
@@ -78,10 +79,25 @@
                         <!-- Payment methods -->
                         <div id="payment-methods" class="mb-8">
                             <h3 class="text-xl font-medium mb-2">Métodos de pago</h3>
+                            <button onClick="window.location.href='/student024/shop/backend/forms/payment_methods/form_payment_method_insert.php'" id="add-payment-method-btn" class="mb-4 px-4 py-2 bg-green-600 rounded text-white hover:bg-green-700">Añadir nuevo método de pago</button>
                             <?php if (!empty($payment_methods)){ ?>
                                 <ul class="space-y-2">
-                                    <?php foreach ($payment_methods as $m){ ?>
-                                        <li class="p-3 bg-azul-claro rounded"><?php echo htmlspecialchars($m['method_name'] ?? 'Método', ENT_QUOTES); ?></li>
+                                    <?php foreach ($payment_methods as $payment_method){ 
+                                        $method_id = $payment_method['method_id'];
+                                        ?>
+                                        <li class="p-3 bg-azul-claro rounded flex flex-col md:flex-row md:justify-between">
+                                            <?php echo htmlspecialchars($payment_method['method_name'] ?? 'Método', ENT_QUOTES); ?>
+                                            <div class="mt-2 md:mt-0 flex gap-2 items-center">
+                                                <?php
+                                                    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/payment_methods/form_method_update_call.php';
+                                                ?>
+                                                <form action="/student024/shop/backend/db/payment_methods/db_payment_method_delete.php" method="POST" class="inline">
+                                                    <input type="hidden" name="method_id" value="<?php echo $method_id; ?>">
+                                                    <button type="submit" class="boton-rojo">Eliminar método de pago</button>
+                                                </form>
+                                            </div>
+                                        </li>
+                                        
                                     <?php } ?>
                                 </ul>
                             <?php } else { ?>
