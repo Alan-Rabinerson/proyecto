@@ -1,5 +1,7 @@
 <?php
+
     function showOrders($order_group){
+        require_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
         // nothing to show
         if (empty($order_group)) return;
 
@@ -23,6 +25,7 @@
         $status = $first['status'] ;
         $method_name = $first['payment_method'];
         $address = $first['delivery_address'];
+
         echo "<div class='order-card'>";
         echo "<h3>Order ID: " . $order_id . "</h3>";
         echo "<p>Customer Name: " . $first_name . " " . $last_name . "</p>";
@@ -47,8 +50,8 @@
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_delete.php';
             }
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/reviews/form_product_review_call.php';
-            
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/can_review.php';
+                        
             echo "</span>";
             echo "</div>";
             echo "</div>";
