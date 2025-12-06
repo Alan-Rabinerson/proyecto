@@ -2,6 +2,7 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: /student024/shop/backend/index.php");
+session_abort();
+header("Location: /student024/Shop/backend/index.php");
 exit();
 ?>

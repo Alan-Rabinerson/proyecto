@@ -9,9 +9,9 @@
 
     // Whitelist of public paths (no login required)
 
-    if (!isset($_SESSION['username']) && $path !== '/student024/shop/backend/login/login.php' && $path !== '/student024/shop/backend/login/logout.php') {
+if (!isset($_SESSION['username']) && $path !== '/student024/shop/backend/login/login.php' && $path !== '/student024/shop/backend/login/logout.php' && $path !== '/student024/shop/backend/views/register.php') {
         header('Location: /student024/Shop/backend/login/login.php');
-        exit;
+        exit;   
     }
 ?>
 
@@ -37,6 +37,7 @@
                         <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { ?>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/customers.php">Customers</a></li>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/my_account.php">My Account</a></li>
+                            <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/reviews.php">Review Management</a></li>
                         <?php } else { ?>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/my_account.php">My Account</a></li>
 
@@ -48,9 +49,11 @@
                     <div class="ml-4">
                         <?php if (isset($_SESSION['username'])){ ?>
                             <span class="mr-2 text-white">Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</span>
+                            <img src="/student024/Shop/assets/avatars/avatar.png" alt="Avatar" class="inline-block h-8 w-8 rounded-full mr-2 object-cover">
                             <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/login/logout.php';">Logout</button>
                         <?php } else { ?>
                             <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/views/login.php'">Login</button>
+                            <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/views/register.php'">Register</button>
                         <?php } ?>
                     </div>
                 </nav>

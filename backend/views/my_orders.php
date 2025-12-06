@@ -1,12 +1,12 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
     require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/functions/showOrders.php';
 ?>
-<main>
+<main calass="min-h-screen p-4 flex flex-col items-center justify-start">
     <h1> Mis Pedidos</h1>
     <form  method="GET">
         <input type="text" name="order_id" placeholder="ID del pedido" class="border-azul-claro border" onkeyup="showMyOrders(this.value)" required>
     </form>
-    <div class="orders-container mt-4 h-fit w-fit flex flex-wrap items-center justify-center gap-4" id="orders-container">
+    <div class="orders-container mt-4 h-fit w-full flex flex-col items-center justify-center gap-4 justify-self-center" id="orders-container">
         <?php 
             include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
             $orders_id_list = [];
@@ -17,16 +17,23 @@
             $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
             if (count($orders) === 0) {
                 echo "<p>You have no orders yet.</p>";
+            } else {
+                echo "<div class='legend-review flex flex-col items-center justify-center gap-2 mb-4 border border-azul-claro p-2 rounded'>";
+                echo "<p>Click on 'Review' to leave feedback for delivered products.</p>";
+                echo "<span class='px-4 py-2 bg-blue-600 text-white rounded'>Review</span>";
+                echo "<span class='px-4 py-2 bg-gray-600 text-white rounded'>Reviewed / Not Eligible</span>";
+                echo "</div>";
+                echo "<div class='flex flex-wrap items-center justify-center gap-4 mb-4'>";
+                foreach($orders as $order){
+                    $order_id = $order['order_id'];
+                    $order_id_list[$order_id][$order['product_id']] = $order;
+                    $order_number = $order['order_number'];
+                }
+                foreach($order_id_list as $order_id => $products){
+                    showOrders($products, $order_number);
+                }
+                echo "</div>";
             }
-            foreach($orders as $order){
-                $order_id = $order['order_id'];
-                $order_id_list[$order_id][$order['product_id']] = $order;
-                $order_number = $order['order_number'];
-            }
-            foreach($order_id_list as $order_id => $products){
-                showOrders($products, $order_number);
-            }
-
             
         ?>
     </div>
