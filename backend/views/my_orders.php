@@ -1,7 +1,12 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
     require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/functions/showOrders.php';
 ?>
-<main calass="min-h-screen p-4 flex flex-col items-center justify-start">
+<main class="min-h-screen p-4 flex flex-col items-center justify-start relative">
+    <!-- Botón para abrir el popup de leyenda -->
+    <button id="open-legend-btn" class="absolute top-4 right-4 px-4 py-2 bg-azul-claro text-white rounded hover:bg-blue-700 transition">
+        Review Legend
+    </button>
+    
     <h1> Mis Pedidos</h1>
     <form  method="GET">
         <input type="text" name="order_id" placeholder="ID del pedido" class="border-azul-claro border" onkeyup="showMyOrders(this.value)" required>
@@ -18,11 +23,6 @@
             if (count($orders) === 0) {
                 echo "<p>You have no orders yet.</p>";
             } else {
-                echo "<div class='legend-review flex flex-col items-center justify-center gap-2 mb-4 border border-azul-claro p-2 rounded'>";
-                echo "<p>Click on 'Review' to leave feedback for delivered products.</p>";
-                echo "<span class='px-4 py-2 bg-blue-600 text-white rounded'>Review</span>";
-                echo "<span class='px-4 py-2 bg-gray-600 text-white rounded'>Reviewed / Not Eligible</span>";
-                echo "</div>";
                 echo "<div class='flex flex-wrap items-center justify-center gap-4 mb-4'>";
                 foreach($orders as $order){
                     $order_id = $order['order_id'];
@@ -37,6 +37,28 @@
             
         ?>
     </div>
+    
+    <!-- Popup Modal de Leyenda -->
+    <div id="legend-modal" class="fixed inset-0 bg-transparent hidden items-center justify-center z-50" style="display: none;">
+        <div id="legend-content" class="bg-white border-2 border-azul-claro p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <h2 class="text-xl font-bold mb-4 text-azul-oscuro">Review Legend</h2>
+            <div class="flex flex-col gap-3">
+                <p class="text-gray-700">Click on 'Review' to leave feedback for delivered products.</p>
+                <div class="flex items-center gap-3">
+                    <span class="px-4 py-2 bg-blue-600 text-white rounded">Review</span>
+                    <span class="text-sm text-gray-600">Available to review</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="px-4 py-2 bg-gray-600 text-white rounded">Review</span>
+                    <span class="text-sm text-gray-600">Already reviewed or not eligible</span>
+                </div>
+            </div>
+            <button id="close-legend-btn" class="mt-4 w-full px-4 py-2 bg-azul-claro text-white rounded hover:bg-blue-700 transition">
+                Close
+            </button>
+        </div>
+    </div>
 </main>
 <script src="/student024/shop/JavaScript/showorders.js"></script>
+<script src="/student024/shop/JavaScript/myOrders.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?>

@@ -1,7 +1,8 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
 <?php 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';// Llama al script para obtener los productos
-    // capturar datos del producto a actualizar
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
+    // capture product_id from POST
     $product_id = $_POST['product_id'];
     // fetch product data from database based on product_id
     $sql = "SELECT * FROM 024_products_view WHERE product_id = $product_id";

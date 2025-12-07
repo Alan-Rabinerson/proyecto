@@ -1,4 +1,4 @@
-<form action="/student024/shop/backend/db/db_order_delete.php" method="GET">
+<form action="/student024/shop/backend/db/orders/db_order_delete.php" method="GET">
     <div class="">
         <input type="number" id="order_number" name="order_number" value="<?php echo $order_number; ?>" required hidden readonly>
     </div>

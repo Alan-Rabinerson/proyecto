@@ -12,16 +12,10 @@
     // update product data in database based on product_id
     $sql = "UPDATE 024_customers SET first_name='$first_name', last_name='$last_name', email='$email', username='$username', password='$password', phone='$phone', birth_date='$birthdate' WHERE customer_id=$customer_id";
     if (mysqli_query($conn, $sql)) {
-        echo "<p>Customer ID $customer_id updated successfully.</p>";
-        echo "<p>First Name: $first_name</p>";
-        echo "<p>Last Name: $last_name</p>";
-        echo "<p>Email: $email</p>";
-        echo "<p>Username: $username</p>";
-        echo "<p>Password: $password</p>";
-        echo "<p>Phone: $phone</p>";
-        echo "<p>Birthdate: $birthdate</p>";
+        header("Location: /student024/shop/backend/views/customers.php?message=" . urlencode("Customer $customer_id updated successfully."));
+
     } else {
-        echo "<p>Error updating customer: " . mysqli_error($conn) . "</p>"; 
+        header("Location: /student024/shop/backend/views/customers.php?error=" . urlencode("Error updating customer: " . mysqli_error($conn))); 
     }
 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado

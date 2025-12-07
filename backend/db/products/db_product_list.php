@@ -9,7 +9,7 @@
         $product_id = $product['product_id'];
         // Display product details
         echo "<div class='product-card mt-2'>";
-        echo "<img src='/student024/shop/assets/imagenes/foto" . $product_id . ".jpg' alt='" . $product['name'] . "' class='w-48 h-48 object-cover mb-2 rounded-lg shadow-md'>";
+        echo "<img src='/student024/Shop/assets/imagenes/foto" . $product_id . ".jpg' alt='" . $product['name'] . "' class='w-48 h-48 object-cover mb-2 rounded-lg shadow-md'>";
         echo "<h3>" . $product['name']  ."</h3>";
         echo "<p>Price: $" . $product['price'] . "</p>";
         echo "<p>Description: " . $product['description'] . "</p>";

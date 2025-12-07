@@ -1,4 +1,6 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php'; 
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
+?>
     <main class="container">
         <h2>Insertar Nuevo Producto</h2>
         <form method="GET" action="/student024/shop/backend/db/products/db_product_insert.php">

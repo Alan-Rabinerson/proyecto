@@ -1,4 +1,7 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado 
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
+
+?>
 <main>
     <h1>Insertar nuevo pedido</h1>
     <form action="/student024/shop/backend/db/db_order_insert.php" method="GET">

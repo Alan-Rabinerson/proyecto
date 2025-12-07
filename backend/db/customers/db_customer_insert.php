@@ -9,19 +9,12 @@
     $phone = $_POST['phone'];
     $birthdate = $_POST['birth_date'];
     // insert product data in database
-    $sql = "INSERT INTO 024_customers (first_name, last_name, email, username, password, phone, birth_date) VALUES ('$first_name', '$last_name', '$email', '$username', '$password', '$phone', '$birthdate')";
+    $sql = "INSERT INTO 024_customers (`first_name`, `last_name`, `email`, `username`, `password`, `phone`, `birth_date`, `type`) VALUES ('$first_name', '$last_name', '$email', '$username', '$password', '$phone', '$birthdate', 'customer')";
     if (mysqli_query($conn, $sql)) {
-        $customer_id = mysqli_insert_id($conn); // Obtener el ID del cliente insertado
-        echo "<p>Customer ID $customer_id inserted successfully.</p>";
-        echo "<p>First Name: $first_name</p>";
-        echo "<p>Last Name: $last_name</p>";
-        echo "<p>Email: $email</p>";
-        echo "<p>Username: $username</p>";
-        echo "<p>Password: $password</p>";
-        echo "<p>Phone: $phone</p>";
-        echo "<p>Birthdate: $birthdate</p>";
+        $message = "Customer '$first_name $last_name' inserted successfully.";
+        header("Location: /student024/shop/backend/views/customers.php?message=" . urlencode($message));
     } else {
-        echo "<p>Error inserting customer: " . mysqli_error($conn) . "</p>"; 
+       header("Location: /student024/shop/backend/views/customers.php?error=" . urlencode("Error inserting customer: " . mysqli_error($conn)));
     }
 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';// footer no terminado
