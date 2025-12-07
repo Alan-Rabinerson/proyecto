@@ -230,6 +230,26 @@ header .search-bar select {
   font-size: 0.9rem;
 }
 
+header #user-display {
+  color: #fdf0d5;
+  font-weight: bold;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+}
+
+header #user-display img {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+}
+
+header #user-display:hover {
+  color: #669BBC;
+}
+
 footer {
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;

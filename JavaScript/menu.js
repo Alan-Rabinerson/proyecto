@@ -10,6 +10,25 @@ document.addEventListener("DOMContentLoaded", function () {
   const añadirCantidadBtn = document.querySelectorAll('.añadir-cantidad');
   const restarCantidadBtn = document.querySelectorAll('.restar-cantidad');
   const checkoutBtn = document.getElementsByClassName('btn-checkout');
+  const usuario = getCookie('user');
+  console.log(usuario);
+  // Si el usuario esta logado ocultar el boton de login y mostrar su nombre y avatar
+  const loginBtn = document.getElementById('login-btn');
+  if (usuario) {
+    const userData = JSON.parse(usuario);
+    loginBtn.style.display = 'none';
+    const userDisplay = document.createElement('div');
+    userDisplay.className = 'user-display flex items-center gap-2 cursor-pointer';
+    userDisplay.id = 'user-display';
+    userDisplay.innerHTML = `
+      <img src="/student024/shop/assets/avatars/avatar.png" alt="Avatar" class="w-8 h-8 rounded-full" id="user-avatar" />
+      <span class="text-white font-medium">${userData.username}</span>
+      <button id="logout-btn" class="boton-rojo text-sm">Logout</button>
+    `;
+    loginBtn.parentNode.appendChild(userDisplay);
+    //console.log(userData.username)
+
+  }
 
   // Evento para abrir el menú móvil
   menuButton.addEventListener('click', function () {
@@ -52,6 +71,26 @@ document.addEventListener("DOMContentLoaded", function () {
     checkoutBtn[0].addEventListener('click', () => {
       window.location.href = './views/shopping-cart.html';
     });
+  }
+
+
+
+
+
+  function getCookie(cname) { // funcion de w3schools para obtener cookies
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
   //Funcionalidad no implementada para que al hacer click en los botones de añadir o restar cantidad en el carrito, se modifique el valor del input de cantidad y el total del producto
   // añadirCantidadBtn.forEach(button => {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 02-12-2025 a las 02:01:49
+-- Tiempo de generación: 07-12-2025 a las 23:17:53
 -- Versión del servidor: 11.5.2-MariaDB
 -- Versión de PHP: 8.3.14
 
@@ -20,6 +20,19 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `online_shop`
 --
+DROP TABLE IF EXISTS `024_orders_table`;
+DROP TABLE IF EXISTS `024_reviews`;
+DROP TABLE IF EXISTS `024_address_customer`;
+DROP TABLE IF EXISTS `024_address`;
+DROP TABLE IF EXISTS `024_payment_customer`;
+DROP TABLE IF EXISTS `024_payment_method`;
+DROP TABLE IF EXISTS `024_shopping_cart`;
+DROP TABLE IF EXISTS `024_product_sizes`;
+DROP TABLE IF EXISTS `024_product_category`;
+DROP TABLE IF EXISTS `024_category`;
+DROP TABLE IF EXISTS `024_product_materials`;
+DROP TABLE IF EXISTS `024_products`;
+DROP TABLE IF EXISTS `024_customers`;
 
 DELIMITER $$
 --
@@ -163,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `024_address` (
   `province` varchar(100) NOT NULL,
   `zip_code` varchar(100) NOT NULL,
   PRIMARY KEY (`address_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_address`
@@ -182,7 +195,8 @@ INSERT INTO `024_address` (`address_id`, `street`, `city`, `province`, `zip_code
 (10, '1213 9th St', 'Madrid', 'Comunidad de Madrid', '28003'),
 (11, 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
 (12, 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
-(14, 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701');
+(14, 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
+(15, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -223,7 +237,8 @@ INSERT INTO `024_address_customer` (`address_id`, `customer_id`) VALUES
 (3, 10),
 (10, 10),
 (9, 11),
-(14, 11);
+(14, 11),
+(15, 13);
 
 -- --------------------------------------------------------
 
@@ -275,14 +290,14 @@ CREATE TABLE IF NOT EXISTS `024_customers` (
   `birth_date` date DEFAULT NULL,
   `type` set('admin','customer') NOT NULL,
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_customers`
 --
 
 INSERT INTO `024_customers` (`customer_id`, `first_name`, `last_name`, `email`, `username`, `password`, `phone`, `birth_date`, `type`) VALUES
-(1, 'John', 'Doe', 'example@gmail.com', 'johndoe', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', '1234567891', '1965-11-25', 'customer'),
+(1, 'John', 'Doe', 'example@gmail.com', 'johndoe', '123456', '1234567891', '1965-11-25', 'customer'),
 (2, 'Jane', 'Doe', 'example@hotmail.com', 'janedoe', '123456', '1234567891', '1999-06-11', 'customer'),
 (3, 'John', 'Smith', 'example@outlook.com', 'johnsmith', '123456', '1234567890', '1985-03-30', 'customer'),
 (4, 'Jane', 'Smith', 'janesmith@gmail.com', 'janesmith', '123456', '1234567890', '1977-11-22', 'customer'),
@@ -293,7 +308,8 @@ INSERT INTO `024_customers` (`customer_id`, `first_name`, `last_name`, `email`, 
 (9, 'John', 'Williams', 'johnwilliams@hotmail.com', 'johnwilliams', '123456', '1234567890', '1989-08-22', 'customer'),
 (10, 'Jane', 'Williams', 'janewilliams@outlook.com', 'janewilliams', '123456', '1234567890', '2001-12-27', 'customer'),
 (11, 'Alan', 'Rabinerson', 'alanrabinerson@gmail.com', 'alanR', '123456', '694480533', '2001-10-24', 'admin'),
-(12, 'Enrique', 'Vizcaino', 'enrique@gmail.com', 'enrique@gmail.com', 'dwesteacher', '123456789', '1975-11-26', 'admin');
+(12, 'Enrique', 'Vizcaino', 'enrique@gmail.com', 'enrique@gmail.com', 'dwesteacher', '123456789', '1975-11-26', 'admin'),
+(13, 'Avi', 'Rabinerson', 'abualan@gmail.com', '', '123456', '607709603', '1960-08-12', 'customer');
 
 -- --------------------------------------------------------
 
@@ -319,8 +335,7 @@ CREATE TABLE IF NOT EXISTS `024_customers_view` (
 ,`zip_code` varchar(100)
 ,`method_id` int(11)
 ,`method_name` varchar(100)
-,`account_number` varchar(100)
-,`card_number` varchar(100)
+,`number` varchar(100)
 ,`expiration_date` varchar(100)
 ,`security_code` varchar(100)
 );
@@ -349,16 +364,21 @@ CREATE TABLE IF NOT EXISTS `024_orders_table` (
   KEY `method_id` (`method_id`),
   KEY `customer_id` (`customer_id`),
   KEY `address_id` (`address_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_orders_table`
 --
 
 INSERT INTO `024_orders_table` (`order_number`, `order_id`, `customer_id`, `product_id`, `size`, `quantity`, `price`, `order_date`, `address_id`, `method_id`, `status`) VALUES
-(1, 'A7244158999', 11, 2, 'XS', 1, 24.99, '2025-12-02 01:56:57', 9, 5, 'PROCESSING'),
-(2, 'A7244158999', 11, 3, 'S', 3, 179.97, '2025-12-02 01:56:57', 9, 5, 'PROCESSING'),
-(3, 'A7244158999', 11, 1, 'XS', 1, 49.99, '2025-12-02 01:56:57', 9, 5, 'PROCESSING');
+(2, 'A7244158999', 11, 3, 'S', 3, 179.97, '2025-12-02 01:56:57', 9, 5, 'DELIVERED'),
+(3, 'A7244158999', 11, 1, 'XS', 2, 49.99, '2025-12-07 02:05:33', 9, 5, 'DELIVERED'),
+(4, 'J9388432427', 1, 2, 'XL', 10, 249.9, '2025-12-03 15:58:36', 1, 5, 'DELIVERED'),
+(5, 'J9388432427', 1, 1, 'XS', 1, 49.99, '2025-12-03 15:58:36', 1, 5, 'DELIVERED'),
+(6, 'J9388432427', 1, 3, 'XXL', 1, 59.99, '2025-12-03 15:58:36', 1, 5, 'DELIVERED'),
+(7, 'J7312287117', 1, 7, 'M', 1, 23.99, '2025-12-03 15:59:41', 5, 1, 'PROCESSING'),
+(8, 'J7312287117', 1, 3, 'XXL', 1, 59.99, '2025-12-03 15:59:41', 5, 1, 'PROCESSING'),
+(9, 'J4581898846', 1, 2, 'XS', 1, 24.99, '2025-12-07 03:22:40', 1, 1, 'PROCESSING');
 
 --
 -- Disparadores `024_orders_table`
@@ -471,28 +491,28 @@ DROP TABLE IF EXISTS `024_payment_method`;
 CREATE TABLE IF NOT EXISTS `024_payment_method` (
   `method_id` int(11) NOT NULL AUTO_INCREMENT,
   `method_name` varchar(100) NOT NULL,
-  `account_number` varchar(100) DEFAULT NULL,
-  `card_number` varchar(100) DEFAULT NULL,
+  `number` varchar(100) DEFAULT NULL,
   `expiration_date` varchar(100) DEFAULT NULL,
   `security_code` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`method_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_payment_method`
 --
 
-INSERT INTO `024_payment_method` (`method_id`, `method_name`, `account_number`, `card_number`, `expiration_date`, `security_code`) VALUES
-(1, 'Visa Debit Card', NULL, '123456789012', '12/25', '123'),
-(2, 'Mastercard Credit Card', NULL, '987654321098', '12/25', '321'),
-(3, 'Bank transfer', '234567890', NULL, NULL, NULL),
-(4, 'Paypal', '345678901', NULL, NULL, NULL),
-(5, 'Visa Credit Card', NULL, '15784522', '12/25', '123'),
-(6, 'Mastercard Debit Card', NULL, '987654321098', '12/25', '321'),
-(7, 'Bank transfer', '234567890', NULL, NULL, NULL),
-(8, 'Mastercard Credit Card', NULL, '987654321907', '12/25', '321'),
-(9, 'Bank transfer', '212367890', NULL, NULL, NULL),
-(10, 'Visa Debit Card', NULL, '134567901234', '12/25', '123');
+INSERT INTO `024_payment_method` (`method_id`, `method_name`, `number`, `expiration_date`, `security_code`) VALUES
+(1, 'Visa Debit Card', '123456789012', '12/25', '123'),
+(2, 'Mastercard Credit Card', '987654321098', '12/25', '321'),
+(3, 'Bank transfer', '234567890', NULL, NULL),
+(4, 'Paypal', '345678901', NULL, NULL),
+(5, 'Visa Credit Card', '15784522', '12/25', '123'),
+(6, 'Mastercard Debit Card', '987654321098', '12/25', '321'),
+(7, 'Bank transfer', '234567890', NULL, NULL),
+(8, 'Mastercard Credit Card', '987654321907', '12/25', '321'),
+(9, 'Bank transfer', '212367890', NULL, NULL),
+(10, 'Visa Debit Card', '134567901234', '12/25', '123'),
+(11, 'Mastercard Debit Card', '12345678912', '02/30', '123');
 
 -- --------------------------------------------------------
 
@@ -504,7 +524,8 @@ DROP TABLE IF EXISTS `024_products`;
 CREATE TABLE IF NOT EXISTS `024_products` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) NOT NULL,
-  `description` varchar(100) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `long_description` varchar(600) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `supplier` varchar(100) NOT NULL,
   `available_sizes` set('XS','S','M','L','XL','XXL') NOT NULL,
@@ -515,30 +536,15 @@ CREATE TABLE IF NOT EXISTS `024_products` (
 -- Volcado de datos para la tabla `024_products`
 --
 
-INSERT INTO `024_products` (`product_id`, `name`, `description`, `price`, `supplier`, `available_sizes`) VALUES
-(1, 'Sudadera Urban Style', 'Sudadera con capucha de estilo urbano, tejido algodÃ³n 100%, bolsillo canguro.', 49.99, 'UrbanWear SL', 'XS,S,M,L,XL,XXL'),
-(2, 'Camiseta Concrete', 'Camiseta de algodón con logo estampado, corte regular.', 24.99, 'Concrete Brands', 'XS,S,M,L,XL,XXL'),
-(3, 'Pantalón Cargo Street', 'Pantalón cargo con múltiples bolsillos y tejido resistente, ajuste relajado.', 59.99, 'CargoCo', 'S,M,L,XL,XXL'),
-(4, 'Zapatillas Urban', 'Zapatillas deportivas de estilo urbano con suela antideslizante.', 89.99, 'UrbanFeet', 'M,L,XL'),
-(5, 'Chaqueta Bomber', 'Chaqueta bomber acolchada, cierre frontal y acabado resistente al agua.', 69.99, 'BomberFactory', 'XS,S,M,L,XL,XXL'),
-(6, 'Hoodie Oversized', 'Sudadera oversize con capucha y bolsillo frontal, estilo streetwear.', 41.24, 'OversizeCorp', 'S,M,L,XL'),
-(7, 'Gorra Snapback', 'Gorra snapback ajustable con logo bordado.', 23.99, 'CapHouse', 'M'),
-(8, 'Ripped Jeans', 'Jeans estilo destroyed con rotos y acabado lavado.', 51.99, 'DenimMasters', 'XS,S,M,L,XL');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `024_products_view`
---
-
-DROP TABLE IF EXISTS `024_products_view`;
-CREATE TABLE IF NOT EXISTS `024_products_view` (
-  `product_id` int(11) DEFAULT NULL,
-  `name` varchar(200) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
-  `stock` int(11) DEFAULT NULL,
-  `category` varchar(100) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+INSERT INTO `024_products` (`product_id`, `name`, `description`, `long_description`, `price`, `supplier`, `available_sizes`) VALUES
+(1, 'Sudadera \"Concrete Wave\" Cuello Alto', 'Sudadera cuello alto \"Concrete Wave\" negra. Logo \"S\" bordado. Corte oversize. Interior térmico. Techwear.', 'Sudadera oversized \"Concrete Wave\" en negro profundo con cuello alto distintivo. El bordado \"YOU-SK\" en el cuello y la letra \"S\" en el pecho crean un diseño minimalista y premium. Interior térmico cepillado para máxima comodidad en temporadas frías. Corte oversize relajado que permite total libertad de movimiento y layering. Costuras reforzadas en hombros, puños acanalados y detalles bordados en manga garantizan durabilidad excepcional. Fusiona estética techwear japonesa con streetwear urbano. Perfecta con cargos y sneakers. Incluye combo con gorra asiática. Unisex.', 49.99, 'UrbanWear SL', 'XS,S,M,L,XL,XXL'),
+(2, 'Camiseta Oversized \"Mad World\"', 'Camiseta oversized blanca \"MAD WORLD\". Algodón 100%. Diseño minimalista urbano. Básico imprescindible.\n', 'Camiseta oversized que captura la esencia del streetwear minimalista. En blanco puro con el estampado \"MAD WORLD\" en tipografía bold negra que transmite actitud urbana. El corte oversize proporciona ese estilo relajado y contemporáneo que define la moda urbana actual. Fabricada en algodón 100% de gramaje medio-alto, ofrece suavidad excepcional y durabilidad para el uso diario. El cuello redondo reforzado mantiene su forma lavado tras lavado. Perfecta para layering o para lucir sola con jeans o joggers. Unisex. Una pieza básica imprescindible en tu armario.', 24.99, 'Concrete Brands', 'XS,S,M,L,XL,XXL'),
+(3, 'Pantalones Cargo Street Grises ', 'Cargo grafito con múltiples bolsillos. Ripstop resistente. Estilo skate-militar. Movimiento total. Duradero.', 'Pantalones cargo en tono grafito oscuro que combinan funcionalidad militar con estética skate contemporánea. Múltiples bolsillos utilitarios en piernas y cintura ofrecen espacio práctico sin comprometer el estilo. Confeccionados en tela resistente tipo ripstop que soporta el uso intenso, ideal para skateboarding y actividades urbanas. El corte relajado pero moderno permite total libertad de movimiento. Cintura elástica con cordón ajustable para máximo confort. Perfectos para el día a día, sesiones de skate o looks techwear. Se mantienen ', 59.99, 'CargoCo', 'S,M,L,XL,XXL'),
+(4, ' Camiseta Retro \"Fast Break Champs \'87\"', 'Camiseta oversized azul cielo \"Fast Break Champs \'87\". Basketball retro. Gráfico vintage naranja. Iconic.', 'Viaja a la era dorada del basketball con esta camiseta oversized en azul cielo pastel. El gráfico vintage \"1987 FAST BREAK CHAMPS\" presenta una ilustración retro de baloncesto en naranja vibrante con tipografía deportiva auténtica de los 80s. Confeccionada en algodón suave de gramaje medio que combina comodidad premium con durabilidad excepcional. El corte oversized relajado captura perfectamente la estética del sportswear vintage. Ideal para fans del basketball old school, coleccionistas de streetwear retro y amantes de la cultura hip-hop clásica. Perfecta con jeans negros y sneakers.', 89.99, 'UrbanFeet', 'M,L,XL'),
+(5, ' Chaqueta Bomber Richmond', 'Bomber Richmond navy y blanco en satén premium. Estilo varsity con bordado exclusivo. Look urbano único', 'Eleva tu estilo urbano con nuestra exclusiva chaqueta bomber Richmond en colorblock navy y blanco. Confeccionada en satén premium con acabados de alta calidad, esta pieza combina la elegancia clásica del diseño varsity con un toque contemporáneo. El bordado \"RICHMOND\" en el hombro añade un detalle distintivo que no pasa desapercibido. Con cierre frontal de cremallera, bolsillos laterales y puños elásticos para un ajuste perfecto. Ideal para looks casual-elegantes, perfecta para la temporada de entretiempo.', 69.99, 'BomberFactory', 'XS,S,M,L,XL,XXL'),
+(6, 'Hoodie Oversize Negro \"CHANGE\"', 'Hoodie oversized negra con gráfico de retrato y texto \"CHANGE\". Streetwear con mensaje. Edición limitada.\n', 'Hoodie oversized que fusiona arte y moda urbana. Presenta un impactante gráfico de retrato en halftone con la palabra \"CHANGE\" en un vibrante naranja que contrasta con el negro profundo de la prenda. Confeccionada en algodón grueso de alta calidad, ofrece máxima comodidad y durabilidad. La capucha amplia y los puños ajustados proporcionan el fit perfecto del streetwear contemporáneo. Este diseño limited edition es perfecto para quienes buscan hacer una declaración de estilo mientras abrazan mensajes positivos de transformación y cambio.', 41.24, 'OversizeCorp', 'S,M,L,XL'),
+(7, 'Gorra Snapback Teal', 'Gorra snapback teal con logo Patagonia bordado. Visera plana estructurada. Ajuste universal. Outdoor style.', 'Gorra snapback en vibrante color teal que captura la esencia del estilo outdoor-urbano. Presenta el icónico logo de montañas Patagonia bordado en blanco sobre la corona, diseño que evoca aventuras y paisajes naturales. Visera plana estructurada que mantiene su forma y broche ajustable en la parte trasera para fit universal perfecto. Confeccionada en materiales de primera calidad resistentes al uso diario y condiciones exteriores. Los paneles ventilados garantizan transpirabilidad óptima.', 23.99, 'CapHouse', 'M'),
+(8, 'Jeans Rotos Streetwear Azul Claro', 'Jeans estilo destroyed con rotos y acabado lavado.', 'Jeans slim fit en lavado azul claro con distressing artesanal que define el estilo grunge contemporáneo. Cada rotura y desgaste está estratégicamente ubicado para lograr ese look auténtico y rebelde. Confeccionados en denim de alta calidad con stretch para mayor comodidad y movilidad. Los detalles desgastados en rodillas y muslos añaden carácter único a cada pieza. Cinco bolsillos funcionales y cierre de botón. El fit entallado pero cómodo los hace versátiles para cualquier ocasión. Perfectos para combinar con sneakers, botas o looks más dressed-up.', 51.99, 'DenimMasters', 'XS,S,M,L,XL');
 
 -- --------------------------------------------------------
 
@@ -615,6 +621,37 @@ INSERT INTO `024_product_category` (`product_id`, `category_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `024_product_materials`
+--
+
+DROP TABLE IF EXISTS `024_product_materials`;
+CREATE TABLE IF NOT EXISTS `024_product_materials` (
+  `product_id` int(11) NOT NULL,
+  `material_name` varchar(50) NOT NULL,
+  `percentage` int(11) NOT NULL,
+  PRIMARY KEY (`product_id`,`material_name`,`percentage`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Volcado de datos para la tabla `024_product_materials`
+--
+
+INSERT INTO `024_product_materials` (`product_id`, `material_name`, `percentage`) VALUES
+(1, 'algodón', 100),
+(2, 'algodón', 80),
+(3, 'algodón', 80),
+(3, 'poliéster reciclado ', 20),
+(4, 'algodón', 100),
+(5, 'algodón', 20),
+(5, 'cuero', 60),
+(5, 'poliéster reciclado ', 20),
+(6, 'algodón', 100),
+(7, 'algodón', 100),
+(8, 'algodón', 100);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `024_product_sizes`
 --
 
@@ -637,7 +674,7 @@ INSERT INTO `024_product_sizes` (`product_id`, `size`, `stock`) VALUES
 (1, 'L', 21),
 (1, 'XL', 13),
 (1, 'XXL', 19),
-(2, 'XS', 8),
+(2, 'XS', 7),
 (2, 'S', 28),
 (2, 'M', 30),
 (2, 'L', 24),
@@ -691,7 +728,40 @@ CREATE TABLE IF NOT EXISTS `024_product_size_availability` (
 --
 DROP VIEW IF EXISTS `024_product_view`;
 CREATE TABLE IF NOT EXISTS `024_product_view` (
+`product_id` int(11)
+,`name` varchar(200)
+,`price` decimal(10,2)
+,`category` varchar(100)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `024_reviews`
+--
+
+DROP TABLE IF EXISTS `024_reviews`;
+CREATE TABLE IF NOT EXISTS `024_reviews` (
+  `product_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `order_number` int(11) NOT NULL,
+  `review_content` varchar(255) NOT NULL,
+  `review_rating` set('1','2','3','4','5') NOT NULL,
+  `status` set('APPROVED','REJECTED','PENDING','') NOT NULL DEFAULT 'PENDING',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`product_id`,`customer_id`,`order_number`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Volcado de datos para la tabla `024_reviews`
+--
+
+INSERT INTO `024_reviews` (`product_id`, `customer_id`, `order_number`, `review_content`, `review_rating`, `status`, `created_at`) VALUES
+(2, 1, 1, 'gran producto', '5', 'APPROVED', '2025-12-03 19:42:55'),
+(3, 11, 2, 'Muy malo', '1', 'APPROVED', '2025-12-04 19:42:55'),
+(1, 11, 3, 'good', '5', 'APPROVED', '2025-12-04 19:44:40'),
+(1, 11, 5, 'good', '2', 'APPROVED', '2025-12-04 20:08:43'),
+(3, 1, 6, 'Great product', '4', 'APPROVED', '2025-12-05 01:08:02');
 
 -- --------------------------------------------------------
 
@@ -709,7 +779,7 @@ CREATE TABLE IF NOT EXISTS `024_shopping_cart` (
   PRIMARY KEY (`shopping_cart_id`),
   KEY `customer_id` (`customer_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=728 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=736 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_shopping_cart`
@@ -763,7 +833,6 @@ INSERT INTO `024_shopping_cart` (`shopping_cart_id`, `customer_id`, `product_id`
 (708, 6, 1, 7, 'S'),
 (709, 10, 3, 5, 'L'),
 (710, 4, 2, 10, 'XXL'),
-(711, 1, 2, 9, 'XL'),
 (712, 3, 8, 1, 'S'),
 (713, 4, 7, 4, 'XXL'),
 (714, 4, 7, 8, 'M'),
@@ -779,7 +848,9 @@ INSERT INTO `024_shopping_cart` (`shopping_cart_id`, `customer_id`, `product_id`
 (724, 6, 2, 4, 'XS'),
 (725, 2, 7, 8, 'S'),
 (726, 10, 7, 6, 'S'),
-(727, 3, 5, 4, 'XL');
+(727, 3, 5, 4, 'XL'),
+(728, 11, 1, 2, 'XS'),
+(730, 11, 3, 1, 'S');
 
 -- --------------------------------------------------------
 
@@ -830,28 +901,12 @@ CREATE TABLE IF NOT EXISTS `024_total_money_spent_view` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `024_wishlist`
---
-
-DROP TABLE IF EXISTS `024_wishlist`;
-CREATE TABLE IF NOT EXISTS `024_wishlist` (
-  `wishlist_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`wishlist_id`,`customer_id`,`product_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
-
--- --------------------------------------------------------
-
---
 -- Estructura para la vista `024_customers_view`
 --
 DROP TABLE IF EXISTS `024_customers_view`;
 
 DROP VIEW IF EXISTS `024_customers_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_customers_view`  AS SELECT `c`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `c`.`email` AS `email`, `c`.`username` AS `username`, `c`.`password` AS `password`, `c`.`phone` AS `phone`, `c`.`birth_date` AS `birth_date`, `c`.`type` AS `type`, `a`.`address_id` AS `address_id`, `a`.`street` AS `street`, `a`.`city` AS `city`, `a`.`province` AS `province`, `a`.`zip_code` AS `zip_code`, `pm`.`method_id` AS `method_id`, `pm`.`method_name` AS `method_name`, `pm`.`account_number` AS `account_number`, `pm`.`card_number` AS `card_number`, `pm`.`expiration_date` AS `expiration_date`, `pm`.`security_code` AS `security_code` FROM ((((`024_customers` `c` join `024_payment_customer` `pc` on(`c`.`customer_id` = `pc`.`customer_id`)) join `024_payment_method` `pm` on(`pc`.`method_id` = `pm`.`method_id`)) join `024_address_customer` `ac` on(`c`.`customer_id` = `ac`.`customer_id`)) join `024_address` `a` on(`ac`.`address_id` = `a`.`address_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_customers_view`  AS SELECT `c`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `c`.`email` AS `email`, `c`.`username` AS `username`, `c`.`password` AS `password`, `c`.`phone` AS `phone`, `c`.`birth_date` AS `birth_date`, `c`.`type` AS `type`, `a`.`address_id` AS `address_id`, `a`.`street` AS `street`, `a`.`city` AS `city`, `a`.`province` AS `province`, `a`.`zip_code` AS `zip_code`, `pm`.`method_id` AS `method_id`, `pm`.`method_name` AS `method_name`, `pm`.`number` AS `number`, `pm`.`expiration_date` AS `expiration_date`, `pm`.`security_code` AS `security_code` FROM ((((`024_customers` `c` join `024_payment_customer` `pc` on(`c`.`customer_id` = `pc`.`customer_id`)) join `024_payment_method` `pm` on(`pc`.`method_id` = `pm`.`method_id`)) join `024_address_customer` `ac` on(`c`.`customer_id` = `ac`.`customer_id`)) join `024_address` `a` on(`ac`.`address_id` = `a`.`address_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -881,7 +936,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 DROP TABLE IF EXISTS `024_product_view`;
 
 DROP VIEW IF EXISTS `024_product_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_product_view`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `p`.`stock` AS `stock`, `c`.`name` AS `category` FROM ((`024_product_category` `pc` join `024_products` `p` on(`pc`.`product_id` = `p`.`product_id`)) join `024_category` `c` on(`pc`.`category_id` = `c`.`category_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_product_view`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `c`.`name` AS `category` FROM ((`024_product_category` `pc` join `024_products` `p` on(`pc`.`product_id` = `p`.`product_id`)) join `024_category` `c` on(`pc`.`category_id` = `c`.`category_id`)) ;
 
 -- --------------------------------------------------------
 
@@ -946,6 +1001,12 @@ ALTER TABLE `024_payment_customer`
 ALTER TABLE `024_product_category`
   ADD CONSTRAINT `product_category_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `024_products` (`product_id`),
   ADD CONSTRAINT `product_category_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `024_category` (`category_id`);
+
+--
+-- Filtros para la tabla `024_product_materials`
+--
+ALTER TABLE `024_product_materials`
+  ADD CONSTRAINT `product_materials_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `024_products` (`product_id`);
 
 --
 -- Filtros para la tabla `024_product_sizes`

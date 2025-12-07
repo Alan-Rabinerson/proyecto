@@ -23,8 +23,110 @@ anadirCarritoBtn.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  loadProductDetail();
   cargarReviews();
 });
+
+// Cargar detalles del producto desde la BD usando XMLHttpRequest
+function loadProductDetail() {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get("id");
+
+    if (!productId) {
+      console.error("No product ID provided");
+      return;
+    }
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          try {
+            const product = JSON.parse(this.responseText);
+
+            if (!product || product.error) {
+              console.error("Product not found");
+              return;
+            }
+
+            // Actualizar título de la página
+            const titleEl = document.querySelector("main h1");
+            if (titleEl) titleEl.textContent = product.product_name;
+
+            // Actualizar imagen principal (usar nombre distinto para evitar colisiones)
+            const mainImg = document.querySelector(".product-images img");
+            if (mainImg) {
+              mainImg.src = `../assets/imagenes/foto${product.product_id}.jpg`;
+              mainImg.alt = product.product_name || "";
+            }
+            const additionalImgs = document.querySelectorAll(".additional-images img");
+            if (additionalImgs) {
+              additionalImgs.forEach((img, index) => {
+                img.src = `../assets/imagenes/foto-detalle-${product.product_id}-${
+                  index + 1
+                }.png`;
+                img.alt = product.product_name || "";
+              });
+            }
+
+            // Actualizar precio
+            const priceElement = document.querySelector("#precio .text-2xl");
+            if (priceElement) {
+              const priceNum = typeof product.price !== "undefined" ? Number(product.price) : NaN;
+              priceElement.textContent = !isNaN(priceNum) ? `${priceNum.toFixed(2)}€` : (product.price || "");
+            }
+
+            // Actualizar descripción
+            const descriptionElement = document.querySelector(".product-description p");
+            if (descriptionElement) {
+              descriptionElement.textContent = product.description || "Sin descripción disponible";
+            }
+
+            // Materiales
+            const materialesList = document.getElementById("materiales");
+            if (materialesList && Array.isArray(product.materials)) {
+              materialesList.innerHTML = "";
+              product.materials.forEach((material) => {
+                const li = document.createElement("li");
+                li.className = "mb-2";
+                li.textContent =
+                  material.material_name +
+                  (material.percentage ? `: ${material.percentage}%` : "");
+                materialesList.appendChild(li);
+              });
+            }
+
+            // Guardar product_id en un campo oculto para las reviews
+            let productIdInput = document.getElementById("productId");
+            if (!productIdInput) {
+              productIdInput = document.createElement("input");
+              productIdInput.type = "hidden";
+              productIdInput.id = "productId";
+              document.body.appendChild(productIdInput);
+            }
+            productIdInput.value = product.product_id;
+          } catch (e) {
+            console.error("Error parsing JSON response:", e);
+          }
+        } else {
+          console.error("Failed to load product detail. Status:", this.status);
+        }
+      }
+    };
+
+    xhr.open(
+      "GET",
+      `/student024/shop/backend/endpoints/product_detail/show_product_detail.php?productId=${encodeURIComponent(
+        productId
+      )}`,
+      true
+    );
+    xhr.send();
+  } catch (error) {
+    console.error("Error loading product detail:", error);
+  }
+}
 
 function cargarReviews() {
   var xmlhttp = new XMLHttpRequest();
@@ -47,7 +149,7 @@ function cargarReviews() {
   };
   xmlhttp.open(
     "GET",
-    "/student024/Shop/backend/endpoints/product_detail/show_reviews.php?product_id=" +
+    "/student024/shop/backend/endpoints/product_detail/show_reviews.php?productId=" +
       productId,
     true
   );

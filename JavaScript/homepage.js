@@ -1,13 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const productCards = document.querySelectorAll('.product-card');
-
-    // Agregar ruta de producto a cada tarjeta de producto
-    productCards.forEach(card => {
-        card.addEventListener('click', () => {
-            window.location.href = './views/producto.html';
-        });
-    });
-
+    // Cargar productos destacados
+    loadFeaturedProducts();
+    
+    // Cargar ofertas semanales
+    loadWeeklyOffers();
 
     // Slider de productos y ofertas
     const sliderContainers = document.querySelectorAll('.slider-container');
@@ -43,4 +39,104 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
+
+    
 });
+
+// Función para cargar productos destacados desde la base de datos usando XMLHttpRequest
+function loadFeaturedProducts() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './backend/endpoints/homepage/show_products.php', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState !== 4) return;
+        const productsSlider = document.querySelector('.featured-products .products-slider');
+        if (!productsSlider) return;
+
+        if (xhr.status === 200) {
+            try {
+                const products = JSON.parse(xhr.responseText);
+                productsSlider.innerHTML = '';
+                products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.style.cursor = 'pointer';
+                    productCard.dataset.productId = product.product_id;
+
+                    productCard.innerHTML = `
+                        <img src="./assets/imagenes/foto${product.product_id}.jpg" alt="${product.product_name}">
+                        <h3>${product.product_name}</h3>
+                        <p class="price">${product.price.toFixed(2)} €</p>
+                        <button class="btn-comprar-ahora">Comprar</button>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    `;
+
+                    productCard.addEventListener('click', (e) => {
+                        if (!e.target.classList.contains('btn-comprar-ahora') && 
+                            !e.target.classList.contains('btn-add-cart')) {
+                            window.location.href = `./views/producto.html?id=${product.product_id}`;
+                        }
+                    });
+
+                    productsSlider.appendChild(productCard);
+                });
+            } catch (err) {
+                console.error('Error parsing featured products response as JSON:', err);
+                console.error('Response text:', xhr.responseText);
+            }
+        } else {
+            console.error('Server returned status', xhr.status, 'for show_products.php');
+            console.error('Response text:', xhr.responseText);
+        }
+    };
+    xhr.send();
+}
+
+// Función para cargar ofertas semanales usando XMLHttpRequest
+function loadWeeklyOffers() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', './backend/endpoints/homepage/show_offers.php', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState !== 4) return;
+        const offersSlider = document.querySelector('.weekly-offers .offers-slider');
+        if (!offersSlider) return;
+
+        if (xhr.status === 200) {
+            try {
+                const offers = JSON.parse(xhr.responseText);
+                offersSlider.innerHTML = '';
+                offers.forEach(offer => {
+                    const offerCard = document.createElement('div');
+                    offerCard.className = 'product-card offer';
+                    offerCard.style.cursor = 'pointer';
+                    offerCard.dataset.productId = offer.product_id;
+
+                    offerCard.innerHTML = `
+                        <div class="discount-badge">-${offer.discount_percent}%</div>
+                        <img src="./assets/imagenes/foto${offer.product_id}.jpg" alt="${offer.product_name}">
+                        <h3>${offer.product_name}</h3>
+                        <p class="price-original">${offer.original_price} €</p>
+                        <p class="price">${offer.price} €</p>
+                        <button class="btn-comprar-ahora">Comprar</button>
+                        <button class="btn-add-cart">Añadir al carrito</button>
+                    `;
+
+                    offerCard.addEventListener('click', (e) => {
+                        if (!e.target.classList.contains('btn-comprar-ahora') && 
+                            !e.target.classList.contains('btn-add-cart')) {
+                            window.location.href = `./views/producto.html?id=${offer.product_id}`;
+                        }
+                    });
+
+                    offersSlider.appendChild(offerCard);
+                });
+            } catch (err) {
+                console.error('Error parsing weekly offers response as JSON:', err);
+                console.error('Response text:', xhr.responseText);
+            }
+        } else {
+            console.error('Server returned status', xhr.status, 'for show_offers.php');
+            console.error('Response text:', xhr.responseText);
+        }
+    };
+    xhr.send();
+}

@@ -29,16 +29,18 @@
             $_SESSION['loggedin'] = true;
             $_SESSION['customer_id'] = $user[0]['customer_id'];
             $_SESSION['username'] = $user[0]['username'];
-            setcookie('username', $user[0]['username'], time() + (86400 * 30), "/"); // 86400 = 1 day
+            
             if ($user[0]['type'] == 'admin') {
                 $_SESSION['role'] = 'admin';
+                setcookie('user', json_encode($user[0]), time() + (86400 * 30), "/"); // 86400 = 1 day
                 header("Location: /student024/shop/backend/index.php");
                 exit;
             } else {
                 $_SESSION['role'] = 'user';
-                header("Location: /student024/shop/frontend/homepage.html");
+                setcookie('user', json_encode($user[0]), time() + (86400 * 30), "/"); // 86400 = 1 day
+                header("Location: /student024/shop/index.html");
             }
-
+            
         } else {
             // Credenciales inválidas, mostrar mensaje de error
             $errores['login'] = 'Usuario o contraseña inválidos. Por favor, inténtelo de nuevo.';

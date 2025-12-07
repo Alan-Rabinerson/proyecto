@@ -1,10 +1,10 @@
 @font-face {
     font-family: Roboto;
-    src: url(../assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
+    src: url(/student024/shop/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
 }
 @font-face {
     font-family: Montserrat;
-    src: url(../assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+    src: url(/student024/shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 :root {
     /* Tipografía */
@@ -115,13 +115,36 @@ header {
     filter: brightness(1.2);
 }
 
-.login {
+.login, #logout-btn {
     background-color: var(--primary-color);
     padding: .5rem 1rem;
     border-radius: 5px;
     color: var(--text-color);
     font-weight: bold;
 }
+
+#user-display {
+    color: var(--text-color);
+    font-weight: bold;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    cursor: pointer;
+}
+
+#user-display img {
+    width: 32px;
+    height: 32px;
+    border-radius: 100%;
+}
+
+#user-display:hover {
+    color: var(--secondary-color);
+}
+
+
+
 
 /* Buscador */
 .search-bar {
@@ -348,7 +371,7 @@ footer {
     .cart-count {
         transform: none;
         margin-left: 0.25rem;
-        top: 2px;
+        top: 15px;
     }
 
     /* Footer */

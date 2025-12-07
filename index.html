@@ -40,7 +40,7 @@
                 <li><a href="#mujer">Mujer</a></li>
                 <li><a href="./backend/index.php">Administración</a></li>
                 <li><a href="#ofertas">Ofertas</a></li>
-                <li><a class="login" href="./backend/login/login.php">Login</a></li>
+                <li><a class="login" href="./backend/login/login.php" id="login-btn">Login</a></li>
                 <li><a href="#carrito">
                     <button id="sticky-cart" class="sticky-cart carrito-desktop" >
                         <img src="./assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
@@ -74,39 +74,8 @@
             <div class="slider-container">
                 <button class="slider-arrow slider-prev" >‹</button>
                 <div class="products-slider">
-                    <div class="product-card">
-                        <img src="./assets/imagenes/foto1.jpg" alt="Sudadera Urban Style">
-                        <h3>Sudadera Urban Style</h3>
-                        <p class="price">49,99 €</p>
-                        <button class="btn-comprar-ahora">Comprar</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
-                    
-                    <div class="product-card">
-                        <img src="./assets/imagenes/foto2.jpg" alt="Camiseta Concrete">
-                        <h3>Camiseta Concrete</h3>
-                        <p class="price">24,99 €</p>
-                        <button class="btn-comprar-ahora">Comprar</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
-                    
-                    <div class="product-card">
-                        <img src="./assets/imagenes/foto3.jpg" alt="Pantalón Cargo Street">
-                        <h3>Pantalón Cargo Street</h3>
-                        <p class="price">59,99 €</p>
-                        <button class="btn-comprar-ahora">Comprar</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
-                    
-                    <div class="product-card">
-                        <img src="./assets/imagenes/foto4.jpg" alt="Zapatillas Urban">
-                        <h3>Zapatillas Urban</h3>
-                        <p class="price">89,99 €</p>
-                        <button class="btn-comprar-ahora">Comprar</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
+                    <!-- Productos cargados dinámicamente vía AJAX -->
                 </div>
-                
                 <button class="slider-arrow slider-next" >›</button>
             </div>
         </section>
@@ -117,55 +86,8 @@
             
             <div class="slider-container">
                 <button class="slider-arrow slider-prev" >‹</button>
-                
                 <div class="offers-slider">
-                    <div class="product-card offer">
-                        <span class="discount-badge">-30%</span>
-                        <img src="./assets/imagenes/foto5.jpg" alt="Chaqueta Bomber">
-                        <h3>Chaqueta Bomber</h3>
-                        <p class="price">
-                            <span class="old-price">99,99 €</span>
-                            <span class="new-price">69,99 €</span>
-                        </p>
-                        <button class="btn-comprar-ahora">Comprar</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
-                    
-                    <div class="product-card offer">
-                        <span class="discount-badge">-25%</span>
-                        <img src="./assets/imagenes/foto6.jpg" alt="Hoodie Oversized">
-                        <h3>Hoodie Oversized</h3>
-                        <p class="price">
-                            <span class="old-price">54,99 €</span>
-                            <span class="new-price">41,24 €</span>
-                        </p>
-                        <button class="btn-comprar-ahora">Comprar</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
-                    
-                    <div class="product-card offer">
-                        <span class="discount-badge">-20%</span>
-                        <img src="./assets/imagenes/foto7.jpg" alt="Gorra Snapback">
-                        <h3>Gorra Snapback</h3>
-                        <p class="price">
-                            <span class="old-price">29,99 €</span>
-                            <span class="new-price">23,99 €</span>
-                        </p>
-                        <button class="btn-comprar-ahora">Comprar ahora</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
-                    
-                    <div class="product-card offer">
-                        <span class="discount-badge">-35%</span>
-                        <img src="./assets/imagenes/foto8.jpg" alt="Jeans Destroyed">
-                        <h3>Ripped Jeans</h3>
-                        <p class="price">
-                            <span class="old-price">79,99 €</span>
-                            <span class="new-price">51,99 €</span>
-                        </p>
-                        <button class="btn-comprar-ahora">Comprar</button>
-                        <button class="btn-add-cart">Añadir al carrito</button>
-                    </div>
+                    <!-- Ofertas cargadas dinámicamente vía AJAX con descuentos hardcoded -->
                 </div>
                 <button class="slider-arrow slider-next">›</button>
             </div>
