@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';  ?>
     <?php
         include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
         // get data
@@ -13,4 +13,4 @@
             echo "<main><h2 class='mt-4'>Error deleting product: " . mysqli_error($conn) . "</h2></main>";
         }
     ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';// footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';  ?>

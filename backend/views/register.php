@@ -9,7 +9,7 @@ if (isset($_SESSION['customer_id'])) {
 }
 if (isset($_POST['register'])){
 
-
+    // Retrieve and sanitize form inputs
     $first_name = $_POST['first_name'] ?? '';
     $last_name = $_POST['last_name'] ?? '';
     $phone = $_POST['phone'] ?? '';
@@ -21,10 +21,10 @@ if (isset($_POST['register'])){
 
     $sql = "INSERT INTO `024_customers` (`first_name`, `last_name`, `phone`, `birth_date`, `username`, `email`, `password`, `type`) VALUES ('$first_name', '$last_name', '$phone', '$birthdate', '$username', '$email', '" . password_hash($password, PASSWORD_DEFAULT) . "', '$role')";
     $query = mysqli_query($conn, $sql);
-    if ($query) {
+    if ($query) { // Registration successful redirect to login page with success message
         header('Location: /student024/Shop/backend/login/login.php?message='.urlencode("Registration successful. Please log in."));
         exit;
-    } else {
+    } else { // Registration failed, redirect back to register with error message
         header('Location: /student024/Shop/backend/views/register.php?error='.urlencode("Registration failed. Please try again or contact the administrator."));
         exit;
     }

@@ -1,5 +1,6 @@
 <?php 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
 ?>
 <h2 class="text-2xl font-bold mb-4 text-center">Shopping Cart</h2>
 <div class="text-center">

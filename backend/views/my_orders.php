@@ -61,4 +61,4 @@
 </main>
 <script src="/student024/shop/JavaScript/showorders.js"></script>
 <script src="/student024/shop/JavaScript/myOrders.js"></script>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>

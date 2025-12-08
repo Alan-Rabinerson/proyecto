@@ -1,14 +1,15 @@
 <?php
     require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
-
+    
+    // get and sanitize input data
     $method_name = mysqli_real_escape_string($conn, $_POST['method_name']);
     $number = mysqli_real_escape_string($conn, $_POST['number']);
     $expiration_date = mysqli_real_escape_string($conn, $_POST['expiration_date']);
     $security_code = mysqli_real_escape_string($conn, $_POST['security_code']);
-
+    // insert payment method into database
     $insert_sql = "INSERT INTO 024_payment_method (method_name, number, expiration_date, security_code) 
                    VALUES ('$method_name', '$number', '$expiration_date', '$security_code')";
-
+    // show success or error message
     if (mysqli_query($conn, $insert_sql)) {
         header("Location: /student024/shop/backend/views/my_account.php?message=Payment+method+added+successfully");
         exit();

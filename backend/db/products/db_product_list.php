@@ -1,10 +1,10 @@
 <?php
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
-
+    // fetch all products from database
     $sql = "SELECT * FROM 024_products";
     $result = mysqli_query($conn, $sql);
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+    // display each product
     foreach($products as $product){
         $product_id = $product['product_id'];
         // Display product details

@@ -1,4 +1,4 @@
-<?php  //include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php  //include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';   
     session_start();
     $customer_id = $_SESSION['customer_id'];
@@ -61,4 +61,4 @@
 
     
 ?>  
-<?php // include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// header no terminado ?>
+<?php // include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>

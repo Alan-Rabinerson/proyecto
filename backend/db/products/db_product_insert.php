@@ -1,6 +1,4 @@
 <?php 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';
-
     // get data
     $product_name = $_GET['product_name'];
     $product_price = $_GET['price'];
@@ -19,7 +17,7 @@
     if (!empty($tallas) && is_array($tallas)) {
         $available_sizes = implode(',', array_map(function($s){ return $s; }, $tallas));
     }
-
+    // insert product into 024_products
     $sql = "INSERT INTO 024_products (name, description, price, supplier, available_sizes) VALUES ('$product_name', '$product_description', $product_price, '$product_supplier', '$available_sizes')";
 
 
@@ -40,17 +38,10 @@
             }
         }
 
-        echo "<main><h2 class='mt-4'>New product created successfully</h2>";
-        echo "<p>Product Name: $product_name</p>";
-        echo "<p>Description: $product_description</p>";
-        echo "<p>Price: $product_price</p>";
-        echo "<p>Stock: $product_stock</p>";
-        echo "<p>Supplier: $product_supplier</p>";
-        echo "<p>Category: $product_category</p></main>";
+        header("Location: /student024/shop/backend/views/product_list.php?success=Product+added+successfully");
     } else {
-        echo "<main><h2 class='mt-4'>Error: " . $sql . "<br>" . $conn->error . "</h2></main>";
+        header("Location: /student024/shop/backend/views/product_add.php?error=Error+adding+product:+".$conn->error);
     }
 
 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';
 ?>

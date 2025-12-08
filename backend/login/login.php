@@ -32,12 +32,12 @@
             
             if ($user[0]['type'] == 'admin') {
                 $_SESSION['role'] = 'admin';
-                setcookie('user', json_encode($user[0]), time() + (86400 * 30), "/"); // 86400 = 1 day
+                setcookie('user', json_encode($user[0]), time() + (28000), "/"); // guardamos la cookie por 8 horas (28000 segundos)
                 header("Location: /student024/shop/backend/index.php");
                 exit;
             } else {
                 $_SESSION['role'] = 'user';
-                setcookie('user', json_encode($user[0]), time() + (86400 * 30), "/"); // 86400 = 1 day
+                setcookie('user', json_encode($user[0]), time() + (28000), "/"); // guardamos la cookie por 8 horas (28000 segundos)
                 header("Location: /student024/shop/index.html");
             }
             

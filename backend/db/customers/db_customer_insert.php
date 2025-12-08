@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';  ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';// Llama al script para obtener los productos
     // capturar datos del producto a actualizar
     $first_name = $_POST['first_name'];
@@ -17,4 +17,4 @@
        header("Location: /student024/shop/backend/views/customers.php?error=" . urlencode("Error inserting customer: " . mysqli_error($conn)));
     }
 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';// footer no terminado
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php'; 

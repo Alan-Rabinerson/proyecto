@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php'; ?>
 
     <main>
         <h2 class="mt-4">Select Customer by ID</h2>
@@ -10,4 +10,4 @@
             <button type="submit" class="btn btn-primary">Select Customer</button>
         </form>
     </main>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; // footer no terminado?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>

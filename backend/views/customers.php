@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  
     include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';// Muestra mensajes de éxito o error
     if ($_SESSION['role'] != 'admin') {
         header("Location: /student024/shop/backend/index.php");
@@ -14,4 +14,4 @@
     </div>
     
 <script src="/student024/shop/Javascript/showcustomers.js"></script>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>

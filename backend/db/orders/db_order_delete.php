@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?> 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?> 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
 
     $order_number = $_GET['order_number'];
@@ -12,5 +12,5 @@
         header("Location: /student024/shop/backend/views/my_orders.php?error=Failed+to+delete+order");
         exit();
     }
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; 
 ?>

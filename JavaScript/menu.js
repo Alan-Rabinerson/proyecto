@@ -27,7 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     loginBtn.parentNode.appendChild(userDisplay);
     //console.log(userData.username)
-
+    userDisplay.addEventListener('click', () => {
+      window.location.href = './backend/views/my_account.php';
+    });
   }
 
   // Evento para abrir el menú móvil

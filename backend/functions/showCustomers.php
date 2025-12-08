@@ -1,5 +1,6 @@
 <?php
     function showCustomer($customer) {
+        // Display customer information in a card format
         $customer_id = $customer['customer_id'];
         echo  "<div class='customer-card w-fit h-fit border-azul-claro p-4 rounded-lg shadow-md flex flex-col items-center' id='customer-" . $customer_id . "'>" .
         "<img src='/student024/shop/assets/imagenes/user.png' class='w-24 h-24 object-cover mb-2 rounded-lg shadow-md '>" .

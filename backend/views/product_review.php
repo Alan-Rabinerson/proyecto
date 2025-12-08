@@ -1,4 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
+    // get customer_id from session, product_id and order_number from GET
     $customer_id = $_SESSION['customer_id'];
     $product_id = $_GET['product_id'];
     $order_number = $_GET['order_number'];

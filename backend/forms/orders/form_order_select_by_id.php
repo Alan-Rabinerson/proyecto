@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';  ?>
 
 <main>
     <form action="/student024/shop/backend/forms/form_order_update.php" method="get">
@@ -7,4 +7,4 @@
         <button type="submit">Buscar Pedido</button>
     </form>
 </main>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';// footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';  ?>

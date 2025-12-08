@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
 <main>
     <h1>Insertar Cliente</h1>
     <form action="/student024/shop/backend/db/customers/db_customer_insert.php" method="post">
@@ -37,4 +37,4 @@
     </form>
 </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; // footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';   ?>

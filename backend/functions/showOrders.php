@@ -25,7 +25,7 @@
         $status = $first['status'] ;
         $method_name = $first['payment_method'];
         $address = $first['delivery_address'];
-
+        // Display order information
         echo "<div class='order-card'>";
         echo "<h3>Order ID: " . $order_id . "</h3>";
         echo "<p>Customer Name: " . $first_name . " " . $last_name . "</p>";

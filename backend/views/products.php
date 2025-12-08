@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
 <main class="bg-azul-oscuro min-h-screen p-6 text-beige">
     <h1 class="text-2xl font-bold mb-4 text-center text-beige">Productos</h1>
     <p>Gestión de productos.</p>
@@ -13,4 +13,4 @@
 <script src="/student024/shop/JavaScript/showproducts.js"></script>
 <script src="/student024/shop/JavaScript/insert_shopping_cart.js"></script>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>

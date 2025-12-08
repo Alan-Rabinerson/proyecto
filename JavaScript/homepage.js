@@ -114,8 +114,8 @@ function loadWeeklyOffers() {
                         <div class="discount-badge">-${offer.discount_percent}%</div>
                         <img src="./assets/imagenes/foto${offer.product_id}.jpg" alt="${offer.product_name}">
                         <h3>${offer.product_name}</h3>
-                        <p class="price-original">${offer.original_price} €</p>
-                        <p class="price">${offer.price} €</p>
+                        <p class="old-price">${offer.original_price} €</p>
+                        <p class="new-price">${offer.price} €</p>
                         <button class="btn-comprar-ahora">Comprar</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     `;

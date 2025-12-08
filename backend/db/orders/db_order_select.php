@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';  ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';// Llama al script para obtener los productos
     // capturar datos delL pedido seleccionado
     if (isset($_GET['order_number']) && is_numeric($_GET['order_number'])) {
@@ -33,4 +33,4 @@
     }
 
 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';// footer no terminado
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php'; 

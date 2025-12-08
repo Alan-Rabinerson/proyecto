@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';// Llama al script para obtener los productos
     // capturar datos del producto a actualizar
     $product_id = $_GET['product_id'];
@@ -46,5 +46,5 @@
         echo "<main><h2 class='mt-4'>Error updating product: " . mysqli_error($conn) . "</h2></main>";
     }
 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; 
 ?>

@@ -1,4 +1,4 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
 <?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
 
     $order_number = $_POST['order_number'];
@@ -34,4 +34,4 @@
     </form>
 </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>

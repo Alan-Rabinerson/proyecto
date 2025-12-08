@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';// header no terminado ?> 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?> 
 <?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php'; ?>
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/read_customer_data.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php'; ?>
@@ -111,4 +111,4 @@
             </div>
         </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';// footer no terminado ?> 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?> 

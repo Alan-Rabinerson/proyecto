@@ -3,7 +3,7 @@
             ?>
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
-                    
+                    // Display error message at the top of the main content in red
                     const errorMsg = document.createElement("p");
                     errorMsg.className = "text-red-500 mb-4";
                     errorMsg.textContent = "<?php echo htmlspecialchars($_GET['error'], ENT_QUOTES, 'UTF-8'); ?>";
@@ -20,6 +20,7 @@
             ?>
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
+                    // Display success message at the top of the main content in green
                     const Msg = document.createElement("p");
                     Msg.className = "text-green-500 mb-4";
                     Msg.textContent = "<?php echo htmlspecialchars($_GET['message'], ENT_QUOTES, 'UTF-8'); ?>";
