@@ -1,8 +1,7 @@
 @font-face {
     font-family: Roboto;
-    src: url("/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wght.ttf");
+    src: url("/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf");
 }
-
 @font-face {
     font-family: Montserrat;
     src: url("/student024/Shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
@@ -173,7 +172,7 @@ header {
         filter: brightness(1.2);
     }
 
-    .login {
+    .login, #logout-btn {
         padding: .5rem 1rem;
         font-weight: bold;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -246,11 +245,6 @@ header {
             color: $color-secundario;
         }
     }
-
-     
-
-
-
 }
 
 footer{

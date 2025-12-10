@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
   font-family: Roboto;
-  src: url("/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wght.ttf");
+  src: url("/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf");
 }
 
 @font-face {
@@ -157,7 +157,7 @@ header .menu-toggle:hover img {
   filter: brightness(1.2);
 }
 
-header .login {
+header .login, header #logout-btn {
   padding: .5rem 1rem;
   font-weight: bold;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -175,7 +175,7 @@ header .login {
   font-weight: 600;
 }
 
-header .login:hover {
+header .login:hover, header #logout-btn:hover {
   background-color: #ea1c2b;
   transform: scale(1.2);
 }
