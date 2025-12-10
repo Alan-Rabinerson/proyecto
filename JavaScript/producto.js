@@ -117,7 +117,7 @@ function loadProductDetail() {
 
     xhr.open(
       "GET",
-      `/student024/shop/backend/endpoints/product_detail/show_product_detail.php?productId=${encodeURIComponent(
+      `/student024/Shop/backend/endpoints/product_detail/show_product_detail.php?productId=${encodeURIComponent(
         productId
       )}`,
       true
@@ -149,7 +149,7 @@ function cargarReviews() {
   };
   xmlhttp.open(
     "GET",
-    "/student024/shop/backend/endpoints/product_detail/show_reviews.php?productId=" +
+    "/student024/Shop/backend/endpoints/product_detail/show_reviews.php?productId=" +
       productId,
     true
   );

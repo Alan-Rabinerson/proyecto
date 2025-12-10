@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     userDisplay.className = 'user-display flex items-center gap-2 cursor-pointer';
     userDisplay.id = 'user-display';
     userDisplay.innerHTML = `
-      <img src="/student024/shop/assets/avatars/avatar.png" alt="Avatar" class="w-8 h-8 rounded-full" id="user-avatar" />
+      <img src="/student024/Shop/assets/avatars/avatar.png" alt="Avatar" class="w-8 h-8 rounded-full" id="user-avatar" />
       <span class="text-white font-medium">${userData.username}</span>
       <button id="logout-btn" class="boton-rojo text-sm">Logout</button>
     `;

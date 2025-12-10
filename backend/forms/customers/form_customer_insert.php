@@ -1,7 +1,7 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
 <main>
     <h1>Insertar Cliente</h1>
-    <form action="/student024/shop/backend/db/customers/db_customer_insert.php" method="post">
+    <form action="/student024/Shop/backend/db/customers/db_customer_insert.php" method="post">
         <div class="mb-3">
             <label for="first_name" class="form-label">Nombre:</label>
             <input type="text" class="block w-full border border-gray-300 rounded px-3 py-2" id="first_name" name="first_name" required>
@@ -37,4 +37,4 @@
     </form>
 </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';   ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';   ?>

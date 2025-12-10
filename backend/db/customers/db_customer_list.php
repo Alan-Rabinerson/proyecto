@@ -1,5 +1,5 @@
 <?php
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     if (!isset($_SESSION)) {
         session_start();
     }
@@ -11,13 +11,13 @@
     foreach($customers as $customer){
         $customer_id = $customer['customer_id'];
         echo "<div class='customer-card w-fit h-fit border border-azul-claro p-4 rounded-lg shadow-md flex flex-col items-center' id='customer-" . $customer_id . "'>";
-        echo "<img src='/student024/shop/assets/avatars/avatar.png' class='w-24 h-24 object-cover mb-2 rounded-lg shadow-md'>";
+        echo "<img src='/student024/Shop/assets/avatars/avatar.png' class='w-24 h-24 object-cover mb-2 rounded-lg shadow-md'>";
         echo "<h3>" . $customer['first_name'] . " " . $customer['last_name'] . "</h3>";
         echo "<p>Email: " . $customer['email'] . "</p>";
         echo "<p>Phone: " . $customer['phone'] . "</p>";
         if ($_SESSION['role'] == 'admin') {
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/customers/form_customer_update_call.php';
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/customers/form_customer_delete.php';
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/customers/form_customer_update_call.php';
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/customers/form_customer_delete.php';
         }
         echo "</div><hr>";
     }

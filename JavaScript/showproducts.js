@@ -15,7 +15,7 @@ function showProducts(str) {
       divProducts.innerHTML = this.responseText;
     }
   };
-  xmlhttp.open("GET", "/student024/shop/backend/db/products/db_product_search.php?searchTerm=" + str, true);
+  xmlhttp.open("GET", "/student024/Shop/backend/db/products/db_product_search.php?searchTerm=" + str, true);
   xmlhttp.send();
   
 }

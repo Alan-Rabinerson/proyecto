@@ -1,11 +1,12 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; ?>
 <?php
 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     $errores = ['usuario' => '', 'login' => '', 'contrasena' => ''];
     if (isset($_POST['submit'])) {
         
-
+        session_abort();
+        session_start();
         $username = $_POST['username'];
         $password = $_POST['password'];
         $sql = "SELECT * FROM 024_customers WHERE username = '$username' AND password = '$password'";
@@ -32,13 +33,13 @@
             
             if ($user[0]['type'] == 'admin') {
                 $_SESSION['role'] = 'admin';
-                setcookie('user', json_encode($user[0]), time() + (28000), "/"); // guardamos la cookie por 8 horas (28000 segundos)
-                header("Location: /student024/shop/backend/index.php");
+                setcookie('user', json_encode($user[0]), time() + (3600), "/"); // guardamos la cookie por 1 horas (28000 segundos)
+                header("Location: /student024/Shop/backend/index.php");
                 exit;
             } else {
                 $_SESSION['role'] = 'user';
-                setcookie('user', json_encode($user[0]), time() + (28000), "/"); // guardamos la cookie por 8 horas (28000 segundos)
-                header("Location: /student024/shop/index.html");
+                setcookie('user', json_encode($user[0]), time() + (3600), "/"); // guardamos la cookie por 1 horas (28000 segundos)
+                header("Location: /student024/Shop/index.html");
             }
             
         } else {
@@ -50,7 +51,7 @@
 ?>
 <main>
     <h1>Login</h1>
-    <form  action="/student024/shop/backend/login/login.php" method="POST">
+    <form  action="/student024/Shop/backend/login/login.php" method="POST">
         <div>
             <label for="username">Username:</label>
             <input class="border border-gray-300 p-2 rounded" type="text" id="username" name="username" required>
@@ -66,4 +67,4 @@
         <button class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" type="submit" name="submit" >Login</button>
     </form>
 </main>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php'; ?>

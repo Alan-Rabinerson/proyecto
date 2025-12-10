@@ -1,7 +1,7 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
 <?php 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';// Llama al script para obtener los productos
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';// Llama al script para obtener los productos
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/show_success_error_msg.php';
     // capture product_id from POST
     $product_id = $_POST['product_id'];
     // fetch product data from database based on product_id
@@ -29,7 +29,7 @@
 ?>
         <main>
             <h2 class="mt-4">Update Product</h2>
-            <form action="/student024/shop/backend/db/products/db_product_update.php" method="GET" class="mt-3">
+            <form action="/student024/Shop/backend/db/products/db_product_update.php" method="GET" class="mt-3">
                 <div class="mb-3">
                     <label for="product_id" class="form-label">Product ID to Update:</label>
                     <input type="number" class="form-control" id="product_id" name="product_id" readonly value="<?php echo $product_id; ?>" >
@@ -87,4 +87,4 @@
             </form>
         </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?>

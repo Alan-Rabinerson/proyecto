@@ -1,5 +1,5 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php'; 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';// Llama al script para obtener los productos
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/header.php'; 
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';// Llama al script para obtener los productos
 
     // verify if product_id is set and is numeric
     if (isset($_GET['product_id']) && is_numeric($_GET['product_id'])){
@@ -32,5 +32,5 @@
     }else { // if product_id is not numeric, show error
         echo "<div class='alert alert-danger mt-4'>Invalid product ID.</div>";
     }
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php'; 
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/footer.php'; 
 ?>

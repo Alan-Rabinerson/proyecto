@@ -1,6 +1,6 @@
 <?php
 if (!isset($conn) || !($conn instanceof mysqli)) {
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 }
 $customer_id_i = isset($_SESSION['customer_id']) ? intval($_SESSION['customer_id']) : 0;
 $canReview = false;
@@ -33,7 +33,7 @@ if (isset($status) && $status === 'DELIVERED') {
 }
 
 if ($canReview) {
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/product_review_call.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/product_review_call.php';
 } else {
     echo "<button disabled class='px-4 py-2 bg-gray-600 text-white rounded'>Review</button>";
 }

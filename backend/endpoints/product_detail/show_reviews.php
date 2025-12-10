@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     $product_id = isset($_GET['productId']) ? intval($_GET['productId']) : 1;
     $reviews = [];
     $sql = "SELECT r.review_rating, r.review_content, r.created_at, (CONCAT(c.first_name, ' ', c.last_name)) AS full_name

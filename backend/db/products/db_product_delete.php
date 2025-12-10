@@ -1,6 +1,6 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/header.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/header.php';  ?>
     <?php
-        include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
         // get data
         $productId = $_GET['productId'];
         // sql to delete a record
@@ -13,4 +13,4 @@
             echo "<main><h2 class='mt-4'>Error deleting product: " . mysqli_error($conn) . "</h2></main>";
         }
     ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/footer.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/footer.php';  ?>

@@ -5,7 +5,7 @@
             ?>
                 <script>
                     setTimeout(() => {
-                        window.location.href = '/student024/shop/backend/login/change_password.php';
+                        window.location.href = '/student024/Shop/backend/login/change_password.php';
                     }, 5000);
                 </script>
             <?php
@@ -17,7 +17,7 @@
                 ?>
                 <script>
                     setTimeout(() => {
-                        window.location.href = '/student024/shop/backend/login/change_password.php';
+                        window.location.href = '/student024/Shop/backend/login/change_password.php';
                     }, 5000);
                 </script>
                 <?php
@@ -29,7 +29,7 @@
                 ?>
                 <script>
                     setTimeout(() => {
-                        window.location.href = '/student024/shop/backend/login/change_password.php';
+                        window.location.href = '/student024/Shop/backend/login/change_password.php';
                     }, 5000);
                 </script>
                 <?php
@@ -41,7 +41,7 @@
                 ?>
                     <script>
                         setTimeout(() => {
-                            window.location.href = '/student024/shop/backend/views/my_account.php';
+                            window.location.href = '/student024/Shop/backend/views/my_account.php';
                         }, 5000);
                     </script>
                 <?php
@@ -50,7 +50,7 @@
                 ?>
                 <script>
                     setTimeout(() => {
-                        window.location.href = '/student024/shop/backend/login/change_password.php';
+                        window.location.href = '/student024/Shop/backend/login/change_password.php';
                     }, 5000);
                 </script>
                 <?php                    

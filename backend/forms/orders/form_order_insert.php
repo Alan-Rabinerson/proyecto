@@ -1,10 +1,10 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/show_success_error_msg.php';
 
 ?>
 <main>
     <h1>Insertar nuevo pedido</h1>
-    <form action="/student024/shop/backend/db/db_order_insert.php" method="GET">
+    <form action="/student024/Shop/backend/db/db_order_insert.php" method="GET">
         <label for="customer_id">ID Cliente:</label>
         <input type="number" id="customer_id" name="customer_id" required><br><br>
 
@@ -24,4 +24,4 @@
     </form>
 </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?>

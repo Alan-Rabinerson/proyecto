@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 session_start();
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 
 
 $customer_id = 0;
@@ -48,7 +48,7 @@ if ($result) {
             'quantity' => $quantity,
             'size' => $row['size'],
             'subtotal' => $subtotal,
-            'image' => '/student024/shop/assets/imagenes/foto' . $product_id . '.jpg'
+            'image' => '/student024/Shop/assets/imagenes/foto' . $product_id . '.jpg'
         ];
     }
 }

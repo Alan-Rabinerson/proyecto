@@ -11,7 +11,7 @@
 
     print_r($_GET); // debug
     // put data into database
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     // prepare available_sizes as CSV for the SET column
     $available_sizes = '';
     if (!empty($tallas) && is_array($tallas)) {
@@ -38,9 +38,9 @@
             }
         }
 
-        header("Location: /student024/shop/backend/views/product_list.php?success=Product+added+successfully");
+        header("Location: /student024/Shop/backend/views/product_list.php?success=Product+added+successfully");
     } else {
-        header("Location: /student024/shop/backend/views/product_add.php?error=Error+adding+product:+".$conn->error);
+        header("Location: /student024/Shop/backend/views/product_add.php?error=Error+adding+product:+".$conn->error);
     }
 
 

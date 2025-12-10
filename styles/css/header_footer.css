@@ -1,10 +1,10 @@
 @font-face {
     font-family: Roboto;
-    src: url(/student024/shop/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
+    src: url(/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf);
 }
 @font-face {
     font-family: Montserrat;
-    src: url(/student024/shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
+    src: url(/student024/Shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf);
 }
 :root {
     /* Tipografía */

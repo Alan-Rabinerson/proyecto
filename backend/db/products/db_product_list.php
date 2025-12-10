@@ -1,5 +1,5 @@
 <?php
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     // fetch all products from database
     $sql = "SELECT * FROM 024_products";
     $result = mysqli_query($conn, $sql);
@@ -14,10 +14,10 @@
         echo "<p>Price: $" . $product['price'] . "</p>";
         echo "<p>Description: " . $product['description'] . "</p>";
         if ($_SESSION['role'] === 'admin') {
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/products/form_product_update_call.php';
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/products/form_product_delete.php';
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/products/form_product_update_call.php';
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/products/form_product_delete.php';
         }
-        include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/shopping_cart/form_shopping_cart_insert.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/shopping_cart/form_shopping_cart_insert.php';
         echo "</div><hr>";
     }
 

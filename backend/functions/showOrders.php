@@ -1,7 +1,7 @@
 <?php
 
     function showOrders($order_group){
-        require_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+        require_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
         // nothing to show
         if (empty($order_group)) return;
 
@@ -41,16 +41,16 @@
             echo "<h3> " . $product['product_name']  . "</h3>";
             echo "</div>";
             echo "<div id='detalles-producto' class='flex items-center justify-center gap-4'>";
-            echo "<img src='/student024/shop/assets/imagenes/foto" . htmlspecialchars($product['product_id'], ENT_QUOTES, 'UTF-8') . ".jpg' alt='" . htmlspecialchars($product['product_name'], ENT_QUOTES, 'UTF-8') . "' class='w-32 h-32 object-cover mb-2'></img>";
+            echo "<img src='/student024/Shop/assets/imagenes/foto" . htmlspecialchars($product['product_id'], ENT_QUOTES, 'UTF-8') . ".jpg' alt='" . htmlspecialchars($product['product_name'], ENT_QUOTES, 'UTF-8') . "' class='w-32 h-32 object-cover mb-2'></img>";
             echo "<p>Quantity: " . $product['quantity'] . "</p>";
             echo "<p>Price: " . $product['price'] . "€</p>";
             
             echo "<span class='flex items-center justify-center gap-2'>";
             if (!empty($_SESSION['role']) && $_SESSION['role'] == 'admin') {
-                include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_update_call.php';
-                include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/orders/form_order_delete.php';
+                include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/orders/form_order_update_call.php';
+                include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/orders/form_order_delete.php';
             }
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/can_review.php';
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/can_review.php';
                         
             echo "</span>";
             echo "</div>";

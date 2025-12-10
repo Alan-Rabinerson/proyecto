@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 
 header('Content-Type: application/json');
 

@@ -1,5 +1,5 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 
     $order_number = $_POST['order_number'];
     $sql = "SELECT * FROM 024_orders_table WHERE order_number = $order_number";
@@ -7,7 +7,7 @@
     $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <main> 
-    <form action="/student024/shop/backend/db/orders/db_order_update.php" method="get">
+    <form action="/student024/Shop/backend/db/orders/db_order_update.php" method="get">
         <h2>Actualizar Pedido</h2>
         <label for="order_number">Número de Pedido (no editable):</label>
         <input type="number" name="order_number" id="order_number" class="form-control" value="<?php echo $orders[0]['order_number']; ?>" readonly><br><br>
@@ -34,4 +34,4 @@
     </form>
 </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?>

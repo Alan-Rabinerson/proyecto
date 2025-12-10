@@ -1,6 +1,6 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php'; 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/read_customer_data.php';
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; 
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/read_customer_data.php';
 
 ?>
 <main class="container p-6">
@@ -10,7 +10,7 @@
         <!-- Left: Shipping & Payment Form -->
         <section class="checkout-form-section lg:w-2/3">
             <h3 id="checkout-form-title" class="text-xl font-semibold mb-3">Shipping & Payment</h3>
-            <form id="checkout-form" method="POST" action="/student024/shop/backend/db/orders/db_order_insert.php">
+            <form id="checkout-form" method="POST" action="/student024/Shop/backend/db/orders/db_order_insert.php">
                 <?php if (!empty($customer_id)): ?>
                     <input type="hidden" name="customer_id" value="<?php echo (int)$customer_id; ?>">
                 <?php endif; ?>
@@ -118,7 +118,7 @@
             <div id="order-summary" class="p-4 border rounded flex flex-wrap gap-4">
                 <?php
                     
-                    require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/db/shopping_cart/db_shopping_cart_list.php';
+                    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/db/shopping_cart/db_shopping_cart_list.php';
                 
                 ?>
             </div>
@@ -130,5 +130,5 @@
         </aside>
     </div>
 </main>
-<script src="/student024/shop/JavaScript/checkout.js"></script>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; ?>
+<script src="/student024/Shop/JavaScript/checkout.js"></script>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php'; ?>

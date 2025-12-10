@@ -1,13 +1,13 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';?> 
-<?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php'; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/read_customer_data.php'; 
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/login/db_change_password.php';?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';?> 
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/read_customer_data.php'; 
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/login/db_change_password.php';?>
         <main class="bg-azul-oscuro min-h-screen text-beige p-6">
             <div class="max-w-6xl mx-auto">
                 <h1 class="text-3xl font-semibold mb-6">Cambiar Contraseña</h1>
 
                 <section id="change-password" class="bg-azul-oscuro p-6 rounded border border-azul-claro max-w-md">
-                    <form action="/student024/shop/backend/login/change_password.php" method="POST" class="space-y-4" >
+                    <form action="/student024/Shop/backend/login/change_password.php" method="POST" class="space-y-4" >
                         <div>
                             <label for="current_password" class="block text-sm font-medium mb-1">Contraseña Actual</label>
                             <input type="password" id="current_password" name="current_password" required class="w-full p-2 rounded bg-azul-claro border border-azul-claro text-white">
@@ -31,4 +31,4 @@ include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/login/db_change_pass
 
 <?php 
 
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';?> 
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';?> 

@@ -1,12 +1,12 @@
-<?php  //include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';   
+<?php  //include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';   
     session_start();
     $customer_id = $_SESSION['customer_id'];
     $payment_method = $_POST['payment_method'];
     $cart_data = json_decode($_POST['cart_data'], true);
     $selected_address_id = $_POST['selected_address_id'];
     if (!$cart_data || !is_array($cart_data) || count($cart_data) === 0) {
-        header("Location: /student024/shop/backend/views/shopping_cart.php?error=Your+cart+is+empty");
+        header("Location: /student024/Shop/backend/views/shopping_cart.php?error=Your+cart+is+empty");
         exit();
     } else {
         foreach ($cart_data as $item) {
@@ -22,7 +22,7 @@
 
             $query = mysqli_query($conn, $sql);
             if (!$query) {
-                header("Location: /student024/shop/backend/views/my_orders.php?error=Failed+to+place+order+for+product+$product_id");
+                header("Location: /student024/Shop/backend/views/my_orders.php?error=Failed+to+place+order+for+product+$product_id");
                 exit();
             }
             // if (!$query) { DEBUGGING 
@@ -38,7 +38,7 @@
             $new_stock = max(0, $available_stock - $quantity); // calculate new stock (if negative, set to 0)
             $update_stock_sql = "UPDATE 024_product_sizes SET stock = $new_stock WHERE product_id = $product_id AND size = '$size'";
             if (!mysqli_query($conn, $update_stock_sql)) {
-                header("Location: /student024/shop/backend/views/my_orders.php?error=Failed+to+update+stock+for+product+$product_id+size+$size");
+                header("Location: /student024/Shop/backend/views/my_orders.php?error=Failed+to+update+stock+for+product+$product_id+size+$size");
                 exit();
             }
             // if (mysqli_query($conn, $update_stock_sql)) { // DEBUGGING
@@ -50,9 +50,9 @@
         // Clear the shopping cart after order is placed
         $clear_cart_sql = "DELETE FROM 024_shopping_cart WHERE customer_id = $customer_id";
         if (mysqli_query($conn, $clear_cart_sql)) {
-            header("Location: /student024/shop/backend/views/my_orders.php?message=Order+placed+successfully");
+            header("Location: /student024/Shop/backend/views/my_orders.php?message=Order+placed+successfully");
         } else {
-            header("Location: /student024/shop/backend/views/my_orders.php?error=Failed+to+clear+shopping+cart");
+            header("Location: /student024/Shop/backend/views/my_orders.php?error=Failed+to+clear+shopping+cart");
         }
         exit();
     }
@@ -61,4 +61,4 @@
 
     
 ?>  
-<?php // include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>
+<?php // include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?>

@@ -1,7 +1,7 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?> 
-<?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php'; ?>
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/read_customer_data.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?> 
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php'; ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/read_customer_data.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/show_success_error_msg.php'; ?>
 
         <main class="bg-azul-oscuro min-h-screen text-beige p-6">
             <div class="max-w-6xl mx-auto">
@@ -16,7 +16,7 @@
                                 <li><a class="block px-3 py-2 rounded hover:bg-azul-oscuro" href="/student024/Shop/backend/views/my_orders.php">Mis pedidos</a></li>
                                 <li><a class="block px-3 py-2 rounded hover:bg-azul-oscuro" href="#addresses">Direcciones</a></li>
                                 <li><a class="block px-3 py-2 rounded hover:bg-azul-oscuro" href="#payment-methods">Métodos de pago</a></li>
-                                <li><a class="block px-3 py-2 rounded hover:bg-azul-oscuro" href="/student024/shop/backend/login/change_password.php">Cambiar contraseña</a></li>
+                                <li><a class="block px-3 py-2 rounded hover:bg-azul-oscuro" href="/student024/Shop/backend/login/change_password.php">Cambiar contraseña</a></li>
                             </ul>
                         </nav>
                     </aside>
@@ -44,7 +44,7 @@
                                     <p class="font-semibold text-white"><a class="underline" href="/student024/Shop/backend/views/my_orders.php">Ver mis pedidos</a></p>
                                 </div>
                             </div>
-                           <?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/customers/form_customer_update_call.php'; ?>
+                           <?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/customers/form_customer_update_call.php'; ?>
                         </div>
 
                         <!-- Addresses -->
@@ -57,11 +57,11 @@
                                              Address:
                                             <?php echo htmlspecialchars(($addr['street'] ?? '') . ', ' . ($addr['city'] ?? '') . ' ' . ($addr['zip_code'] ?? ''), ENT_QUOTES); ?>
                                             <div class="mt-2 md:mt-0 flex gap-2 items-center">                                               
-                                                <form action="/student024/shop/backend/db/addresses/db_address_delete.php" method="POST" class="inline">
+                                                <form action="/student024/Shop/backend/db/addresses/db_address_delete.php" method="POST" class="inline">
                                                     <input type="hidden" name="address_id" value="<?php echo $addr['address_id']; ?>">
                                                     <button type="submit" class="boton-rojo">Eliminar dirección</button>
                                                 </form>
-                                                <form action="/student024/shop/backend/forms/addresses/form_address_update.php" method="POST" class="flex items-center ">
+                                                <form action="/student024/Shop/backend/forms/addresses/form_address_update.php" method="POST" class="flex items-center ">
                                                     <input type="hidden" name="address_id" value="<?php echo $addr['address_id']; ?>">
                                                     <button id="manage-addresses-btn" class="boton-rojo bg-azul-oscuro" type="submit">Actualizar direccion</button>
                                                 </form>
@@ -72,14 +72,14 @@
                             <?php else: ?>
                                 <p class="text-beige opacity-80">No hay direcciones guardadas.</p>
                             <?php endif; ?>
-                            <button  type="button" onClick="window.location.href='/student024/shop/backend/forms/addresses/form_address_insert.php'" id="add-address-btn" class="mt-4 px-4 py-2 bg-green-600 rounded text-white hover:bg-green-700">Agregar nueva dirección</button>
+                            <button  type="button" onClick="window.location.href='/student024/Shop/backend/forms/addresses/form_address_insert.php'" id="add-address-btn" class="mt-4 px-4 py-2 bg-green-600 rounded text-white hover:bg-green-700">Agregar nueva dirección</button>
                             
                         </div>
 
                         <!-- Payment methods -->
                         <div id="payment-methods" class="mb-8">
                             <h3 class="text-xl font-medium mb-2">Métodos de pago</h3>
-                            <button onClick="window.location.href='/student024/shop/backend/forms/payment_methods/form_payment_method_insert.php'" id="add-payment-method-btn" class="mb-4 px-4 py-2 bg-green-600 rounded text-white hover:bg-green-700">Añadir nuevo método de pago</button>
+                            <button onClick="window.location.href='/student024/Shop/backend/forms/payment_methods/form_payment_method_insert.php'" id="add-payment-method-btn" class="mb-4 px-4 py-2 bg-green-600 rounded text-white hover:bg-green-700">Añadir nuevo método de pago</button>
                             <?php if (!empty($payment_methods)){ ?>
                                 <ul class="space-y-2">
                                     <?php foreach ($payment_methods as $payment_method){ 
@@ -89,9 +89,9 @@
                                             <?php echo htmlspecialchars($payment_method['method_name'] ?? 'Método', ENT_QUOTES); ?>
                                             <div class="mt-2 md:mt-0 flex gap-2 items-center">
                                                 <?php
-                                                    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/forms/payment_methods/form_method_update_call.php';
+                                                    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/payment_methods/form_method_update_call.php';
                                                 ?>
-                                                <form action="/student024/shop/backend/db/payment_methods/db_payment_method_delete.php" method="POST" class="inline">
+                                                <form action="/student024/Shop/backend/db/payment_methods/db_payment_method_delete.php" method="POST" class="inline">
                                                     <input type="hidden" name="method_id" value="<?php echo $method_id; ?>">
                                                     <button type="submit" class="boton-rojo">Eliminar método de pago</button>
                                                 </form>
@@ -111,4 +111,4 @@
             </div>
         </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?> 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?> 

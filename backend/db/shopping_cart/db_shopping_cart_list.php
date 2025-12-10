@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 $customer_id = $_SESSION['customer_id'];
 $sql = "SELECT * FROM 024_shopping_cart WHERE customer_id = $customer_id";
 $result = mysqli_query($conn, $sql);
@@ -28,7 +28,7 @@ if ($total_items > 0) {
         $size_safe = htmlspecialchars($item['size']);
         $container_id = 'product-' . $product_id . '-' . $size_safe;
         echo "<div class='product-card w-fit h-fit' id='" . $container_id . "'>";
-        echo "<img src='/student024/shop/assets/imagenes/foto" . $product_id . ".jpg' alt='" . $item['name'] . "' class='w-48 h-48 object-cover mb-2 rounded-lg shadow-md'>";
+        echo "<img src='/student024/Shop/assets/imagenes/foto" . $product_id . ".jpg' alt='" . $item['name'] . "' class='w-48 h-48 object-cover mb-2 rounded-lg shadow-md'>";
         echo "<h3 id='product-name-" . $product_id . "'>" . $item['name']  ."</h3>";
         echo "<p id='product-price-" . $product_id . "'>Price: " . $item['price'] . "€ </p>";
         echo "<p>Size: " . htmlspecialchars($item['size']) . "</p>";

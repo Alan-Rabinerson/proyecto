@@ -1,5 +1,5 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php'; 
-    require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php'; 
+    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';
     $method_id = $_POST['method_id'];
     $method_sql = "SELECT * FROM 024_payment_method WHERE method_id = $method_id";
     $method_result = mysqli_query($conn, $method_sql);
@@ -10,7 +10,7 @@
     $expiration_date = $payment_method[0]['expiration_date'];
 ?>
     
-<form action="/student024/shop/backend/db/payment_methods/db_method_update.php" method="POST">
+<form action="/student024/Shop/backend/db/payment_methods/db_method_update.php" method="POST">
     <label for="method_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Method Name</label>
     <input type="text" name="method_name" id="method_name" class='form-control' value="<?php echo htmlspecialchars($method_name); ?>" required>
     <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number</label>
@@ -23,4 +23,4 @@
     <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save New Payment Method</button>
 </form>
 
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; ?>
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php'; ?>

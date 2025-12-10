@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     
     // Productos en oferta con descuentos hardcoded
     $offers = [

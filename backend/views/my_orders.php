@@ -1,5 +1,5 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';
-    require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/functions/showOrders.php';
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/showOrders.php';
 ?>
 <main class="min-h-screen p-4 flex flex-col items-center justify-start relative">
     <!-- Botón para abrir el popup de leyenda -->
@@ -13,10 +13,10 @@
     </form>
     <div class="orders-container mt-4 h-fit w-full flex flex-col items-center justify-center gap-4 justify-self-center" id="orders-container">
         <?php 
-            include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
+            include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/show_success_error_msg.php';
             $orders_id_list = [];
             $customer_id = $_SESSION['customer_id'];
-            require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+            require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
             $sql = "SELECT * FROM 024_order_view WHERE customer_id = $customer_id ORDER BY order_number DESC";
             $result = mysqli_query($conn, $sql);
             $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -59,6 +59,6 @@
         </div>
     </div>
 </main>
-<script src="/student024/shop/JavaScript/showorders.js"></script>
-<script src="/student024/shop/JavaScript/myOrders.js"></script>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>
+<script src="/student024/Shop/JavaScript/showorders.js"></script>
+<script src="/student024/Shop/JavaScript/myOrders.js"></script>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?>

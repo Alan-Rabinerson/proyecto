@@ -1,9 +1,9 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php'; 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/show_success_error_msg.php';
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; 
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/show_success_error_msg.php';
 ?>
     <main class="container">
         <h2>Insertar Nuevo Producto</h2>
-        <form method="GET" action="/student024/shop/backend/db/products/db_product_insert.php">
+        <form method="GET" action="/student024/Shop/backend/db/products/db_product_insert.php">
             <div class="mb-3">
                 <label for="product_name" class="form-label">Product Name</label>
                 <input type="text" class="block w-full border border-gray-300 rounded px-3 py-2" id="product_name" name="product_name" required>
@@ -52,4 +52,4 @@
             <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Insertar Producto</button>
         </form>
     </main>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php'; ?>

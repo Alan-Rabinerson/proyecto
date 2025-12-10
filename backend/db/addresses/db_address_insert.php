@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 session_start();
 // Sanitize and validate input
 $street = isset($_POST['street']) ? mysqli_real_escape_string($conn, trim($_POST['street'])) : '';
@@ -13,14 +13,14 @@ $customer_id = $_SESSION['customer_id'] ;
 // Insert address first
 $insert_address_sql = "INSERT INTO `024_address` (`street`, `city`, `zip_code`, `province`) VALUES ('$street', '$city', '$zip_code', '$province')";
 if (!mysqli_query($conn, $insert_address_sql)) {
-    header("Location: /student024/shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
+    header("Location: /student024/Shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
     exit();
 }
 
 // Get the newly created address id
 $address_id = mysqli_insert_id($conn);
 if (empty($address_id)) {
-    header("Location: /student024/shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode("Failed to retrieve new address ID"));
+    header("Location: /student024/Shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode("Failed to retrieve new address ID"));
     exit();
 }
 
@@ -30,11 +30,11 @@ if (!mysqli_query($conn, $customer_address_sql)) {
     // If this fails, remove the previously inserted address to avoid orphan rows
     $del_sql = "DELETE FROM `024_address` WHERE `address_id` = $address_id";
     mysqli_query($conn, $del_sql);
-    header("Location: /student024/shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
+    header("Location: /student024/Shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
     exit();
 }
 
 // Success: redirect back to account page
-header("Location: /student024/shop/backend/views/my_account.php?message=" . urlencode("Address added successfully"));
+header("Location: /student024/Shop/backend/views/my_account.php?message=" . urlencode("Address added successfully"));
 exit();
 ?>

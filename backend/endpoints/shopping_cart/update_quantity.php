@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 session_start();
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 
 $customer_id = 0;
 if (isset($_SESSION['customer_id'])) {

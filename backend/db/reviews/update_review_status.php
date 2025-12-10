@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 if (isset($_POST['status']) && isset($_POST['product_id']) && isset($_POST['customer_id']) && isset($_POST['order_number'])) {
     $status = $_POST['status'];
     $product_id = $_POST['product_id'];
@@ -9,10 +9,10 @@ if (isset($_POST['status']) && isset($_POST['product_id']) && isset($_POST['cust
     $sql = "UPDATE 024_reviews SET status = '$status' WHERE product_id = $product_id AND customer_id = $customer_id AND order_number = '$order_number'";
     $query = mysqli_query($conn, $sql);
     if ($query) {
-        header("Location: /student024/shop/backend/views/reviews.php?message=Review+status+updated+successfully");
+        header("Location: /student024/Shop/backend/views/reviews.php?message=Review+status+updated+successfully");
         exit();
     } else {
-        header("Location: /student024/shop/backend/views/reviews.php?error=Failed+to+update+review+status");
+        header("Location: /student024/Shop/backend/views/reviews.php?error=Failed+to+update+review+status");
     }
 
 } else if (isset($_POST['status']) && !isset($_POST['product_id']) && !isset($_POST['customer_id']) && !isset($_POST['order_number'])) {

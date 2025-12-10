@@ -902,39 +902,39 @@ CREATE TABLE IF NOT EXISTS `024_total_money_spent_view` (
 
 --
 DROP TABLE IF EXISTS `024_customers_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_customers_view`
+
 DROP VIEW IF EXISTS `024_customers_view`;
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `024_customers_view`  AS SELECT `c`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `c`.`email` AS `email`, `c`.`username` AS `username`, `c`.`password` AS `password`, `c`.`phone` AS `phone`, `c`.`birth_date` AS `birth_date`, `c`.`type` AS `type`, `a`.`address_id` AS `address_id`, `a`.`street` AS `street`, `a`.`city` AS `city`, `a`.`province` AS `province`, `a`.`zip_code` AS `zip_code`, `pm`.`method_id` AS `method_id`, `pm`.`method_name` AS `method_name`, `pm`.`number` AS `number`, `pm`.`expiration_date` AS `expiration_date`, `pm`.`security_code` AS `security_code` FROM ((((`024_customers` `c` join `024_payment_customer` `pc` on(`c`.`customer_id` = `pc`.`customer_id`)) join `024_payment_method` `pm` on(`pc`.`method_id` = `pm`.`method_id`)) join `024_address_customer` `ac` on(`c`.`customer_id` = `ac`.`customer_id`)) join `024_address` `a` on(`ac`.`address_id` = `a`.`address_id`)) ;
+CREATE ALGORITHM=UNDEFINED VIEW `024_customers_view`  AS SELECT `c`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `c`.`email` AS `email`, `c`.`username` AS `username`, `c`.`password` AS `password`, `c`.`phone` AS `phone`, `c`.`birth_date` AS `birth_date`, `c`.`type` AS `type`, `a`.`address_id` AS `address_id`, `a`.`street` AS `street`, `a`.`city` AS `city`, `a`.`province` AS `province`, `a`.`zip_code` AS `zip_code`, `pm`.`method_id` AS `method_id`, `pm`.`method_name` AS `method_name`, `pm`.`number` AS `number`, `pm`.`expiration_date` AS `expiration_date`, `pm`.`security_code` AS `security_code` FROM ((((`024_customers` `c` join `024_payment_customer` `pc` on(`c`.`customer_id` = `pc`.`customer_id`)) join `024_payment_method` `pm` on(`pc`.`method_id` = `pm`.`method_id`)) join `024_address_customer` `ac` on(`c`.`customer_id` = `ac`.`customer_id`)) join `024_address` `a` on(`ac`.`address_id` = `a`.`address_id`)) ;
 
 -- --------------------------------------------------------
 
 --
 DROP TABLE IF EXISTS `024_order_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_order_view`
+
 DROP VIEW IF EXISTS `024_order_view`;
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `024_order_view`  AS SELECT `o`.`order_number` AS `order_number`, `o`.`order_id` AS `order_id`, `o`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `o`.`quantity` AS `quantity`, `o`.`size` AS `size`, `p`.`price` AS `price`, `o`.`price` AS `total_price`, `pm`.`method_name` AS `payment_method`, `o`.`method_id` AS `payment_method_id`, `o`.`order_date` AS `order_date`, concat_ws(', ',`a`.`street`,`a`.`city`,`a`.`province`,`a`.`zip_code`) AS `delivery_address`, `o`.`status` AS `status` FROM ((((`024_orders_table` `o` join `024_customers` `c` on(`o`.`customer_id` = `c`.`customer_id`)) join `024_address` `a` on(`o`.`address_id` = `a`.`address_id`)) join `024_products` `p` on(`o`.`product_id` = `p`.`product_id`)) join `024_payment_method` `pm` on(`o`.`method_id` = `pm`.`method_id`)) ;
+CREATE ALGORITHM=UNDEFINED VIEW `024_order_view`  AS SELECT `o`.`order_number` AS `order_number`, `o`.`order_id` AS `order_id`, `o`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `o`.`quantity` AS `quantity`, `o`.`size` AS `size`, `p`.`price` AS `price`, `o`.`price` AS `total_price`, `pm`.`method_name` AS `payment_method`, `o`.`method_id` AS `payment_method_id`, `o`.`order_date` AS `order_date`, concat_ws(', ',`a`.`street`,`a`.`city`,`a`.`province`,`a`.`zip_code`) AS `delivery_address`, `o`.`status` AS `status` FROM ((((`024_orders_table` `o` join `024_customers` `c` on(`o`.`customer_id` = `c`.`customer_id`)) join `024_address` `a` on(`o`.`address_id` = `a`.`address_id`)) join `024_products` `p` on(`o`.`product_id` = `p`.`product_id`)) join `024_payment_method` `pm` on(`o`.`method_id` = `pm`.`method_id`)) ;
 
 -- --------------------------------------------------------
 
 --
 DROP TABLE IF EXISTS `024_product_size_availability`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_product_size_availability`
+
 DROP VIEW IF EXISTS `024_product_size_availability`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `024_product_size_availability`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `ps`.`size` AS `size`, `ps`.`stock` AS `stock`, CASE WHEN `ps`.`stock` > 10 THEN 'En Stock' WHEN `ps`.`stock` > 0 THEN 'Últimas Unidades' ELSE 'Agotado' END AS `availability_status` FROM (`024_products` `p` join `024_product_sizes` `ps` on(`p`.`product_id` = `ps`.`product_id`)) ORDER BY `p`.`product_id` ASC, field(`ps`.`size`,'XS','S','M','L','XL','XXL') ASC ;
+CREATE ALGORITHM=UNDEFINED VIEW `024_product_size_availability`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `ps`.`size` AS `size`, `ps`.`stock` AS `stock`, CASE WHEN `ps`.`stock` > 10 THEN 'En Stock' WHEN `ps`.`stock` > 0 THEN 'Últimas Unidades' ELSE 'Agotado' END AS `availability_status` FROM (`024_products` `p` join `024_product_sizes` `ps` on(`p`.`product_id` = `ps`.`product_id`)) ORDER BY `p`.`product_id` ASC, field(`ps`.`size`,'XS','S','M','L','XL','XXL') ASC ;
 
 -- --------------------------------------------------------
 
 --
 DROP TABLE IF EXISTS `024_product_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_product_view`
+
 DROP VIEW IF EXISTS `024_product_view`;
-CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `024_product_view`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `c`.`name` AS `category` FROM ((`024_product_category` `pc` join `024_products` `p` on(`pc`.`product_id` = `p`.`product_id`)) join `024_category` `c` on(`pc`.`category_id` = `c`.`category_id`)) ;
+CREATE ALGORITHM=UNDEFINED VIEW `024_product_view`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `c`.`name` AS `category` FROM ((`024_product_category` `pc` join `024_products` `p` on(`pc`.`product_id` = `p`.`product_id`)) join `024_category` `c` on(`pc`.`category_id` = `c`.`category_id`)) ;
 
 -- --------------------------------------------------------
 
 --
 DROP TABLE IF EXISTS `024_shopping_cart_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_shopping_cart_view`
+
 DROP VIEW IF EXISTS `024_shopping_cart_view`;
 CREATE ALGORITHM=UNDEFINED VIEW `024_shopping_cart_view`  AS SELECT `sc`.`shopping_cart_id` AS `shopping_cart_id`, `sc`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `sc`.`product_id` AS `product_id`, `p`.`name` AS `name`, `sc`.`quantity` AS `quantity`, `p`.`price` AS `price`, `p`.`price`* `sc`.`quantity` AS `total_price` FROM ((`024_shopping_cart` `sc` join `024_customers` `c` on(`sc`.`customer_id` = `c`.`customer_id`)) join `024_products` `p` on(`sc`.`product_id` = `p`.`product_id`)) ;
 
@@ -942,21 +942,25 @@ CREATE ALGORITHM=UNDEFINED VIEW `024_shopping_cart_view`  AS SELECT `sc`.`shoppi
 
 --
 DROP TABLE IF EXISTS `024_total_income_per_month`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_total_income_per_month`
+
 DROP VIEW IF EXISTS `024_total_income_per_month`;
-CREATE ALGORITHM=UNDEFINED  VIEW `024_total_income_per_month`  AS SELECT sum(`024_order_view`.`total_price`) AS `total_income`, month(`024_order_view`.`order_date`) AS `MONTH`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` GROUP BY year(`024_order_view`.`order_date`), month(`024_order_view`.`order_date`) ORDER BY '' ASC, '' ASC ;
+CREATE ALGORITHM=UNDEFINED VIEW `024_total_income_per_month`  AS SELECT sum(`024_order_view`.`total_price`) AS `total_income`, month(`024_order_view`.`order_date`) AS `MONTH`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` GROUP BY year(`024_order_view`.`order_date`), month(`024_order_view`.`order_date`) ORDER BY '' ASC, '' ASC ;
 
 -- --------------------------------------------------------
 
 --
 DROP TABLE IF EXISTS `024_total_money_spent_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_total_money_spent_view`
+
 DROP VIEW IF EXISTS `024_total_money_spent_view`;
-CREATE ALGORITHM=UNDEFINED  VIEW `024_total_money_spent_view`  AS SELECT `024_order_view`.`customer_id` AS `customer_id`, `024_full_name`(`024_order_view`.`first_name`,`024_order_view`.`last_name`) AS `full_name`, sum(`024_order_view`.`total_price`) AS `total_money_spent`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` WHERE year(`024_order_view`.`order_date`) = 2024 GROUP BY `024_order_view`.`customer_id` ORDER BY '' DESC ;
+CREATE ALGORITHM=UNDEFINED VIEW `024_total_money_spent_view`  AS SELECT `024_order_view`.`customer_id` AS `customer_id`, `024_full_name`(`024_order_view`.`first_name`,`024_order_view`.`last_name`) AS `full_name`, sum(`024_order_view`.`total_price`) AS `total_money_spent`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` WHERE year(`024_order_view`.`order_date`) = 2024 GROUP BY `024_order_view`.`customer_id` ORDER BY '' DESC ;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+-- Desactivar comprobación de claves foráneas temporalmente
+SET FOREIGN_KEY_CHECKS=0;
+
 
 --
 -- Filtros para la tabla `024_address_customer`
@@ -1006,6 +1010,9 @@ ALTER TABLE `024_product_sizes`
 ALTER TABLE `024_shopping_cart`
   ADD CONSTRAINT `shopping_cart_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `024_customers` (`customer_id`),
   ADD CONSTRAINT `shopping_cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `024_products` (`product_id`);
+
+-- Volver a activar comprobación de claves foráneas
+SET FOREIGN_KEY_CHECKS=1;
 
 DELIMITER $$
 --

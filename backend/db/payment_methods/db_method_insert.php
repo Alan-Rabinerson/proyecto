@@ -1,5 +1,5 @@
 <?php
-    require $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     
     // get and sanitize input data
     $method_name = mysqli_real_escape_string($conn, $_POST['method_name']);
@@ -11,10 +11,10 @@
                    VALUES ('$method_name', '$number', '$expiration_date', '$security_code')";
     // show success or error message
     if (mysqli_query($conn, $insert_sql)) {
-        header("Location: /student024/shop/backend/views/my_account.php?message=Payment+method+added+successfully");
+        header("Location: /student024/Shop/backend/views/my_account.php?message=Payment+method+added+successfully");
         exit();
     } else {
-        header("Location: /student024/shop/backend/forms/payment_methods/form_payment_method_insert.php?error=error+adding+payment+method");
+        header("Location: /student024/Shop/backend/forms/payment_methods/form_payment_method_insert.php?error=error+adding+payment+method");
         exit();
     }
 ?>

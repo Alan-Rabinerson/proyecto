@@ -9,17 +9,36 @@
     $path = strtolower(parse_url($request_uri, PHP_URL_PATH) ?? '');
 
     // Whitelist of public paths (no login required)
-    if (!isset($_SESSION['username']) && $path !== '/student024/shop/backend/login/login.php' && $path !== '/student024/shop/backend/login/logout.php' && $path !== '/student024/shop/backend/views/register.php') {
+    if (!isset($_SESSION['username']) && $path !== '/student024/Shop/backend/login/login.php' && $path !== '/student024/Shop/backend/login/logout.php' && $path !== '/student024/Shop/backend/views/register.php') {
         header('Location: /student024/Shop/backend/login/login.php');
         exit;   
     }
-    // Restore session from cookie if available
-    if (isset($_COOKIE['user']) && !isset($_SESSION['username'])) {
-        $userData = json_decode($_COOKIE['user'], true);
-        if ($userData && isset($userData['username']) && isset($userData['role'])) {
-            $_SESSION['username'] = $userData['username'];
-            $_SESSION['role'] = $userData['role'];
-        }
+    // // Restore session from cookie if available
+    // if (isset($_COOKIE['user']) && !isset($_SESSION['username'])) {
+    //     $userData = json_decode($_COOKIE['user'], true);
+    //     if ($userData && isset($userData['username']) && isset($userData['role'])) {
+    //         $_SESSION['username'] = $userData['username'];
+    //         $_SESSION['role'] = $userData['role'];
+    //     }
+    // }
+
+    // whitelist of admin-only paths
+    $admin_paths = [
+        '/student024/Shop/backend/views/customers.php',
+        '/student024/Shop/backend/views/reviews.php',
+        '/student024/Shop/backend/views/orders.php',
+        '/student024/Shop/backend/forms/products/form_product_insert.php',
+        '/student024/Shop/backend/forms/products/form_product_delete.php',
+        '/student024/Shop/backend/forms/products/form_product_update.php',
+        '/student024/Shop/backend/forms/orders/form_order_insert.php',
+        '/student024/Shop/backend/forms/orders/form_order_update.php',
+        '/student024/Shop/backend/forms/shopping_cart/form_shopping_cart_insert.php',
+        '/student024/Shop/backend/forms/shopping_cart/form_shopping_cart_update.php',
+    ];
+    if (in_array($path, $admin_paths) && (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin')) {
+        // User is not admin, redirect to login page or show error
+        header('Location: /student024/Shop/backend/index.php');
+        exit;
     }
 ?>
 
@@ -46,11 +65,12 @@
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/customers.php">Customers</a></li>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/my_account.php">My Account</a></li>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/reviews.php">Review Management</a></li>
+                            <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/orders.php">Orders</a></li>
                         <?php } else { // if user is not admin show only my account ?>
                             <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/my_account.php">My Account</a></li>
 
                         <?php } ?>
-                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/orders.php">Orders</a></li>
+                        <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/my_orders.php">My Orders</a></li>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/shopping_cart.php">Shopping Cart</a></li>
                         <li class="px-3 py-1 bg-azul-claro border border-gray-200 rounded"><a class="text-beige hover:underline" href="/student024/Shop/index.html">Homepage</a></li>
                     </ul>

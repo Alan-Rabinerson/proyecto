@@ -1,6 +1,6 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/header.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
 <?php 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/config/db_connect.php';// Llama al script para obtener los productos
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';// Llama al script para obtener los productos
     // capturar datos del producto a actualizar
     $customer_id = $_POST['customer_id'];
     // fetch product data from database based on product_id
@@ -17,7 +17,7 @@
     $birthdate = $customers[0]['birth_date'];?>
     <main class="flex items-center flex-col">
         <h2 class="mt-4 text-4xl">Update Customer</h2>
-        <form action="/student024/shop/backend/db/customers/db_customer_update.php" method="POST" class="mt-3 border border-azul-claro p-4 rounded-lg shadow-md w-fit">
+        <form action="/student024/Shop/backend/db/customers/db_customer_update.php" method="POST" class="mt-3 border border-azul-claro p-4 rounded-lg shadow-md w-fit">
             <div class="mb-3 flex gap-3 items-center">
                 <label for="customer_id" class="form-label">Customer ID to Update: </label>
                 <input type="number" class="form-control"id="customer_id" name="customer_id" readonly value="<?php echo $customer_id; ?>" >
@@ -56,4 +56,4 @@
         </form>
     </main>
 
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/shop/backend/includes/footer.php';  ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?>
