@@ -4,23 +4,50 @@
         session_start();
     }
 
-    // Determine requested path
-    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
-    $path = strtolower(parse_url($request_uri, PHP_URL_PATH) ?? '');
 
-    // Whitelist of public paths (no login required)
-    if (!isset($_SESSION['username']) && $path !== '/student024/Shop/backend/login/login.php' && $path !== '/student024/Shop/backend/login/logout.php' && $path !== '/student024/Shop/backend/views/register.php') {
-        header('Location: /student024/Shop/backend/login/login.php');
-        exit;   
+    // Determine requested path. Prefer SCRIPT_NAME to avoid rewrite/query issues.
+    $script_name = strtolower($_SERVER['SCRIPT_NAME'] ?? $_SERVER['PHP_SELF'] ?? '');
+    $request_uri = $_SERVER['REQUEST_URI'] ?? '';
+    $path = $script_name;
+
+    // Debug logging: record host, REQUEST_URI, SCRIPT_NAME and computed path to PHP error log
+    if (isset($_SERVER['HTTP_HOST'])) {
+        error_log("DEBUG header.php host=" . $_SERVER['HTTP_HOST'] . " request_uri=" . $request_uri . " script_name=" . $script_name . " path=" . $path);
     }
-    // // Restore session from cookie if available
-    // if (isset($_COOKIE['user']) && !isset($_SESSION['username'])) {
+
+
+    // Polyfill for str_contains on older PHP versions
+    if (!function_exists('str_contains')) {
+        function str_contains(string $haystack, string $needle): bool
+        {
+            return strpos($haystack, $needle) !== false;
+        }
+    }
+
+    // // Restore session from cookie if available (do this before redirect check)
+    // if (isset($_COOKIE['user']) && !isset($_SESSION['username']) && $path !== '/student024/Shop/backend/login/logout.php' && $path !== '/student024/Shop/backend/login/login.php') {
     //     $userData = json_decode($_COOKIE['user'], true);
     //     if ($userData && isset($userData['username']) && isset($userData['role'])) {
     //         $_SESSION['username'] = $userData['username'];
     //         $_SESSION['role'] = $userData['role'];
+    //         error_log("DEBUG header.php: restored session from cookie for user=" . $_SESSION['username']);
     //     }
     // }
+
+    // Whitelist of public paths (no login required)
+    // Recognize common public pages by filename or by the login folder
+    $is_public = (
+        str_contains($path, '/login.php') ||
+        str_contains($path, '/register.php') ||
+        str_contains($path, '/logout.php') ||
+        str_contains($path, '/backend/login/') ||
+        str_contains($path, '/login/')
+    );
+
+    if (!isset($_SESSION['username']) && !$is_public) {
+        header('Location: /student024/Shop/backend/login/login.php');
+        exit;
+    }
 
     // whitelist of admin-only paths
     $admin_paths = [
@@ -54,7 +81,7 @@
         <header class="header">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <img src="/student024/Shop/assets/logos/logo_sin_fondo._rectangular.png" alt="Logo" class="h-auto max-h-24 object-contain"/>
+                    <img src="/student024/Shop/assets/logos/logo_sin_fondo_rectangular.png" alt="Logo" class="h-auto max-h-24 object-contain"/>
                 </div>
                 <nav class="flex items-center justify center">
                     <ul class="flex space-x-2 list-none p-0 m-0">
@@ -80,7 +107,7 @@
                             <img src="/student024/Shop/assets/avatars/avatar.png" alt="Avatar" class="inline-block h-8 w-8 rounded-full mr-2 object-cover">
                             <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/login/logout.php';">Logout</button>
                         <?php } else { // if not logged in show login and register buttons ?>
-                            <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/views/login.php'">Login</button>
+                            <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/login/login.php'">Login</button>
                             <button class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onclick="window.location.href='/student024/Shop/backend/views/register.php'">Register</button>
                         <?php } ?>
                     </div>

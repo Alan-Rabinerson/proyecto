@@ -50,9 +50,9 @@
                         <!-- Addresses -->
                         <div id="addresses" class="mb-8">
                             <h3 class="text-xl font-medium mb-2">Direcciones</h3>
-                            <?php if (!empty($addresses)): ?>
+                            <?php if (!empty($addresses)){ ?>
                                 <ul class="space-y-2">
-                                    <?php foreach ($addresses as $addr): ?>
+                                    <?php foreach ($addresses as $addr){ ?>
                                         <li class="p-3 bg-azul-claro rounded flex flex-col md:flex-row md:justify-between">
                                              Address:
                                             <?php echo htmlspecialchars(($addr['street'] ?? '') . ', ' . ($addr['city'] ?? '') . ' ' . ($addr['zip_code'] ?? ''), ENT_QUOTES); ?>
@@ -67,11 +67,11 @@
                                                 </form>
                                             </div>
                                         </li>
-                                    <?php endforeach; ?>
+                                    <?php } ?>
                                 </ul>
-                            <?php else: ?>
+                            <?php }else{ ?>
                                 <p class="text-beige opacity-80">No hay direcciones guardadas.</p>
-                            <?php endif; ?>
+                            <?php } ?>
                             <button  type="button" onClick="window.location.href='/student024/Shop/backend/forms/addresses/form_address_insert.php'" id="add-address-btn" class="mt-4 px-4 py-2 bg-green-600 rounded text-white hover:bg-green-700">Agregar nueva dirección</button>
                             
                         </div>

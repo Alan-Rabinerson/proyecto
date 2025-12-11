@@ -4,12 +4,24 @@
     include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
     $errores = ['usuario' => '', 'login' => '', 'contrasena' => ''];
     if (isset($_POST['submit'])) {
-        
-        session_abort();
-        session_start();
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-        $sql = "SELECT * FROM 024_customers WHERE username = '$username' AND password = '$password'";
+        // Ensure session started (avoid calling session_abort which may not exist on some PHP versions)
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // sanitize inputs
+        $username = isset($_POST['username']) ? $_POST['username'] : '';
+        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        if (isset($conn) && $conn) {
+            $username_esc = mysqli_real_escape_string($conn, $username);
+            $password_esc = mysqli_real_escape_string($conn, $password);
+        } else {
+            $username_esc = $username;
+            $password_esc = $password;
+        }
+
+        // Table name starts with digits — quote it with backticks
+        $sql = "SELECT * FROM `024_customers` WHERE username = '$username_esc' AND `password` = '$password_esc'";
         $result = mysqli_query($conn, $sql);
 
         $user = mysqli_fetch_all($result, MYSQLI_ASSOC);

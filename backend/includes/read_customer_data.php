@@ -23,10 +23,16 @@
 
         // Colecciones para admitir múltiples direcciones y métodos de pago
         $addresses = [];
-        $payment_methods = []; // re-inicializamos aquí por seguridad
+        $payment_methods = []; // re-inicializamos aquí por seguridad            
+        $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+        ?> <script> console.log("Rows found: + <?php echo count($rows); ?> ");</script>
+        <?php
         if ($result && mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
+            
+            
+            
+            foreach ($rows as $row) {
                 // Datos básicos (tomar del primer registro disponible)
                 if (empty($full_name)) {
                     $full_name = trim((($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? '')));
@@ -40,7 +46,6 @@
                 if (empty($password_hash)) {
                     $password_hash = hash('sha256', $row['password']);
                 }
-
                 // Normalizar/extraer dirección
                 $addr = [
                     'address_id' => $row['address_id'] ?? null,
@@ -50,7 +55,7 @@
                     'province'   => $row['province'] ?? '',
                     'label'      => $row['address_label'] ?? ''
                 ];
-                // Generar clave única para evitar duplicados (preferir address_id si existe)
+                 // Generar clave única para evitar duplicados (preferir address_id si existe)
                 $addr_key ='addr_' . $addr['address_id'];
                 if (!isset($addresses[$addr_key])) {
                     $addresses[$addr_key] = $addr;
@@ -72,6 +77,7 @@
                     } 
                 }
             }
+            
 
             // Re-indexar como arrays numéricos para uso en frontend
             $payment_methods = array_values($payment_methods);
@@ -84,6 +90,16 @@
                 $zip_code = $addresses[0]['zip_code'];
                 $province = $addresses[0]['province'];
             }
+        } else { // si no hay filas (el cliente no ha agregado datos aún), obtener datos básicos del cliente
+                $sql = "SELECT * FROM `024_customers` WHERE customer_id = " . (int)$customer_id;
+                $result = mysqli_query($conn, $sql);
+                if ($result && mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_assoc($result);
+                    $full_name = trim((($row['first_name'] ?? '') . ' ' . ($row['last_name'] ?? '')));
+                    $email = $row['email'] ?? '';
+                    $phone = $row['phone'] ?? '';
+                    $password_hash = hash('sha256', $row['password']);
+                }
         }
-    }
+    } 
     

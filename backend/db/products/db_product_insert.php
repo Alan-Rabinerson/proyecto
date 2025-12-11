@@ -3,9 +3,10 @@
     $product_name = $_GET['product_name'];
     $product_price = $_GET['price'];
     $product_description = $_GET['description'];
+    $long_description = $_GET['long-description'];
     $product_stock = isset($_GET['stock']) ? (int) $_GET['stock'] : 0;
     $product_supplier = $_GET['supplier'];
-    $product_category = $_GET['category'];
+    $product_category = $_GET['categories']; 
     $tallas = isset($_GET['tallas']) ? $_GET['tallas'] : []; // array of sizes
     $tallas_stock = isset($_GET['tallas_stock']) ? $_GET['tallas_stock'] : []; // associative array size=>stock
 
@@ -18,7 +19,7 @@
         $available_sizes = implode(',', array_map(function($s){ return $s; }, $tallas));
     }
     // insert product into 024_products
-    $sql = "INSERT INTO 024_products (name, description, price, supplier, available_sizes) VALUES ('$product_name', '$product_description', $product_price, '$product_supplier', '$available_sizes')";
+    $sql = "INSERT INTO 024_products (name, description, long_description, price, supplier, available_sizes) VALUES ('$product_name', '$product_description', '$long_description', $product_price, '$product_supplier', '$available_sizes')";
 
 
 
@@ -38,9 +39,9 @@
             }
         }
 
-        header("Location: /student024/Shop/backend/views/product_list.php?success=Product+added+successfully");
+        header("Location: /student024/Shop/backend/views/products.php?success=Product+added+successfully");
     } else {
-        header("Location: /student024/Shop/backend/views/product_add.php?error=Error+adding+product:+".$conn->error);
+        header("Location: /student024/Shop/backend/views/products.php?error=Error+adding+product:+".$conn->error);
     }
 
 

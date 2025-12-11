@@ -8,7 +8,6 @@ function showOrders(str) {
   };
   xmlhttp.open("GET", "/student024/Shop/backend/db/orders/db_orders_search.php?searchTerm=" + str, true);
   xmlhttp.send();
-  
 }
 
 function showMyOrders(str) {

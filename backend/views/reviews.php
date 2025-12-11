@@ -37,7 +37,7 @@
                         <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($review['review_rating'], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td class="border border-gray-300 px-4 py-2"><?php echo htmlspecialchars($review['status'], ENT_QUOTES, 'UTF-8'); 
 
-                        if ($review['status'] !== 'APPROVED') {
+                        if ($review['status'] == 'PENDING') {
                         ?>
                             
                             <form action="/student024/Shop/backend/db/reviews/update_review_status.php" method="POST">

@@ -9,7 +9,7 @@
     
     <h1> Mis Pedidos</h1>
     <form  method="GET">
-        <input type="text" name="order_id" placeholder="ID del pedido" class="border-azul-claro border" onkeyup="showMyOrders(this.value)" required>
+        <input type="text" name="order_id" placeholder="Nombre del producto" class="border-azul-claro border" onkeyup="showMyOrders(this.value)" required>
     </form>
     <div class="orders-container mt-4 h-fit w-full flex flex-col items-center justify-center gap-4 justify-self-center" id="orders-container">
         <?php 

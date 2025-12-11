@@ -5,15 +5,14 @@
     // capture product_id from POST
     $product_id = $_POST['product_id'];
     // fetch product data from database based on product_id
-    $sql = "SELECT * FROM 024_products_view WHERE product_id = $product_id";
+    $sql = "SELECT * FROM 024_product_view WHERE product_id = $product_id";
     $result = mysqli_query($conn, $sql);
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $product_id = $products[0]['product_id'];
     $product_name = $products[0]['name'];
     $description = $products[0]['description'];
     $price = $products[0]['price'];
-    $stock = $products[0]['stock'];
-    $tallas = $products[0]['tallas'];
+    $tallas = $products[0]['available_sizes'];
     // fetch existing size stocks for this product
     $sizeStocks = [];
     $sql = "SELECT size, stock FROM 024_product_sizes WHERE product_id = $product_id";
@@ -45,10 +44,6 @@
                 <div class="mb-3">
                     <label for="price" class="form-label">Price:</label>
                     <input type="number" step="0.01" class="form-control" id="price" name="price" required value="<?php echo $price; ?>">
-                </div>
-                <div class="mb-3">
-                    <label for="stock" class="form-label">Stock:</label>
-                    <input type="number" class="form-control" id="stock" name="stock" required value="<?php echo $stock; ?>">
                 </div>
                 <div class="mb-3">
                     <label for="supplier" class="form-label">Supplier:</label>

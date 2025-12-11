@@ -12,6 +12,6 @@
     <div class="flex flex-wrap items-center justify-center gap-4 mt-4" id="customer-list">
         <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/db/customers/db_customer_list.php'; ?>
     </div>
-    
-<script src="/student024/Shop/Javascript/showcustomers.js"></script>
+</main>    
+<script src="/student024/Shop/JavaScript/showcustomers.js"></script>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?>

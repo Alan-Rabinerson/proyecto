@@ -33,6 +33,7 @@
         echo "<p>Status: " . $status . "</p>";
         echo "<p>Method: " . $method_name . "</p>";
         echo "<p>Address: " . $address . "</p>";
+        echo "<button class='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700' onclick=\"location.href='/student024/Shop/backend/includes/buyAgain.php?order_id=" . $order_id . "'\">Buy Order Again</button>";   
         foreach($items as $product){
             $order_number = $product['order_number'];
             $product_id = $product['product_id'];
@@ -51,7 +52,7 @@
                 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/forms/orders/form_order_delete.php';
             }
             include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/can_review.php';
-                        
+            echo "<button class='px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700' onclick=\"location.href='/student024/Shop/backend/includes/buyAgain.php?product_id=" . $product_id . "&size=" . $product['size'] . "'\">Buy Product Again</button>";   
             echo "</span>";
             echo "</div>";
             echo "</div>";
