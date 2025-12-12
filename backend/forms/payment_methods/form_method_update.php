@@ -10,7 +10,7 @@
     $expiration_date = $payment_method[0]['expiration_date'];
 ?>
     
-<form action="/student024/Shop/backend/db/payment_methods/db_method_update.php" method="POST">
+<form action="/student024/Shop/backend/db/payment_methods/db_method_update.php" method="POST" class="max-w-md mx-auto mt-10 p-6 rounded-lg shadow-md">
     <label for="method_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Method Name</label>
     <input type="text" name="method_name" id="method_name" class='form-control' value="<?php echo htmlspecialchars($method_name); ?>" required>
     <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Number</label>

@@ -5,16 +5,26 @@ let cartTotal = document.getElementById("cart-total");
 let cartTotalValue = cartTotal.textContent.split(":")[1].trim();
 function addQuantity(productId, size, quantity, price) {
     var xmlhttp = new XMLHttpRequest();
-    productQty = document.querySelector("#product-" + productId + "-" + size + " #product-quantity-" + productId + "-" + size);
+    // obtain the current quantity from the DOM instead of relying on the static value
+    let productQtyElem = document.querySelector("#product-" + productId + "-" + size + " #product-quantity-" + productId + "-" + size);
+    let currentQty = quantity;
+    if (productQtyElem) {
+        const m = productQtyElem.textContent.match(/(\d+)/);
+        if (m) currentQty = parseInt(m[1], 10);
+    }
+    let subtotalElem = document.querySelector("#subtotal-" + productId + "-" + size);
     xmlhttp.onreadystatechange = () => {
+        
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             try {
                 let resp = JSON.parse(xmlhttp.responseText);
                 if (resp.status === 'ok' && resp.item) {
                     let products = resp.item;
-                    productQty.textContent = "Quantity: " + products.quantity;
+                    productQtyElem.textContent = "Quantity: " + products.quantity;
+                    
                     cartTotalValue = (parseFloat(cartTotalValue) + parseFloat(price)).toFixed(2) + "€";
                     cartTotal.textContent = "Cart Total: " + cartTotalValue;
+                    subtotalElem.textContent = "Subtotal: " + (products.quantity * price).toFixed(2) + "€";
                 } else if (resp.status === 'deleted') {
                     // item removed from cart server-side
                     let container = document.querySelector("#product-" + productId + "-" + size);
@@ -30,23 +40,33 @@ function addQuantity(productId, size, quantity, price) {
             
         }
     }
-    xmlhttp.open("GET", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart.php?product_id=" + productId + "&size="+ encodeURIComponent(size) + "&action=add&quantity="+ quantity, true);
+    xmlhttp.open("GET", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart.php?product_id=" + productId + "&size="+ encodeURIComponent(size) + "&action=add&quantity="+ currentQty, true);
     xmlhttp.send();
 }
     
 
 function removeQuantity(productId, size, quantity, price) {
-    productQty = document.querySelector("#product-" + productId + "-" + size + " #product-quantity-" + productId + "-" + size);
+    // obtain the current quantity from the DOM instead of relying on the static value
+    let productQtyElem = document.querySelector("#product-" + productId + "-" + size + " #product-quantity-" + productId + "-" + size);
+    let currentQty = quantity;
+    if (productQtyElem) {
+        const m = productQtyElem.textContent.match(/(\d+)/);
+        if (m) currentQty = parseInt(m[1], 10);
+    }
+    let subtotalElem = document.querySelector("#subtotal-" + productId + "-" + size);
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = () => {
+        
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             try {
-                let resp = JSON.parse(xmlhttp.responseText);
+                let resp = JSON.parse(xmlhttp.responseText);                
                 if (resp.status === 'ok' && resp.item) {
                     let products = resp.item;
-                    productQty.textContent = "Quantity: " + products.quantity;
+                    productQtyElem.textContent = "Quantity: " + products.quantity;
+                    
                     cartTotalValue = (parseFloat(cartTotalValue) - parseFloat(price)).toFixed(2) + "€";
                     cartTotal.textContent = "Cart Total: " + cartTotalValue;
+                    subtotalElem.textContent = "Subtotal: " + (products.quantity * price).toFixed(2) + "€";
                     if (products.quantity <= 0) {
                         let container = document.querySelector("#product-" + productId + "-" + size);
                         if (container) container.remove();
@@ -64,7 +84,7 @@ function removeQuantity(productId, size, quantity, price) {
             }
         }
     }
-    xmlhttp.open("GET", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart.php?product_id=" + productId + "&size="+ encodeURIComponent(size) + "&action=remove&quantity="+ quantity, true);
+    xmlhttp.open("GET", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart.php?product_id=" + productId + "&size="+ encodeURIComponent(size) + "&action=remove&quantity="+ currentQty, true);
     xmlhttp.send();
 }
 // student024\Shop\sandbox\db_shopping_cart.php

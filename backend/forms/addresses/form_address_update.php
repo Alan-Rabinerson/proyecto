@@ -1,4 +1,5 @@
 <?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php'; 
+
     require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';
     $address_id = $_POST['address_id'];
     $addr_sql = "SELECT * FROM 024_address WHERE address_id = $address_id";
@@ -8,9 +9,12 @@
     $city = $addresses[0]['city'];
     $zip_code = $addresses[0]['zip_code'];
     $province = $addresses[0]['province'];
+    $address_name = $addresses[0]['address_name'];
 ?>
-<form action="/student024/Shop/backend/db/addresses/db_address_update.php" method="POST">
+<form action="/student024/Shop/backend/db/addresses/db_address_update.php" method="POST" class="max-w-md mx-auto mt-10 p-6 rounded-lg shadow-md">
     <input type="number" name="address_id" value="<?php echo $address_id; ?>" required readonly hidden>
+    <label for="address_name" id="address_name" class="form-label">Address Name</label>
+    <input type="text" name="address_name" id="address_name" class="form-control" value="<?php echo $address_name; ?>" required>
     <label for="street" id="street" class="form-label">Street</label>
     <input type="text" name="street" id="street" class="form-control" value="<?php echo $street; ?>" required>
     <label for="city" id="city" class="form-label">City</label>

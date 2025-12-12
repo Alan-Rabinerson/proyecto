@@ -30,8 +30,6 @@
         <?php
         if ($result && mysqli_num_rows($result) > 0) {
             
-            
-            
             foreach ($rows as $row) {
                 // Datos básicos (tomar del primer registro disponible)
                 if (empty($full_name)) {
@@ -49,6 +47,7 @@
                 // Normalizar/extraer dirección
                 $addr = [
                     'address_id' => $row['address_id'] ?? null,
+                    'address_name' => $row['address_name'] ?? '',
                     'street'     => $row['street'] ?? ($row['address'] ?? ''),
                     'city'       => $row['city'] ?? '',
                     'zip_code'   => $row['postal_code'] ?? ($row['zip_code'] ?? ''),
@@ -99,6 +98,8 @@
                     $email = $row['email'] ?? '';
                     $phone = $row['phone'] ?? '';
                     $password_hash = hash('sha256', $row['password']);
+                    $addresses = [];
+                    $payment_methods = [];
                 }
         }
     } 

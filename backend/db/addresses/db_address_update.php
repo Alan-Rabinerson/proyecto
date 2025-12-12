@@ -5,7 +5,8 @@
     $city = $_POST['city'];
     $zip_code = $_POST['zip_code'];
     $province = $_POST['province'];
-    $update_sql = "UPDATE 024_address SET street='$street', city='$city', zip_code='$zip_code', province='$province' WHERE address_id=$address_id";
+    $address_name = $_POST['address_name'];
+    $update_sql = "UPDATE 024_address SET street='$street', city='$city', zip_code='$zip_code', province='$province', address_name='$address_name' WHERE address_id=$address_id";
     if (mysqli_query($conn, $update_sql)) {
         header("Location: /student024/Shop/backend/views/my_account.php?message=" . urlencode("Address updated successfully"));
         exit();

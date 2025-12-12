@@ -39,7 +39,7 @@
                                 $city = htmlspecialchars($addr['city'] ?? '', ENT_QUOTES);
                                 $postal = htmlspecialchars($addr['postal_code'] ?? $addr['zip_code'] ?? '', ENT_QUOTES);
                                 $prov = htmlspecialchars($addr['province'] ?? '', ENT_QUOTES);
-                                $label = htmlspecialchars($addr['label'] ?? ($street . ' ' . $city . ' ' . $postal), ENT_QUOTES);
+                                $label = htmlspecialchars($addr['address_name'] ?? ($street . ' ' . $city . ' ' . $postal), ENT_QUOTES);
                             ?>
                             <label class="block mt-2">
                                 <input type="radio"

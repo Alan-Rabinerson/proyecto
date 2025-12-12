@@ -32,7 +32,7 @@ if ($total_items > 0) {
         echo "<h3 id='product-name-" . $product_id . "'>" . $item['name']  ."</h3>";
         echo "<p id='product-price-" . $product_id . "'>Price: " . $item['price'] . "€ </p>";
         echo "<p>Size: " . htmlspecialchars($item['size']) . "</p>";
-        echo "<p>Subtotal: " . ($item['price'] * $item['quantity']) . "€ </p>";
+        echo "<p id='subtotal-" . $product_id . "-" . htmlspecialchars($item['size']) . "' >Subtotal: " . ($item['price'] * $item['quantity']) . "€ </p>";
         echo "<span class='flex items-center gap-2'>";
         ?>
         <button onclick="removeQuantity(<?php echo $product_id; ?>, '<?php echo $item['size']; ?>', <?php echo $quantity; ?>, <?php echo $item['price']; ?>)"  class="boton-rojo rounded-4xl">-</button>           

@@ -6,12 +6,13 @@ $street = isset($_POST['street']) ? mysqli_real_escape_string($conn, trim($_POST
 $city = isset($_POST['city']) ? mysqli_real_escape_string($conn, trim($_POST['city'])) : '';
 $zip_code = isset($_POST['zip_code']) ? mysqli_real_escape_string($conn, trim($_POST['zip_code'])) : '';
 $province = isset($_POST['province']) ? mysqli_real_escape_string($conn, trim($_POST['province'])) : '';
+$address_name = isset($_POST['address_name']) ? mysqli_real_escape_string($conn, trim($_POST['address_name'])) : '';
 
 $customer_id = $_SESSION['customer_id'] ;
 
 
 // Insert address first
-$insert_address_sql = "INSERT INTO `024_address` (`street`, `city`, `zip_code`, `province`) VALUES ('$street', '$city', '$zip_code', '$province')";
+$insert_address_sql = "INSERT INTO `024_address` (`address_name`, `street`, `city`, `zip_code`, `province`) VALUES ('$address_name', '$street', '$city', '$zip_code', '$province')";
 if (!mysqli_query($conn, $insert_address_sql)) {
     header("Location: /student024/Shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
     exit();
