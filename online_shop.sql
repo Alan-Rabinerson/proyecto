@@ -171,6 +171,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `024_address`;
 CREATE TABLE IF NOT EXISTS `024_address` (
   `address_id` int(11) NOT NULL AUTO_INCREMENT,
+  `address_name` varchar(50) NOT NULL,
   `street` varchar(100) NOT NULL,
   `city` varchar(100) NOT NULL,
   `province` varchar(100) NOT NULL,
@@ -309,7 +310,8 @@ INSERT INTO `024_customers` (`customer_id`, `first_name`, `last_name`, `email`, 
 (10, 'Jane', 'Williams', 'janewilliams@outlook.com', 'janewilliams', '123456', '1234567890', '2001-12-27', 'customer'),
 (11, 'Alan', 'Rabinerson', 'alanrabinerson@gmail.com', 'alanR', '123456', '694480533', '2001-10-24', 'admin'),
 (12, 'Enrique', 'Vizcaino', 'enrique@gmail.com', 'enrique@gmail.com', 'dwesteacher', '123456789', '1975-11-26', 'admin'),
-(13, 'Avi', 'Rabinerson', 'abualan@gmail.com', '', '123456', '607709603', '1960-08-12', 'customer');
+(13, 'Avi', 'Rabinerson', 'abualan@gmail.com', '', '123456', '607709603', '1960-08-12', 'customer'),
+(14, 'Test', 'Customer', 'customer@gmail.com', 'customer@gmail.com', 'dwescustomer', '123456789', '1999-12-26', 'admin');
 
 -- --------------------------------------------------------
 
@@ -328,6 +330,7 @@ CREATE TABLE IF NOT EXISTS `024_customers_view` (
 ,`phone` varchar(100)
 ,`birth_date` date
 ,`type` set('admin','customer')
+,`address_name` varchar(50)
 ,`address_id` int(11)
 ,`street` varchar(100)
 ,`city` varchar(100)
@@ -337,8 +340,7 @@ CREATE TABLE IF NOT EXISTS `024_customers_view` (
 ,`method_name` varchar(100)
 ,`number` varchar(100)
 ,`expiration_date` varchar(100)
-,`security_code` varchar(100)
-);
+,`security_code` varchar(100));
 
 -- --------------------------------------------------------
 
