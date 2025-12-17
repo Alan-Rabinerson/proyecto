@@ -35,10 +35,16 @@ function renderCart(items, total) {
 	const header = list.querySelector(':scope > li:first-child');
 	list.innerHTML = '';
 	if (header) list.appendChild(header);
+	if (items.length > 0) {
+		// remove "carrito-vacio" message if present
+		const emptyMsg = list.querySelector('.carrito-vacio');
+		if (emptyMsg) emptyMsg.remove();
+	}
 
 	items.forEach(item => {
 		const li = document.createElement('li');
 		li.className = 'carrito-item';
+
 
 		li.innerHTML = `
 			<img src="${item.image}" alt="${escapeHtml(item.name)}">

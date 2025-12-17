@@ -92,6 +92,28 @@
                 <button class="slider-arrow slider-next">›</button>
             </div>
         </section>
+        <!-- Carrito Sticky (Móvil/Tablet) -->
+        <button id="sticky-cart" class="sticky-cart" >
+            <img class="" src="./assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
+            <span class="cart-count">2</span>
+        </button>
+        <div class="carrito sticky bg-transparent bottom-20">
+            <div class="carrito-header">
+                <h2>Tu Carrito</h2>
+                <button id="close-cart">×</button>
+            </div>
+            <div class="carrito-body">
+                <ul class="carrito-items">
+                    <!-- Los elementos se cargan dinamicamente por lo que por defecto solo se mostrara el mensaje de carrito vacio -->
+                    <li class="carrito-vacio">Tu carrito está vacío.</li>
+                </ul>
+                <button class="btn-ver-mas">Ver detalles</button>
+            </div>
+            <div class="carrito-footer">
+                <p class="total-amount">Total: 0,00 €</p>
+                <button class="btn-checkout">Proceder al pago</button>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
@@ -127,28 +149,6 @@
         </div>
     </footer>
 
-    <!-- Carrito Sticky (Móvil/Tablet) -->
-    <button id="sticky-cart" class="sticky-cart" >
-        <img class="" src="./assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
-        <span class="cart-count">2</span>
-    </button>
-    <div class="carrito sticky bg-transparent bottom-20">
-        <div class="carrito-header">
-            <h2>Tu Carrito</h2>
-            <button id="close-cart">×</button>
-        </div>
-        <div class="carrito-body">
-            <ul class="carrito-items">
-                <li class="carrito-item"><span>   </span><span class="nombre-producto">Nombre </span> <span class="cantidad-producto">Cantidad</span> <span class="precio-producto">Precio</span></li>
-                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 1</span> <span class="restar-cantidad">-</span> <span class="cantidad-producto">1</span><span class="añadir-cantidad">+</span> <span class="precio-producto">29,99 €</span></li>
-                <li class="carrito-item"><img src="https://picsum.photos/150/" alt="Producto 1"> <span class="nombre-producto">Nombre del Producto 2</span> <span class="restar-cantidad">-</span> <span class="cantidad-producto">1</span> <span class="añadir-cantidad">+</span> <span class="precio-producto">29,99 €</span></li>
-            </ul>
-        </div>
-        <div class="carrito-footer">
-            <p class="total-amount">Total: 0,00 €</p>
-            <button class="btn-checkout">Proceder al pago</button>
-        </div>
-    </div>
     <script src="./JavaScript/homepage.js"></script>
     <script src="./JavaScript/menu.js"></script>
 </body>

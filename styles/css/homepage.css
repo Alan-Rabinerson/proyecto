@@ -348,6 +348,19 @@ main {
     display: none;
 }
 
+.carrito-body {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-md);
+}
+
+.cantidad-container {
+    display: flex;
+    align-items: space-around;
+    justify-content: center;
+    margin-top: var(--spacing-sm);
+}
+
 .carrito.active {
     display: flex;
     flex-direction: column;
@@ -426,6 +439,20 @@ main {
 .añadir-cantidad,
 .restar-cantidad {
     display: none;
+}
+
+.btn-ver-mas{
+    margin: 0 auto;
+    margin-top: var(--spacing-md);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 5px;
+    font-weight: 600;
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 /* ===== TABLET (768px+) ===== */

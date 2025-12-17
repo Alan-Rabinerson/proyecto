@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="logo">
-            <img class="w-63" src="../assets/logos/logo_sin_fondo._rectangular.PNG" alt="logo Concrete Jungle">
+            <img class="w-63" src="/student024/Shop/assets/logos/logo_sin_fondo_rectangular.png" alt="logo Concrete Jungle">
         </div>
         
         <!-- Menú hamburguesa -->
@@ -63,7 +63,7 @@
                     <p class="text-2xl font-bold mb-4">49.99€</p>
                 </span>
                 <nav class="botones flex items-center justify-center flex-wrap gap-4 md:justify-start">
-                    <form action="" class="flex justify-center">
+                    <form action="" class="flex justify-center gap-1">
                         <label for="cantidad" class="font-bold mr-2">Cantidad:</label>
                         <input type="number" id="cantidad" name="cantidad" value="1" min="1" class="w-16 rounded-md p-1 border border-beige">
                         <input type="hidden" id="productId" value="1">
@@ -185,39 +185,11 @@
 
         <!-- Lista de Items -->
         <ul class="carrito-items">
-            <!-- Fila de Encabezados (solo visible en tablet+) -->
-            <li class="carrito-item">
-                <span class="w-[90px]"></span>
-                <span class="nombre-producto">Nombre</span>
-                <span class="cantidad-container">Cantidad</span>
-                <span class="precio-producto">Precio</span>
-            </li>
-
-            <!-- Item 1 -->
-            <li class="carrito-item" id="carrito-item-1">
-                <img src="../assets/imagenes/foto1.jpg" alt="Producto 1">
-                <span class="nombre-producto">Sudadera Urban Style</span>
-                <div class="cantidad-container">
-                    <button class="restar-cantidad" data-producto="1">-</button>
-                    <span class="cantidad-producto">1</span>
-                    <button class="añadir-cantidad" data-producto="1">+</button>
-                </div>
-                <span class="precio-producto">49,99 €</span>
-            </li>
-
-            <!-- Item 2 -->
-            <li class="carrito-item" id="carrito-item-2">
-                <img src="../assets/imagenes/foto2.jpg" alt="Producto 2">
-                <span class="nombre-producto">Camiseta Concrete</span>
-                <div class="cantidad-container">
-                    <button class="restar-cantidad" data-producto="2">-</button>
-                    <span class="cantidad-producto">2</span>
-                    <button class="añadir-cantidad" data-producto="2">+</button>
-                </div>
-                <span class="precio-producto">24,99 €</span>
-            </li>
+            <!-- Los elementos se cargan dinamicamente por lo que por defecto solo se mostrara el mensaje de carrito vacio -->
+            <li class="carrito-vacio">Tu carrito está vacío.</li>
+            
         </ul>
-
+        <button class="btn-ver-mas boton-azul">Ver detalles</button>
         <!-- Footer del Carrito -->
         <div class="carrito-footer">
             <p class="total-amount">Total: 99,97 €</p>

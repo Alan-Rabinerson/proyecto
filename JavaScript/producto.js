@@ -130,16 +130,18 @@ function loadProductDetail() {
 
 function cargarReviews() {
   var xmlhttp = new XMLHttpRequest();
-  var productId = document.getElementById("productId").value;
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
   xmlhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       try {
+        
         var response = JSON.parse(this.responseText);
         if (response) {
           // Normalize different response shapes to an array before rendering
           var reviewsArr = [];
           reviewsArr = response;
-          console.log(response + "array");
+          console.log(response);
           renderReviews(reviewsArr);
         }
       } catch (e) {
@@ -149,8 +151,7 @@ function cargarReviews() {
   };
   xmlhttp.open(
     "GET",
-    "/student024/Shop/backend/endpoints/product_detail/show_reviews.php?productId=" +
-      productId,
+    "/student024/Shop/backend/endpoints/product_detail/show_reviews.php?productId=" + encodeURIComponent(productId),
     true
   );
   xmlhttp.send();
