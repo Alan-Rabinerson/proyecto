@@ -90,12 +90,16 @@ ul {
     right: -5px;
     background-color: var(--primary-color);
     color: var(--text-color);
-    font-size: 0.7rem;
-    font-weight: bold;
-    padding: 2px 6px;
     border-radius: 50%;
-    min-width: 20px;
-    text-align: center;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: bold;
+    z-index: 50;
+    pointer-events: none;
 }
 
 /* ===== MAIN CONTENT ===== */
@@ -170,7 +174,7 @@ main {
 }
 
 .btn-add-cart:hover {
-    background-color: var(--primary-color);
+    transform: scale(1.1);
 }
 
 .btn-comprar-ahora {
@@ -184,7 +188,7 @@ main {
 }
 
 .btn-comprar-ahora:hover {
-    background-color: var(--secondary-color);
+    transform: scale(1.1);
 }
 /* Secciones de productos */
 .featured-products,
@@ -256,37 +260,59 @@ main {
 .product-card {
     min-width: 320px;
     background-color: rgba(102, 155, 188, 0.1);
-    border: 2px solid var(--secondary-color);
-    border-radius: 10px;
+    border: 2px solid rgba(102, 155, 188, 0.2);
+    border-radius: 12px;
     padding: var(--spacing-md);
-    transition: var(--transition);
+    transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(193, 18, 31, 0.3);
-    border-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: #669BBC;
+    background: rgba(253, 240, 213, 0.12);
 }
 
 .product-card img {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: var(--spacing-sm);
+    border: 3px solid rgba(102, 155, 188, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.product-card img:hover {
+    transform: scale(1.05);
+    border-color: #669BBC;
 }
 
 .product-card h3 {
     font-size: 1.1rem;
     margin-bottom: var(--spacing-xs);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--text-color);
 }
 
 .product-card .price {
     font-size: 1.3rem;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--secondary-color);
     margin: var(--spacing-sm) 0;
+}
+
+select.size-select {
+    margin-bottom: var(--spacing-sm);
+    background-color: var(--bg-color);
+    padding: var(--spacing-xs);
+    border-radius: 5px;
+    color: var(--text-color);
 }
 
 /* Badges de descuento */
@@ -352,6 +378,8 @@ main {
     display: flex;
     flex-direction: column;
     padding: var(--spacing-md);
+    overflow: hidden;
+    height: 100%;
 }
 
 .cantidad-container {
@@ -362,13 +390,20 @@ main {
 }
 
 .carrito.active {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "carrito-header"
+        "carrito-items"
+        "carrito-footer";
     position: fixed;
     height: 88vh;
-    width: 80vw;
+    width: 95vw;
+    max-width: 95vw;
     top: 10vh;
-    right: 50px;
+    left: 2.5vw;
+    right: 2.5vw;
     background-color: var(--bg-color);
     border: 2px solid var(--secondary-color);
     border-radius: 10px;
@@ -377,6 +412,7 @@ main {
 }
 
 .carrito-header {
+    grid-area: carrito-header;
     padding: var(--spacing-sm);
     border-bottom: 2px solid var(--secondary-color);
     display: flex;
@@ -392,33 +428,158 @@ main {
 }
 
 .carrito-items {
-    flex: 1;
+    grid-area: carrito-items;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: var(--spacing-md);
+    max-height: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: var(--secondary-color) transparent;
+}
+
+.carrito-items::-webkit-scrollbar {
+    width: 8px;
+}
+
+.carrito-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.carrito-items::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.carrito-items::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }
 
 .carrito-items .carrito-item {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto auto;
+    grid-template-areas: "img nombre talla cantidad precio";
+    gap: 0.75rem;
     align-items: center;
+    padding: 0.75rem;
     margin-bottom: var(--spacing-md);
-    flex-direction: column;
-    border-bottom: 1px solid var(--secondary-color);
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(102, 155, 188, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.carrito-item:nth-child(1) {
-    display: none;
+.carrito-items .carrito-item:hover {
+    background: rgba(102, 155, 188, 0.05);
 }
 
 .carrito-items .carrito-item img {
-    width: 90px;
-    height: 90px;
+    grid-area: img;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
-    border-radius: 5px;
-    margin-right: var(--spacing-sm);
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.carrito-items .carrito-item img:hover {
+    transform: scale(1.05);
+}
+
+.carrito-items .carrito-item .nombre-producto {
+    grid-area: nombre;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.carrito-items .carrito-item .talla-producto {
+    grid-area: talla;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
+
+.carrito-items .carrito-item .cantidad-container {
+    grid-area: cantidad;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    width: fit-content;
+}
+
+.carrito-items .carrito-item .cantidad-container button {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+.carrito-items .carrito-item .cantidad-container button:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+.carrito-items .carrito-item .cantidad-container .cantidad-producto {
+    min-width: 30px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.carrito-items .carrito-item .precio-producto {
+    grid-area: precio;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text-color);
+}
+
+.carrito-items .carrito-item .eliminar-producto {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 28px;
+    height: 28px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    box-shadow: none;
+}
+
+.carrito-items .carrito-item .eliminar-producto:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.1);
 }
 
 .carrito-footer {
+    grid-area: carrito-footer;
     padding: var(--spacing-sm);
     border-top: 2px solid var(--secondary-color);
     text-align: center;
@@ -438,7 +599,35 @@ main {
 
 .añadir-cantidad,
 .restar-cantidad {
-    display: none;
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.añadir-cantidad:hover,
+.restar-cantidad:hover {
+    background-color: var(--accent-color);
+    transform: scale(1.1);
+}   
+
+
+.eliminar-producto {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 5px;
+    font-weight: 500;
+    margin-top: var(--spacing-sm);
 }
 
 .btn-ver-mas{
@@ -470,30 +659,35 @@ main {
         font-size: 1.2rem;
     }
     
-    /* Productos */
+    /* Productos en tablet */
     .product-card {
         min-width: 400px;
     }
 
-    /* Carrito */
+    /* Carrito en tablet - mantener estructura de 1 columna */
     .carrito.active {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
         left: 2.5vw;
         right: 2.5vw;
         width: auto;
         max-width: calc(100vw - 5vw);
     }
-    .carrito-item:first-child {
-        display: flex;
-        font-weight: bold;
-        border-bottom: 2px solid var(--secondary-color);
-        padding-bottom: var(--spacing-sm);
-        margin-bottom: var(--spacing-md);
-    }
-    .carrito-items .carrito-item {
-        flex-direction: row;
-        border: none;
-    }  
 
+    .carrito-items .carrito-item {
+        grid-template-columns: 100px 1fr auto auto auto;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .carrito-items .carrito-item img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .carrito-items .carrito-item .nombre-producto {
+        font-size: 1.1rem;
+    }
 
     .añadir-cantidad,
     .restar-cantidad {
@@ -524,29 +718,83 @@ main {
         font-size: 1.4rem;
     }
 
+    /* Ocultar sticky cart móvil en desktop */
+    .sticky-cart {
+        display: none;
+    }
+
+    /* Carrito desktop en header */
+    .sticky-cart.carrito-desktop {
+        display: flex;
+        position: relative;
+        width: auto;
+        background: transparent;
+        top: 0.125rem;
+        margin-left: auto;
+        bottom: auto;
+        right: auto;
+        box-shadow: none;
+    }
+
+    .sticky-cart.carrito-desktop:hover {
+        background: transparent;
+        transform: scale(1.1);
+    }
+
+    .carrito-desktop .cart-count {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+        top: 0;
+        right: 0;
+    }
+
     /* carrito */
     .carrito.active {
-        display: grid;
         grid-template-columns: 2.5fr 1fr; 
         grid-template-rows: auto 1fr; 
         grid-template-areas:
             "carrito-header carrito-header"
             "carrito-items carrito-footer";
         align-items: start;
-    }
-
-    .carrito-header {
-        grid-area: carrito-header;
+        width: 95vw;
+        left: 2.5vw;
+        right: 2.5vw;
+        transform: translateX(0);
     }
 
     .carrito-items {
-        grid-area: carrito-items;
         overflow-y: auto;
         padding: var(--spacing-md);
     }
 
+    .carrito-items .carrito-item {
+        grid-template-columns: 120px 2fr auto auto auto;
+        gap: 1.5rem;
+        padding: 1.25rem;
+    }
+
+    .carrito-items .carrito-item img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .carrito-items .carrito-item .nombre-producto {
+        font-size: 1.25rem;
+    }
+
+    .carrito-items .carrito-item .precio-producto {
+        font-size: 1.4rem;
+    }
+
+    .carrito-items .carrito-item .eliminar-producto {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+        top: 1rem;
+        right: 1rem;
+    }
+
     .carrito-footer {
-        grid-area: carrito-footer;
         padding: var(--spacing-md);
         border-top: none;
         border-left: 2px solid var(--secondary-color);
@@ -569,6 +817,7 @@ main {
     .slider-arrow{
         display: none;
     }
+    
     /* Productos */
     .product-card {
         min-width: 300px;
@@ -589,5 +838,37 @@ main {
 }
 
 .product-card {
-    animation: fadeIn 0.5s ease;
+    animation: fadeIn 0.3s ease-out backwards;
+}
+
+.product-card:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.product-card:nth-child(2) {
+    animation-delay: 0.05s;
+}
+
+.product-card:nth-child(3) {
+    animation-delay: 0.1s;
+}
+
+.product-card:nth-child(4) {
+    animation-delay: 0.15s;
+}
+
+.product-card:nth-child(5) {
+    animation-delay: 0.2s;
+}
+
+.product-card:nth-child(6) {
+    animation-delay: 0.25s;
+}
+
+.product-card:nth-child(7) {
+    animation-delay: 0.3s;
+}
+
+.product-card:nth-child(8) {
+    animation-delay: 0.35s;
 }

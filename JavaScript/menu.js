@@ -7,16 +7,45 @@ document.addEventListener("DOMContentLoaded", function () {
   const stickyCart = document.querySelectorAll('.sticky-cart')[1];
   const cerrarCarrito = document.getElementById('close-cart');
   const carritoDesktop = document.querySelector('.menu-links .carrito-desktop');
-  const añadirCantidadBtn = document.querySelectorAll('.añadir-cantidad');
-  const restarCantidadBtn = document.querySelectorAll('.restar-cantidad');
   const verMasBtn = document.getElementsByClassName('btn-ver-mas');
-  const usuario = getCookie('user');
-  const url = window.location.href;
-  // DEBUGGING console.log(usuario);
-  // Si el usuario esta logado ocultar el boton de login y mostrar su nombre y avatar
+  const logo = document.getElementsByClassName('logo');
+  const addToCartButtons = document.getElementsByClassName('add-to-cart-btn');
+  const productId = new URLSearchParams(window.location.search).get('id');
+  const size = document.querySelector('.size-select:checked') ? document.querySelector('.size-select:checked').value : 'M';
+  const fotoCarrito = document.querySelectorAll('.carrito-item img');
+  
+  // Obtener customer_id: primero desde user cookie (JSON), si no existe desde guest_id (número simple)
+  let userData = null;
+  let customer_id = null;
+  let isGuest = false;
+  
+  const userCookie = getCookie('user');
+  const guestCookie = getCookie('guest_id');
+  
+  if (userCookie) {
+    try {
+      userData = JSON.parse(userCookie);
+      customer_id = userData.customer_id;
+    } catch (e) {
+      console.warn('Error parseando user cookie:', e);
+    }
+  } else if (guestCookie) {
+    // guest_id es un número simple, no JSON
+    customer_id = guestCookie;
+    isGuest = true;
+    userData = { customer_id: guestCookie, username: 'guest_' + guestCookie };
+  }
+  
+  console.log('Customer ID:', customer_id, 'Is Guest:', isGuest);
+  
+  // Si el usuario está logado ocultar el botón de login y mostrar su nombre y avatar
   const loginBtn = document.getElementById('login-btn');
-  if (usuario) {
-    const userData = JSON.parse(usuario);
+  if (userData && !isGuest) {
+    // Exponer cookie 'username' y 'customer_id' para que los endpoints PHP los reconozcan
+    try {
+      if (userData.username) document.cookie = 'username=' + encodeURIComponent(userData.username) + '; path=/';
+      if (userData.customer_id) document.cookie = 'customer_id=' + encodeURIComponent(userData.customer_id) + '; path=/';
+    } catch (e) { console.warn('No se pudo setear cookie auxiliar username/customer_id', e); }
     loginBtn.style.display = 'none';
     const userDisplay = document.createElement('div');
     userDisplay.className = 'user-display flex items-center gap-2 cursor-pointer';
@@ -28,6 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     loginBtn.parentNode.appendChild(userDisplay);
     //console.log(userData.username)
+  }
+
+  // evento para redirigir al home al hacer click en el logo
+  if (logo.length > 0) {
+    logo[0].addEventListener('click', () => {
+      window.location.href = '/student024/Shop/index.html';
+    });
   }
 
   // Evento para abrir el menú móvil
@@ -76,12 +112,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (typeof loadCart === 'function' && !url.includes('shopping-cart.html')) {
+  if (addToCartButtons.length > 0) {
+    Array.from(addToCartButtons).forEach(button => {
+      button.addEventListener('click', () => {
+        addToCart(productId, 1, size);
+      });
+    });
+  }
+
+  if (fotoCarrito.length > 0) {
+    Array.from(fotoCarrito).forEach(img => {
+      img.addEventListener('click', () => {
+        window.location.href = '/student024/Shop/views/product.html?id=' + img.parentElement.getAttribute('data-product');
+      });
+    });
+  }
+
+     
+
+
+
+  if (typeof loadCart === 'function') {
     try { loadCart(); } catch (e) { console.error('loadCart error:', e); }
-  } else if (!url.includes('shopping-cart.html')){
+  } else {
     // Fallback: petición XHR directa si loadCart no existe
-    //DEBUGGING
-    //console.log(url)
+    loadCartFromServer();
+  }
+
+  function loadCartFromServer() {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
@@ -109,7 +167,13 @@ document.addEventListener("DOMContentLoaded", function () {
         c = c.substring(1);
       }
       if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
+        let cookieValue = c.substring(name.length, c.length);
+        // Intentar decodificar si es URI encoded
+        try {
+          return decodeURIComponent(cookieValue);
+        } catch (e) {
+          return cookieValue;
+        }
       }
     }
     return "";
@@ -118,42 +182,67 @@ document.addEventListener("DOMContentLoaded", function () {
   function renderCart(items, total) {
     const list = document.querySelector('.carrito-items');
     if (!list) return;
-    // keep header (first li) if present
-    const header = list.querySelector(':scope > li:first-child');
+    // DEBUG: mostrar items recibidos
+    //try { console.log('renderCart items:', items, 'total:', total); } catch(e){}
+    // mantener el header "Carrito Vacío" si existe y el boton de "Ver Más"
+    let verMasBtn = list.querySelector('button.btn-ver-mas');
     list.innerHTML = '';
-    if (header) list.appendChild(header);
+    if (verMasBtn) {
+      const verMasLi = document.createElement('li');
+      verMasLi.classList.add('flex', 'justify-center', 'mt-4');
+      verMasLi.appendChild(verMasBtn);
+      list.appendChild(verMasLi);
+    }
 
-    items.forEach(item => {
+    Object.values(items).forEach(item => {     
       const li = document.createElement('li');
       li.className = 'carrito-item';
+      // mark li for product/size so we can find related buttons across duplicates
+      li.setAttribute('data-product', item.product_id);
+      li.setAttribute('data-size', item.size || '');
 
       li.innerHTML = `
         <img src="${item.image}" alt="${escapeHtml(item.name)}">
         <span class="nombre-producto">${escapeHtml(item.name)}</span>
+        <span class="talla-producto p-2">Talla: ${escapeHtml(item.size)}</span>
         <div class="cantidad-container">
           <button class="restar-cantidad" data-product="${item.product_id}" data-size="${escapeHtml(item.size)}">-</button>
           <span class="cantidad-producto">${item.quantity}</span>
           <button class="añadir-cantidad" data-product="${item.product_id}" data-size="${escapeHtml(item.size)}">+</button>
         </div>
         <span class="precio-producto">${Number(item.subtotal).toFixed(2)} €</span>
+        <button class="eliminar-producto" data-product="${item.product_id}" data-size="${escapeHtml(item.size)}" onClick="updateQuantity('${item.product_id}', '${escapeHtml(item.size)}', -${item.quantity}); event.stopPropagation();">×</button>
       `;
 
-      // attach handlers
-      li.querySelectorAll('button.restar-cantidad, button.añadir-cantidad').forEach(btn => {
-        btn.addEventListener('click', function (e) {
+      // Añadir un único listener por botón para evitar duplicados
+      const restBtn = li.querySelector('button.restar-cantidad');
+      const addBtn = li.querySelector('button.añadir-cantidad');
+      if (restBtn) {
+        restBtn.addEventListener('click', function (e) {
+          e.preventDefault();
           const pid = this.getAttribute('data-product');
           const size = this.getAttribute('data-size');
-          const delta = this.classList.contains('restar-cantidad') ? -1 : 1;
-          updateQuantity(pid, size, delta);
+          updateQuantity(pid, size, -1, this);
         });
-      });
+      }
+      if (addBtn) {
+        addBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          const pid = this.getAttribute('data-product');
+          const size = this.getAttribute('data-size');
+          updateQuantity(pid, size, 1, this);
+        });
+      }
 
       list.appendChild(li);
     });
 
-    // update total if footer element exists
+    // actualizar total carrito
     const totalEl = document.querySelector('.carrito-footer .total-amount');
     if (totalEl) totalEl.textContent = 'Total: ' + Number(total).toFixed(2) + ' €';
+    // actualizar contador carrito en el menú
+    const cartCountEl = document.querySelector('.cart-count');
+    if (cartCountEl) cartCountEl.textContent = Object.values(items).reduce((sum, it) => sum + Number(it.quantity), 0);
   }
 
   function escapeHtml(str) {
@@ -163,6 +252,80 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  function updateQuantity(productId, size, delta) {
 
-  
+    //console.log('updateQuantity', productId, size, delta);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/student024/Shop/backend/endpoints/shopping_cart/update_quantity.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4) {
+        if (this.status === 200) {
+          try {
+            var resp = JSON.parse(this.responseText);
+            //console.log('updateQuantity response:', resp); // DEBUGGING
+            if (resp && resp.success && typeof renderCart === 'function') {
+              renderCart(resp.items, resp.total);
+            }
+          } catch (e) { console.error('Error parsing update quantity response:', e, '\nresponseText:', this.responseText); }
+        } else {
+          console.error('updateQuantity XHR error, status:', this.status, 'response:', this.responseText);
+        }
+      }
+    };
+    xhr.send('product_id=' + encodeURIComponent(productId) + '&size=' + encodeURIComponent(size) + '&delta=' + encodeURIComponent(delta));
+
+  }
+  function addToCart(productId, quantity, size) {
+    // Usar window.customer_id si la variable local no está disponible
+    const cid = customer_id || window.customer_id;
+    
+    if (!cid) {
+      console.error('customer_id no disponible. No se puede añadir al carrito.');
+      alert('Por favor, inicia sesión o espera a que se cargue la página.');
+      return;
+    }
+    
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/student024/Shop/backend/db/shopping_cart/db_shopping_cart_insert.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState !== 4) return;
+      if (xhr.status === 200) {
+        try {
+          const response = JSON.parse(xhr.responseText);
+          if (response.success) {
+            // DEBUGGING console.log('Producto añadido al carrito exitosamente. Customer ID:', cid);
+            // Recargar el carrito inmediatamente después de añadir
+            loadCartFromServer();
+          } else {
+            console.error('Error al añadir el producto al carrito: ' + response.message);
+          }
+        } catch (err) {
+          console.error('Error parsing add to cart response as JSON:', err);
+          console.error('Response text:', xhr.responseText);
+        }
+      } else {
+        console.error('Server returned status', xhr.status, 'for db_shopping_cart_insert.php');
+        console.error('Response text:', xhr.responseText);
+      }
+    };
+    // DEBUGGING console.log('Enviando addToCart:', { productId, quantity, size, customer_id: cid });
+    xhr.send('product_id=' + encodeURIComponent(productId) + '&quantity=' + encodeURIComponent(quantity) + '&size=' + encodeURIComponent(size) + '&customer_id=' + encodeURIComponent(cid));
+  }
+
+  // Hacer accesibles algunas funciones y variables desde el scope global para los manejadores inline
+  try {
+    window.updateQuantity = updateQuantity;
+    window.renderCart = renderCart;
+    window.escapeHtml = escapeHtml;
+    window.addToCart = addToCart;
+    window.loadCartFromServer = loadCartFromServer;
+    window.customer_id = customer_id;
+    window.userData = userData;
+    window.isGuest = isGuest;
+    // DEBUGGING console.log('Global variables set: customer_id=', window.customer_id, 'isGuest=', window.isGuest);
+  } catch (e) { console.warn('No se pudieron exportar funciones al scope global:', e); }
+
 });

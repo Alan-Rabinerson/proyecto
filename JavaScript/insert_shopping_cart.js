@@ -1,5 +1,14 @@
-let addtoCartForms = document.querySelectorAll(".add-to-cart-form"); 
+let addtoCartForms = document.querySelectorAll(".add-to-cart-form") ?? document.querySelectorAll(".btn-add-cart"); 
 let elementoMensaje = document.createElement("div"); 
+function getCookie(name){
+    const n = name + "=";
+    const parts = decodeURIComponent(document.cookie).split(';');
+    for (let p of parts){
+        p = p.trim();
+        if (p.indexOf(n) === 0) return p.substring(n.length);
+    }
+    return "";
+}
 addtoCartForms.forEach(form => {
     form.addEventListener("submit", (event) => {
         event.preventDefault(); // prevent form submission
@@ -10,6 +19,15 @@ addtoCartForms.forEach(form => {
         xhttp.open("POST", "/student024/Shop/backend/db/shopping_cart/db_shopping_cart_insert.php", true);
         var size = form.querySelector("select[name='size']");
         params += "&size=" + encodeURIComponent(size.value);
+
+        // Añadir customer_id si está disponible (soporte invitados)
+        let cid = null;
+        const userCookie = getCookie('user');
+        if (userCookie) {
+            try { const u = JSON.parse(userCookie); cid = u.customer_id || null; } catch(e){}
+        }
+        if (!cid) cid = getCookie('customer_id') || getCookie('guest_id') || null;
+        if (cid) params += "&customer_id=" + encodeURIComponent(cid);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         
         xhttp.onreadystatechange = function() {
@@ -28,7 +46,21 @@ addtoCartForms.forEach(form => {
                 document.body.appendChild(elementoMensaje);
                 setTimeout(() => {
                     document.body.removeChild(elementoMensaje);
-                }, 5000);
+                }, 5000); 
+            } else {
+                elementoMensaje.innerText = JSON.parse(this.responseText).message;   
+                elementoMensaje.style.position = "fixed";
+                elementoMensaje.style.bottom = "20px";
+                elementoMensaje.style.right = "20px";
+                elementoMensaje.style.backgroundColor = "#FF4C4C";
+                elementoMensaje.style.color = "white";
+                elementoMensaje.style.padding = "10px";
+                elementoMensaje.style.borderRadius = "5px";
+                elementoMensaje.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.3)";
+                document.body.appendChild(elementoMensaje);
+                setTimeout(() => {
+                    document.body.removeChild(elementoMensaje);
+                }, 5000); 
             }
         };
         xhttp.send(params);

@@ -1,39 +1,7 @@
-@font-face {
-    font-family: Roboto;
-    src: url("/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf");
-}
-@font-face {
-    font-family: Montserrat;
-    src: url("/student024/Shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
-}
-$color-fondo: #003049;
-$color-fondo-footer: rgba(0,0,0,0.3);
-$color-texto: #fdf0d5;
-$color-accent: #780000;
-$color-secundario: #669BBC;
-$color-primario: #C1121F;
-$fuente-principal: 'Roboto', sans-serif;
-$fuente-secundaria: 'Montserrat', sans-serif;
+@import '_variables';
+@import '_mixins';
 
-@mixin boton($size, $bg-color, $text-color, $hover-bg-color, $roundness) {
-    width: $size;
-    height: auto;
-    background-color: $bg-color;
-    color: $text-color;
-    border: none;
-    border-radius: $roundness;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
 
-    &:hover {
-        background-color: $hover-bg-color;
-        transform: scale(1.2);
-    }
-}
 html, body {
     overflow-x: hidden;
 }

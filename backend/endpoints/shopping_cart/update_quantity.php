@@ -1,15 +1,24 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 
 $customer_id = 0;
+// 1) Sesión
 if (isset($_SESSION['customer_id'])) {
     $customer_id = intval($_SESSION['customer_id']);
+// 2) Parámetro explícito
 } elseif (isset($_POST['customer_id'])) {
     $customer_id = intval($_POST['customer_id']);
+// 3) Cookies directas
+} elseif (isset($_COOKIE['customer_id'])) {
+    $customer_id = intval($_COOKIE['customer_id']);
+} elseif (isset($_COOKIE['guest_id'])) {
+    $customer_id = intval($_COOKIE['guest_id']);
+// 4) Resolver desde username
 } elseif (isset($_COOKIE['username'])) {
-    // Resolve customer_id from username cookie when session not present
     $username = mysqli_real_escape_string($conn, $_COOKIE['username']);
     $q = "SELECT customer_id FROM `024_customers` WHERE username = '" . $username . "' LIMIT 1";
     $r = mysqli_query($conn, $q);
@@ -42,14 +51,14 @@ if ($res && mysqli_num_rows($res) > 0) {
         mysqli_query($conn, $upd);
     }
     // Return refreshed cart
-    include __DIR__ . '/get_cart.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/endpoints/shopping_cart/get_cart.php';
     exit;
 } else {
     // If no existing row and delta positive, insert
     if ($delta > 0) {
         $ins = "INSERT INTO `024_shopping_cart` (customer_id, product_id, quantity, size) VALUES ($customer_id, $product_id, $delta, '" . $size . "')";
         mysqli_query($conn, $ins);
-        include __DIR__ . '/get_cart.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/endpoints/shopping_cart/get_cart.php';
         exit;
     }
 }

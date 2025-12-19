@@ -67,7 +67,7 @@
                         <label for="cantidad" class="font-bold mr-2">Cantidad:</label>
                         <input type="number" id="cantidad" name="cantidad" value="1" min="1" class="w-16 rounded-md p-1 border border-beige">
                         <input type="hidden" id="productId" value="1">
-                        <button id="añadir-carrito-btn" class="boton-rojo agregar-carrito">Agregar al Carrito</button>
+                        <button id="añadir-carrito-btn" class="boton-rojo agregar-carrito add-to-cart-btn">Agregar al Carrito</button>
                     </form>
                     <button class="boton-rojo ml-4">Comprar Ahora</button>
                 </nav>
@@ -135,6 +135,36 @@
                 </span>
             </div> -->
         </section>
+        <!-- Botón Sticky Cart (Móvil) -->
+        <button id="sticky-cart-mobile" class="sticky-cart">
+            <img src="../assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
+            <span class="cart-count">2</span>
+        </button>
+    
+    
+    
+        <!-- Modal del Carrito -->
+        <div class="carrito" id="carrito">
+            <!-- Header del Carrito -->
+            <div class="carrito-header">
+                <h2>Tu Carrito</h2>
+                <button id="close-cart">×</button>
+            </div>
+    
+            <!-- Lista de Items -->
+            <ul class="carrito-items">
+                <!-- Los elementos se cargan dinamicamente por lo que por defecto solo se mostrara el mensaje de carrito vacio -->
+                <li class="carrito-vacio text-center text-azul-claro py-8">Tu carrito está vacío.</li>
+                
+                <button class="btn-ver-mas">VER DETALLES</button>
+            </ul>
+            <!-- Footer del Carrito -->
+            <div class="carrito-footer">
+                <p class="total-amount">Total: 99,97 €</p>
+                <button class="btn-checkout">Proceder al pago</button>
+            </div>
+        </div>
+        
     </main>  
     <footer>
         <div class="footer-content flex justify-between flex-wrap gap-4 p-8 bg-fondo-footer text-beige text-sm">
@@ -167,36 +197,8 @@
             <p>&copy; 2025 Concrete Jungle. Todos los derechos reservados.</p>
         </div>
     </footer>
-    <!-- Botón Sticky Cart (Móvil) -->
-    <button id="sticky-cart-mobile" class="sticky-cart">
-        <img src="../assets/logos/carrito_blanco.png" alt="Icono carrito de compras">
-        <span class="cart-count">2</span>
-    </button>
-
-
-
-    <!-- Modal del Carrito -->
-    <div class="carrito" id="carrito">
-        <!-- Header del Carrito -->
-        <div class="carrito-header">
-            <h2>Tu Carrito</h2>
-            <button id="close-cart">×</button>
-        </div>
-
-        <!-- Lista de Items -->
-        <ul class="carrito-items">
-            <!-- Los elementos se cargan dinamicamente por lo que por defecto solo se mostrara el mensaje de carrito vacio -->
-            <li class="carrito-vacio">Tu carrito está vacío.</li>
-            
-        </ul>
-        <button class="btn-ver-mas boton-azul">Ver detalles</button>
-        <!-- Footer del Carrito -->
-        <div class="carrito-footer">
-            <p class="total-amount">Total: 99,97 €</p>
-            <button class="btn-checkout">Proceder al pago</button>
-        </div>
-    </div>
     <script src="../JavaScript/menu.js"></script>
     <script src="../JavaScript/producto.js"></script>
+    <script src="../JavaScript/guest.js"></script>
 </body>
 </html> 

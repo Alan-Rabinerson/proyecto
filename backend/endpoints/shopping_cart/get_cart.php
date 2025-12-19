@@ -1,16 +1,25 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 
 
 $customer_id = 0;
+// 1) Prioridad: sesión
 if (isset($_SESSION['customer_id'])) {
     $customer_id = intval($_SESSION['customer_id']);
+// 2) Parámetro explícito en la petición
 } elseif (isset($_GET['customer_id'])) {
     $customer_id = intval($_GET['customer_id']);
+// 3) Cookies directas de identificación
+} elseif (isset($_COOKIE['customer_id'])) {
+    $customer_id = intval($_COOKIE['customer_id']);
+} elseif (isset($_COOKIE['guest_id'])) {
+    $customer_id = intval($_COOKIE['guest_id']);
+// 4) Resolver desde username si existe
 } elseif (isset($_COOKIE['username'])) {
-    // Try to resolve customer_id from username cookie
     $username = mysqli_real_escape_string($conn, $_COOKIE['username']);
     $q = "SELECT customer_id FROM `024_customers` WHERE username = '" . $username . "' LIMIT 1";
     $r = mysqli_query($conn, $q);

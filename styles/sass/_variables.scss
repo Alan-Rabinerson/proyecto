@@ -1,0 +1,16 @@
+@font-face {
+    font-family: Roboto;
+    src: url("/student024/Shop/assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf");
+}
+@font-face {
+    font-family: Montserrat;
+    src: url("/student024/Shop/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+$color-fondo: #003049;
+$color-fondo-footer: rgba(0,0,0,0.3);
+$color-texto: #fdf0d5;
+$color-accent: #780000;
+$color-secundario: #669BBC;
+$color-primario: #C1121F;
+$fuente-principal: 'Roboto', sans-serif;
+$fuente-secundaria: 'Montserrat', sans-serif;

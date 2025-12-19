@@ -1,0 +1,21 @@
+// mixin para botones con personalización de tamaño, colores y redondez
+@mixin boton($size, $bg-color, $text-color, $hover-bg-color, $roundness) {
+    width: $size;
+    height: auto;
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    border-radius: $roundness;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+
+    &:hover {
+        background-color: $hover-bg-color;
+        transform: scale(1.2);
+    }
+}
+

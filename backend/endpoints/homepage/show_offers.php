@@ -16,8 +16,8 @@
         $product_id = intval($offer['product_id']);
         $discount = floatval($offer['discount_percent']);
         
-        $sql = "SELECT p.product_id, p.name, p.price, p.description
-                FROM `024_products` p
+        $sql = "SELECT p.product_id, p.name, p.price, p.description, p.available_sizes
+                FROM `024_product_view` p
                 WHERE p.product_id = $product_id 
                 LIMIT 1";
         
@@ -34,6 +34,7 @@
                 'price' => number_format($discounted_price, 2, '.', ''),
                 'discount_percent' => $discount,
                 'description' => $row['description'],
+                'sizes' => $row['available_sizes']
             ];
         }
     }

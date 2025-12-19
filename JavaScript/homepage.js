@@ -59,22 +59,48 @@ function loadFeaturedProducts() {
                 products.forEach(product => {
                     const productCard = document.createElement('div');
                     productCard.className = 'product-card';
-                    productCard.style.cursor = 'pointer';
                     productCard.dataset.productId = product.product_id;
 
                     productCard.innerHTML = `
                         <img src="./assets/imagenes/foto${product.product_id}.jpg" alt="${product.product_name}">
                         <h3>${product.product_name}</h3>
                         <p class="price">${product.price.toFixed(2)} €</p>
+                        `
+                    
+                    const sizes = product.sizes.split(',');
+                    let sizeOptions = `<label for="size-select-${product.product_id}">Talla:</label>
+                        <select id="size-select-${product.product_id}" class="size-select">`;
+                    sizes.forEach(element => {
+                        sizeOptions += `
+                         <option value="${element}">${element}</option>
+                        `;
+                    });
+                    sizeOptions += `</select>`;
+                    productCard.innerHTML += sizeOptions;
+                        
+                    productCard.innerHTML+=    
+                        `
                         <button class="btn-comprar-ahora">Comprar</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     `;
 
                     productCard.addEventListener('click', (e) => {
                         if (!e.target.classList.contains('btn-comprar-ahora') && 
-                            !e.target.classList.contains('btn-add-cart')) {
+                            !e.target.classList.contains('btn-add-cart') && !e.target.classList.contains('size-select')) {
+                            e.stopPropagation();
                             window.location.href = `./views/producto.html?id=${product.product_id}`;
                         }
+                    });
+
+                    // Agregar event listener al botón "Añadir al carrito"
+                    const addCartBtn = productCard.querySelector('.btn-add-cart');
+                    addCartBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const productId = productCard.dataset.productId;
+                        const sizeSelect = productCard.querySelector('.size-select');
+                        const selectedSize = sizeSelect ? sizeSelect.value : 'M';
+                        console.log('Añadiendo producto:', productId, 'talla:', selectedSize);
+                        addToCart(productId, 1, selectedSize);
                     });
 
                     productsSlider.appendChild(productCard);
@@ -115,16 +141,39 @@ function loadWeeklyOffers() {
                         <img src="./assets/imagenes/foto${offer.product_id}.jpg" alt="${offer.product_name}">
                         <h3>${offer.product_name}</h3>
                         <p class="old-price">${offer.original_price} €</p>
-                        <p class="new-price">${offer.price} €</p>
-                        <button class="btn-comprar-ahora">Comprar</button>
+                        <p class="new-price">${offer.price} €</p>`
+                    const sizes = offer.sizes.split(',');
+                    let sizeOptions = `<label for="size-select-${offer.product_id}">Talla:</label>
+                        <select id="size-select-${offer.product_id}" class="size-select">`;
+                    sizes.forEach(element => {
+                        sizeOptions += `
+                         <option value="${element}">${element}</option>
+                        `;
+                    });
+                    sizeOptions += `</select>`;       
+                    offerCard.innerHTML += sizeOptions;                 
+                    offerCard.innerHTML +=
+                       `<button class="btn-comprar-ahora">Comprar</button>
                         <button class="btn-add-cart">Añadir al carrito</button>
                     `;
 
                     offerCard.addEventListener('click', (e) => {
                         if (!e.target.classList.contains('btn-comprar-ahora') && 
-                            !e.target.classList.contains('btn-add-cart')) {
+                            !e.target.classList.contains('btn-add-cart') && !e.target.classList.contains('size-select')) {
+                            e.stopPropagation();
                             window.location.href = `./views/producto.html?id=${offer.product_id}`;
                         }
+                    });
+
+                    // Agregar event listener al botón "Añadir al carrito"
+                    const addCartBtn = offerCard.querySelector('.btn-add-cart');
+                    addCartBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const productId = offerCard.dataset.productId;
+                        const sizeSelect = offerCard.querySelector('.size-select');
+                        const selectedSize = sizeSelect ? sizeSelect.value : 'M';
+                        console.log('Añadiendo oferta:', productId, 'talla:', selectedSize);
+                        addToCart(productId, 1, selectedSize);
                     });
 
                     offersSlider.appendChild(offerCard);

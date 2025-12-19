@@ -125,7 +125,7 @@
 
     /* Carrito escritorio: icono de carrito no fijo colocado en el header para pantallas grandes */
     .sticky-cart.carrito-desktop{
-        @apply hidden lg:flex relative w-auto bg-transparent hover:scale-110 top-0.5 ml-5; ;
+        @apply hidden lg:flex relative w-auto bg-transparent hover:scale-110 top-0.5 ml-auto; ;
     }
 
     /* Imagen del icono del carrito: tamaño y ajuste */
@@ -169,48 +169,89 @@
 
     /* Lista de items del carrito: área con scroll que contiene los items individuales */
     .carrito-items{
-        @apply flex-1 overflow-y-auto p-4 lg:row-start-2;
+        @apply flex-1 overflow-y-auto overflow-x-hidden p-4 max-h-full [scrollbar-width:thin] [scrollbar-color:#669BBC_transparent] lg:row-start-2;
+    }
+
+    /* Estilos del scrollbar webkit para carrito-items */
+    .carrito-items::-webkit-scrollbar{
+        @apply w-2;
+    }
+
+    .carrito-items::-webkit-scrollbar-track{
+        @apply bg-transparent;
+    }
+
+    .carrito-items::-webkit-scrollbar-thumb{
+        @apply bg-azul-claro rounded;
+    }
+
+    .carrito-items::-webkit-scrollbar-thumb:hover{
+        @apply bg-rojo;
     }
 
     /* Item individual del carrito */
     .carrito-item{
-        @apply flex flex-col items-center justify-between mb-4 pb-4 border-b border-azul-claro  md:flex-row md:border-none;
+        @apply grid grid-cols-[80px_1fr_auto_auto_auto] gap-3 items-center p-3 bg-transparent rounded-none border-none border-b border-azul-claro/20 transition-all relative;
+    }
+
+    .carrito-item:hover{
+        @apply bg-azul-claro/5;
     }
 
     /* Primera fila (encabezados) - solo visible en tablet+ */
     .carrito-item:first-child{
-        @apply hidden md:flex md:flex-row font-bold border-b-2 border-azul-claro pb-2 mb-4;
+        @apply hidden;
     }
 
     /* Imagen del producto en el carrito */
     .carrito-item img{
-        @apply w-[90px] h-[90px] object-cover rounded-md mr-0 mb-2 md:mr-4 md:mb-0;
+        @apply w-[80px] h-[80px] object-cover rounded-lg border-none shadow-none transition-all;
+    }
+
+    .carrito-item img:hover{
+        @apply scale-105;
     }
 
     /* Nombre del producto */
     .carrito-item .nombre-producto{
-        @apply flex-1 text-center md:text-left mb-2 md:mb-0;
+        @apply font-primary font-bold text-base text-beige;
+    }
+
+    .carrito-item .talla-producto{
+        @apply text-beige font-normal text-sm;
     }
 
     /* Contenedor de cantidad */
     .cantidad-container{
-        @apply flex items-center gap-2 w-24 justify-center mb-2 md:mb-0;
+        @apply flex items-center gap-3 bg-transparent p-0 rounded-none border-none w-fit;
     }
 
     /* Botones de incrementar/decrementar cantidad del carrito */
     .añadir-cantidad,
     .restar-cantidad{
-        @apply hidden md:inline-block cursor-pointer bg-rojo text-beige px-2 py-0.5  rounded-full font-bold hover:bg-granate transition select-none;
+        @apply w-8 h-8 bg-rojo text-beige border-none rounded-full font-bold hover:bg-granate transition flex items-center justify-center cursor-pointer text-xl shadow-none;
     }
 
+    .añadir-cantidad:hover,
+    .restar-cantidad:hover{
+        @apply scale-110;
+    }
 
     .carrito-item .cantidad-producto{
-        @apply w-8 text-center font-semibold;
+        @apply min-w-[30px] text-center font-bold text-beige text-lg;
     }
 
-
     .carrito-item .precio-producto{
-        @apply w-20 text-right font-semibold;
+        @apply font-bold text-beige text-lg;
+    }
+
+    .precio-producto{
+        @apply p-0;
+    }
+
+    /* Botón eliminar producto del carrito */
+    .eliminar-producto{
+        @apply absolute top-2 right-2 w-7 h-7 bg-rojo text-beige rounded-full font-bold hover:bg-granate transition flex items-center justify-center cursor-pointer text-xl;
     }
 
     /* Footer del carrito (total y checkout) */
@@ -225,7 +266,7 @@
 
     /* Botón de checkout */
     .btn-checkout{
-        @apply bg-rojo text-beige px-6 py-2 rounded font-semibold uppercase tracking-wider shadow-md hover:bg-granate transition w-full;
+        @apply bg-rojo text-beige px-6 py-2 rounded font-semibold uppercase tracking-wider hover:bg-granate transition w-full;
     }
 
     /* Estado vacío del carrito */
@@ -235,6 +276,11 @@
 
     .carrito-empty p{
         @apply text-lg text-azul-claro;
+    }
+
+    /* Botón ver más en el carrito */
+    .btn-ver-mas{
+        @apply bg-azul-claro text-beige px-6 py-2 rounded font-semibold uppercase tracking-wider hover:bg-granate transition mx-auto mt-4 block;
     }
 
     .add-to-cart-form{

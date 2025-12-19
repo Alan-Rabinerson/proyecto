@@ -1,0 +1,316 @@
+@import "_common";
+
+
+.carrito-header {
+  display: flex ;
+  justify-content: space-between ;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, $color-primario 0%, $color-accent 100%);
+  border-radius: 12px;
+  border-bottom: 3px solid $color-secundario;
+  box-shadow: 0 4px 12px rgba($color-primario, 0.3) ;
+  
+  h2 {
+    font-family: $fuente-secundaria;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: $color-texto;
+    text-transform: uppercase;
+    letter-spacing: 1.5px; 
+
+    @media (min-width: 768px) {
+      font-size: 2rem ;
+    }
+  }
+
+} 
+
+// Vista detallada del carrito - Full page layout
+.carrito { 
+  width: 100%; 
+  margin: 1rem auto;
+  padding: 2rem;
+  background: $color-fondo;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  display: grid; 
+  grid-template-columns: 1fr;
+  gap: 2rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 0.5fr;
+    align-items: center;
+  }
+} 
+
+
+
+ 
+.carrito-items {  
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.carrito-item {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  padding: 1.5rem;
+  background: rgba($color-texto, 0.06);
+  border-radius: 12px;
+  border: 2px solid rgba($color-secundario, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  grid-template-columns: 80px 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: $color-secundario;
+    background: rgba($color-texto, 0.12);
+  }
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: 120px 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 150px 1fr;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid rgba($color-secundario, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      border-color: $color-secundario;
+    }
+    
+    @media (min-width: 1024px) {
+      width: 150px;
+      height: 150px;
+    }
+
+    @media (min-width: 768px) {
+      width: 120px;
+      height: 120px;
+    }
+
+  }
+
+  .product-info {
+    grid-column: 2;
+
+    @media (min-width: 1024px) {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;    
+    }
+  }
+  
+  .nombre-producto {
+    font-family: $fuente-secundaria;
+    font-weight: 700;
+    font-size: 1rem;
+    color: $color-texto;
+    line-height: 1.3;
+    
+    @media (min-width: 1024px) {
+      font-size: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.1rem;
+    }
+  }
+
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: rgba($color-texto, 0.85);
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .label {
+        font-weight: 600;
+        color: $color-secundario;
+      }
+
+      .value {
+        color: $color-texto;
+      }
+    }
+  }
+  
+  .cantidad-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba($color-fondo, 0.5);
+    padding: 0.4rem 0.75rem;
+    border-radius: 10px;
+    border: 2px solid rgba($color-secundario, 0.3);
+    width: fit-content;
+
+    @media (min-width: 1024px) {
+      padding: 0.5rem 1rem;
+      gap: 0.75rem;
+    }
+
+    @media (min-width: 768px) {
+      margin-top: 1rem;
+    }
+    
+    button {
+      @include boton(auto, $color-secundario, $color-texto, lighten($color-secundario, 10%), 8px);
+      min-width: 32px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba($color-secundario, 0.3);
+      
+      &:hover {
+        transform: scale(1.15);
+        box-shadow: 0 4px 12px rgba($color-secundario, 0.5);
+      }
+      
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+    
+    .cantidad-producto {
+      min-width: 40px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: $color-texto;
+      min-width: 30px;
+      font-size: 1.1rem ;
+    }
+  }
+  
+  .precio-producto {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: $color-secundario;
+    text-align: right;
+
+    @media (min-width: 1024px) {
+      font-size: 1.4rem;
+    }
+
+    @media (min-width: 768px) { 
+      font-size: 1.25rem;
+    } 
+  }
+
+  .eliminar-producto {
+    @include boton(28px, rgba($color-accent, 0.1), $color-primario, rgba($color-accent, 0.2), 50%);
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;    
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba($color-accent, 0.4);
+
+    &:hover {
+      transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 4px 12px rgba($color-primario, 0.6);
+    }
+
+    @media (min-width: 1024px) {
+      width: 36px;
+      height: 36px;
+      font-size: 1.1rem;
+      top: 1rem;
+      right: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      width: 28px ;
+      height: 28px;
+      font-size: 1rem;
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
+}
+
+
+main {
+  min-height: calc(100vh - 200px);
+  padding: 1rem 0.5rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem 1rem;
+  }
+
+  .btn-checkout {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, $color-primario 0%, $color-accent 100%);
+    color: $color-texto;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    box-shadow: 0 6px 20px rgba($color-primario, 0.4);
+    margin-top: 1rem;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba($color-primario, 0.6);
+      background: linear-gradient(135deg, lighten($color-primario, 5%) 0%, lighten($color-accent, 5%) 100%);
+    }
+
+    &:active { transform: translateY(0); }
+
+    @media (min-width: 768px) {
+      padding: 1.25rem;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+// Animaciones y transiciones suaves
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.carrito-item {
+  animation: slideIn 0.3s ease-out backwards;
+
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i + 1}) { animation-delay: #{$i * 0.05}s; }
+  }
+}
+
+
