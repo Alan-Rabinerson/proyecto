@@ -99,7 +99,7 @@ function loadFeaturedProducts() {
                         const productId = productCard.dataset.productId;
                         const sizeSelect = productCard.querySelector('.size-select');
                         const selectedSize = sizeSelect ? sizeSelect.value : 'M';
-                        console.log('Añadiendo producto:', productId, 'talla:', selectedSize);
+                        // DEBUGGING console.log('Añadiendo producto:', productId, 'talla:', selectedSize);
                         addToCart(productId, 1, selectedSize);
                     });
 
@@ -172,7 +172,7 @@ function loadWeeklyOffers() {
                         const productId = offerCard.dataset.productId;
                         const sizeSelect = offerCard.querySelector('.size-select');
                         const selectedSize = sizeSelect ? sizeSelect.value : 'M';
-                        console.log('Añadiendo oferta:', productId, 'talla:', selectedSize);
+                        // DEBUGGING console.log('Añadiendo oferta:', productId, 'talla:', selectedSize);
                         addToCart(productId, 1, selectedSize);
                     });
 

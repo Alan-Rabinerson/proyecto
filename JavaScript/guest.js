@@ -6,19 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // si no existe usuario crear invitado en la base de datos primero
     const today = parseInt(Date.now().toString().slice(0, 9));
     const tempGuestId = Math.floor(Math.random() * 100) + today;
-    console.log('Creando guest con tempId:', tempGuestId);
+    // DEBUGGING console.log('Creando guest con tempId:', tempGuestId);
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
         if (xhr.status === 200) {
-          console.log('Guest creation response:', this.responseText);
+          // DEBUGGING console.log('Guest creation response:', this.responseText);
           try {
             const response = JSON.parse(this.responseText);
             if (response.success && response.customer_id) {
               // Usar el customer_id devuelto por el servidor
               guestId = response.customer_id;
               document.cookie = "guest_id=" + guestId + "; path=/; max-age=" + 60 * 60 * 24 * 7; // 7 dias
-              console.log("Bienvenido invitado. Customer ID: " + guestId);
+              // DEBUGGING console.log("Bienvenido invitado. Customer ID: " + guestId);
             } else {
               console.error('Error creando guest:', response.message);
             }

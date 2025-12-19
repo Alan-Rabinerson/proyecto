@@ -10,7 +10,7 @@ $size = $_POST['size'];
 $quantity = $_POST['quantity'] ?? 1;
 
 // Check if product already in cart
-$sql = "SELECT quantity FROM `024_shopping_cart` WHERE `customer_id` = $customer_id AND `product_id` = $product_id AND `size` = '$size'";
+$sql = "SELECT * FROM `024_shopping_cart` WHERE `customer_id` = $customer_id AND `product_id` = $product_id AND `size` = '$size'";
 $result = mysqli_query($conn, $sql);
 
 // server-side check stock for selected size
