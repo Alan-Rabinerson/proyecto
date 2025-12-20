@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/header.php'; 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';// Llama al script para obtener los productos
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';// Llama al script para obtener los productos
 
     // verify if product_id is set and is numeric
     if (isset($_GET['product_id']) && is_numeric($_GET['product_id'])){

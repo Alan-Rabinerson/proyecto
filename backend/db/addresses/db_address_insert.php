@@ -1,5 +1,5 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
 session_start();
 // Sanitize and validate input
 $street = isset($_POST['street']) ? mysqli_real_escape_string($conn, trim($_POST['street'])) : '';

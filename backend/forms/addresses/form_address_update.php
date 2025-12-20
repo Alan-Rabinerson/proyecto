@@ -1,4 +1,4 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php'; 
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php'; 
 
     require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';
     $address_id = $_POST['address_id'];

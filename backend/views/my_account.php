@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?> 
-<?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php'; ?>
+<?php require_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php'; ?>
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/read_customer_data.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/show_success_error_msg.php'; ?>
 

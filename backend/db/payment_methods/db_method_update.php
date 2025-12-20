@@ -1,5 +1,5 @@
 <?php
-    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     // get and sanitize input data
     $method_name = mysqli_real_escape_string($conn, $_POST['method_name']);
     $number = mysqli_real_escape_string($conn, $_POST['number']);

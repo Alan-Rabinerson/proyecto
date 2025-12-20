@@ -1,7 +1,7 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; ?>
 <?php
 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     $errores = ['usuario' => '', 'login' => '', 'contrasena' => ''];
     if (isset($_POST['submit'])) {
         // Ensure session started (avoid calling session_abort which may not exist on some PHP versions)

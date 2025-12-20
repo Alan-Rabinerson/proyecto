@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/header.php';  ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';// Llama al script para obtener los productos
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';// Llama al script para obtener los productos
     // capturar datos delL pedido seleccionado
     if (isset($_GET['order_number']) && is_numeric($_GET['order_number'])) {
         $order_number = intval($_GET['order_number']);

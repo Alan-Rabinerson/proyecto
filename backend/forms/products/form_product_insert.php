@@ -40,7 +40,7 @@
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
                 <?php 
-                    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+                    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
                     $sql = "SELECT * FROM 024_category";
                     $result = mysqli_query($conn, $sql);
                     $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);

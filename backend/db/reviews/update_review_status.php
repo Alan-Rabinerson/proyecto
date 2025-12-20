@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
 if (isset($_POST['status']) && isset($_POST['product_id']) && isset($_POST['customer_id']) && isset($_POST['order_number'])) {
     $status = $_POST['status'];
     $product_id = $_POST['product_id'];

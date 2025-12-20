@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     if (isset($_GET['product_id']) && isset($_GET['size'])) {
         $product_id = $_GET['product_id'];
         $size = $_GET['size'];

@@ -12,7 +12,7 @@
 
     print_r($_GET); // debug
     // put data into database
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     // prepare available_sizes as CSV for the SET column
     $available_sizes = '';
     if (!empty($tallas) && is_array($tallas)) {

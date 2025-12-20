@@ -1,4 +1,4 @@
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php'; 
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php'; 
     require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';
     $method_id = $_POST['method_id'];
     $method_sql = "SELECT * FROM 024_payment_method WHERE method_id = $method_id";

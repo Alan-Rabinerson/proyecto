@@ -1,5 +1,5 @@
     <?php
-        include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
         // get data
         $productId = $_POST['product_id'];
         // delete sizes, stock, categories associations first due to foreign key constraints

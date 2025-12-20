@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
 $customer_id = $_SESSION['customer_id'];
 $sql = "SELECT * FROM 024_shopping_cart WHERE customer_id = $customer_id";
 $result = mysqli_query($conn, $sql);

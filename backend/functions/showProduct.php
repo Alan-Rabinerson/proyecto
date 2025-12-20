@@ -2,7 +2,7 @@
     function showProduct($product) {
         $product_id = $product['product_id'];
         // fetch size availability
-        include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+        include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
         $sizes = [];
         $psql = "SELECT size, stock FROM 024_product_sizes WHERE product_id = $product_id ORDER BY FIELD(size,'XS','S','M','L','XL','XXL')";
         $pres = mysqli_query($conn, $psql);

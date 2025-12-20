@@ -16,7 +16,7 @@
             include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/show_success_error_msg.php';
             $orders_id_list = [];
             $customer_id = $_SESSION['customer_id'];
-            require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+            require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
             $sql = "SELECT * FROM 024_order_view WHERE customer_id = $customer_id ORDER BY order_number DESC";
             $result = mysqli_query($conn, $sql);
             $orders = mysqli_fetch_all($result, MYSQLI_ASSOC);

@@ -1,5 +1,5 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; 
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     // Fetch all reviews ordered by creation date
     $sql = "SELECT * FROM 024_reviews ORDER BY created_at DESC";
     $result = mysqli_query($conn, $sql);

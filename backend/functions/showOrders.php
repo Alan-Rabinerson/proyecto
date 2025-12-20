@@ -1,7 +1,7 @@
 <?php
 
     function showOrders($order_group){
-        require_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+        require_once $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
         // nothing to show
         if (empty($order_group)) return;
 

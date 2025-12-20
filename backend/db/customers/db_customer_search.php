@@ -1,7 +1,7 @@
 <?php 
     session_start();
     header('Content-Type: application/json; charset=utf-8');
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/showCustomers.php';
     $searchTerm = $_GET['searchTerm'] ?? '';
 

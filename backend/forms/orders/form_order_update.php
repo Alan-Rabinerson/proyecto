@@ -1,5 +1,5 @@
 <?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
-<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+<?php require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
 
     $order_number = $_POST['order_number'];
     $sql = "SELECT * FROM 024_orders_table WHERE order_number = $order_number";

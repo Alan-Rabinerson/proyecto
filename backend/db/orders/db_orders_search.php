@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/showOrders.php';
     $searchTerm = $_GET['searchTerm'] ?? '';
 

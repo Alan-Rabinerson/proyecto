@@ -1,6 +1,6 @@
 <?php
 if (!isset($conn) || !($conn instanceof mysqli)) {
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
 }
 $customer_id_i = isset($_SESSION['customer_id']) ? intval($_SESSION['customer_id']) : 0;
 $canReview = false;

@@ -3,7 +3,7 @@
     $customer_id = $_SESSION['customer_id'];
     $product_id = $_GET['product_id'];
     $order_number = $_GET['order_number'];
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     $sql = "SELECT * FROM 024_products WHERE product_id = $product_id";
     $result = mysqli_query($conn, $sql);
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);

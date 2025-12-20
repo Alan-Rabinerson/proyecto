@@ -1,5 +1,5 @@
 <?php  //include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';   
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';   
     session_start();
     $customer_id = $_SESSION['customer_id'];
     $payment_method = $_POST['payment_method'];

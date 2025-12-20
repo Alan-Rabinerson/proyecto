@@ -68,14 +68,15 @@ function loadFeaturedProducts() {
                         `
                     
                     const sizes = product.sizes.split(',');
-                    let sizeOptions = `<label for="size-select-${product.product_id}">Talla:</label>
+                    let sizeOptions = `<div class="size-select-wrapper" data-product-id="${product.product_id}">
+                        <label for="size-select-${product.product_id}">Talla:</label>
                         <select id="size-select-${product.product_id}" class="size-select">`;
                     sizes.forEach(element => {
                         sizeOptions += `
                          <option value="${element}">${element}</option>
                         `;
                     });
-                    sizeOptions += `</select>`;
+                    sizeOptions += `</select></div>`;
                     productCard.innerHTML += sizeOptions;
                         
                     productCard.innerHTML+=    
@@ -91,6 +92,22 @@ function loadFeaturedProducts() {
                             window.location.href = `./views/producto.html?id=${product.product_id}`;
                         }
                     });
+
+                    // Hacer que cualquier click en el área de tallas despliegue el selector
+                    const sizeWrapper = productCard.querySelector('.size-select-wrapper');
+                    const sizeSelectEl = productCard.querySelector(`#size-select-${product.product_id}`);
+                    if (sizeWrapper && sizeSelectEl) {
+                        sizeWrapper.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (typeof sizeSelectEl.showPicker === 'function') {
+                                sizeSelectEl.showPicker();
+                            } else {
+                                // Fallback para navegadores sin showPicker
+                                sizeSelectEl.focus();
+                                sizeSelectEl.click();
+                            }
+                        });
+                    }
 
                     // Agregar event listener al botón "Añadir al carrito"
                     const addCartBtn = productCard.querySelector('.btn-add-cart');
@@ -143,14 +160,15 @@ function loadWeeklyOffers() {
                         <p class="old-price">${offer.original_price} €</p>
                         <p class="new-price">${offer.price} €</p>`
                     const sizes = offer.sizes.split(',');
-                    let sizeOptions = `<label for="size-select-${offer.product_id}">Talla:</label>
+                    let sizeOptions = `<div class="size-select-wrapper" data-product-id="${offer.product_id}">
+                        <label for="size-select-${offer.product_id}">Talla:</label>
                         <select id="size-select-${offer.product_id}" class="size-select">`;
                     sizes.forEach(element => {
                         sizeOptions += `
                          <option value="${element}">${element}</option>
                         `;
                     });
-                    sizeOptions += `</select>`;       
+                    sizeOptions += `</select></div>`;       
                     offerCard.innerHTML += sizeOptions;                 
                     offerCard.innerHTML +=
                        `<button class="btn-comprar-ahora">Comprar</button>
@@ -164,6 +182,21 @@ function loadWeeklyOffers() {
                             window.location.href = `./views/producto.html?id=${offer.product_id}`;
                         }
                     });
+
+                    // Hacer que cualquier click en el área de tallas despliegue el selector
+                    const offerSizeWrapper = offerCard.querySelector('.size-select-wrapper');
+                    const offerSizeSelectEl = offerCard.querySelector(`#size-select-${offer.product_id}`);
+                    if (offerSizeWrapper && offerSizeSelectEl) {
+                        offerSizeWrapper.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (typeof offerSizeSelectEl.showPicker === 'function') {
+                                offerSizeSelectEl.showPicker();
+                            } else {
+                                offerSizeSelectEl.focus();
+                                offerSizeSelectEl.click();
+                            }
+                        });
+                    }
 
                     // Agregar event listener al botón "Añadir al carrito"
                     const addCartBtn = offerCard.querySelector('.btn-add-cart');
