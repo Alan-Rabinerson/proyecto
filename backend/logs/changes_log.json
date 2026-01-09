@@ -1,1 +1,4 @@
-{"timestamp":"2026-01-09 00:06:08","type":"update","category":"product","message":"Product with ID 2 updated by customer 11 alanR"}
+[
+    {"timestamp":"2026-01-09 00:06:08","type":"update","category":"product","message":"Product with ID 2 updated by customer 11 alanR"},
+    {"timestamp":"2026-01-09 00:18:46","type":"update","category":"product","message":"Product with ID 2 updated by customer 11 alanR"}
+]
