@@ -1,6 +1,6 @@
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';
     include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';// Llama al script para obtener los productos
-    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.php';
+    require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJSON.php';
     // capturar datos del producto a actualizar
     $customer_id = $_POST['customer_id'];
     $first_name = $_POST['first_name'];

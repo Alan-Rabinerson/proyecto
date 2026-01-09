@@ -1,6 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
-require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.php';
+require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJSON.php';
 session_start();
 // Sanitize and validate input
 $street = isset($_POST['street']) ? mysqli_real_escape_string($conn, trim($_POST['street'])) : '';

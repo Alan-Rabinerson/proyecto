@@ -1,6 +1,6 @@
 <?php 
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
-require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.php';
+require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJSON.php';
 session_start();
 
     // capture data for the product to delete
