@@ -1,5 +1,6 @@
 <?php
 require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
+require $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.php';
 session_start();
 // Sanitize and validate input
 $street = isset($_POST['street']) ? mysqli_real_escape_string($conn, trim($_POST['street'])) : '';
@@ -34,7 +35,9 @@ if (!mysqli_query($conn, $customer_address_sql)) {
     header("Location: /student024/Shop/backend/forms/addresses/form_address_insert.php?error=" . urlencode(mysqli_error($conn)));
     exit();
 }
-
+if ($_SESSION['role'] == 'admin') {
+    write_logJSON("Address added: address_id=$address_id, customer_id=$customer_id", "insert" ,"address", "changes_log.json");
+}
 // Success: redirect back to account page
 header("Location: /student024/Shop/backend/views/my_account.php?message=" . urlencode("Address added successfully"));
 exit();

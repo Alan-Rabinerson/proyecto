@@ -1,5 +1,7 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';// Llama al script para obtener los productos
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';// Llama al script para obtener los productos
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJSON.php';
+
     // capturar datos del producto a actualizar
     $product_id = $_GET['product_id'];
     $product_name = $_GET['product_name'];
@@ -34,6 +36,9 @@
  
     // send confirmation or error message
     if ( mysqli_query($conn, $sql) === TRUE) {
+        if ($_SESSION['role'] == 'admin') {
+            write_logJSON("Product with ID " . $product_id . " updated by customer " . $_SESSION['customer_id'] ." ". $_SESSION['username'], "update" ,"product", "changes_log.json");
+        }
         header("Location: /student024/Shop/backend/views/products.php?message=".urlencode("Product $product_name updated successfully"));
         exit();
     } else {

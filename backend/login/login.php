@@ -1,5 +1,5 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; ?>
-<?php
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; 
+    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.php';
 
     include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
     $errores = ['usuario' => '', 'login' => '', 'contrasena' => ''];
@@ -47,16 +47,19 @@
                 $_SESSION['role'] = 'admin';
                 setcookie('user', json_encode($user[0]), time() + (3600), "/"); // guardamos la cookie por 1 horas (28000 segundos)
                 header("Location: /student024/Shop/backend/index.php");
+                write_log("User number" . $user[0]['customer_id']. " " . $user[0]['username']." logged in", "connection_log.txt");
                 exit;
             } else {
                 $_SESSION['role'] = 'user';
                 setcookie('user', json_encode($user[0]), time() + (3600), "/"); // guardamos la cookie por 1 horas (28000 segundos)
+                write_log("User number" . $user[0]['customer_id']. " " . $user[0]['username']." logged in", "connection_log.txt");
                 header("Location: /student024/Shop/index.html");
             }
             
         } else {
             // Credenciales inválidas, mostrar mensaje de error
             $errores['login'] = 'Usuario o contraseña inválidos. Por favor, inténtelo de nuevo.';
+            write_log("Failed login attempt for username " . $username, "connection_log.txt");
             exit;
         }
     }

@@ -13,6 +13,7 @@
     $sql = "UPDATE 024_orders_table SET customer_id = $customer_id, order_date = '$order_date', product_id = $product_id, quantity = $quantity, address_id = $address_id, method_id = $method_id, status = '$status' WHERE order_number = $order_number";
     $result = mysqli_query($conn, $sql);
     if($result){
+        write_logJSON("Order with number " . $order_number . " updated by customer " . $_SESSION['customer_id'] ." ". $_SESSION['username'], "update" ,"order", "changes_log.json");
         header("Location: /student024/Shop/backend/views/orders.php?message=".urlencode("Pedido actualizado correctamente")."&order_number=".$order_number);
     } else {
         header("Location: /student024/Shop/backend/forms/orders/form_order_update.php?error=".urlencode("Error al actualizar el pedido: " . mysqli_error($conn))."&order_number=".$order_number);

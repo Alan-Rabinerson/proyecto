@@ -1,4 +1,3 @@
-<?php  //include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';   
     session_start();
     $customer_id = $_SESSION['customer_id'];
@@ -50,6 +49,9 @@
         // Clear the shopping cart after order is placed
         $clear_cart_sql = "DELETE FROM 024_shopping_cart WHERE customer_id = $customer_id";
         if (mysqli_query($conn, $clear_cart_sql)) {
+            if ($_SESSION['role'] == 'admin') {
+                write_logJSON("Order placed by customer " . $_SESSION['customer_id'] ." ". $_SESSION['username'], "insert" ,"order", "changes_log.json");
+            }
             header("Location: /student024/Shop/backend/views/my_orders.php?message=Order+placed+successfully");
         } else {
             header("Location: /student024/Shop/backend/views/my_orders.php?error=Failed+to+clear+shopping+cart");

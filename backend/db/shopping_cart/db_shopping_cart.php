@@ -43,6 +43,9 @@
             echo json_encode(['status' => 'ok', 'item' => $products[0]]);
         } else {
             // item was deleted
+            if ($_SESSION['role'] == 'admin'){
+                write_logJSON("Product " . $product_id . " added to the shopping cart of customer " . $customer_id . " by admin " . $_SESSION['username'], "insert" ,"shopping_cart", "changes_log.json");
+            }
             echo json_encode(['status' => 'deleted', 'item' => null]);
         }
     } else {

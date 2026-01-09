@@ -86,6 +86,9 @@ try {
         if ($ins_res === false) {
             throw new Exception('Error insertando en carrito: ' . mysqli_error($conn));
         }
+        if ($_SESSION['role'] == 'admin'){
+            write_logJSON("Producto " . $product_id . " añadido al carrito del cliente " . $customer_id . " por el admin " . $_SESSION['username'], "insert" ,"shopping_cart", "changes_log.json");
+        }
         echo json_encode(['success' => true, 'message' => 'Producto ' . $product_id . ' añadido al carrito', 'product_id' => $product_id, 'quantity' => $quantity]);
         exit;
     }
