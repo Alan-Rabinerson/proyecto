@@ -1,7 +1,5 @@
-<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php';  
-    include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/APIs/accuweather/location_api.php';
-
-?> 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/header.php'; ?> 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/APIs/accuweather/current_conditions.php';?>
         <main class="bg-azul-oscuro h-100vh  text-white p-6 flex flex-col items-center">
             <h2 class="mt-4">Página Principal</h2>
             <p class="mt-2">Este es el contenido principal de la página.</p>
@@ -10,7 +8,6 @@
                 <h3>Products</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/products.php"> View Product</a></li>
-                    
                 </ul>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'){ ?>
                 <h3 class="mt-4">Customers</h3>
@@ -40,12 +37,15 @@
                 <ul class="flex space-x-2 list-none p-0 m-0">
                     <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/Shop/backend/views/shopping_cart.php">View Shopping Cart</a></li>
                 </ul>
-                <!--<h3 class="mt-4">sandbox</h3>
+                <h3 class="mt-4">sandbox</h3>
                 <ul class="flex space-x-2 list-none p-0 m-0">
-                    <li class="boton-rojo"><a class="text-beige hover:underline" href="/student024/Shop/sandbox/orders.php">View Sandbox</a></li>
-                </ul> -->
+                    <li class="boton-rojo"><button id="WeatherButton">Weather Button</button></li>
+                </ul>
             </nav>
         </main>
+        
+        
+                
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?> 
 
 
