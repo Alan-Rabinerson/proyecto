@@ -10,6 +10,10 @@ include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJ
 // Leer entrada cruda
 $raw_input = file_get_contents('php://input');
 $headers = function_exists('getallheaders') ? getallheaders() : [];
+$decoded = null;
+if (!empty($raw_input)) {
+    $decoded = json_decode($raw_input, true);
+}
 
 // Detectar si el archivo se está ejecutando directamente o se está incluyendo
 $is_direct = realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME']);

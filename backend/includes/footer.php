@@ -7,7 +7,7 @@
     if (!empty($current_conditions) && isset($current_conditions[0])) {
         $temp = $current_conditions[0]['Temperature']['Metric']['Value'] . '°C';
         $city = 'Mahón'; 
-        $icon_code = str_pad($current_conditions[0]['WeatherIcon'], 2, '0', STR_PAD_LEFT);
+        $icon_code = $current_conditions[0]['WeatherIcon'];
         // Use a web path (not filesystem path) to allow browsers to load the icon
         $icon_url = '/student024/Shop/assets/weather_icons/' . $icon_code . '.svg';
     } else {
