@@ -1,0 +1,7 @@
+[
+  {"product_id":"1","category_id":"2","image_path":"\/student012\/shop\/assets\/img\/shoes\/shai001_1-1.jpg","product_name":"SHAI 001","description":"Converse and NBA MVP Shai Gilgeous-Alexander unveil his first signature shoe.","color":"gold,blue","unit_price":"129.99"},
+  {"product_id":"2","category_id":"8","image_path":"\/student012\/shop\/assets\/img\/shoes\/curry-4_1-1.jpg","product_name":"UA Curry 4","description":"Get the shoes from the only unanimous MVP.","color":"black","unit_price":"85.00"},
+  {"product_id":"3","category_id":"5","image_path":"\/student012\/shop\/assets\/img\/shoes\/kd-18_1-1.jpg","product_name":"Nike KD 18","description":"Do you like snakes? Then buy KD's shoes.","color":"pink","unit_price":"169.99"},
+  {"product_id":"4","category_id":"5","image_path":"\/student012\/shop\/assets\/img\/shoes\/lebron-9_1-1.jpg","product_name":"Nike LeBron 9","description":"He's LeBron James, just buy it.","color":"black","unit_price":"109.99"},
+  {"product_id":"5","category_id":"3","image_path":"\/student012\/shop\/assets\/img\/shoes\/jordan-tatum-3_1-1.jpg","product_name":"Jordan Tatum 3","description":"Jordan and Jayson Tatum release the third shoes from Boston Celtics' star player and 2024 NBA Champion.","color":"white","unit_price":"94.99"}
+]

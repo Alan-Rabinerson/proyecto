@@ -1,16 +1,17 @@
 <?php
-
-include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
+include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect_switch.php';
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.php';
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJSON.php';
+            
 
 $url_current = 'https://dataservice.accuweather.com/currentconditions/v1/305482?apikey=zpka_463a1bcd9972461385e29c4e2090f7d4_3bd1c314&details=true';
+
 $url_forecast = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/305482?apikey=zpka_463a1bcd9972461385e29c4e2090f7d4_3bd1c314&details=true&metric=true';
 $json_data_current = file_get_contents($url_current);
 $data_current = json_decode($json_data_current, true);
 $json_data_forecast = file_get_contents($url_forecast);
 $data_forecast = json_decode($json_data_forecast, true);
-
+                
 if ($data_current === null || $data_forecast === null) {
     write_log("Error al decodificar JSON de AccuWeather");
     echo json_encode(['error' => 'Error al obtener datos del clima']);
@@ -45,7 +46,7 @@ if (mysqli_query($conn, $sql)) {
         'WeatherText' => $data_current[0]['WeatherText'] ?? 'N/A',
         'Temperature' => $data_current[0]['Temperature']['Metric']['Value'] ?? 'N/A',
         'WeatherIcon' => $data_current[0]['WeatherIcon'] ?? 1,
-        'Forecast' => $data_forecast
+        'Forecast' => $data_forecast['DailyForecasts'] ?? []
     ]);
 } else {
     header('Content-Type: application/json');
