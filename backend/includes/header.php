@@ -76,6 +76,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Mi Proyecto</title>
         <link rel="stylesheet" href="/student024/Shop/styles/css/output.css">
+        <script src="/student024/Shop/JavaScript/weather.js"></script>
     </head>
     <body class="bg-azul-oscuro text-beige">
         <header class="header">

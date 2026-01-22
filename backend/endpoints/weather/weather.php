@@ -1,102 +1,54 @@
 <?php
 
-// Endpoint para recibir datos de clima (current conditions + 3day forecast)
-// Guarda en archivo JSON, inserta en la base de datos y muestra por pantalla
-
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/config/db_connect.php';
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.php';
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJSON.php';
 
-// Leer entrada cruda
-$raw_input = file_get_contents('php://input');
-$headers = function_exists('getallheaders') ? getallheaders() : [];
-$decoded = null;
-if (!empty($raw_input)) {
-    $decoded = json_decode($raw_input, true);
+$url_current = 'https://dataservice.accuweather.com/currentconditions/v1/305482?apikey=zpka_463a1bcd9972461385e29c4e2090f7d4_3bd1c314&details=true';
+$url_forecast = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/305482?apikey=zpka_463a1bcd9972461385e29c4e2090f7d4_3bd1c314&details=true&metric=true';
+$json_data_current = file_get_contents($url_current);
+$data_current = json_decode($json_data_current, true);
+$json_data_forecast = file_get_contents($url_forecast);
+$data_forecast = json_decode($json_data_forecast, true);
+
+if ($data_current === null || $data_forecast === null) {
+    write_log("Error al decodificar JSON de AccuWeather");
+    echo json_encode(['error' => 'Error al obtener datos del clima']);
+    exit;
 }
 
-// Detectar si el archivo se está ejecutando directamente o se está incluyendo
-$is_direct = realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME']);
+$json_pretty_current = json_encode($data_current, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+$json_pretty_current_db = mysqli_real_escape_string($conn, $json_pretty_current);
+$json_pretty_forecast = json_encode($data_forecast, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+$json_pretty_forecast_db = mysqli_real_escape_string($conn, $json_pretty_forecast);
 
-// Si no hay entrada POST y estamos incluidos (por ejemplo en el footer),
-// cargar la última entrada guardada para mostrar el clima en la plantilla
-if (empty($raw_input) && !$is_direct) {
-    $logPath = __DIR__ . '/../../logs/weather_entries.json';
-    if (file_exists($logPath)) {
-        $logContent = file_get_contents($logPath);
-        $entries = json_decode($logContent, true);
-        if (is_array($entries) && count($entries) > 0) {
-            $last = end($entries);
-            $message = isset($last['message']) ? $last['message'] : null;
-            if ($message) {
-                $entryData = json_decode($message, true);
-                if ($entryData) {
-                    $current = $entryData['currentConditions'] ?? [];
-                    $forecast = $entryData['threeDayForecast'] ?? [];
-                }
-            }
-        }
-    }
-    // No continuar con el resto del procesamiento que asume una petición POST
+$db_array =json_encode( [
+    'current' => $json_pretty_current_db,
+    'forecast' => $json_pretty_forecast_db
+]);
+
+$sql = "INSERT INTO 024_weather_data (cc_info_JSON, date_time) VALUES ('$db_array', NOW())";;
+if (mysqli_query($conn, $sql)) {
+    $file = fopen($_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/logs/current_weather_entry.json', 'w');
+    fwrite($file, $json_data_current);
+    fclose($file);
+    $file_forecast = fopen($_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/logs/forecast_weather_entry.json', 'a');
+    fwrite($file_forecast, $json_data_forecast);
+    fclose($file_forecast);
+    write_logJSON("saved new entry for weather data ",'insert', 'weather', 'changes_log.json');
+    file_put_contents($_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/logs/weather_log.json', $json_data_current);
+    file_put_contents($_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/logs/weather_log.json', $json_data_forecast);
+    
+    // Devolver los datos del clima en formato JSON
+    header('Content-Type: application/json');
+    echo json_encode([
+        'WeatherText' => $data_current[0]['WeatherText'] ?? 'N/A',
+        'Temperature' => $data_current[0]['Temperature']['Metric']['Value'] ?? 'N/A',
+        'WeatherIcon' => $data_current[0]['WeatherIcon'] ?? 1,
+        'Forecast' => $data_forecast
+    ]);
 } else {
-    // Guardar debug del request
-    write_log('Received weather POST', 'weather_debug.log');
-    write_logJSON($raw_input, 'info', 'weather_raw', 'weather_debug.json');
-
-    if ($decoded !== null) {
-        // Soportar dos formatos comunes:
-        // 1) {"currentConditions": [...], "threeDayForecast": [...]}
-        // 2) Un array con current conditions como primer elemento y forecast separado
-        $current = [];
-        $forecast = [];
-
-        if (isset($decoded['currentConditions'])) {
-            $current = $decoded['currentConditions'];
-        }
-        elseif (isset($decoded[0]) && is_array($decoded[0]) && isset($decoded[0]['LocalObservationDateTime'])) {
-            $current = $decoded; // payload de current conditions directamente
-        }
-
-        if (isset($decoded['threeDayForecast'])) {
-            $forecast = $decoded['threeDayForecast'];
-        }
-
-        // Construir entrada unificada
-        $entry = [
-            'recorded_at' => date('Y-m-d H:i:s'),
-            'remote_addr' => $_SERVER['REMOTE_ADDR'] ?? '',
-            'headers' => $headers,
-            'currentConditions' => $current,
-            'threeDayForecast' => $forecast
-        ];
-
-        // Guardar en fichero JSON (append como array usando write_logJSON)
-        write_logJSON(json_encode($entry), 'info', 'weather_entry', 'weather_entries.json');
-
-        // También añadir una entrada simple en el log de texto
-        write_log('Weather entry saved at ' . $entry['recorded_at'], 'weather_debug.log');
-
-        // Insertar en la base de datos. Reutilizamos db_connect.php (variable $conn)
-        if (isset($conn) && $conn) {
-            $payload = mysqli_real_escape_string($conn, json_encode(['currentConditions'=>$current,'threeDayForecast'=>$forecast]));
-            $recorded_at = mysqli_real_escape_string($conn, $entry['recorded_at']);
-            $sql = "INSERT INTO 024_weather_data (date_time, cc_info_JSON) VALUES ('" . $recorded_at . "', '" . $payload . "')";
-            $res = mysqli_query($conn, $sql);
-            if (!$res) {
-                write_log('DB insert failed: ' . mysqli_error($conn), 'weather_debug.log');
-            }
-        }
-        // Si la petición fue directa (no inclusión), devolver JSON para que el cliente pueda parsearlo
-        if ($is_direct) {
-            header('Content-Type: application/json');
-            echo json_encode([
-                'status' => 'ok',
-                'recorded_at' => $entry['recorded_at'],
-                'currentCount' => is_array($current) ? count($current) : 0
-            ]);
-            // Asegurar que no se envía más contenido
-            exit;
-        }
-    }
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Error al guardar datos del clima en la base de datos: ' . mysqli_error($conn)]);
 }
-
+mysqli_close($conn);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 07-12-2025 a las 23:17:53
+-- Tiempo de generación: 20-01-2026 a las 23:41:08
 -- Versión del servidor: 11.5.2-MariaDB
 -- Versión de PHP: 8.3.14
 
@@ -20,6 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `online_shop`
 --
+
 DROP TABLE IF EXISTS `024_orders_table`;
 DROP TABLE IF EXISTS `024_reviews`;
 DROP TABLE IF EXISTS `024_address_customer`;
@@ -34,12 +35,13 @@ DROP TABLE IF EXISTS `024_product_materials`;
 DROP TABLE IF EXISTS `024_products`;
 DROP TABLE IF EXISTS `024_customers`;
 
+
 DELIMITER $$
 --
 -- Procedimientos
 --
 DROP PROCEDURE IF EXISTS `024_automaticOrders`$$
-CREATE PROCEDURE `024_automaticOrders` ()   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `024_automaticOrders` ()   BEGIN
     DECLARE var_number_of_added_items INT;
     DECLARE var_number_of_orders INT;
     
@@ -51,7 +53,7 @@ CREATE PROCEDURE `024_automaticOrders` ()   BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `024_order_data_dump`$$
-CREATE PROCEDURE `024_order_data_dump` (IN `var_number_of_orders` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `024_order_data_dump` (IN `var_number_of_orders` INT)   BEGIN
     DECLARE var_customer_id INT;
     DECLARE var_product_id INT;
     DECLARE i INT;
@@ -88,7 +90,7 @@ CREATE PROCEDURE `024_order_data_dump` (IN `var_number_of_orders` INT)   BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS `024_shopping_cart_data_dump`$$
-CREATE PROCEDURE `024_shopping_cart_data_dump` (IN `var_number_of_items` INT)   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `024_shopping_cart_data_dump` (IN `var_number_of_items` INT)   BEGIN
     DECLARE var_customer_id INT;
     DECLARE var_product_id INT;
     DECLARE var_quantity INT;
@@ -115,23 +117,23 @@ END$$
 -- Funciones
 --
 DROP FUNCTION IF EXISTS `024_age`$$
-CREATE FUNCTION `024_age` (`birthdate` DATE) RETURNS INT(11) DETERMINISTIC RETURN FLOOR((DATEDIFF(CURDATE(),birthdate)/365.25))$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `024_age` (`birthdate` DATE) RETURNS INT(11) DETERMINISTIC RETURN FLOOR((DATEDIFF(CURDATE(),birthdate)/365.25))$$
 
 DROP FUNCTION IF EXISTS `024_full_name`$$
-CREATE FUNCTION `024_full_name` (`first_name` VARCHAR(100), `last_name` VARCHAR(100)) RETURNS VARCHAR(210) CHARSET utf8mb4 COLLATE utf8mb4_general_ci DETERMINISTIC RETURN CONCAT(first_name,' ',last_name)$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `024_full_name` (`first_name` VARCHAR(100), `last_name` VARCHAR(100)) RETURNS VARCHAR(210) CHARSET utf8mb4 COLLATE utf8mb4_general_ci DETERMINISTIC RETURN CONCAT(first_name,' ',last_name)$$
 
 DROP FUNCTION IF EXISTS `024_get_address`$$
-CREATE FUNCTION `024_get_address` (`var_customer_id` INT) RETURNS INT(11)  BEGIN
-  RETURN (SELECT adress_id FROM 024_adress_customer WHERE customer_id = var_customer_id LIMIT 1);
+CREATE DEFINER=`root`@`localhost` FUNCTION `024_get_address` (`var_customer_id` INT) RETURNS INT(11)  BEGIN
+    RETURN (SELECT adress_id FROM 024_adress_customer WHERE customer_id = var_customer_id LIMIT 1);
 END$$
 
 DROP FUNCTION IF EXISTS `024_get_payment_method`$$
-CREATE FUNCTION `024_get_payment_method` (`var_customer_id` INT) RETURNS INT(11)  BEGIN
-  RETURN (SELECT method_id FROM 024_payment_customer WHERE customer_id = var_customer_id LIMIT 1);
+CREATE DEFINER=`root`@`localhost` FUNCTION `024_get_payment_method` (`var_customer_id` INT) RETURNS INT(11)  BEGIN
+    RETURN (SELECT method_id FROM 024_payment_customer WHERE customer_id = var_customer_id LIMIT 1);
 END$$
 
 DROP FUNCTION IF EXISTS `024_get_random_valid_size`$$
-CREATE FUNCTION `024_get_random_valid_size` (`var_product_id` INT) RETURNS VARCHAR(10) CHARSET latin1 COLLATE latin1_bin DETERMINISTIC BEGIN
+CREATE DEFINER=`root`@`localhost` FUNCTION `024_get_random_valid_size` (`var_product_id` INT) RETURNS VARCHAR(10) CHARSET latin1 COLLATE latin1_bin DETERMINISTIC BEGIN
     DECLARE valid_size VARCHAR(10);
     
     SELECT size INTO valid_size
@@ -144,7 +146,7 @@ CREATE FUNCTION `024_get_random_valid_size` (`var_product_id` INT) RETURNS VARCH
 END$$
 
 DROP FUNCTION IF EXISTS `024_membership_level`$$
-CREATE FUNCTION `024_membership_level` (`var_money_spent` INT) RETURNS VARCHAR(50) CHARSET utf8mb4 COLLATE utf8mb4_general_ci DETERMINISTIC BEGIN
+CREATE DEFINER=`Alan`@`localhost` FUNCTION `024_membership_level` (`var_money_spent` INT) RETURNS VARCHAR(50) CHARSET utf8mb4 COLLATE utf8mb4_general_ci DETERMINISTIC BEGIN
     DECLARE var_level_name VARCHAR(50);
     
     IF var_money_spent > 1500 THEN 
@@ -183,21 +185,20 @@ CREATE TABLE IF NOT EXISTS `024_address` (
 -- Volcado de datos para la tabla `024_address`
 --
 
-INSERT INTO `024_address` (`address_id`, `street`, `city`, `province`, `zip_code`) VALUES
-(1, '1234 Main St', 'Mahon', 'Islas Baleares', '07701'),
-(2, '5678 1st St', 'Barcelona', 'Cataluña', '08011'),
-(3, '9101 2nd St', 'Madrid', 'Comunidad de Madrid', '28001'),
-(4, '1123 3rd St', 'Sevilla', 'Andalucia', '41001'),
-(5, '4567 4th St', 'Granada', 'Andalucia', '18001'),
-(6, '8910 5th St', 'Zaragoza', 'Aragon', '50001'),
-(7, '2345 6th St', 'Valencia', 'Comunidad Valenciana', '46001'),
-(8, '6789 7th St', 'Barcelona', 'Cataluña', '08035'),
-(9, '1012 8th St', 'Mahon', 'Islas Baleares', '07702'),
-(10, '1213 9th St', 'Madrid', 'Comunidad de Madrid', '28003'),
-(11, 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
-(12, 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
-(14, 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
-(15, '', '', '', '');
+INSERT INTO `024_address` (`address_id`, `address_name`, `street`, `city`, `province`, `zip_code`) VALUES
+(1, 'Casa', '1234 Main St', 'Mahon', 'Islas Baleares', '07701'),
+(2, 'Trabajo', '5678 1st St', 'Barcelona', 'Cataluña', '08011'),
+(3, 'Oficina', '9101 2nd St', 'Madrid', 'Comunidad de Madrid', '28001'),
+(4, '', '1123 3rd St', 'Sevilla', 'Andalucia', '41001'),
+(5, '', '4567 4th St', 'Granada', 'Andalucia', '18001'),
+(6, '', '8910 5th St', 'Zaragoza', 'Aragon', '50001'),
+(7, '', '2345 6th St', 'Valencia', 'Comunidad Valenciana', '46001'),
+(8, '', '6789 7th St', 'Barcelona', 'Cataluña', '08035'),
+(9, 'Tienda', '1012 8th St', 'Mahon', 'Islas Baleares', '07702'),
+(10, '', '1213 9th St', 'Madrid', 'Comunidad de Madrid', '28003'),
+(11, '', 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
+(12, '', 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701'),
+(14, 'Casa', 'Avinguda Fort De Leau 32 3D', 'Mahón', 'Islas Baleares', '07701');
 
 -- --------------------------------------------------------
 
@@ -238,8 +239,7 @@ INSERT INTO `024_address_customer` (`address_id`, `customer_id`) VALUES
 (3, 10),
 (10, 10),
 (9, 11),
-(14, 11),
-(15, 13);
+(14, 11);
 
 -- --------------------------------------------------------
 
@@ -282,16 +282,16 @@ INSERT INTO `024_category` (`category_id`, `name`, `description`) VALUES
 DROP TABLE IF EXISTS `024_customers`;
 CREATE TABLE IF NOT EXISTS `024_customers` (
   `customer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `phone` varchar(100) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
   `type` set('admin','customer') NOT NULL,
   PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=176611097 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_customers`
@@ -300,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `024_customers` (
 INSERT INTO `024_customers` (`customer_id`, `first_name`, `last_name`, `email`, `username`, `password`, `phone`, `birth_date`, `type`) VALUES
 (1, 'John', 'Doe', 'example@gmail.com', 'johndoe', '123456', '1234567891', '1965-11-25', 'customer'),
 (2, 'Jane', 'Doe', 'example@hotmail.com', 'janedoe', '123456', '1234567891', '1999-06-11', 'customer'),
-(3, 'John', 'Smith', 'example@outlook.com', 'johnsmith', '123456', '1234567890', '1985-03-30', 'customer'),
+(3, 'John', 'Smith', 'example@outlook.com', 'johnsmith', '123456', '1234567891', '1985-03-30', 'customer'),
 (4, 'Jane', 'Smith', 'janesmith@gmail.com', 'janesmith', '123456', '1234567890', '1977-11-22', 'customer'),
 (5, 'John', 'Johnson', 'johnjohnson@outlook.com', 'johnjohnson', '123456', '1234567890', '1983-09-22', 'customer'),
 (6, 'Jane', 'Johnson', 'janejohnson@gmail.com', 'janejohnson', '123456', '1234567890', '1980-03-09', 'customer'),
@@ -310,8 +310,17 @@ INSERT INTO `024_customers` (`customer_id`, `first_name`, `last_name`, `email`, 
 (10, 'Jane', 'Williams', 'janewilliams@outlook.com', 'janewilliams', '123456', '1234567890', '2001-12-27', 'customer'),
 (11, 'Alan', 'Rabinerson', 'alanrabinerson@gmail.com', 'alanR', '123456', '694480533', '2001-10-24', 'admin'),
 (12, 'Enrique', 'Vizcaino', 'enrique@gmail.com', 'enrique@gmail.com', 'dwesteacher', '123456789', '1975-11-26', 'admin'),
-(13, 'Avi', 'Rabinerson', 'abualan@gmail.com', '', '123456', '607709603', '1960-08-12', 'customer'),
-(14, 'Test', 'Customer', 'customer@gmail.com', 'customer@gmail.com', 'dwescustomer', '123456789', '1999-12-26', 'admin');
+(13, 'Avi', 'Rabinerson', 'abualan@gmail.com', 'abaulan', '123456', '607709603', '1960-08-12', 'customer'),
+(176610953, 'guest', '176610953', '176610953@guest.com', 'guest_176610953', '', '123456789', '2025-12-19', 'customer'),
+(176611029, 'guest', '176611029', '176611029@guest.com', 'guest_176611029', '', '123456789', '2025-12-19', 'customer'),
+(176611089, 'guest', '176611089', '176611089@guest.com', 'guest_176611089', '', '123456789', '2025-12-19', 'customer'),
+(176611090, 'guest', '176611245', '176611245@guest.com', 'guest_176611245', '', '123456789', '2025-12-19', 'customer'),
+(176611091, 'guest', '176790314', '176790314@guest.com', 'guest_176790314', '', '123456789', '2026-01-08', 'customer'),
+(176611092, 'guest', '176797554', '176797554@guest.com', 'guest_176797554', '', '123456789', '2026-01-09', 'customer'),
+(176611093, 'guest', '176823232', '176823232@guest.com', 'guest_176823232', '', '123456789', '2026-01-12', 'customer'),
+(176611094, 'guest', '176834518', '176834518@guest.com', 'guest_176834518', '', '123456789', '2026-01-13', 'customer'),
+(176611095, 'guest', '176843736', '176843736@guest.com', 'guest_176843736', '', '123456789', '2026-01-15', 'customer'),
+(176611096, 'guest', '176883385', '176883385@guest.com', 'guest_176883385', '', '123456789', '2026-01-19', 'customer');
 
 -- --------------------------------------------------------
 
@@ -367,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `024_orders_table` (
   KEY `method_id` (`method_id`),
   KEY `customer_id` (`customer_id`),
   KEY `address_id` (`address_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_orders_table`
@@ -381,7 +390,12 @@ INSERT INTO `024_orders_table` (`order_number`, `order_id`, `customer_id`, `prod
 (6, 'J9388432427', 1, 3, 'XXL', 1, 59.99, '2025-12-03 15:58:36', 1, 5, 'DELIVERED'),
 (7, 'J7312287117', 1, 7, 'M', 1, 23.99, '2025-12-03 15:59:41', 5, 1, 'PROCESSING'),
 (8, 'J7312287117', 1, 3, 'XXL', 1, 59.99, '2025-12-03 15:59:41', 5, 1, 'PROCESSING'),
-(9, 'J4581898846', 1, 2, 'XS', 1, 24.99, '2025-12-07 03:22:40', 1, 1, 'PROCESSING');
+(9, 'J4581898846', 1, 2, 'XS', 1, 24.99, '2025-12-07 03:22:40', 1, 1, 'PROCESSING'),
+(10, 'A8215723976', 11, 1, 'XS', 2, 99.98, '2025-12-11 23:48:23', 9, 5, 'PROCESSING'),
+(11, 'A8215723976', 11, 3, 'S', 1, 59.99, '2025-12-11 23:48:23', 9, 5, 'PROCESSING'),
+(12, 'A8215723976', 11, 1, 'XS', 1, 49.99, '2025-12-11 23:48:23', 9, 5, 'PROCESSING'),
+(13, 'A8215723976', 11, 3, 'S', 1, 59.99, '2025-12-11 23:48:23', 9, 5, 'PROCESSING'),
+(14, 'A8215723976', 11, 1, 'XS', 1, 49.99, '2025-12-11 23:48:23', 9, 5, 'PROCESSING');
 
 --
 -- Disparadores `024_orders_table`
@@ -498,7 +512,7 @@ CREATE TABLE IF NOT EXISTS `024_payment_method` (
   `expiration_date` varchar(100) DEFAULT NULL,
   `security_code` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`method_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_payment_method`
@@ -515,7 +529,8 @@ INSERT INTO `024_payment_method` (`method_id`, `method_name`, `number`, `expirat
 (8, 'Mastercard Credit Card', '987654321907', '12/25', '321'),
 (9, 'Bank transfer', '212367890', NULL, NULL),
 (10, 'Visa Debit Card', '134567901234', '12/25', '123'),
-(11, 'Mastercard Debit Card', '12345678912', '02/30', '123');
+(11, 'Mastercard Debit Card', '12345678912', '02/30', '123'),
+(12, 'Mastercard Debit Card', '12345678912', '01/30', '123');
 
 -- --------------------------------------------------------
 
@@ -533,15 +548,15 @@ CREATE TABLE IF NOT EXISTS `024_products` (
   `supplier` varchar(100) NOT NULL,
   `available_sizes` set('XS','S','M','L','XL','XXL') NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_products`
 --
 
 INSERT INTO `024_products` (`product_id`, `name`, `description`, `long_description`, `price`, `supplier`, `available_sizes`) VALUES
-(1, 'Sudadera \"Concrete Wave\" Cuello Alto', 'Sudadera cuello alto \"Concrete Wave\" negra. Logo \"S\" bordado. Corte oversize. Interior térmico. Techwear.', 'Sudadera oversized \"Concrete Wave\" en negro profundo con cuello alto distintivo. El bordado \"YOU-SK\" en el cuello y la letra \"S\" en el pecho crean un diseño minimalista y premium. Interior térmico cepillado para máxima comodidad en temporadas frías. Corte oversize relajado que permite total libertad de movimiento y layering. Costuras reforzadas en hombros, puños acanalados y detalles bordados en manga garantizan durabilidad excepcional. Fusiona estética techwear japonesa con streetwear urbano. Perfecta con cargos y sneakers. Incluye combo con gorra asiática. Unisex.', 49.99, 'UrbanWear SL', 'XS,S,M,L,XL,XXL'),
-(2, 'Camiseta Oversized \"Mad World\"', 'Camiseta oversized blanca \"MAD WORLD\". Algodón 100%. Diseño minimalista urbano. Básico imprescindible.\n', 'Camiseta oversized que captura la esencia del streetwear minimalista. En blanco puro con el estampado \"MAD WORLD\" en tipografía bold negra que transmite actitud urbana. El corte oversize proporciona ese estilo relajado y contemporáneo que define la moda urbana actual. Fabricada en algodón 100% de gramaje medio-alto, ofrece suavidad excepcional y durabilidad para el uso diario. El cuello redondo reforzado mantiene su forma lavado tras lavado. Perfecta para layering o para lucir sola con jeans o joggers. Unisex. Una pieza básica imprescindible en tu armario.', 24.99, 'Concrete Brands', 'XS,S,M,L,XL,XXL'),
+(1, 'Sudadera ', 'Sudadera cuello alto ', 'Sudadera oversized \"Concrete Wave\" en negro profundo con cuello alto distintivo. El bordado \"YOU-SK\" en el cuello y la letra \"S\" en el pecho crean un diseño minimalista y premium. Interior térmico cepillado para máxima comodidad en temporadas frías. Corte oversize relajado que permite total libertad de movimiento y layering. Costuras reforzadas en hombros, puños acanalados y detalles bordados en manga garantizan durabilidad excepcional. Fusiona estética techwear japonesa con streetwear urbano. Perfecta con cargos y sneakers. Incluye combo con gorra asiática. Unisex.', 49.99, 'UrbanWear SL', 'XS,S,M,L,XL,XXL'),
+(2, 'Camiseta Oversized ', 'Camiseta oversized blanca ', 'Camiseta oversized que captura la esencia del streetwear minimalista. En blanco puro con el estampado \"MAD WORLD\" en tipografía bold negra que transmite actitud urbana. El corte oversize proporciona ese estilo relajado y contemporáneo que define la moda urbana actual. Fabricada en algodón 100% de gramaje medio-alto, ofrece suavidad excepcional y durabilidad para el uso diario. El cuello redondo reforzado mantiene su forma lavado tras lavado. Perfecta para layering o para lucir sola con jeans o joggers. Unisex. Una pieza básica imprescindible en tu armario.', 24.99, 'Concrete Brands', 'XS,S,M,L,XL,XXL'),
 (3, 'Pantalones Cargo Street Grises ', 'Cargo grafito con múltiples bolsillos. Ripstop resistente. Estilo skate-militar. Movimiento total. Duradero.', 'Pantalones cargo en tono grafito oscuro que combinan funcionalidad militar con estética skate contemporánea. Múltiples bolsillos utilitarios en piernas y cintura ofrecen espacio práctico sin comprometer el estilo. Confeccionados en tela resistente tipo ripstop que soporta el uso intenso, ideal para skateboarding y actividades urbanas. El corte relajado pero moderno permite total libertad de movimiento. Cintura elástica con cordón ajustable para máximo confort. Perfectos para el día a día, sesiones de skate o looks techwear. Se mantienen ', 59.99, 'CargoCo', 'S,M,L,XL,XXL'),
 (4, ' Camiseta Retro \"Fast Break Champs \'87\"', 'Camiseta oversized azul cielo \"Fast Break Champs \'87\". Basketball retro. Gráfico vintage naranja. Iconic.', 'Viaja a la era dorada del basketball con esta camiseta oversized en azul cielo pastel. El gráfico vintage \"1987 FAST BREAK CHAMPS\" presenta una ilustración retro de baloncesto en naranja vibrante con tipografía deportiva auténtica de los 80s. Confeccionada en algodón suave de gramaje medio que combina comodidad premium con durabilidad excepcional. El corte oversized relajado captura perfectamente la estética del sportswear vintage. Ideal para fans del basketball old school, coleccionistas de streetwear retro y amantes de la cultura hip-hop clásica. Perfecta con jeans negros y sneakers.', 89.99, 'UrbanFeet', 'M,L,XL'),
 (5, ' Chaqueta Bomber Richmond', 'Bomber Richmond navy y blanco en satén premium. Estilo varsity con bordado exclusivo. Look urbano único', 'Eleva tu estilo urbano con nuestra exclusiva chaqueta bomber Richmond en colorblock navy y blanco. Confeccionada en satén premium con acabados de alta calidad, esta pieza combina la elegancia clásica del diseño varsity con un toque contemporáneo. El bordado \"RICHMOND\" en el hombro añade un detalle distintivo que no pasa desapercibido. Con cierre frontal de cremallera, bolsillos laterales y puños elásticos para un ajuste perfecto. Ideal para looks casual-elegantes, perfecta para la temporada de entretiempo.', 69.99, 'BomberFactory', 'XS,S,M,L,XL,XXL'),
@@ -576,7 +591,6 @@ INSERT INTO `024_product_category` (`product_id`, `category_id`) VALUES
 (6, 1),
 (7, 1),
 (8, 1),
-(9, 1),
 (10, 1),
 (11, 1),
 (12, 1),
@@ -600,7 +614,6 @@ INSERT INTO `024_product_category` (`product_id`, `category_id`) VALUES
 (20, 5),
 (6, 6),
 (8, 6),
-(9, 7),
 (10, 7),
 (11, 7),
 (12, 7),
@@ -671,7 +684,7 @@ CREATE TABLE IF NOT EXISTS `024_product_sizes` (
 --
 
 INSERT INTO `024_product_sizes` (`product_id`, `size`, `stock`) VALUES
-(1, 'XS', 12),
+(1, 'XS', 8),
 (1, 'S', 23),
 (1, 'M', 18),
 (1, 'L', 21),
@@ -679,11 +692,11 @@ INSERT INTO `024_product_sizes` (`product_id`, `size`, `stock`) VALUES
 (1, 'XXL', 19),
 (2, 'XS', 7),
 (2, 'S', 28),
-(2, 'M', 30),
-(2, 'L', 24),
-(2, 'XL', 33),
+(2, 'M', 31),
+(2, 'L', 25),
+(2, 'XL', 40),
 (2, 'XXL', 14),
-(3, 'S', 11),
+(3, 'S', 9),
 (3, 'M', 14),
 (3, 'L', 19),
 (3, 'XL', 8),
@@ -733,7 +746,11 @@ DROP VIEW IF EXISTS `024_product_view`;
 CREATE TABLE IF NOT EXISTS `024_product_view` (
 `product_id` int(11)
 ,`name` varchar(200)
+,`description` varchar(500)
+,`long_description` varchar(600)
 ,`price` decimal(10,2)
+,`supplier` varchar(100)
+,`available_sizes` set('XS','S','M','L','XL','XXL')
 ,`category` varchar(100)
 );
 
@@ -782,7 +799,7 @@ CREATE TABLE IF NOT EXISTS `024_shopping_cart` (
   PRIMARY KEY (`shopping_cart_id`),
   KEY `customer_id` (`customer_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=736 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=779 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `024_shopping_cart`
@@ -852,8 +869,22 @@ INSERT INTO `024_shopping_cart` (`shopping_cart_id`, `customer_id`, `product_id`
 (725, 2, 7, 8, 'S'),
 (726, 10, 7, 6, 'S'),
 (727, 3, 5, 4, 'XL'),
-(728, 11, 1, 2, 'XS'),
-(730, 11, 3, 1, 'S');
+(739, 12, 3, 3, 'S'),
+(740, 12, 1, 2, 'XS'),
+(748, 11, 3, 6, 'S'),
+(751, 11, 2, 4, 'XS'),
+(752, 11, 6, 2, 'S'),
+(755, 11, 3, 1, 'M'),
+(766, 176611089, 4, 3, 'M'),
+(767, 176611089, 3, 6, 'S'),
+(768, 176611089, 2, 2, 'XS'),
+(769, 176611090, 3, 5, 'S'),
+(771, 176611090, 1, 2, 'XS'),
+(772, 176611090, 7, 3, 'M'),
+(773, 176611090, 8, 3, 'XS'),
+(776, 176611090, 5, 1, 'XS'),
+(777, 176611090, 3, 1, 'M'),
+(778, 176611090, 4, 1, 'M');
 
 -- --------------------------------------------------------
 
@@ -904,65 +935,129 @@ CREATE TABLE IF NOT EXISTS `024_total_money_spent_view` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `024_weather_data`
+--
+
+DROP TABLE IF EXISTS `024_weather_data`;
+CREATE TABLE IF NOT EXISTS `024_weather_data` (
+  `date_time` datetime NOT NULL,
+  `cc_info_JSON` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  PRIMARY KEY (`date_time`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_bin;
+
+--
+-- Volcado de datos para la tabla `024_weather_data`
+--
+
+INSERT INTO `024_weather_data` (`date_time`, `cc_info_JSON`) VALUES
+('2026-01-15 15:45:24', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-15T00:52:00+01:00\",\"WeatherText\":\"Partly cloudy\",\"Temperature\":{\"Metric\":{\"Value\":12.4}}}],\"threeDayForecast\":[{\"Date\":\"2026-01-15\",\"Temperature\":{\"Maximum\":{\"Value\":15},\"Minimum\":{\"Value\":8}}}]}'),
+('2026-01-15 15:46:04', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-15T16:42:00+01:00\",\"EpochTime\":1768491720,\"WeatherText\":\"Partly sunny\",\"WeatherIcon\":3,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":true,\"Temperature\":{\"Metric\":{\"Value\":15.4,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":60,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 19:32:15', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-15T20:22:00+01:00\",\"EpochTime\":1768504920,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":13.5,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":56,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 20:10:16', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-15T21:02:00+01:00\",\"EpochTime\":1768507320,\"WeatherText\":\"Partly cloudy\",\"WeatherIcon\":35,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":12.6,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":55,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 23:12:39', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-16T00:06:00+01:00\",\"EpochTime\":1768518360,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 23:13:37', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-16T00:06:00+01:00\",\"EpochTime\":1768518360,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 23:14:49', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-16T00:06:00+01:00\",\"EpochTime\":1768518360,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 23:14:58', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-16T00:06:00+01:00\",\"EpochTime\":1768518360,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 23:20:35', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-16T00:06:00+01:00\",\"EpochTime\":1768518360,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":14,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 23:24:47', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-16T00:16:00+01:00\",\"EpochTime\":1768518960,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":13.5,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":56,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-15 23:24:51', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-16T00:16:00+01:00\",\"EpochTime\":1768518960,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":13.5,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":56,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-19 14:59:15', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-19T15:51:00+01:00\",\"EpochTime\":1768834260,\"WeatherText\":\"Cloudy\",\"WeatherIcon\":7,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":true,\"Temperature\":{\"Metric\":{\"Value\":13.7,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-19 15:05:31', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-19T15:51:00+01:00\",\"EpochTime\":1768834260,\"WeatherText\":\"Cloudy\",\"WeatherIcon\":7,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":true,\"Temperature\":{\"Metric\":{\"Value\":13.7,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":57,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-19 22:48:37', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-19T23:36:00+01:00\",\"EpochTime\":1768862160,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":12.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":55,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-19 22:51:51', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-19T23:36:00+01:00\",\"EpochTime\":1768862160,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":12.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":55,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-19 22:52:14', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-19T23:36:00+01:00\",\"EpochTime\":1768862160,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":12.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":55,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-19 22:54:05', '{\"currentConditions\":[{\"LocalObservationDateTime\":\"2026-01-19T23:36:00+01:00\",\"EpochTime\":1768862160,\"WeatherText\":\"Mostly cloudy\",\"WeatherIcon\":38,\"HasPrecipitation\":false,\"PrecipitationType\":null,\"IsDayTime\":false,\"Temperature\":{\"Metric\":{\"Value\":12.8,\"Unit\":\"C\",\"UnitType\":17},\"Imperial\":{\"Value\":55,\"Unit\":\"F\",\"UnitType\":18}},\"MobileLink\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\",\"Link\":\"http:\\/\\/www.accuweather.com\\/en\\/es\\/mao\\/2-305482_1_al\\/current-weather\\/2-305482_1_al?lang=en-us\"}],\"threeDayForecast\":[]}'),
+('2026-01-19 23:24:18', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-19 23:24:22', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-19 23:25:19', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-19 23:25:43', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:16:14', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:16:23', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:17:39', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:19:22', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:19:26', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:23:15', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:28:53', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:28:57', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:33:59', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:34:01', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:39:45', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:39:47', '{\"currentConditions\":[],\"threeDayForecast\":[]}'),
+('2026-01-20 00:45:15', '{\"currentConditions\":[],\"threeDayForecast\":[]}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `024_customers_view`
+--
 DROP TABLE IF EXISTS `024_customers_view`;
 
 DROP VIEW IF EXISTS `024_customers_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_customers_view`  AS SELECT `c`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `c`.`email` AS `email`, `c`.`username` AS `username`, `c`.`password` AS `password`, `c`.`phone` AS `phone`, `c`.`birth_date` AS `birth_date`, `c`.`type` AS `type`, `a`.`address_name` AS `address_name`, `a`.`address_id` AS `address_id`, `a`.`street` AS `street`, `a`.`city` AS `city`, `a`.`province` AS `province`, `a`.`zip_code` AS `zip_code`, `pm`.`method_id` AS `method_id`, `pm`.`method_name` AS `method_name`, `pm`.`number` AS `number`, `pm`.`expiration_date` AS `expiration_date`, `pm`.`security_code` AS `security_code` FROM ((((`024_customers` `c` join `024_payment_customer` `pc` on(`c`.`customer_id` = `pc`.`customer_id`)) join `024_payment_method` `pm` on(`pc`.`method_id` = `pm`.`method_id`)) join `024_address_customer` `ac` on(`c`.`customer_id` = `ac`.`customer_id`)) join `024_address` `a` on(`ac`.`address_id` = `a`.`address_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_customers_view`  AS SELECT `c`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `c`.`email` AS `email`, `c`.`username` AS `username`, `c`.`password` AS `password`, `c`.`phone` AS `phone`, `c`.`birth_date` AS `birth_date`, `c`.`type` AS `type`, `a`.`address_name` AS `address_name`, `a`.`address_id` AS `address_id`, `a`.`street` AS `street`, `a`.`city` AS `city`, `a`.`province` AS `province`, `a`.`zip_code` AS `zip_code`, `pm`.`method_id` AS `method_id`, `pm`.`method_name` AS `method_name`, `pm`.`number` AS `number`, `pm`.`expiration_date` AS `expiration_date`, `pm`.`security_code` AS `security_code` FROM ((((`024_customers` `c` join `024_payment_customer` `pc` on(`c`.`customer_id` = `pc`.`customer_id`)) join `024_payment_method` `pm` on(`pc`.`method_id` = `pm`.`method_id`)) join `024_address_customer` `ac` on(`c`.`customer_id` = `ac`.`customer_id`)) join `024_address` `a` on(`ac`.`address_id` = `a`.`address_id`)) ;
+
 -- --------------------------------------------------------
 
+--
+-- Estructura para la vista `024_order_view`
 --
 DROP TABLE IF EXISTS `024_order_view`;
 
 DROP VIEW IF EXISTS `024_order_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_order_view`  AS SELECT `o`.`order_number` AS `order_number`, `o`.`order_id` AS `order_id`, `o`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `o`.`quantity` AS `quantity`, `o`.`size` AS `size`, `p`.`price` AS `price`, `o`.`price` AS `total_price`, `pm`.`method_name` AS `payment_method`, `o`.`method_id` AS `payment_method_id`, `o`.`order_date` AS `order_date`, concat_ws(', ',`a`.`street`,`a`.`city`,`a`.`province`,`a`.`zip_code`) AS `delivery_address`, `o`.`status` AS `status` FROM ((((`024_orders_table` `o` join `024_customers` `c` on(`o`.`customer_id` = `c`.`customer_id`)) join `024_address` `a` on(`o`.`address_id` = `a`.`address_id`)) join `024_products` `p` on(`o`.`product_id` = `p`.`product_id`)) join `024_payment_method` `pm` on(`o`.`method_id` = `pm`.`method_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_order_view`  AS SELECT `o`.`order_number` AS `order_number`, `o`.`order_id` AS `order_id`, `o`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `o`.`quantity` AS `quantity`, `o`.`size` AS `size`, `p`.`price` AS `price`, `o`.`price` AS `total_price`, `pm`.`method_name` AS `payment_method`, `o`.`method_id` AS `payment_method_id`, `o`.`order_date` AS `order_date`, concat_ws(', ',`a`.`street`,`a`.`city`,`a`.`province`,`a`.`zip_code`) AS `delivery_address`, `o`.`status` AS `status` FROM ((((`024_orders_table` `o` join `024_customers` `c` on(`o`.`customer_id` = `c`.`customer_id`)) join `024_address` `a` on(`o`.`address_id` = `a`.`address_id`)) join `024_products` `p` on(`o`.`product_id` = `p`.`product_id`)) join `024_payment_method` `pm` on(`o`.`method_id` = `pm`.`method_id`)) ;
 
 -- --------------------------------------------------------
 
+--
+-- Estructura para la vista `024_product_size_availability`
 --
 DROP TABLE IF EXISTS `024_product_size_availability`;
 
 DROP VIEW IF EXISTS `024_product_size_availability`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_product_size_availability`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `ps`.`size` AS `size`, `ps`.`stock` AS `stock`, CASE WHEN `ps`.`stock` > 10 THEN 'En Stock' WHEN `ps`.`stock` > 0 THEN 'Últimas Unidades' ELSE 'Agotado' END AS `availability_status` FROM (`024_products` `p` join `024_product_sizes` `ps` on(`p`.`product_id` = `ps`.`product_id`)) ORDER BY `p`.`product_id` ASC, field(`ps`.`size`,'XS','S','M','L','XL','XXL') ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_product_size_availability`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `product_name`, `ps`.`size` AS `size`, `ps`.`stock` AS `stock`, CASE WHEN `ps`.`stock` > 10 THEN 'En Stock' WHEN `ps`.`stock` > 0 THEN 'Últimas Unidades' ELSE 'Agotado' END AS `availability_status` FROM (`024_products` `p` join `024_product_sizes` `ps` on(`p`.`product_id` = `ps`.`product_id`)) ORDER BY `p`.`product_id` ASC, field(`ps`.`size`,'XS','S','M','L','XL','XXL') ASC ;
 
 -- --------------------------------------------------------
 
+--
+-- Estructura para la vista `024_product_view`
 --
 DROP TABLE IF EXISTS `024_product_view`;
 
 DROP VIEW IF EXISTS `024_product_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_product_view`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `name`, `p`.`price` AS `price`, `c`.`name` AS `category` FROM ((`024_product_category` `pc` join `024_products` `p` on(`pc`.`product_id` = `p`.`product_id`)) join `024_category` `c` on(`pc`.`category_id` = `c`.`category_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_product_view`  AS SELECT `p`.`product_id` AS `product_id`, `p`.`name` AS `name`, `p`.`description` AS `description`, `p`.`long_description` AS `long_description`, `p`.`price` AS `price`, `p`.`supplier` AS `supplier`, `p`.`available_sizes` AS `available_sizes`, `c`.`name` AS `category` FROM ((`024_product_category` `pc` join `024_products` `p` on(`pc`.`product_id` = `p`.`product_id`)) join `024_category` `c` on(`pc`.`category_id` = `c`.`category_id`)) ;
 
 -- --------------------------------------------------------
 
+--
+-- Estructura para la vista `024_shopping_cart_view`
 --
 DROP TABLE IF EXISTS `024_shopping_cart_view`;
 
 DROP VIEW IF EXISTS `024_shopping_cart_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_shopping_cart_view`  AS SELECT `sc`.`shopping_cart_id` AS `shopping_cart_id`, `sc`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `sc`.`product_id` AS `product_id`, `p`.`name` AS `name`, `sc`.`quantity` AS `quantity`, `p`.`price` AS `price`, `p`.`price`* `sc`.`quantity` AS `total_price` FROM ((`024_shopping_cart` `sc` join `024_customers` `c` on(`sc`.`customer_id` = `c`.`customer_id`)) join `024_products` `p` on(`sc`.`product_id` = `p`.`product_id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `024_shopping_cart_view`  AS SELECT `sc`.`shopping_cart_id` AS `shopping_cart_id`, `sc`.`customer_id` AS `customer_id`, `c`.`first_name` AS `first_name`, `c`.`last_name` AS `last_name`, `sc`.`product_id` AS `product_id`, `p`.`name` AS `name`, `sc`.`quantity` AS `quantity`, `p`.`price` AS `price`, `p`.`price`* `sc`.`quantity` AS `total_price` FROM ((`024_shopping_cart` `sc` join `024_customers` `c` on(`sc`.`customer_id` = `c`.`customer_id`)) join `024_products` `p` on(`sc`.`product_id` = `p`.`product_id`)) ;
 
 -- --------------------------------------------------------
 
+--
+-- Estructura para la vista `024_total_income_per_month`
 --
 DROP TABLE IF EXISTS `024_total_income_per_month`;
 
 DROP VIEW IF EXISTS `024_total_income_per_month`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_total_income_per_month`  AS SELECT sum(`024_order_view`.`total_price`) AS `total_income`, month(`024_order_view`.`order_date`) AS `MONTH`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` GROUP BY year(`024_order_view`.`order_date`), month(`024_order_view`.`order_date`) ORDER BY '' ASC, '' ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`Alan`@`localhost` SQL SECURITY DEFINER VIEW `024_total_income_per_month`  AS SELECT sum(`024_order_view`.`total_price`) AS `total_income`, month(`024_order_view`.`order_date`) AS `MONTH`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` GROUP BY year(`024_order_view`.`order_date`), month(`024_order_view`.`order_date`) ORDER BY '' ASC, '' ASC ;
 
 -- --------------------------------------------------------
 
 --
+-- Estructura para la vista `024_total_money_spent_view`
+--
 DROP TABLE IF EXISTS `024_total_money_spent_view`;
 
 DROP VIEW IF EXISTS `024_total_money_spent_view`;
-CREATE ALGORITHM=UNDEFINED VIEW `024_total_money_spent_view`  AS SELECT `024_order_view`.`customer_id` AS `customer_id`, `024_full_name`(`024_order_view`.`first_name`,`024_order_view`.`last_name`) AS `full_name`, sum(`024_order_view`.`total_price`) AS `total_money_spent`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` WHERE year(`024_order_view`.`order_date`) = 2024 GROUP BY `024_order_view`.`customer_id` ORDER BY '' DESC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`Alan`@`localhost` SQL SECURITY DEFINER VIEW `024_total_money_spent_view`  AS SELECT `024_order_view`.`customer_id` AS `customer_id`, `024_full_name`(`024_order_view`.`first_name`,`024_order_view`.`last_name`) AS `full_name`, sum(`024_order_view`.`total_price`) AS `total_money_spent`, year(`024_order_view`.`order_date`) AS `YEAR` FROM `024_order_view` WHERE year(`024_order_view`.`order_date`) = 2024 GROUP BY `024_order_view`.`customer_id` ORDER BY '' DESC ;
 
 --
 -- Restricciones para tablas volcadas
 --
-
--- Desactivar comprobación de claves foráneas temporalmente
-SET FOREIGN_KEY_CHECKS=0;
-
 
 --
 -- Filtros para la tabla `024_address_customer`
@@ -1013,15 +1108,12 @@ ALTER TABLE `024_shopping_cart`
   ADD CONSTRAINT `shopping_cart_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `024_customers` (`customer_id`),
   ADD CONSTRAINT `shopping_cart_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `024_products` (`product_id`);
 
--- Volver a activar comprobación de claves foráneas
-SET FOREIGN_KEY_CHECKS=1;
-
 DELIMITER $$
 --
 -- Eventos
 --
 DROP EVENT IF EXISTS `024_insert_test_data_event`$$
-CREATE EVENT `024_insert_test_data_event` ON SCHEDULE EVERY 2 SECOND STARTS '2025-11-17 17:22:45' ENDS '2025-11-18 17:22:45' ON COMPLETION PRESERVE DISABLE DO BEGIN
+CREATE DEFINER=`root`@`localhost` EVENT `024_insert_test_data_event` ON SCHEDULE EVERY 2 SECOND STARTS '2025-11-17 17:22:45' ENDS '2025-11-18 17:22:45' ON COMPLETION PRESERVE DISABLE DO BEGIN
 CALL 024_automaticOrders();
 SELECT * FROM 024_order_view;
 END$$
