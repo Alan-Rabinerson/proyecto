@@ -1,10 +1,10 @@
 <?php
 $locationKey = '305482'; // Clave de ubicación para Mahón
-$apiKey = 'zpka_463a1bcd9972461385e29c4e2090f7d4_3bd1c314';
+$apiKey = 'zpka_9f0db2f848fb41b49876f21bf448b754_62f8e394';
 $ch = curl_init();
 $data = array( 'Authorization' => "Bearer $apiKey" );
 $payload = json_encode($data);
-$
+
 
 curl_setopt($ch, CURLOPT_URL, "https://dataservice.accuweather.com/currentconditions/v1/$locationKey/?apikey=$apiKey");
 // curl_setopt($ch, CURLOPT_POST, true);

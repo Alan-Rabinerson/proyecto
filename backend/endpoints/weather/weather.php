@@ -4,9 +4,9 @@ include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_log.
 include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/functions/write_logJSON.php';
             
 
-$url_current = 'https://dataservice.accuweather.com/currentconditions/v1/305482?apikey=zpka_463a1bcd9972461385e29c4e2090f7d4_3bd1c314&details=true';
+$url_current = 'https://dataservice.accuweather.com/currentconditions/v1/305482?apikey=zpka_9f0db2f848fb41b49876f21bf448b754_62f8e394&details=true';
 
-$url_forecast = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/305482?apikey=zpka_463a1bcd9972461385e29c4e2090f7d4_3bd1c314&details=true&metric=true';
+$url_forecast = 'https://dataservice.accuweather.com/forecasts/v1/daily/5day/305482?apikey=zpka_9f0db2f848fb41b49876f21bf448b754_62f8e394&details=true&metric=true';
 $json_data_current = file_get_contents($url_current);
 $data_current = json_decode($json_data_current, true);
 $json_data_forecast = file_get_contents($url_forecast);
@@ -31,9 +31,11 @@ $db_array =json_encode( [
 $sql = "INSERT INTO 024_weather_data (cc_info_JSON, date_time) VALUES ('$db_array', NOW())";;
 if (mysqli_query($conn, $sql)) {
     $file = fopen($_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/logs/current_weather_entry.json', 'w');
+    fwrite($file, " "); // Vaciar el archivo antes de escribir
     fwrite($file, $json_data_current);
     fclose($file);
-    $file_forecast = fopen($_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/logs/forecast_weather_entry.json', 'a');
+    $file_forecast = fopen($_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/logs/forecast_weather_entry.json', 'w');// Abrir en modo 'w' para sobrescribir
+    fwrite($file_forecast, " "); // Vaciar el archivo antes de escribir
     fwrite($file_forecast, $json_data_forecast);
     fclose($file_forecast);
     write_logJSON("saved new entry for weather data ",'insert', 'weather', 'changes_log.json');
