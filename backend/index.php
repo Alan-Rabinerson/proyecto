@@ -43,8 +43,8 @@
             </nav>
         </main>
         
-        
-                
+       <script src="/student024/Shop/JavaScript/products_json.js"></script>     
+            
 <?php include $_SERVER['DOCUMENT_ROOT'].'/student024/Shop/backend/includes/footer.php';  ?> 
 
 

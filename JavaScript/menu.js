@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.open(
       "GET",
       "/student024/Shop/backend/endpoints/shopping_cart/get_cart.php",
-      true
+      true,
     );
     xhr.send();
   }
@@ -238,15 +238,15 @@ document.addEventListener("DOMContentLoaded", function () {
           }" data-size="${escapeHtml(item.size)}">+</button>
         </div>
         <span class="precio-producto">${Number(item.subtotal).toFixed(
-          2
+          2,
         )} €</span>
         <button class="eliminar-producto" data-product="${
           item.product_id
         }" data-size="${escapeHtml(item.size)}" onClick="updateQuantity('${
-        item.product_id
-      }', '${escapeHtml(item.size)}', -${
-        item.quantity
-      }); event.stopPropagation();">×</button>
+          item.product_id
+        }', '${escapeHtml(item.size)}', -${
+          item.quantity
+        }); event.stopPropagation();">×</button>
       `;
 
       // Añadir un único listener por botón para evitar duplicados
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (cartCountEl)
       cartCountEl.textContent = Object.values(items).reduce(
         (sum, it) => sum + Number(it.quantity),
-        0
+        0,
       );
   }
 
@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.open(
       "POST",
       "/student024/Shop/backend/endpoints/shopping_cart/update_quantity.php",
-      true
+      true,
     );
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", function () {
               "Error parsing update quantity response:",
               e,
               "\nresponseText:",
-              this.responseText
+              this.responseText,
             );
           }
         } else {
@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "updateQuantity XHR error, status:",
             this.status,
             "response:",
-            this.responseText
+            this.responseText,
           );
         }
       }
@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "&size=" +
         encodeURIComponent(size) +
         "&delta=" +
-        encodeURIComponent(delta)
+        encodeURIComponent(delta),
     );
   }
   function addToCart(productId, quantity, size) {
@@ -351,7 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!cid) {
       console.error(
-        "customer_id no disponible. No se puede añadir al carrito."
+        "customer_id no disponible. No se puede añadir al carrito.",
       );
       return;
     }
@@ -360,7 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
     xhr.open(
       "POST",
       "/student024/Shop/backend/db/shopping_cart/db_shopping_cart_insert.php",
-      true
+      true,
     );
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
@@ -388,7 +388,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 5000);
           } else {
             console.error(
-              "Error al añadir el producto al carrito: " + response.message
+              "Error al añadir el producto al carrito: " + response.message,
             );
             // Mostrar mensaje de error
             elementoMensaje.innerText = JSON.parse(this.responseText).message;
@@ -413,7 +413,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error(
           "Server returned status",
           xhr.status,
-          "for db_shopping_cart_insert.php"
+          "for db_shopping_cart_insert.php",
         );
         console.error("Response text:", xhr.responseText);
       }
@@ -427,7 +427,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "&size=" +
         encodeURIComponent(size) +
         "&customer_id=" +
-        encodeURIComponent(cid)
+        encodeURIComponent(cid),
     );
   }
 

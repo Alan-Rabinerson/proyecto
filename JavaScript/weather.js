@@ -1,40 +1,47 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const weatherButton = document.getElementById('WeatherButton');
-    if (!weatherButton) return;
-
-    weatherButton.addEventListener('click', () => {
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var weatherData = JSON.parse(this.responseText);
-                updateWeatherDisplay(weatherData);
-            }
-        };
-        xmlhttp.open("GET", "/student024/Shop/backend/endpoints/weather/weather.php", true);
-        xmlhttp.send();
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  const weatherButton = document.getElementById("WeatherButton");
+  if (!weatherButton) return;
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var weatherData = JSON.parse(this.responseText);
+      updateWeatherDisplay(weatherData);
+    }
+  };
+  xmlhttp.open(
+    "GET",
+    "/student024/Shop/backend/endpoints/weather/weather.php",
+    true,
+  );
+  xmlhttp.send();
 });
 
 function updateWeatherDisplay(weatherData) {
-    const footer = document.querySelector('footer');
-    if (!footer) return;
-    const weatherContainer = footer.querySelector('div');
-    if (!weatherContainer) return;
+  const footer = document.querySelector("footer");
+  if (!footer) return;
+  const weatherContainer = footer.querySelector("div");
+  if (!weatherContainer) return;
 
-    if (weatherData && weatherData.WeatherText && weatherData.Temperature && weatherData.WeatherIcon && weatherData.Forecast && weatherData.Forecast.length > 0) {
-        const weatherIcon = weatherData.WeatherIcon || 1;
-        const weatherText = weatherData.WeatherText;
-        const temperature = weatherData.Temperature;
-        const forecast = weatherData.Forecast;
-        const forecastDay1 = forecast[1];
-        const forecastDay2 = forecast[2];
-        const forecastDay3 = forecast[3];
-        const date1 = new Date(forecastDay1.Date);
-        const date2 = new Date(forecastDay2.Date);
-        const date3 = new Date(forecastDay3.Date);
-        
+  if (
+    weatherData &&
+    weatherData.WeatherText &&
+    weatherData.Temperature &&
+    weatherData.WeatherIcon &&
+    weatherData.Forecast &&
+    weatherData.Forecast.length > 0
+  ) {
+    const weatherIcon = weatherData.WeatherIcon || 1;
+    const weatherText = weatherData.WeatherText;
+    const temperature = weatherData.Temperature;
+    const forecast = weatherData.Forecast;
+    const forecastDay1 = forecast[1];
+    const forecastDay2 = forecast[2];
+    const forecastDay3 = forecast[3];
+    const date1 = new Date(forecastDay1.Date);
+    const date2 = new Date(forecastDay2.Date);
+    const date3 = new Date(forecastDay3.Date);
 
-        weatherContainer.innerHTML = `
+    weatherContainer.innerHTML = `
             <div class="mb-4">
                 <h3 class="text-beige text-xl mb-2">3-Day Forecast</h3>
                 <div class="flex justify-between">
@@ -64,5 +71,5 @@ function updateWeatherDisplay(weatherData) {
                 <span class="text-beige text-lg">${weatherText}, ${temperature}°C</span>
             </div>
         `;
-    }
+  }
 }
